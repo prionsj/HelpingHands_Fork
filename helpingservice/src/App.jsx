@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Help from "./components/Help"
 
 import "./index.css";
 
 const App = () => (
   <div className="container">
-    <h1>Helping Service App</h1>
+      <Help />
   </div>
 );
 ReactDOM.render(<App />, document.getElementById("app"));
