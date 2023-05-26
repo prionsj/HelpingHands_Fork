@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import db from './firebase.config';
+import "./Help.css";
 
 const Help = () => {
     const [helps, setHelps] = useState([])
@@ -11,7 +12,6 @@ const Help = () => {
         data.docs.forEach((help) => {
             helpArray.push(help.data())
         })
-        console.log(helpArray)
         setHelps(helpArray)
     }
 
@@ -21,14 +21,21 @@ const Help = () => {
 
     return (
         <div className="Help">
+            <h1>Hilfeinträge</h1>
             {
                 helps && helps.map((help, index)=> {
                     console.log(help.title)
                     return (
-                        <div key={help.id}>
-                            <h4>{help.title} - {help.city}</h4>
-                            <p>{help.description}</p>
-                        </div>
+                            <section key={help.id}>
+                                <h2><strong>{help.city}:</strong> {help.title} </h2>
+                                <p>{help.description} </p>
+                                <ul>
+                                    <li><div>Standort:</div> {help.city} </li>
+                                    <li><div>Zeitpunkt:</div> {help.date} </li>
+                                    <li><div>Kategorie:</div> {help.category} </li>
+                                </ul>
+
+                            </section>
                     )
                 })
 
