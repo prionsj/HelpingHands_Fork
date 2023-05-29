@@ -1,2 +1,1 @@
-docker-compose up -d
-docker logs meindigitaleskochbuch-backend-1 -f
+docker-compose -f docker-compose.yml up -d
