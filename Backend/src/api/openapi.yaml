@@ -1,319 +1,219 @@
 openapi: 3.0.0
 info:
-  title: HelpingHands
   version: '1.0'
-  description: 'HelpingHands nutzt einen simplen REST-Webservices zur Kommunikation mit dem Backend. Mit diesem ist es möglich, Rezepte zu bearbeiten, hinzuzufügen und zu löschen. Diese bestehen aus dem Rezeptnamen, der Zubereitungsdauer, dem Schwierigkeitsgrad, den Zutaten und der Zubereitungsbeschreibung. Rezepte können außerdem den Favoriten hinzugefügen aber auch von diesen entfernt werden. Außerdem könenn Zutaten der Einkaufsliste hinzugefügt und entfernt werden. Den Rezepten können klassischerweise auch Bewertungen zugeordnet werden, welche hinzugefügt, bearbeitet und gelöscht werden können.'
+  title: HelpingHands
+  description: 'Die HelpingHands-WebApp nutzt einen REST-Webservices zur Kommunikation mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche, Anzeige und Bearbeitung von Hilfs-Anzeigen, wobei jede Hilfs-Anzeige aus einer Beschreibung besteht.'
   contact:
-    name: 'Angelika K., Ayse Nur K., Elena V., Marco P., Rebecca P., Jonas P.'
+    name: Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions
+  license:
+    url: 'https://creativecommons.org/licenses/by/4.0/deed.de'
+    name: CC-BY-4.0
 servers:
   - url: 'http://localhost:3000'
 paths:
   /:
     get:
-      summary: Wurzeladresse des Webservice zum HATEOAS Abruf seiner Collections
       tags:
         - Index
+      summary: 'Wurzeladresse des Webservices: Anmeldeseite'
+      description: Anmeldeseite anzeigen
+      operationId: index
+      requestBody:
+        content: {}
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/HATEOAS_Collection'
-      operationId: get
-      description: HATEAOS-Links mit den Collections abrufen
-  /rezept:
-    get:
-      summary: Rezept suchen
-      tags:
-        - Rezeptliste
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
+                $ref: '#/components/schemas/Login'
+            application/xml:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Rezept'
-      operationId: get-rezept
-      description: Rezept lesen
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: rezeptname
-          description: Gesuchter Rezeptname
-        - schema:
-            type: string
-          in: query
-          name: dauer
-          description: Gesuchte Zubereitungsdauer
-        - schema:
-            type: string
-          in: query
-          name: schwierigkeitsgrad
-          description: Gesuchte Schwierigkeitsgrad
-        - schema:
-            type: string
-          in: query
-          name: zutaten
-          description: Gesuchte Zutaten
-        - schema:
-            type: string
-          in: query
-          name: zubereitung
-          description: Gesuchte Zubereitung
+                $ref: '#/components/schemas/HATEOAS_Collection'
+            multipart/form-data:
+              schema:
+                type: object
+      servers:
+        - url: 'http://localhost:3000'
+  /registrierung:
     post:
-      summary: Rezept anlegen
       tags:
-        - Rezeptliste
+        - Benutzer
+      summary: Benutzer registrieren
+      description: Neuen Benutzer registrieren
+      operationId: post-registrierung
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Benutzer'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rezept'
-          headers:
-            Location:
-              schema:
-                type: string
-              description: URL des angelegten Datensatzes
-      operationId: post-rezept
-      description: Rezept anlegen
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Rezept'
-        description: Daten des anzulegenden Rezeptes
-  '/rezept/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
+                $ref: '#/components/schemas/Benutzer'
+      servers:
+        - url: 'http://localhost:3000'
+  /hilfsanzeige:
     get:
-      summary: Rezept lesen
       tags:
-        - Rezept
+        - Hilfs-Anzeige
+      summary: Hilfs-Anzeige suchen
+      description: Suche nach Hilfsanzeigen. Gibt eine Liste aller Hilfsanzeigen passend zu den übergebenen Suchkriterien zurück.
+      operationId: get-hilfsanzeige
+      parameters:
+        - name: titel
+          in: query
+          description: Gesuchter Titel
+          schema:
+            type: string
+        - name: beschreibung
+          in: query
+          description: Gesuchte Beschreibung
+          schema:
+            type: string
+        - name: kategorie
+          in: query
+          description: Gesuchte Kategorie
+          schema:
+            type: string
+        - name: zeitraum
+          in: query
+          description: Gesuchter Zeitraum
+          schema:
+            type: string
+        - name: standort
+          in: query
+          description: Gesuchter Standort
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rezept'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-      operationId: get-rezept-id
-      description: Ließt ein Rezept vom Server
-    put:
-      summary: Rezept bearbeiten
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hilfsanzeige'
+      servers:
+        - url: 'http://localhost:3000'
+    post:
       tags:
-        - Rezept
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rezept'
-        '404':
-          description: Not Found
-      operationId: put-rezept-id
-      description: 'Rezeptdatensatz bearbeiten. Es könne alle Felder geändert werden, mit ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+        - Hilfs-Anzeige
+      summary: Hilfs-Anzeige anlegen
+      description: 'Neue Hilfsanzeige anlegen. Speichert die übergebene Hilfsanzeige in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
+      operationId: post-hilfsanzeige
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Rezept'
         description: ''
-    patch:
-      summary: Rezept einzelne Felder ändern
-      tags:
-        - Rezept
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rezept'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-      operationId: patch-rezept-id
-      description: 'Rezeptdatensatz bearbeiten. Es könne einzelne Felder geändert werden, mit ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
-      requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Rezept'
-    delete:
-      summary: Rezept entfernen
-      tags:
-        - Rezept
-      responses:
-        '204':
-          description: No Content
-        '404':
-          description: Not Found
-      operationId: delete-rezept-id
-      description: Gewähltes Rezept wird gelöscht
-  /bewertung:
+              $ref: '#/components/schemas/Hilfsanzeige'
+      responses: {}
+      servers:
+        - url: 'http://localhost:3000'
+  '/hilfsanzeige/{id}':
     get:
-      summary: Bewertung ansehen
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Bewertung'
-      operationId: get-bewertung
-      description: Bewertung lesen
       tags:
-        - Bewertungsliste
+        - Hilfs-Anzeige
+      summary: Hilfsanzeige lesen
+      description: Listet eine einzelne Hilfsanzeige vom Server
+      operationId: get-hilfsanzeige-id
       parameters:
-        - schema:
+        - name: id
+          in: path
+          required: true
+          schema:
             type: string
-          in: query
-          name: rezeptname
-          description: Gesuchter Rezeptname
-        - schema:
-            type: string
-          in: query
-          name: bewertungstitel
-          description: Gesuchter Bewertungstitel
-        - schema:
-            type: string
-          in: query
-          name: bepunktung
-          description: Gesuchte Bepunktung
-        - schema:
-            type: string
-          in: query
-          name: bewertungstext
-          description: Gesuchter Bewertungstext
-    post:
-      summary: Bewertung anlegen
-      tags:
-        - Bewertung
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Bewertung'
-          headers:
-            Location:
-              schema:
-                type: string
-              description: URL des angelegten Datensatzes
-      operationId: post-bewertung
-      description: Bewertung anlegen
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Bewertung'
-        description: Daten der anzulgenden Bewertung
-    parameters: []
-  '/bewertung/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-    get:
-      summary: Bewertung lesen
-      tags:
-        - Bewertung
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bewertung'
+                $ref: '#/components/schemas/Hilfsanzeige'
         '404':
           description: Not Found
-      operationId: get-bewertung-id
-      description: Einzelnes Rezept vom Server lesen
+      servers:
+        - url: 'http://localhost:3000'
     put:
-      summary: Bewertung bearbeiten
       tags:
-        - Bewertung
+        - Hilfs-Anzeige
+      summary: Hilfsanzeige überschreiben
+      description: 'Hilfsanzeige bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: put-hilfsanzeige-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bewertung'
+                $ref: '#/components/schemas/Hilfsanzeige'
         '404':
           description: Not Found
-      operationId: put-bewertung-id
-      description: 'Bewertungsdatensatz bearbeiten. Es könne alle Felder geändert werden, mit ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Bewertung'
-    delete:
-      summary: Bewertung löschen
-      tags:
-        - Bewertung
-      responses:
-        '204':
-          description: No Content
-        '404':
-          description: Not Found
-      operationId: delete-bewertung-id
-      description: Bewerungsdatensatz löschen
+      servers:
+        - url: 'http://localhost:3000'
     patch:
-      summary: Bewertung einzelne Felder ändern
       tags:
-        - Bewertung
+        - Hilfs-Anzeige
+      summary: Einzelne Felder ändern
+      description: 'Hilfsanzeige bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: patch-hilfsanzeige-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bewertung'
+                $ref: '#/components/schemas/Hilfsanzeige'
         '404':
           description: Not Found
-      operationId: patch-bewertung-id
-      description: 'Bewertungsdatensatz bearbeiten. Es könne einzelne Felder geändert werden, mit ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Bewertung'
-  /favoriten:
+      servers:
+        - url: 'http://localhost:3000'
+    delete:
+      summary: ''
+      description: Löschen der Hilfsanzeige
+      operationId: delete-hilfsanzeige-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+  /angebot:
     get:
-      summary: Favoriten lesen
       tags:
-        - Favoritenliste
+        - Hilfs-Anzeige
+      summary: Angebotene Hilfe einsehen
+      operationId: get-angebot
+      parameters:
+        - name: titel
+          in: query
+          description: Titel der Hilfsanzeige
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -322,18 +222,19 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Favoriten'
-      operationId: get-favoriten
-      description: Favoriten lesen
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: rezeptname
-          description: Gesuchter Rezeptname
+                  $ref: '#/components/schemas/Angebot'
+      servers:
+        - url: 'http://localhost:3000'
     post:
-      summary: ''
-      operationId: post-favoriten
+      tags:
+        - Hilfs-Anzeige
+      summary: Zur Liste hinzufügen
+      operationId: post-angebot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Angebot'
       responses:
         '201':
           description: Created
@@ -341,157 +242,200 @@ paths:
             Location:
               schema:
                 type: string
-              description: URL des angelegten Datensatzes
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Favoriten'
-      description: Favorit anlegen
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Favoriten'
-        description: Daten des anzulegenden Favorits
-  '/favoriten/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
+              description: URL des Datensatzes
+      servers:
+        - url: 'http://localhost:3000'
+  '/angebot/{id}':
     get:
-      summary: Favorit lesen
-      tags:
-        - Favorit
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Favoriten'
-        '404':
-          description: Not Found
-      operationId: get-favoriten-id
-      description: Ließt ein Favorit vom Server
-    delete:
-      summary: Favorit löschen
-      tags:
-        - Favorit
-      responses:
-        '204':
-          description: No Content
-        '404':
-          description: Not Found
-      operationId: delete-favoriten-id
-      description: Gewählter Favorit löschen
-  /einkaufsliste:
-    get:
-      summary: Einkaufsliste anschauen
-      tags:
-        - Einkaufsliste
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Einkaufsliste'
-      operationId: get-einkaufsliste
-      description: Einkaufsliste lesen
+      summary: Angebot lesen
+      description: Angebot einsehen
+      operationId: get-angebot-id
       parameters:
-        - schema:
+        - name: id
+          in: path
+          required: true
+          schema:
             type: string
-          in: query
-          name: rezeptname
-          description: Gesuchter Rezeptname
-        - schema:
-            type: string
-          in: query
-          name: zutaten
-          description: Gesuchte Zutaten
-    post:
-      summary: ''
-      operationId: post-einkaufsliste
-      responses:
-        '201':
-          description: Created
-          headers:
-            Location:
-              schema:
-                type: string
-              description: URL des angelegten Datensatzes
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Einkaufsliste'
-      description: Einkauf anlegen
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Einkaufsliste'
-        description: Daten des anzulegenden Einkaufs
-  '/einkaufsliste/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-    get:
-      summary: Rezept aus Einkaufliste lesen
-      tags:
-        - Einkauf
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Einkaufsliste'
+                $ref: '#/components/schemas/Angebot'
         '404':
           description: Not Found
-      operationId: get-einkaufsliste-id
-      description: Einzelner Einkauf von Server lesen
-    delete:
-      summary: Rezept aus Einkaufliste löschen
-      tags:
-        - Einkauf
+      servers:
+        - url: 'http://localhost:3000'
+  /benutzer:
+    get:
+      summary: Benutzer sehen
+      description: Benutzer einsehen
+      operationId: get-benutzer
+      parameters:
+        - name: vorname
+          in: query
+          description: Gesuchter Vorname
+          schema:
+            type: string
+        - name: nachname
+          in: query
+          description: Gesuchter Nachname
+          schema:
+            type: string
+        - name: straße
+          in: query
+          description: Gesuchte Straße
+          schema:
+            type: string
+        - name: hausnummer
+          in: query
+          description: Gesuchte Hausnummer
+          schema:
+            type: string
+        - name: postleitzahl
+          in: query
+          description: Gesuchte Postleitzahl
+          schema:
+            type: string
+        - name: stadt
+          in: query
+          description: Gesuchte Stadt
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: Gesuchte Email
+          schema:
+            type: string
+        - name: telefon
+          in: query
+          description: Gesuchte Telefonnummer
+          schema:
+            type: string
+        - name: nutzername
+          in: query
+          description: Gesuchter Nutzername
+          schema:
+            type: string
+        - name: passwort
+          in: query
+          description: Gesuchtes Passwort
+          schema:
+            type: string
+      responses: {}
+      servers:
+        - url: 'http://localhost:3000'
+  '/benutzer/{id}':
+    get:
+      summary: Benutzer sehen
+      description: Benutzer von Server lesen
+      operationId: get-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
         '404':
           description: Not Found
-      operationId: delete-einkaufsliste-id
-      description: Gewählter Einkauf löschen
+      servers:
+        - url: 'http://localhost:3000'
+    put:
+      summary: Benutzer überschrieben
+      description: 'Benutzer bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: put-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Benutzer'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+    patch:
+      summary: Einzelne Felder ändern
+      description: 'Benutzer bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: patch-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Benutzer'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+    delete:
+      summary: Benutzer löschen
+      description: Benutzer löscchen
+      operationId: delete-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+tags:
+  - name: Benutzer
+  - name: Hilfs-Anzeige
+  - name: Index
 components:
   schemas:
-    Rezept:
-      title: Rezept
+    Login:
       type: object
-      description: Ein Rezept
+      title: Login
       properties:
-        _links:
-          $ref: '#/components/schemas/HATEOAS_Ressource'
-        _id:
+        nutzername:
           type: string
-        rezeptname:
-          type: string
-        dauer:
-          type: string
-        schwierigkeitsgrad:
-          type: string
-        zutaten:
-          type: string
-        zubereitung:
+        passwort:
           type: string
     HATEOAS_Collection:
-      title: HATEOAS_Collection
       type: object
+      title: HATEOAS_Collection
+      description: HATEOAS-Links einer Collection
       properties:
         _name:
           type: string
@@ -499,23 +443,10 @@ components:
           $ref: '#/components/schemas/HATEOAS_Link'
         create:
           $ref: '#/components/schemas/HATEOAS_Link'
-      description: HATEOAS-Links einer Collection
-    HATEOAS_Ressource:
-      title: HATEOAS_Ressource
-      type: object
-      description: HATEOAS Links einer Ressource
-      properties:
-        read:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        upadate:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        patch:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        delete:
-          $ref: '#/components/schemas/HATEOAS_Link'
     HATEOAS_Link:
-      title: HATEOAS_Link
       type: object
+      title: HATEOAS_Link
+      description: HATEOAS-Link
       properties:
         url:
           type: string
@@ -525,51 +456,72 @@ components:
           type: array
           items:
             type: string
-      description: HATEOAS Links
-    Einkaufsliste:
-      title: Einkaufsliste
+    Benutzer:
       type: object
-      properties:
-        _id:
-          type: string
-        rezeptname:
-          type: string
-        zutaten:
-          type: string
-      description: Einkaufsliste mit Zutaten der Rezepte.
-    Favoriten:
-      title: Favoriten
-      type: object
-      properties:
-        _id:
-          type: string
-        rezeptname:
-          type: string
-      description: Liste der favorisierten Rezepten.
-    Bewertung:
-      title: Bewertung
-      type: object
-      description: Bewertung eines Rezeptes.
+      title: Benutzer
+      description: Benutzer
       properties:
         _links:
-          $ref: '#/components/schemas/HATEOAS_Ressource'
+          $ref: '#/components/schemas/HATEAOS_Resource'
         _id:
           type: string
-        rezeptname:
+        vorname:
           type: string
-        bewertungstitel:
+        nachname:
           type: string
-        bepunktung:
+        straße:
           type: string
-        bewertungstext:
+        hausnummer:
           type: string
-tags:
-  - name: Bewertung
-  - name: Bewertungsliste
-  - name: Einkauf
-  - name: Einkaufsliste
-  - name: Favorit
-  - name: Favoritenliste
-  - name: Index
-  - name: Rezept
-  - name: Rezeptliste
+        postleitzahl:
+          type: string
+        stadt:
+          type: string
+        email:
+          type: string
+        telefon:
+          type: string
+        nutzername:
+          type: string
+        passwort:
+          type: string
+    HATEAOS_Resource:
+      type: object
+      title: HATEAOS_Resource
+      description: HATEAOS-Links einer Ressource
+      properties:
+        read:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        update:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        patch:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        delete:
+          $ref: '#/components/schemas/HATEOAS_Link'
+    Hilfsanzeige:
+      type: object
+      title: Hilfsanzeige
+      description: Hilfsanzeige
+      properties:
+        _links:
+          $ref: '#/components/schemas/HATEAOS_Resource'
+        _id:
+          type: string
+        titel:
+          type: string
+        beschreibung:
+          type: string
+        kategorie:
+          type: string
+        zeitraum:
+          type: string
+        standort:
+          type: string
+    Angebot:
+      type: object
+      title: Angebot
+      properties:
+        _id:
+          type: string
+        titel:
+          type: string
