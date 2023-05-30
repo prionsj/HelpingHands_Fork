@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Mein digitales Kochbuch
+  title: HelpingHands
   version: '1.0'
-  description: 'Mein digitales Kochbuch nutzt einen simplen REST-Webservices zur Kommunikation mit dem Backend. Mit diesem ist es möglich, Rezepte zu bearbeiten, hinzuzufügen und zu löschen. Diese bestehen aus dem Rezeptnamen, der Zubereitungsdauer, dem Schwierigkeitsgrad, den Zutaten und der Zubereitungsbeschreibung. Rezepte können außerdem den Favoriten hinzugefügen aber auch von diesen entfernt werden. Außerdem könenn Zutaten der Einkaufsliste hinzugefügt und entfernt werden. Den Rezepten können klassischerweise auch Bewertungen zugeordnet werden, welche hinzugefügt, bearbeitet und gelöscht werden können.'
+  description: 'HelpingHands nutzt einen simplen REST-Webservices zur Kommunikation mit dem Backend. Mit diesem ist es möglich, Rezepte zu bearbeiten, hinzuzufügen und zu löschen. Diese bestehen aus dem Rezeptnamen, der Zubereitungsdauer, dem Schwierigkeitsgrad, den Zutaten und der Zubereitungsbeschreibung. Rezepte können außerdem den Favoriten hinzugefügen aber auch von diesen entfernt werden. Außerdem könenn Zutaten der Einkaufsliste hinzugefügt und entfernt werden. Den Rezepten können klassischerweise auch Bewertungen zugeordnet werden, welche hinzugefügt, bearbeitet und gelöscht werden können.'
   contact:
-    name: 'Angelika K., Florian K., Marco P., Rebecca P.'
+    name: 'Angelika K., Ayse Nur K., Elena V., Marco P., Rebecca P., Jonas P.'
 servers:
   - url: 'http://localhost:3000'
 paths:

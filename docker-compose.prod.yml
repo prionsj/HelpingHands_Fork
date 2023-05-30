@@ -34,7 +34,7 @@ services:
             - dbdata:/data/db
             - dbconfig:/data/configdb
 
-    # Kochbuch-Backend (Produktivmodus)
+    # HelpingHands-Backend (Produktivmodus)
     backend:
         build:
             context: ./Backend
@@ -51,7 +51,7 @@ services:
             # Parameter `--scale backend=…` übersteuert werden.
             replicas: 3
 
-    # Kochbuch-Frontend (Produktivmodus)
+    # HelpingHands-Frontend (Produktivmodus)
     frontend:
         build:
             context: ./Frontend
