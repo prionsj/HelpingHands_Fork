@@ -37,43 +37,6 @@ paths:
                 type: object
       servers:
         - url: 'http://localhost:3000'
-  /anmeldung:
-    get:
-      tags:
-        - Benutzer
-      summary: Anmeldung
-      description: Anmeldeseite anzeigen
-      operationId: get-anmeldung
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Login'
-      servers:
-        - url: 'http://localhost:3000'
-  /registrierung:
-    post:
-      tags:
-        - Benutzer
-      summary: Benutzer registrieren
-      description: Neuen Benutzer registrieren
-      operationId: post-registrierung
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Benutzer'
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Benutzer'
-      servers:
-        - url: 'http://localhost:3000'
   /hilfsanzeige:
     get:
       tags:
@@ -225,6 +188,7 @@ paths:
       tags:
         - Hilfs-Anzeige
       summary: Angebotene Hilfe einsehen
+      description: 'Neues Angebot anlegen. Speichert die übergebene Hilfsanzeige in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
       operationId: get-angebot
       parameters:
         - name: titel
@@ -466,13 +430,45 @@ components:
           type: array
           items:
             type: string
-    Login:
+    Hilfsanzeige:
       type: object
-      title: Login
+      title: Hilfsanzeige
+      description: Hilfsanzeige
       properties:
-        nutzername:
+        _links:
+          $ref: '#/components/schemas/HATEAOS_Resource'
+        _id:
           type: string
-        passwort:
+        titel:
+          type: string
+        beschreibung:
+          type: string
+        kategorie:
+          type: string
+        zeitraum:
+          type: string
+        standort:
+          type: string
+    HATEAOS_Resource:
+      type: object
+      title: HATEAOS_Resource
+      description: HATEAOS-Links einer Ressource
+      properties:
+        read:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        update:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        patch:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        delete:
+          $ref: '#/components/schemas/HATEOAS_Link'
+    Angebot:
+      type: object
+      title: Angebot
+      properties:
+        _id:
+          type: string
+        titel:
           type: string
     Benutzer:
       type: object
@@ -502,44 +498,4 @@ components:
         nutzername:
           type: string
         passwort:
-          type: string
-    HATEAOS_Resource:
-      type: object
-      title: HATEAOS_Resource
-      description: HATEAOS-Links einer Ressource
-      properties:
-        read:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        update:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        patch:
-          $ref: '#/components/schemas/HATEOAS_Link'
-        delete:
-          $ref: '#/components/schemas/HATEOAS_Link'
-    Hilfsanzeige:
-      type: object
-      title: Hilfsanzeige
-      description: Hilfsanzeige
-      properties:
-        _links:
-          $ref: '#/components/schemas/HATEAOS_Resource'
-        _id:
-          type: string
-        titel:
-          type: string
-        beschreibung:
-          type: string
-        kategorie:
-          type: string
-        zeitraum:
-          type: string
-        standort:
-          type: string
-    Angebot:
-      type: object
-      title: Angebot
-      properties:
-        _id:
-          type: string
-        titel:
           type: string

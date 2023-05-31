@@ -8,8 +8,6 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
-import AnmeldungController from "./controller/anmeldung.controller.js";
-import RegistrierungController from "./controller/registrierung.controller.js";
 import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
 import AngebotController from "./controller/angebot.controller.js";
 import BenutzerController from "./controller/benutzer.controller.js";
@@ -98,8 +96,6 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/");
-new AnmeldungController(server, "/anmeldung");
-new RegistrierungController(server, "/registrierung");
 new HilfsanzeigeController(server, "/hilfsanzeige");
 new AngebotController(server, "/angebot");
 new BenutzerController(server, "/benutzer");
