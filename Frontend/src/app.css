@@ -65,28 +65,13 @@ html {
 
 /* NAVIGATION */
 nav {
-  user-select: none;
-
   color: grey;
   background-color: grey;
   text-align: center;
-
-  border: 0px solid rgb(245, 213, 181);
-  border-bottom-width: 3px;
 }
 
-nav a,
-nav a:visited,
-nav a:hover {
-  color: white;
+nav a {
   text-decoration: none;
-
-  display: block;
-  padding: 1em;
-}
-
-nav.non-interactive a:hover {
-  cursor: default;
 }
 
 nav ul {
@@ -99,15 +84,31 @@ nav ul {
   flex-basis: auto;
 }
 
-nav li.active {
-  background-color: rgb(245, 213, 181);
-  border: 0px solid #B9E4F1;
-  border-bottom-width: 3px;
-}
-
 nav li:hover {
   background-color: rgb(220, 220, 220);
 
   border: 0px solid white;
   border-bottom-width: 3px;
+
+  color: black;
 }
+
+.nav {
+  flex-wrap: unset;
+  --bs-nav-link-hover-color: black;
+}
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.nav-link {
+  color: #f0f0f0;
+}
+
+.navbar, .container {
+  padding: 0;
+}
+
