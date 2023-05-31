@@ -1,7 +1,7 @@
 "use strict";
 
 import Page from "../page.js";
-import HtmlTemplate from "./page-list.html";
+import HtmlTemplate from "./hilfsanzeige.html";
 
 /**
 * Klasse PageList: Stellt die Listenübersicht der Rezepte zur Verfügung
