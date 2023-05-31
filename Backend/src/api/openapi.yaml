@@ -4,7 +4,7 @@ info:
   title: HelpingHands
   description: 'Die HelpingHands-WebApp nutzt einen REST-Webservices zur Kommunikation mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche, Anzeige und Bearbeitung von Hilfs-Anzeigen, wobei jede Hilfs-Anzeige aus einer Beschreibung besteht.'
   contact:
-    name: Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions
+    name: 'Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions'
   license:
     url: 'https://creativecommons.org/licenses/by/4.0/deed.de'
     name: CC-BY-4.0
@@ -15,8 +15,8 @@ paths:
     get:
       tags:
         - Index
-      summary: 'Wurzeladresse des Webservices: Anmeldeseite'
-      description: Anmeldeseite anzeigen
+      summary: Wurzeladresse des Webservices
+      description: HATEAOS-Links mit den Collections abrufen
       operationId: index
       requestBody:
         content: {}
@@ -26,13 +26,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Login'
+                type: array
+                items:
+                  $ref: '#/components/schemas/HATEOAS_Collection'
             application/xml:
               schema:
                 $ref: '#/components/schemas/HATEOAS_Collection'
             multipart/form-data:
               schema:
                 type: object
+      servers:
+        - url: 'http://localhost:3000'
+  /anmeldung:
+    get:
+      tags:
+        - Benutzer
+      summary: Anmeldung
+      description: Anmeldeseite anzeigen
+      operationId: get-anmeldung
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
       servers:
         - url: 'http://localhost:3000'
   /registrierung:
@@ -424,14 +442,6 @@ tags:
   - name: Index
 components:
   schemas:
-    Login:
-      type: object
-      title: Login
-      properties:
-        nutzername:
-          type: string
-        passwort:
-          type: string
     HATEOAS_Collection:
       type: object
       title: HATEOAS_Collection
@@ -456,6 +466,14 @@ components:
           type: array
           items:
             type: string
+    Login:
+      type: object
+      title: Login
+      properties:
+        nutzername:
+          type: string
+        passwort:
+          type: string
     Benutzer:
       type: object
       title: Benutzer

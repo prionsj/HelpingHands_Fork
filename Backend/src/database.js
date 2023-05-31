@@ -37,42 +37,54 @@ class DatabaseFactory {
 
     async _createDemoData() {
 
-        //Demodaten von Rezepten
-        let rezepte = this.database.collection("rezepte");
-        if (await rezepte.estimatedDocumentCount() === 0) {
-            rezepte.insertMany([
+        //Demodaten von Hilfsanzeigen
+        let hilfsanzeige = this.database.collection("hilfsanzeige");
+        if (await hilfsanzeige.estimatedDocumentCount() === 0) {
+            hilfsanzeige.insertMany([
                 {
-                    rezeptname: "Erdbeerkuchen",
-                    dauer: "50min",
-                    schwierigkeitsgrad: "3",
-                    zutaten: "<p> - 200g Mehl <br /> \ - 400g Erdeeren <br /> \ - 700l Milch <br /> \ - 20g Zucker</p>",
-                    zubereitung:"Mehl mit Milch und Zucker verühren. Backen auf 500 Grad."
+                    titel: "Rasenmähen",
+                    beschreibung: "Mein Rasen muss gemäht werden. Bitte um Hilfe!",
+                    kategorie: "Garten",
+                    zeitraum: "31.05.2023",
+                    standort:"Karlsruhe"
                 },
                 {
-                    rezeptname: "Apfelkuchen",
-                    dauer: "80min",
-                    schwierigkeitsgrad: "5",
-                    zutaten: "<p> - 250g Mehl <br /> \ - 1000g Äpfel <br /> \ - 400ml Milch <br /> \ - 150g Zucker</p>",
-                    zubereitung:"Mehl mit Milch und Zucker verühren. Und so weiter. Test."
+                    titel: "Regal aufbauen",
+                    beschreibung: "Ich brauche einen Handwerker. Bitte um Hilfe!",
+                    kategorie: "Möbel",
+                    zeitraum: "29.05.2023",
+                    standort:"Landau"
                 },
             ]);
         }
 
-        //Demodaten von Bewertungen
-        let bewertungen = this.database.collection("bewertungen");
-        if (await bewertungen.estimatedDocumentCount() === 0) {
-            bewertungen.insertMany([
+        //Demodaten von Benutzer
+        let benutzer = this.database.collection("benutzer");
+        if (await benutzer.estimatedDocumentCount() === 0) {
+            benutzer.insertMany([
                 {
-                    rezeptname: "Erdbeerkuchen",
-                    bewertungstitel: "Super lecker...",
-                    bepunktung: "⭐️⭐️⭐️⭐️⭐️",
-                    bewertungstext: "Ich habe noch nie einen so tollen Kuchen gegessen. Zu empfehlen!"
+                    vorname: "Hans",
+                    nachname: "Müller",
+                    straße: "Landwehrstraße",
+                    hausnummer: "7",
+                    postleitzahl: "76829",
+                    stadt: "Landau",
+                    email: "hans.mueller@gmail.com",
+                    telefon: "00001717",
+                    nutzername:"hans.m",
+                    passwort: "hansm"
                 },
                 {
-                    rezeptname: "Apfelkuchenkuchen",
-                    bewertungstitel: "Nicht so meins!",
-                    bepunktung: "⭐️⭐️",
-                    bewertungstext: "Finde ich ein wenig matschig. Geschmackssache."
+                    vorname: "Peter",
+                    nachname: "Klaus",
+                    straße: "Karlsruherstraße",
+                    hausnummer: "99",
+                    postleitzahl: "76133",
+                    stadt: "Karlsruhe",
+                    email: "klaus.peter@gmail.com",
+                    telefon: "00009999",
+                    nutzername:"peter.k",
+                    passwort: "peterk"
                 },
             ]);
         }
