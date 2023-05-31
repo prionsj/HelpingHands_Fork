@@ -50,11 +50,11 @@ export default class HilfsanzeigeService {
     hilfsanzeige = hilfsanzeige || {};
 
     let newHilfsanzeige = {
-      titel:                            rezept.titel                    || "",
-      beschreibung:                     rezept.beschreibung             || "",
-      kategorie:                        rezept.kategorie                || "",
-      zeitraum:                         rezept.zeitraum                 || "",
-      standort:                         rezept.standort                 || ""
+      titel:                            hilfsanzeige.titel                    || "",
+      beschreibung:                     hilfsanzeige.beschreibung             || "",
+      kategorie:                        hilfsanzeige.kategorie                || "",
+      zeitraum:                         hilfsanzeige.zeitraum                 || "",
+      standort:                         hilfsanzeige.standort                 || ""
     };
 
     let result = await this._hilfsanzeige.insertOne(newHilfsanzeige);
@@ -91,7 +91,7 @@ export default class HilfsanzeigeService {
     }
 
     if (hilfsanzeige.titel)           updateDoc.$set.titel               = hilfsanzeige.titel;
-    if (hilfsanzeige.beschriebung)    updateDoc.$set.beschreibung        = hilfsanzeige.beschreibung;
+    if (hilfsanzeige.beschreibung)    updateDoc.$set.beschreibung        = hilfsanzeige.beschreibung;
     if (hilfsanzeige.kategorie)       updateDoc.$set.kategorie           = hilfsanzeige.kategorie;
     if (hilfsanzeige.zeitraum)        updateDoc.$set.zeitraum            = hilfsanzeige.zeitraum;
     if (hilfsanzeige.standort)        updateDoc.$set.standort            = hilfsanzeige.standort;
