@@ -8,9 +8,9 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
-import RezeptController from "./controller/hilfsanzeige.controller.js";
+import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
 import BewertungController from "./controller/bewertung.controller.js";
-import FavoritenController from "./controller/favoriten.controller.js";
+import AngebotController from "./controller/angebot.controller.js";
 import EinkaufslisteController from "./controller/einkaufsliste.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
@@ -97,9 +97,9 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/");
-new RezeptController(server, "/hilfsanzeige");
+new HilfsanzeigeController(server, "/hilfsanzeige");
 new BewertungController(server, "/bewertung");
-new FavoritenController(server, "/favoriten");
+new AngebotController(server, "/angebot");
 new EinkaufslisteController(server, "/einkaufsliste");
 
 // Server tatsächlich starten
