@@ -8,10 +8,11 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
+import AnmeldungController from "./controller/anmeldung.controller.js";
+import RegistrierungController from "./controller/registrierung.controller.js";
 import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
-import BewertungController from "./controller/bewertung.controller.js";
 import AngebotController from "./controller/angebot.controller.js";
-import EinkaufslisteController from "./controller/einkaufsliste.controller.js";
+import BenutzerController from "./controller/benutzer.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
@@ -97,10 +98,12 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/");
+new AnmeldungController(server, "/anmeldung");
+new RegistrierungController(server, "/registrierung");
 new HilfsanzeigeController(server, "/hilfsanzeige");
-new BewertungController(server, "/bewertung");
 new AngebotController(server, "/angebot");
-new EinkaufslisteController(server, "/einkaufsliste");
+new BenutzerController(server, "/benutzer");
+
 
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
