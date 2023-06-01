@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from "react"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+import "./App.css"
+
+import Login from "./components/Login"
+import Registrierung from "./components/Registrierung"
+import Hilfsanzeigen from "./components/Hilfsanzeigen"
+import AnzeigeErstellen from "./components/AnzeigeErstellen"
+import AngeboteneHilfe from "./components/AngeboteneHilfe"
+import Konto from "./components/Konto"
+import Error from "./components/Error"
+
+
+class App extends Component {
+  render() {
+    return (
+        <Router>
+          <div>
+            <Routes>
+              <Route path="/" element={<Login />} exact/>
+              <Route path="/registrierung" element={<Registrierung />}/>
+              <Route path="/hilfsanzeigen" element={<Hilfsanzeigen />}/>
+              <Route path="/anzeige-erstellen" element={<AnzeigeErstellen />} exact/>
+              <Route path="/angebotene-hilfe" element={<AngeboteneHilfe />}/>
+              <Route path="/konto" element={<Konto />}/>
+              <Route element={<Error />}/>
+            </Routes>
+          </div>
+        </Router>
+    );
+  }
+
 }
 
 export default App;
