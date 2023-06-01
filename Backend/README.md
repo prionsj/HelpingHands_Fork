@@ -1,4 +1,4 @@
-Kochbuch: Backend
+HelpingHands: Backend
 ===================
 
 Inhaltsverzeichnis
@@ -15,7 +15,7 @@ Inhaltsverzeichnis
 Kurzbeschreibung
 ----------------
 
-Dies ist der backendseitige REST-Webservice der Kochbuch-App. Es handelt sich
+Dies ist der backendseitige REST-Webservice der HelpingHands-WebApp Es handelt sich
 um ein einfaches nodeJS-Projekt mit dem Webframework [Restify](http://restify.com/).
 Die Schnittstelle des Webservices ist in der Datei `src/api/openapi.yaml`
 beschrieben.
@@ -23,7 +23,7 @@ beschrieben.
 Start mit Docker Compose
 ------------------------
 
-Am einfachsten lässt sich die Kochbuch-App mit Docker Compose aus dem Wurzelverzeichnis
+Am einfachsten lässt sich die HelpingHands-WebApp mit Docker Compose aus dem Wurzelverzeichnis
 heraus starten. Das dort abgelegte README beschreibt die dafür notwendigen
 Befehle im Detail:
 

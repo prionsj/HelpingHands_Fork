@@ -12,7 +12,7 @@ Inhaltsverzeichnis
 Kurzbeschreibung
 ----------------
 
-Dies ist der Gateway-Server des Kochbuchs, der alle Einzelservices
+Dies ist der Gateway-Server der HelpingHands-App, der alle Einzelservices
 der Anwendung hinter einem zentralen HTTP-Endpunkt verbirgt. Für die Entwicklung
 ist es tatsächlich besser, jeden Service über eine localhost-Adresse des eigenen
 Rechners direkt ansprechen zu können. Setzt sich eine Anwendung allerdings aus
@@ -81,8 +81,8 @@ Am einfachsten lässt sich die App mit Docker Compose aus dem Wurzelverzeichnis
 heraus starten. Das dort abgelegte README beschriebt die dafür notwendigen
 Befehle im Detail:
 
- * `docker-compose -f docker-compose.dev.yml up -d` zum Starten aller Dienste
- * `docker-compose -f docker-compose.dev.yml down` zum Stoppen aller Dienste
+ * `docker-compose -f docker-compose.yml up -d` zum Starten aller Dienste
+ * `docker-compose -f docker-compose.yml down` zum Stoppen aller Dienste
  * `docker system prune` zum Aufräumen nicht mehr benötigter Dateien
 
 Der nachfolgende Abschnitt in dieser Datei beschreiben hingegen, was dabei im
@@ -95,11 +95,11 @@ Für den Produktivbetrieb konfiguriert das beigefügte `Dockerfile` einen `nginx
 Webserver als Reverse Proxy bzw. Gateway-Server (beide Begriffe sind hier weitgehend
 synonym zu verstehen). Folgende Befehle werden hierfür benötigt:
 
- * `docker build -t meindigitaleskochbuch-gateway .` zum Bauen des Containers
- * `docker run -d -p 8080:81 --net meindigitaleskochbuch --name gateway meindigitaleskochbuch-gateway` zum Ausführen des Containers
+ * `docker build -t helpinghands-gateway .` zum Bauen des Containers
+ * `docker run -d -p 8080:81 --net helpinghands --name gateway helpinghands-gateway` zum Ausführen des Containers
  * `docker container stop gateway` zum Stoppen des Containers
  * `docker system prune` zum Aufräumen nicht mehr benötigter Daten
 
 Das `Dockerfile` wird auch verwendet, wenn im Wurzelverzeichnis mit Docker
-Compose die Datei `docker-compose.prod.yml` ausgeführt wird. Der Container wird
+Compose die Datei `docker-compose.yml` ausgeführt wird. Der Container wird
 im Grunde genommen damit auch auf die gleiche Art gestartet.
