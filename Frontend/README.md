@@ -1,4 +1,4 @@
-Kochbuch: Frontend
+HelpingHands: Frontend
 ====================
 
 Inhaltsverzeichnis
@@ -9,13 +9,12 @@ Inhaltsverzeichnis
  1. [Node.js-Kommandozeilenbefehle](#nodejs-kommandozeilenbefehle)
  1. [Node.js in Docker ausführen](#nodejs-in-docker-ausführen)
  1. [Produktives Container Image bauen](#produktives-container-image-bauen)
- 1. [Dokumentation eines spezifischen Fehlers](#dokumentation-eines-spezifischen-fehlers)
 
 
 Kurzbeschreibung
 ----------------
 
-Dies ist die clientseitige Single Page App mit dem Frontend des Kochbuchs.
+Dies ist die clientseitige Single Page App mit dem Frontend der HelpingHands-WebApp.
 Es handelt sich dabei um eine einfache Webanwendung, die mit VanillaJS
 (also einfachem JavaScript) ohne zusätzlichem Framework realisiert wurde.
 
@@ -26,8 +25,8 @@ Am einfachsten lässt sich die App mit Docker Compose aus dem Wurzelverzeichnis
 heraus starten. Das dort abgelegte README beschriebt die dafür notwendigen
 Befehle im Detail:
 
- * `docker-compose -f docker-compose.dev.yml up -d` zum Starten aller Dienste
- * `docker-compose -f docker-compose.dev.yml down` zum Stoppen aller Dienste
+ * `docker-compose -f docker-compose.yml up -d` zum Starten aller Dienste
+ * `docker-compose -f docker-compose.yml down` zum Stoppen aller Dienste
  * `docker system prune` zum Aufräumen nicht mehr benötigter Dateien
 
 Die nachfolgenden Abschnitte in dieser Datei beschreiben hingegen, was dabei im
@@ -54,7 +53,7 @@ Browser neugeladen werden.
 Die mit `npm run build` gebaute Anwendung wird im Verzeichnis `build` abgelegt
 und kann von dort auf einen beliebigen Webserver hochgeladen werden. Insbesondere
 `npm install` und `npm run build` werden daher im `Dockerfile` während dem Bauen
-des Container Images ausgeführt. In der `../docker-compose.dev.yml` werden
+des Container Images ausgeführt. In der `../docker-compose.yml` werden
 hingegen die Befehle `npm install` und `npm start` ausgeführt.
 
 Node.js in Docker ausführen
@@ -65,8 +64,8 @@ folgenden Befehlen ein Docker-Container mit Node.js gestartet werden. In diesem
 können die oben gezeigten Befehle dann alternativ ausgeführt werden:
 
 ```sh
-docker network create meindigitaleskochbuch
-docker run -it --net meindigitaleskochbuch -p 8080:8080 -w /app -v "$(pwd):/app" node:17-alpine sh
+docker network create helpinghands
+docker run -it --net helpinghands -p 8080:8080 -w /app -v "$(pwd):/app" node:17-alpine sh
 ```
 
 Der erste Befehl muss dabei nur einmalig ausgeführt werden, um ein virtuelles
@@ -79,7 +78,7 @@ den Docker-Container mit Node.js. Seine Parameter haben folgende Bedeutung:
   | ------------------------------| -------------------------------------------------------------------------|
   | `run`                         | Es soll ein Docker-Container ausgeführt werden                           |
   | `-it`                         | Start im Vordergrund mit interaktivem Terminal                           |
-  | `--net meindigitaleskochbuch` | Container mit dem virtuellen Netzwerk `meindigitaleskochbuch` verbinden  |
+  | `--net helpinghands` | Container mit dem virtuellen Netzwerk `helpinghands` verbinden  |
   | `-p 8080:8080`                | `localhost:8080` an den Port 8080 des Containers weiterleiten            |
   | `-w /app`                     | Arbeitsverzeichnis `/app` im Container benutzen                          |
   | `-v "$(pwd):/app"`            | Das aktuelle Verzeichnis unter `/app` im Container einbinden             |
@@ -99,7 +98,7 @@ Bauen der App entstehen im lokalen Quellcodeverzeichnis auf dem eigenen Rechner
 abgelegt.
 
 Das Gleiche passiert automatisch, wenn im Wurzelverzeichnis mit Docker Compose
-die Datei `docker-compose.dev.yml` ausgeführt wird.
+die Datei `docker-compose.yml` ausgeführt wird.
 
 Für weitere Informationen siehe
 [Docker Getting Started Guide](https://docs.docker.com/get-started/).
@@ -114,8 +113,8 @@ Für den Produktivbetrieb konfiguriert das beigefügte `Dockerfile` einen
 für Containervirtualisierung ausgeführt werden kann. Folgende Befehle werden
 hierfür benötigt:
 
- * `docker build -t meindigitaleskochbuch-frontend .` zum Bauen des Containers
- * `docker run -d -p 8080:80 --net meindigitaleskochbuch --name frontend meindigitaleskochbuch-frontend` zum Ausführen des Containers
+ * `docker build -t helpinghands-frontend .` zum Bauen des Containers
+ * `docker run -d -p 8080:80 --net helpinghands --name frontend helpinghands-frontend` zum Ausführen des Containers
  * `docker container stop frontend` zum Stoppen des Containers
  * `docker system prune` zum Aufräumen nicht mehr benötigter Daten
 
@@ -123,17 +122,5 @@ Das `Dockerfile` wird auch verwendet, wenn im Wurzelverzeichnis mit Docker
 Compose die Datei `docker-compose.prod.yml` ausgeführt wird. Der Container wird
 im Grunde genommen damit auch auf die gleiche Art gestartet.
 
-Dokumentation eines spezifischen Fehlers
----------------------------------
 
-Beim Löschen eines Rezeptes / einer Bewertung / eines Rezeptes auf der Favoritenliste / eines Rezeptes auf der Einkaufsliste
-erscheint ein spezifischer Fehler im Frontend:
 
-Uncaught (in promise) SyntaxError: Unexpected end of JSON input
-    at Backend.fetch (backend.js:89:29)
-
-![Screesnhot der Fehlermeldung beim löschen eines Rezeptes](fehlermeldung.jpg)
-
-Diese Fehlermeldung ist uns bewusst, allerdings konnte die Quelle unsererseits nicht identifiziert und somit nicht gelöst werden.
-Da es aber die Funktionalität des Löschens nicht beeinträchtigt wird, wurden hierfür keine Maßnahmen getroffen.
-Außerdem ist dieser Fehler bereits im Vorlagen-Grundgerüst "Adressbuch" aufzufinden.
