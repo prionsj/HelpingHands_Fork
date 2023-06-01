@@ -1,3 +1,11 @@
+/* APP */
+html {
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+}
+
+
 /* NAVIGATION */
 nav {
   color: grey;
@@ -31,6 +39,7 @@ nav li:hover, .nav-link.active {
 .nav {
   flex-wrap: unset;
   --bs-nav-link-hover-color: black;
+  height: 100px;
 }
 
 .nav-item {
@@ -41,9 +50,190 @@ nav li:hover, .nav-link.active {
 
 .nav-link {
   color: #f0f0f0;
-  padding: 0;
+  padding: 5px;
+  padding-top: 25px;
 }
 
 .navbar, .container {
   padding: 0;
+}
+
+/* HILFSANZEIGEN */
+.hilfsanzeigen-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  background: lightgray;
+}
+.logo-picture {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 125px;
+}
+
+.logo-description {
+  display: flex;
+  justify-content: center;
+  color: #0d0d40;
+  margin-top: -20px;
+}
+
+.search {
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius)!important;
+  width: 350px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.form-control {
+  border: none;
+}
+
+.category-container {
+  margin-top: 10px;
+  width: 350px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-select {
+  width: 275px;
+}
+
+.no-entry {
+  font-size: 16px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 350px;
+  margin-top: 10px;
+  background: lightgray;
+  padding: 2px;
+}
+
+.hilfsanzeigen {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  height: 475px;
+  overflow: scroll;
+  margin-top: 10px;
+}
+
+.hilfsanzeigen li {
+  margin: 0;
+
+  background-color: rgba(250, 250, 250, .8);
+
+  border-bottom-width: 1px;
+}
+
+.hilfsanzseigen .help {
+
+}
+
+.hilfsanzeigen .titel {
+  font-family: 'Brush Script MT', cursive;
+  padding-left: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.hilfsanzeigen .beschreibung {
+  padding-left: 5px;
+}
+
+.hilfsanzeigen ul{
+  padding-left: 0;
+  align-content: center;
+  background: lightgray;
+}
+
+.hilfsanzeigen ul li {
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 5px;
+}
+
+.zeitpunkt, .standort, .kategorie {
+  width: 80px;
+}
+
+.hilfsanzeigen .actions {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: lightgray;
+  width: auto
+}
+
+.hilfsanzeigen .actions > div {
+
+  background-color: rgb(220, 220, 220);
+  transition: background-color 0.5s;
+
+  flex: 1;
+  text-align: center;
+
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.action.edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hilfsanzeigen .actions > div:first-child {
+  margin-left: 0;
+}
+
+.hilfsanzeigen .actions > div:last-child {
+  margin-right: 0;
+}
+
+.hilfsanzeigen .actions > div:hover {
+  background-color: darkgray;
+  cursor: pointer;
+}
+
+.hilfsanzeigen ol ul {
+  list-style: none;
+}
+
+.anfrage {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+
 }
