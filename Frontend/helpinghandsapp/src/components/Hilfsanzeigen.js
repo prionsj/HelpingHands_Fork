@@ -1,14 +1,162 @@
-import React from 'react'
+import React, {Component} from "react"
 import Navigation from "./Navigation";
+import logo from "./static/HelpingHands.png"
 
-const Hilfsanzeigen = () => {
-    return (
-        <div>
-            <Navigation />
-            <h1>Hilfsanzeigen</h1>
-            <p>Hier stehen später alle Hilfsanzeigen.</p>
-        </div>
-    )
+class Hilfsanzeigen extends Component {
+    render() {
+        const keineAnzeigen = false
+        let hilfsanzeigen
+
+        if (keineAnzeigen) {
+            hilfsanzeigen = (
+                <div className="no-entry">
+                    Es sind keine Hilfseinträge vorhanden.
+                </div>
+            )
+        } else {
+            hilfsanzeigen = (
+                <div>
+                    <div className="card">
+                        <li className="list-entry" data-id="$ID$">
+                            <div className="stadt titel">
+                                $STADT$: $TITEL$
+                            </div>
+                            <div className="beschreibung">
+                                $BESCHREIBUNG$
+                            </div>
+                            <ul>
+                                <div>
+                                    <li>
+                                        <div className="standort">Standort:</div>
+                                        $STADT$
+                                    </li>
+                                    <li>
+                                        <div className="zeitpunkt">Zeitpunkt:</div>
+                                        $ZEITPUNKT$
+                                    </li>
+                                    <li>
+                                        <div className="kategorie">Kategorie:</div>
+                                        $KATEGORIE$
+                                    </li>
+                                </div>
+                                <div className="actions">
+                                    <div className="action edit">
+                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
+                                        </a>
+                                    </div>
+                                </div>
+                            </ul>
+                        </li>
+                    </div>
+                    <div className="card">
+                        <li className="list-entry" data-id="$ID$">
+                            <div className="stadt titel">
+                                $STADT$: $TITEL$
+                            </div>
+                            <div className="beschreibung">
+                                $BESCHREIBUNG$
+                            </div>
+                            <ul>
+                                <div>
+                                    <li>
+                                        <div className="standort">Standort:</div>
+                                        $STADT$
+                                    </li>
+                                    <li>
+                                        <div className="zeitpunkt">Zeitpunkt:</div>
+                                        $ZEITPUNKT$
+                                    </li>
+                                    <li>
+                                        <div className="kategorie">Kategorie:</div>
+                                        $KATEGORIE$
+                                    </li>
+                                </div>
+                                <div className="actions">
+                                    <div className="action edit">
+                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </ul>
+                        </li>
+                    </div>
+                    <div className="card">
+                        <li className="list-entry" data-id="$ID$">
+                            <div className="stadt titel">
+                                $STADT$: $TITEL$
+                            </div>
+                            <div className="beschreibung">
+                                $BESCHREIBUNG$
+                            </div>
+                            <ul>
+                                <div>
+                                    <li>
+                                        <div className="standort">Standort:</div>
+                                        $STADT$
+                                    </li>
+                                    <li>
+                                        <div className="zeitpunkt">Zeitpunkt:</div>
+                                        $ZEITPUNKT$
+                                    </li>
+                                    <li>
+                                        <div className="kategorie">Kategorie:</div>
+                                        $KATEGORIE$
+                                    </li>
+                                </div>
+                                <div className="actions">
+                                    <div className="action edit">
+                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+
+
+            )
+        }
+
+        return (
+            <div className="hilfsanzeigen-page">
+                <Navigation />
+                <div className="logo-container">
+                    <div className="logo-picture">
+                        <img className="logo" src={logo}/>
+                    </div>
+                    <p className="logo-description">
+                        Biete Hilfe in deiner Stadt
+                    </p>
+                </div>
+                <div className="search-container">
+                    <form className="d-flex search" role="search">
+                        <input type="search" className="form-control rounded" placeholder="Standort" aria-label="Suche"
+                               aria-describedby="search-addon"/>
+                        <button className="btn" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                <div className="category-container">
+                    <select className="form-select" aria-label="Default select example">
+                        <option selected>Kategorie</option>
+                        <option value="1">Kategorie 1</option>
+                        <option value="2">Kategorie 2</option>
+                        <option value="3">Kategorie 3</option>
+                    </select>
+                </div>
+                <ol className="hilfsanzeigen">
+                    {hilfsanzeigen}
+                </ol>
+            </div>
+        )
+    }
+
 }
 
 export default Hilfsanzeigen;
