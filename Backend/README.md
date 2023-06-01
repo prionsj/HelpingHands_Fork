@@ -27,8 +27,8 @@ Am einfachsten lässt sich die Kochbuch-App mit Docker Compose aus dem Wurzelver
 heraus starten. Das dort abgelegte README beschreibt die dafür notwendigen
 Befehle im Detail:
 
- * `docker-compose -f docker-compose.dev.yml up -d` zum Starten aller Dienste
- * `docker-compose -f docker-compose.dev.yml down` zum Stoppen aller Dienste
+ * `docker-compose -f docker-compose.yml up -d` zum Starten aller Dienste
+ * `docker-compose -f docker-compose.yml down` zum Stoppen aller Dienste
  * `docker system prune` zum Aufräumen nicht mehr benötigter Dateien
 
 Die nachfolgenden Abschnitte in dieser Datei beschreiben hingegen, was dabei im
@@ -73,12 +73,12 @@ Am einfachsten kann dies durch Starten eines temporären Docker Container
 erreicht werden:
 
 ```sh
-docker network create meindigitaleskochbuch
-docker run -d --name mongodb --net meindigitaleskochbuch -p 27017:27017 mongo
+docker network create helpinghands
+docker run -d --name mongodb --net helpinghands -p 27017:27017 mongo
 ```
 
 Der erste Befehl muss dabei nur ausgeführt werden, wenn das virtuelle Netzwerk
-`meindigitaleskochbuch` nicht bereits zuvor angelegt wurde. Der zweite Befehl startet
+`helpinghands` nicht bereits zuvor angelegt wurde. Der zweite Befehl startet
 eine temporäre MongoDB-Instanz und verbindet sie mit dem virtuellen Netzwerk.
 Zusätzlich wird der Port 27017 das eigenen Rechners an den Port 27017 des
 Containers weitergeleitet, um die Datenbank auch dann nutzen können, wenn der
@@ -88,7 +88,7 @@ Mit folgendem Befehl kann darüber hinaus ein grafisches Admin-Tool zur
 Verwaltung der Datenbank gestartet werden:
 
 ```sh
-docker run -d --name mongo-gui --net meindigitaleskochbuch -p 8081:8081 -e ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017/ mongo-express
+docker run -d --name mongo-gui --net helpinghands -p 8081:8081 -e ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017/ mongo-express
 ```
 
 Mit folgenden Befehlen können die beiden Container wieder gestoppt und nicht
@@ -120,7 +120,7 @@ Service automatisch neugestartet wird. Zusätzlich kann der Standardport 9229
 zur Anbindung eines JavaScript-Debuggers verwendet werden.
 
 `npm install` wird auch im `Dockerfile` während dem Bauen des Container Images
-ausgeführt. In der `../docker-compose.dev.yml` werden hingegen die Befehle
+ausgeführt. In der `../docker-compose.yml` werden hingegen die Befehle
 `npm install` und `npm start` ausgeführt.
 
 Node.js in Docker ausführen
@@ -139,8 +139,8 @@ Node.js-Laufzeitumgebung mit dem Quellcode des Backend-Services und allen seinen
 Abhängigkeiten. Der Container kann somit direkt in eine produktive Systemlandschaft
 überführt werden. Folgende Befehle werden hierfür benötigt:
 
- * `docker build -t meindigitaleskochbuch-backend .` zum Bauen des Containers
- * `docker run -d -p 3000:3000 --net meindigitaleskochbuch --name backend meindigitaleskochbuch-backend` zum Ausführen des Containers
+ * `docker build -t helpinghands-backend .` zum Bauen des Containers
+ * `docker run -d -p 3000:3000 --net helpinghands --name backend helpinghands-backend` zum Ausführen des Containers
  * `docker container stop backend` zum Stoppen des Containers
  * `docker system prune` zum Aufräumen nicht mehr benötigter Daten
 

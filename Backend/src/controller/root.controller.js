@@ -39,25 +39,27 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
      async index(req, res, next) {
          res.sendResult([
+            {
+                _name: "anmeldung",
+                query: {url: "/anmeldung", method: "GET", queryParams: ["search", "nutzername", "passwort"]},
+            },
              {
-                 _name: "rezept",
-                 query: {url: "/rezept", method: "GET", queryParams: ["search", "rezeptname", "dauer", "schwierigkeitsgrad", "zutaten", "zubereitung"]},
-                 create: {url: "/rezept", method: "POST"},
+                 _name: "registrierung",
+                 create: {url: "/registrierung", method: "POST"},
              },
              {
-                 _name: "bewertungen",
-                 query: {url: "/bewertungen", method: "GET", queryParams: ["search", "rezeptname", "bewertungstitel", "bepunktung", "bewertungstext"]},
-                 create: {url: "/bewertungen", method: "POST"},
+                 _name: "hilfsanzeige",
+                 query: {url: "/hilfsanzeige", method: "GET", queryParams: ["search", "titel", "beschreibung", "kategorie", "zeitraum", "standort"]},
+                 create: {url: "/hilfsanzeige", method: "POST"},
              },
              {
-                 _name: "favoriten",
-                 query: {url: "/favoriten", method: "GET", queryParams: ["search", "rezeptname"]},
-                 create: {url: "/favoriten", method: "POST"},
+                 _name: "angebot",
+                 query: {url: "/angebot", method: "GET", queryParams: ["search", "titel"]},
+                 create: {url: "/angebot", method: "POST"},
              },
              {
-                 _name: "einkaufsliste",
-                 query: {url: "/einkaufsliste", method: "GET", queryParams: ["search", "rezeptname", "zutaten"]},
-                 create: {url: "/einkaufsliste", method: "POST"},
+                 _name: "benutzer",
+                 query: {url: "/benutzer", method: "GET", queryParams: ["search", "vorname", "nachname", "straße", "hausnummer", "postleitzahl", "stadt", "email", "telefon", "nutzername", "passwort"]},
              },
          ]);
 

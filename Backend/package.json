@@ -1,8 +1,8 @@
 {
-  "name": "kochbuch-backend",
+  "name": "helpinghands-backend",
   "version": "1.0.0",
-  "description": "Mein digitales Kochbuch: Backend",
-  "author": "Angelika Kleimann, Florian Khan, Marco Pelzer, Rebecca Piotrowski",
+  "description": "HelpingHands: Backend",
+  "author": "Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions",
   "license": "CC-BY-4.0",
   "main": "src/index.js",
   "type": "module",

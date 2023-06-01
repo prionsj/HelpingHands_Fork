@@ -8,10 +8,6 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
-import RezeptController from "./controller/rezept.controller.js";
-import BewertungController from "./controller/bewertung.controller.js";
-import FavoritenController from "./controller/favoriten.controller.js";
-import EinkaufslisteController from "./controller/einkaufsliste.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
@@ -97,17 +93,16 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/");
-new RezeptController(server, "/rezept");
-new BewertungController(server, "/bewertung");
-new FavoritenController(server, "/favoriten");
-new EinkaufslisteController(server, "/einkaufsliste");
-new LoginController(server, "/login");
+new HilfsanzeigeController(server, "/hilfsanzeige");
+new AngebotController(server, "/angebot");
+new BenutzerController(server, "/benutzer");
+
 
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
   console.log();
   console.log("=============");
-  console.log("Kochbuch-Server");
+  console.log("HelpingHands-Server");
   console.log("=============");
   console.log();
   console.log("Ausführung mit folgender Konfiguration:");

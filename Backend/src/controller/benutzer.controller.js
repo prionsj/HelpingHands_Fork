@@ -1,34 +1,34 @@
 "use strict"
 
-import BewertungService from "../service/bewertung.service.js";
+import BenutzerService from "../service/benutzer.service.js";
 import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
 /**
-* HTTP-Controller-Klasse für Bewertungseinträge.
+* HTTP-Controller-Klasse für Benutzer.
 * Diese Klasse registriert alle notwendigen URL-Handler beim Webserver
 * für einen einfachen REST-Webservice zum Lesen und Schreiben von
-* Bewertungen.
+* Benutzer.
 */
 
-export default class BewertungController {
+export default class BenutzerController {
 
   /**
-  * Konstruktor. Hier werden die URL-Handler registrert.
+  * Konstruktor. Hier werden die URL-Handler registriert.
   *
   * @param {Object} server Restify Serverinstanz
   * @param {String} prefix Gemeinsamer Prefix aller URLs
   */
 
   constructor(server, prefix) {
-    this._service = new BewertungService();
+    this._service = new BenutzerService();
     this._prefix = prefix;
 
-    // Collection: Bewertungen
+    // Collection: Benutzer
     server.get(prefix, wrapHandler(this, this.search));
     server.post(prefix, wrapHandler(this, this.create));
 
-    // Entity: Bewertung
+    // Entity: Benutzer
     server.get(prefix + "/:id", wrapHandler(this, this.read));
     server.put(prefix + "/:id", wrapHandler(this, this.update));
     server.patch(prefix + "/:id", wrapHandler(this, this.update));
@@ -55,8 +55,8 @@ export default class BewertungController {
   }
 
   /**
-  * GET /bewertung
-  * Bewertung suchen
+  * GET /benutzer
+  * Benutzer suchen
   *
   * @param {Object} req
   * @param {Object} res
@@ -71,8 +71,8 @@ export default class BewertungController {
   }
 
   /**
-  * POST /bewertung
-  * Neue Bewertung anlegen
+  * POST /benutzer
+  * Neuen Benutzer anlegen
   *
   * @param {Object} req
   * @param {Object} res
@@ -89,8 +89,8 @@ export default class BewertungController {
   }
 
   /**
-  * GET /bewertung/:id
-  * Bewertung mit der angegebenen ID auslesen
+  * GET /benutzer/:id
+  * Benutzer mit der angegebenen ID auslesen
   *
   * @param {Object} req
   * @param {Object} res
@@ -103,15 +103,15 @@ export default class BewertungController {
     if (result) {
       res.sendResult(result);
     } else {
-      throw new RestifyError.NotFoundError("Bewertung nicht gefunden");
+      throw new RestifyError.NotFoundError("Benutzer nicht gefunden");
     }
     return next();
   }
 
   /**
-  * PUT /bewertung/:id
-  * PATCH /bewertung/:id
-  * Bewertung mit der angegebenen ID ändern
+  * PUT /benutzer/:id
+  * PATCH /benutzer/:id
+  * Benutzer mit der angegebenen ID ändern
   *
   * @param {Object} req
   * @param {Object} res
@@ -124,14 +124,14 @@ export default class BewertungController {
     if (result) {
       res.sendResult(result);
     } else {
-      throw new RestifyError.NotFoundError("Bewertung nicht gefunden");
+      throw new RestifyError.NotFoundError("Benutzer nicht gefunden");
     }
     return next();
   }
 
   /**
-  * DELETE /bewertung/:id
-  * Bewertung mit der angegebenen ID löschen
+  * DELETE /benutzer/:id
+  * Benutzer mit der angegebenen ID löschen
   *
   * @param {Object} req
   * @param {Object} res

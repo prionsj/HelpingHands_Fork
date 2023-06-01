@@ -1,34 +1,34 @@
 "use strict"
 
-import RezeptService from "../service/rezept.service.js";
+import HilfsanzeigeService from "../service/hilfsanzeige.service.js";
 import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
 /**
-* HTTP-Controller-Klasse für Rezepteinträge.
+* HTTP-Controller-Klasse für Hilfsanzeigen.
 * Diese Klasse registriert alle notwendigen URL-Handler beim Webserver
 * für einen einfachen REST-Webservice zum Lesen und Schreiben von
-* Rezepten.
+* Hilfsanzeigen.
 */
 
-export default class RezeptController {
+export default class HilfsanzeigeController {
 
   /**
-  * Konstruktor. Hier werden die URL-Handler registrert.
+  * Konstruktor. Hier werden die URL-Handler registriert.
   *
   * @param {Object} server Restify Serverinstanz
   * @param {String} prefix Gemeinsamer Prefix aller URLs
   */
 
   constructor(server, prefix) {
-    this._service = new RezeptService();
+    this._service = new HilfsanzeigeService();
     this._prefix = prefix;
 
-    // Collection: Rezepte
+    // Collection: Hilfsanzeige
     server.get(prefix, wrapHandler(this, this.search));
     server.post(prefix, wrapHandler(this, this.create));
 
-    // Entity: Rezept
+    // Entity: Hilfsanzeige
     server.get(prefix + "/:id", wrapHandler(this, this.read));
     server.put(prefix + "/:id", wrapHandler(this, this.update));
     server.patch(prefix + "/:id", wrapHandler(this, this.update));
@@ -55,8 +55,8 @@ export default class RezeptController {
   }
 
   /**
-  * GET /rezept
-  * Rezepte suchen
+  * GET /hilfsanzeige
+  * Hilfsanzeige suchen
   *
   * @param {Object} req
   * @param {Object} res
@@ -71,8 +71,8 @@ export default class RezeptController {
   }
 
   /**
-  * POST /rezept
-  * Neues Rezept anlegen
+  * POST /hilfsanzeige
+  * Neue Hilfsanzeige anlegen
   *
   * @param {Object} req
   * @param {Object} res
@@ -89,8 +89,8 @@ export default class RezeptController {
   }
 
   /**
-  * GET /rezept/:id
-  * Rezept mit der angegebenen ID auslesen
+  * GET /hilfsanzeige/:id
+  * Hilfsanzeige mit der angegebenen ID auslesen
   *
   * @param {Object} req
   * @param {Object} res
@@ -103,15 +103,15 @@ export default class RezeptController {
     if (result) {
       res.sendResult(result);
     } else {
-      throw new RestifyError.NotFoundError("Rezept nicht gefunden");
+      throw new RestifyError.NotFoundError("Hilfsanzeige nicht gefunden");
     }
     return next();
   }
 
   /**
-  * PUT /rezept/:id
-  * PATCH /rezept/:id
-  * Rezept mit der angegebenen ID ändern
+  * PUT /hilfsanzeige/:id
+  * PATCH /hilfsanzeige/:id
+  * Hilfsanzeige mit der angegebenen ID ändern
   *
   * @param {Object} req
   * @param {Object} res
@@ -124,14 +124,14 @@ export default class RezeptController {
     if (result) {
       res.sendResult(result);
     } else {
-      throw new RestifyError.NotFoundError("Rezept nicht gefunden");
+      throw new RestifyError.NotFoundError("Hilfsanzeige nicht gefunden");
     }
     return next();
   }
 
   /**
-  * DELETE /rezept/:id
-  * Rezept mit der angegebenen ID löschen
+  * DELETE /hilfsanzeige/:id
+  * Hilfsanzeige mit der angegebenen ID löschen
   *
   * @param {Object} req
   * @param {Object} res

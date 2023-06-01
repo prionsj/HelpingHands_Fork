@@ -1,17 +1,17 @@
 "use strict"
 
-import FavoritenService from "../service/favoriten.service.js";
+import AngebotService from "../service/angebot.service.js";
 import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
 /**
- * HTTP-Controller-Klasse für Favoriteneinträge.
+ * HTTP-Controller-Klasse für Angeboteinträge.
  *  Diese Klasse registriert alle notwendigen URL-Handler beim Webserver
  *  für einen einfachen REST-Webservice zum Lesen und Schreiben von
- *  Favoriten.
+ *  Angebote.
  */
 
-export default class FavoritenController {
+export default class AngebotController {
 
     /**
      * Konstruktor. Hier werden die URL-Handler registrert.
@@ -21,16 +21,15 @@ export default class FavoritenController {
      */
 
     constructor(server, prefix) {
-        this._service = new FavoritenService();
+        this._service = new AngebotService();
         this._prefix = prefix;
 
-        // Collection: Favoriten
+        // Collection: Angebote
         server.get(prefix, wrapHandler(this, this.search));
         server.post(prefix, wrapHandler(this, this.create));
 
-        // Entity: Favorit
+        // Entity: Angebot
         server.get(prefix + "/:id", wrapHandler(this, this.read));
-        server.del(prefix + "/:id", wrapHandler(this, this.delete));
     }
 
     /**
@@ -46,14 +45,13 @@ export default class FavoritenController {
         let url = `${this._prefix}/${entity._id}`;
 
         entity._links = {
-            read:   {url: url, method: "GET"},
-            delete: {url: url, method: "DELETE"},
+            read:   {url: url, method: "GET"}
         }
     }
 
     /**
-     * GET /favoriten
-     * Favoriten suchen
+     * GET /angebot
+     * Angebot suchen
      *
      * @param {Object} req
      * @param {Object} res
@@ -68,8 +66,8 @@ export default class FavoritenController {
     }
 
     /**
-     * POST /favoriten
-     * Neuen Favorit anlegen
+     * POST /angebot
+     * Neues Angebot anlegen
      *
      * @param {Object} req
      * @param {Object} res
@@ -88,8 +86,8 @@ export default class FavoritenController {
     }
 
     /**
-     * GET /favoriten/:id
-     * Favoriten mit der angegebenen ID auslesen
+     * GET /angebot/:id
+     * Angebot mit der angegebenen ID auslesen
      *
      * @param {Object} req
      * @param {Object} res
@@ -103,25 +101,9 @@ export default class FavoritenController {
         if (result) {
             res.sendResult(result);
         } else {
-            throw new RestifyError.NotFoundError("Favorit nicht gefunden");
+            throw new RestifyError.NotFoundError("Angebot nicht gefunden");
         }
 
-        return next();
-    }
-
-    /**
-     * DELETE /favoriten/:id
-     * Favorit mit der angegebenen ID löschen
-     *
-     * @param {Object} req
-     * @param {Object} res
-     * @param {Object} next
-     */
-
-    async delete(req, res, next) {
-        await this._service.delete(req.params.id)
-        res.status(204);
-        res.sendResult({});
         return next();
     }
 

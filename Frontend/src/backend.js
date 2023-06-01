@@ -38,9 +38,9 @@ export default class Backend {
   * Low-level Wrapper um die Fetch API, um diese bei jeder Verwendung mit
   * denselben Parametern zu versorgen. Aufrufbeispiel:
   *
-  *   * backend.fetch("GET", "/rezept");
-  *   * backend.fetch("GET", "/rezept", {query: {rezeptname: "Test"}});
-  *   * backend.fetch("PUT", "/rezept", {body: { ... }});
+  *   * backend.fetch("GET", "/hilfsanzeige");
+  *   * backend.fetch("GET", "/hilfsanzeige", {query: {hilfsanzeige: "Test"}});
+  *   * backend.fetch("PUT", "/hilfsanzeige", {body: { ... }});
   *
   * Über das Options-Objekt können Query-Parameter mitgegeben werden, die
   * als URL-Parameter angehängt werden, sowie Daten, die nach JSON konvertiert
