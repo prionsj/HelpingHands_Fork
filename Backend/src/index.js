@@ -101,6 +101,7 @@ new RezeptController(server, "/rezept");
 new BewertungController(server, "/bewertung");
 new FavoritenController(server, "/favoriten");
 new EinkaufslisteController(server, "/einkaufsliste");
+new LoginController(server, "/login");
 
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
