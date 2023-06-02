@@ -54,7 +54,8 @@ export default class HilfsanzeigeService {
       beschreibung:                     hilfsanzeige.beschreibung             || "",
       kategorie:                        hilfsanzeige.kategorie                || "",
       zeitraum:                         hilfsanzeige.zeitraum                 || "",
-      standort:                         hilfsanzeige.standort                 || ""
+      standort:                         hilfsanzeige.standort                 || "",
+      benutzerid:                       hilfsanzeige.benutzerid               || ""
     };
 
     let result = await this._hilfsanzeige.insertOne(newHilfsanzeige);
@@ -95,6 +96,8 @@ export default class HilfsanzeigeService {
     if (hilfsanzeige.kategorie)       updateDoc.$set.kategorie           = hilfsanzeige.kategorie;
     if (hilfsanzeige.zeitraum)        updateDoc.$set.zeitraum            = hilfsanzeige.zeitraum;
     if (hilfsanzeige.standort)        updateDoc.$set.standort            = hilfsanzeige.standort;
+    if (hilfsanzeige.benutzerid)      updateDoc.$set.benutzerid          = hilfsanzeige.benutzerid;
+
 
     await this._hilfsanzeige.updateOne({_id: new ObjectId(id)}, updateDoc);
     return this._hilfsanzeige.findOne({_id: new ObjectId(id)});

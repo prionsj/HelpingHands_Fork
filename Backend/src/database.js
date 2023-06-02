@@ -46,14 +46,16 @@ class DatabaseFactory {
                     beschreibung: "Mein Rasen muss gemäht werden. Bitte um Hilfe!",
                     kategorie: "Garten",
                     zeitraum: "31.05.2023",
-                    standort:"Karlsruhe"
+                    standort:"Karlsruhe",
+                    benutzerid: "xx"
                 },
                 {
                     titel: "Regal aufbauen",
                     beschreibung: "Ich brauche einen Handwerker. Bitte um Hilfe!",
                     kategorie: "Möbel",
                     zeitraum: "29.05.2023",
-                    standort:"Landau"
+                    standort:"Landau",
+                    benutzerid: "yy"
                 },
             ]);
         }

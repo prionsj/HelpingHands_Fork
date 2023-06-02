@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: '1.0'
   title: HelpingHands
-  description: 'Die HelpingHands-WebApp nutzt einen REST-Webservices zur Kommunikation mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche, Anzeige und Bearbeitung von Hilfs-Anzeigen, wobei jede Hilfs-Anzeige aus einer Beschreibung besteht.'
+  description: 'Die HelpingHands-WebApp nutzt einen REST-Webservices zur Kommunikation mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche, Anzeige und Bearbeitung von Hilfsanzeigen, wobei jede Hilfsanzeige aus einer Beschreibung besteht.'
   contact:
     name: 'Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions'
 servers:
@@ -29,8 +29,8 @@ paths:
   /hilfsanzeige:
     get:
       tags:
-        - Hilfs-Anzeige
-      summary: Hilfs-Anzeige suchen
+        - Hilfsanzeigenliste
+      summary: Hilfsanzeige suchen
       description: Suche nach Hilfsanzeigen. Gibt eine Liste aller Hilfsanzeigen passend zu den übergebenen Suchkriterien zurück.
       operationId: get-hilfsanzeige
       parameters:
@@ -59,6 +59,11 @@ paths:
           description: Gesuchter Standort
           schema:
             type: string
+        - name: benutzerid
+          in: query
+          description: Gesuchte Benutzer-ID
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -72,8 +77,8 @@ paths:
         - url: 'http://localhost:3000'
     post:
       tags:
-        - Hilfs-Anzeige
-      summary: Hilfs-Anzeige anlegen
+        - Hilfsanzeigenliste
+      summary: Hilfsanzeige anlegen
       description: 'Neue Hilfsanzeige anlegen. Speichert die übergebene Hilfsanzeige in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
       operationId: post-hilfsanzeige
       requestBody:
@@ -99,7 +104,7 @@ paths:
   '/hilfsanzeige/{id}':
     get:
       tags:
-        - Hilfs-Anzeige
+        - Hilfsanzeige
       summary: Hilfsanzeige lesen
       description: Listet eine einzelne Hilfsanzeige vom Server
       operationId: get-hilfsanzeige-id
@@ -126,7 +131,7 @@ paths:
         - url: 'http://localhost:3000'
     put:
       tags:
-        - Hilfs-Anzeige
+        - Hilfsanzeige
       summary: Hilfsanzeige überschreiben
       description: 'Hilfsanzeige bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
       operationId: put-hilfsanzeige-id
@@ -155,7 +160,7 @@ paths:
         - url: 'http://localhost:3000'
     patch:
       tags:
-        - Hilfs-Anzeige
+        - Hilfsanzeige
       summary: Einzelne Felder ändern
       description: 'Hilfsanzeige bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
       operationId: patch-hilfsanzeige-id
@@ -186,6 +191,8 @@ paths:
       servers:
         - url: 'http://localhost:3000'
     delete:
+      tags:
+        - Hilfsanzeige
       summary: Hilfsanzeige entfernen
       description: Löschen der Hilfsanzeige
       operationId: delete-hilfsanzeige-id
@@ -205,7 +212,7 @@ paths:
   /angebot:
     get:
       tags:
-        - Hilfs-Anzeige
+        - Angebotsliste
       summary: Angebotene Hilfe einsehen
       description: 'Neues Angebot anlegen. Speichert die übergebene Hilfsanzeige in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
       operationId: get-angebot
@@ -228,7 +235,7 @@ paths:
         - url: 'http://localhost:3000'
     post:
       tags:
-        - Hilfs-Anzeige
+        - Angebotsliste
       summary: Zur Liste hinzufügen
       operationId: post-angebot
       requestBody:
@@ -253,6 +260,8 @@ paths:
         - url: 'http://localhost:3000'
   '/angebot/{id}':
     get:
+      tags:
+        - Angebot
       summary: Angebot lesen
       description: Angebot einsehen
       operationId: get-angebot-id
@@ -275,6 +284,8 @@ paths:
         - url: 'http://localhost:3000'
   /benutzer:
     get:
+      tags:
+        - Benutzerliste
       summary: Benutzer sehen
       description: Benutzer einsehen
       operationId: get-benutzer
@@ -342,7 +353,7 @@ paths:
         - url: 'http://localhost:3000'
     post:
       tags:
-        - Benutzer
+        - Benutzerliste
       summary: Benutzer anlegen
       description: 'Neuen Benutzer anlegen. Speichert den übergebenen Benutzer in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
       operationId: post-benutzer
@@ -368,6 +379,8 @@ paths:
         - url: 'http://localhost:3000'
   '/benutzer/{id}':
     get:
+      tags:
+        - Benutzer
       summary: Benutzer sehen
       description: Benutzer von Server lesen
       operationId: get-benutzer-id
@@ -389,6 +402,8 @@ paths:
       servers:
         - url: 'http://localhost:3000'
     put:
+      tags:
+        - Benutzer
       summary: Benutzer überschrieben
       description: 'Benutzer bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
       operationId: put-benutzer-id
@@ -416,6 +431,8 @@ paths:
       servers:
         - url: 'http://localhost:3000'
     patch:
+      tags:
+        - Benutzer
       summary: Einzelne Felder ändern
       description: 'Benutzer bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
       operationId: patch-benutzer-id
@@ -442,6 +459,8 @@ paths:
       servers:
         - url: 'http://localhost:3000'
     delete:
+      tags:
+        - Benutzer
       summary: Benutzer löschen
       description: Benutzer löschen
       operationId: delete-benutzer-id
@@ -460,7 +479,11 @@ paths:
         - url: 'http://localhost:3000'
 tags:
   - name: Benutzer
-  - name: Hilfs-Anzeige
+  - name: Benutzerliste
+  - name: Hilfsanzeige
+  - name: Hilfsanzeigenliste
+  - name: Angebot
+  - name: Angebotsliste
   - name: Index
 components:
   schemas:
@@ -506,6 +529,8 @@ components:
         zeitraum:
           type: string
         standort:
+          type: string
+        benutzerid:
           type: string
     HATEAOS_Resource:
       type: object
