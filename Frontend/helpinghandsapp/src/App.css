@@ -71,11 +71,11 @@ nav li:hover, .nav-link.active {
   width: 100vw;
   background: lightgray;
 }
+
 .logo-picture {
   display: flex;
   justify-content: center;
 }
-
 .logo {
   width: 125px;
 }
@@ -237,3 +237,70 @@ nav li:hover, .nav-link.active {
   color: black;
 
 }
+
+/* LOGIN */
+
+.logo-picture{
+
+  margin: 0 auto;
+  text-align: center;
+
+}
+.logo {
+  width: 125px;
+  margin-top: 0;
+  background-position: top;
+}
+.logo-description {
+  display: block;
+  justify-content: center;
+  color: #0d0d40;
+  margin-top: 10px;
+}
+.login-page, .login-form, .register-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+}
+.login-page{
+  padding: 7rem;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  margin: 0 auto;
+}
+input {
+  margin: 0.5rem ;
+  padding: 1rem;
+  border:rgb(9, 9, 9);
+  border-radius: 10px;
+  background-color: rgb(236, 237, 238);
+}
+button {
+  margin: 10px;
+  background-color: rgb(167, 192, 246);
+  border: rgb(9, 9, 9);
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #ffffff;
+}
+.link-btn {
+  background: none;
+  color: rgb(10, 10, 10);
+  text-decoration: underline;
+  margin:0;
+}
+label {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+/* Registrieren */
+.registrieren-page{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  margin: 20px;
+}
+
+
