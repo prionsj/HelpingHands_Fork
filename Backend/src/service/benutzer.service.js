@@ -50,16 +50,16 @@ export default class BenutzerService {
     benutzer = benutzer || {};
 
     let newBenutzer = {
-      vorname:                          benutzer.titel                    || "",
-      nachname:                         benutzer.beschreibung             || "",
-      straße:                           benutzer.kategorie                || "",
-      hausnummer:                       benutzer.zeitraum                 || "",
-      postleitszahl:                    benutzer.standort                 || "",
-      stadt:                            benutzer.titel                    || "",
-      email:                            benutzer.beschreibung             || "",
-      telefon:                          benutzer.kategorie                || "",
-      nutzername:                       benutzer.zeitraum                 || "",
-      passwort:                         benutzer.standort                 || "",
+      vorname:                          benutzer.vorname              || "",
+      nachname:                         benutzer.nachname             || "",
+      straße:                           benutzer.straße               || "",
+      hausnummer:                       benutzer.hausnummer           || "",
+      postleitszahl:                    benutzer.postleitzahl         || "",
+      stadt:                            benutzer.stadt                || "",
+      email:                            benutzer.email                || "",
+      telefon:                          benutzer.telefon              || "",
+      nutzername:                       benutzer.nutzername           || "",
+      passwort:                         benutzer.passwort             || "",
     };
 
     let result = await this._benutzer.insertOne(newBenutzer);
@@ -99,7 +99,7 @@ export default class BenutzerService {
     if (benutzer.nachname)          updateDoc.$set.nachname              = benutzer.nachname;
     if (benutzer.straße)            updateDoc.$set.straße                = benutzer.straße;
     if (benutzer.hausnummer)        updateDoc.$set.hausnummer            = benutzer.hausnummer;
-    if (benutzer.postleitzahl)      updateDoc.$set.postleitzahl          = benutzer.postleitzahl;
+    if (benutzer.postleitszahl)     updateDoc.$set.postleitszahl          = benutzer.postleitszahl;
     if (benutzer.stadt)             updateDoc.$set.stadt                 = benutzer.stadt;
     if (benutzer.email)             updateDoc.$set.email                 = benutzer.email;
     if (benutzer.telefon)           updateDoc.$set.telefon               = benutzer.telefon;
