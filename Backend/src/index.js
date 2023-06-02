@@ -8,6 +8,10 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
+import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
+import AngebotController from "./controller/angebot.controller.js";
+import BenutzerController from "./controller/benutzer.controller.js";
+
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";

@@ -39,14 +39,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
      async index(req, res, next) {
          res.sendResult([
-            {
-                _name: "anmeldung",
-                query: {url: "/anmeldung", method: "GET", queryParams: ["search", "nutzername", "passwort"]},
-            },
-             {
-                 _name: "registrierung",
-                 create: {url: "/registrierung", method: "POST"},
-             },
              {
                  _name: "hilfsanzeige",
                  query: {url: "/hilfsanzeige", method: "GET", queryParams: ["search", "titel", "beschreibung", "kategorie", "zeitraum", "standort"]},
@@ -60,7 +52,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
              {
                  _name: "benutzer",
                  query: {url: "/benutzer", method: "GET", queryParams: ["search", "vorname", "nachname", "straße", "hausnummer", "postleitzahl", "stadt", "email", "telefon", "nutzername", "passwort"]},
-             },
+                 create: {url: "/benutzer", method: "POST"},
+             }
          ]);
 
          next();

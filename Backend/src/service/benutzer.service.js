@@ -59,7 +59,7 @@ export default class BenutzerService {
       email:                            benutzer.beschreibung             || "",
       telefon:                          benutzer.kategorie                || "",
       nutzername:                       benutzer.zeitraum                 || "",
-      passwort:                         benutzer.standort                 || ""
+      passwort:                         benutzer.standort                 || "",
     };
 
     let result = await this._benutzer.insertOne(newBenutzer);
@@ -83,7 +83,7 @@ export default class BenutzerService {
   * oder des gesamten Benutzer-Objektes (ohne die ID).
   *
   * @param {String} id ID des gesuchten Benutzers
-  * @param {[type]} rezept Zu speichernde Benutzerdaten
+  * @param {[type]} benutzer Zu speichernde Benutzerdaten
   * @return {Promise} Gespeicherte Benutzerdaten oder undefined
   */
 

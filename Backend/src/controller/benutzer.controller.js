@@ -72,7 +72,7 @@ export default class BenutzerController {
 
   /**
   * POST /benutzer
-  * Neuen Benutzer anlegen
+  * Neue Benutzer anlegen
   *
   * @param {Object} req
   * @param {Object} res

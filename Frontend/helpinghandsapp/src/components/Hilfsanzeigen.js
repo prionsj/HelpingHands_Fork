@@ -1,11 +1,26 @@
-import React, {Component} from "react"
+import React, {Component, useState, useEffect} from "react"
 import Navigation from "./Navigation";
 import logo from "./static/HelpingHands.png"
+import Backend from "./backend.js";
 
-class Hilfsanzeigen extends Component {
-    render() {
+const Hilfsanzeigen = () => {
         const keineAnzeigen = false
         let hilfsanzeigen
+
+        const [helps, setHelps] = useState([])
+        
+        useEffect(() => {
+            fetch('http://localhost:3000/hilfsanzeige')
+            .then((response) => response.json())
+            .then((data) => {
+            console.log(data);
+            setHelps(data);
+        
+            }).catch((err) => {
+                console.log(err.message);
+            });
+        }, []);
+
 
         if (keineAnzeigen) {
             hilfsanzeigen = (
@@ -48,77 +63,8 @@ class Hilfsanzeigen extends Component {
                             </ul>
                         </li>
                     </div>
-                    <div className="card">
-                        <li className="list-entry" data-id="$ID$">
-                            <div className="stadt titel">
-                                $STADT$: $TITEL$
-                            </div>
-                            <div className="beschreibung">
-                                $BESCHREIBUNG$
-                            </div>
-                            <ul>
-                                <div>
-                                    <li>
-                                        <div className="standort">Standort:</div>
-                                        $STADT$
-                                    </li>
-                                    <li>
-                                        <div className="zeitpunkt">Zeitpunkt:</div>
-                                        $ZEITPUNKT$
-                                    </li>
-                                    <li>
-                                        <div className="kategorie">Kategorie:</div>
-                                        $KATEGORIE$
-                                    </li>
-                                </div>
-                                <div className="actions">
-                                    <div className="action edit">
-                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </ul>
-                        </li>
-                    </div>
-                    <div className="card">
-                        <li className="list-entry" data-id="$ID$">
-                            <div className="stadt titel">
-                                $STADT$: $TITEL$
-                            </div>
-                            <div className="beschreibung">
-                                $BESCHREIBUNG$
-                            </div>
-                            <ul>
-                                <div>
-                                    <li>
-                                        <div className="standort">Standort:</div>
-                                        $STADT$
-                                    </li>
-                                    <li>
-                                        <div className="zeitpunkt">Zeitpunkt:</div>
-                                        $ZEITPUNKT$
-                                    </li>
-                                    <li>
-                                        <div className="kategorie">Kategorie:</div>
-                                        $KATEGORIE$
-                                    </li>
-                                </div>
-                                <div className="actions">
-                                    <div className="action edit">
-                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </ul>
-                        </li>
-                    </div>
                 </div>
-
-
             )
-        }
 
         return (
             <div className="hilfsanzeigen-page">
@@ -151,7 +97,47 @@ class Hilfsanzeigen extends Component {
                     </select>
                 </div>
                 <ol className="hilfsanzeigen">
-                    {hilfsanzeigen}
+                {
+                    helps && helps.map((help, index)=> {
+                        console.log(help.titel)
+                        return (
+                            <div>
+                    <div className="card">
+                        <li className="list-entry" data-id="$ID$">
+                            <div className="stadt titel">
+                                {help.standort}: {help.titel}
+                            </div>
+                            <div className="beschreibung">
+                                {help.beschreibung}
+                            </div>
+                            <ul>
+                                <div>
+                                    <li>
+                                        <div className="standort">Standort:</div>
+                                        {help.standort}
+                                    </li>
+                                    <li>
+                                        <div className="zeitpunkt">Zeitpunkt:</div>
+                                        {help.zeitraum}
+                                    </li>
+                                    <li>
+                                        <div className="kategorie">Kategorie:</div>
+                                        {help.kategorie}
+                                    </li>
+                                </div>
+                                <div className="actions">
+                                    <div className="action edit">
+                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
+                                        </a>
+                                    </div>
+                                </div>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+                        )
+                    })
+                }
                 </ol>
             </div>
         )

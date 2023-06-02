@@ -5,9 +5,6 @@ info:
   description: 'Die HelpingHands-WebApp nutzt einen REST-Webservices zur Kommunikation mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche, Anzeige und Bearbeitung von Hilfs-Anzeigen, wobei jede Hilfs-Anzeige aus einer Beschreibung besteht.'
   contact:
     name: 'Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions'
-  license:
-    url: 'https://creativecommons.org/licenses/by/4.0/deed.de'
-    name: CC-BY-4.0
 servers:
   - url: 'http://localhost:3000'
 paths:
@@ -17,9 +14,7 @@ paths:
         - Index
       summary: Wurzeladresse des Webservices
       description: HATEAOS-Links mit den Collections abrufen
-      operationId: index
-      requestBody:
-        content: {}
+      operationId: get
       responses:
         '200':
           description: OK
@@ -29,12 +24,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HATEOAS_Collection'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/HATEOAS_Collection'
-            multipart/form-data:
-              schema:
-                type: object
       servers:
         - url: 'http://localhost:3000'
   /hilfsanzeige:
@@ -88,12 +77,23 @@ paths:
       description: 'Neue Hilfsanzeige anlegen. Speichert die übergebene Hilfsanzeige in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
       operationId: post-hilfsanzeige
       requestBody:
-        description: ''
+        description: Daten des anzulegenden Hilfsanzeige
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Hilfsanzeige'
-      responses: {}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hilfsanzeige'
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL des angelegten Datensatzes
       servers:
         - url: 'http://localhost:3000'
   '/hilfsanzeige/{id}':
@@ -118,6 +118,10 @@ paths:
                 $ref: '#/components/schemas/Hilfsanzeige'
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
       servers:
         - url: 'http://localhost:3000'
     put:
@@ -132,6 +136,12 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hilfsanzeige'
       responses:
         '200':
           description: OK
@@ -155,6 +165,11 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hilfsanzeige'
       responses:
         '200':
           description: OK
@@ -164,10 +179,14 @@ paths:
                 $ref: '#/components/schemas/Hilfsanzeige'
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
       servers:
         - url: 'http://localhost:3000'
     delete:
-      summary: ''
+      summary: Hilfsanzeige entfernen
       description: Löschen der Hilfsanzeige
       operationId: delete-hilfsanzeige-id
       parameters:
@@ -177,8 +196,8 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: OK
+        '204':
+          description: No Content
         '404':
           description: Not Found
       servers:
@@ -213,6 +232,7 @@ paths:
       summary: Zur Liste hinzufügen
       operationId: post-angebot
       requestBody:
+        description: Daten des anzulegenden Angebots
         content:
           application/json:
             schema:
@@ -220,6 +240,10 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Angebot'
           headers:
             Location:
               schema:
@@ -305,7 +329,41 @@ paths:
           description: Gesuchtes Passwort
           schema:
             type: string
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Benutzer'
+      servers:
+        - url: 'http://localhost:3000'
+    post:
+      tags:
+        - Benutzer
+      summary: Benutzer anlegen
+      description: 'Neuen Benutzer anlegen. Speichert den übergebenen Benutzer in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
+      operationId: post-benutzer
+      requestBody:
+        description: Daten des anzulegenden Benutzers
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Benutzer'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL des angelegten Datensatzes
       servers:
         - url: 'http://localhost:3000'
   '/benutzer/{id}':
@@ -385,7 +443,7 @@ paths:
         - url: 'http://localhost:3000'
     delete:
       summary: Benutzer löschen
-      description: Benutzer löscchen
+      description: Benutzer löschen
       operationId: delete-benutzer-id
       parameters:
         - name: id
@@ -394,8 +452,8 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: OK
+        '204':
+          description: No Content
         '404':
           description: Not Found
       servers:
@@ -465,6 +523,7 @@ components:
     Angebot:
       type: object
       title: Angebot
+      description: Liste der angebotenen Hilfen.
       properties:
         _id:
           type: string
