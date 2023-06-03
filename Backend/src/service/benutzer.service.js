@@ -54,7 +54,7 @@ export default class BenutzerService {
       nachname:                         benutzer.nachname             || "",
       straße:                           benutzer.straße               || "",
       hausnummer:                       benutzer.hausnummer           || "",
-      postleitszahl:                    benutzer.postleitzahl         || "",
+      postleitzahl:                     benutzer.postleitzahl         || "",
       stadt:                            benutzer.stadt                || "",
       email:                            benutzer.email                || "",
       telefon:                          benutzer.telefon              || "",
@@ -99,7 +99,7 @@ export default class BenutzerService {
     if (benutzer.nachname)          updateDoc.$set.nachname              = benutzer.nachname;
     if (benutzer.straße)            updateDoc.$set.straße                = benutzer.straße;
     if (benutzer.hausnummer)        updateDoc.$set.hausnummer            = benutzer.hausnummer;
-    if (benutzer.postleitszahl)     updateDoc.$set.postleitszahl          = benutzer.postleitszahl;
+    if (benutzer.postleitzahl)      updateDoc.$set.postleitzahl          = benutzer.postleitzahl;
     if (benutzer.stadt)             updateDoc.$set.stadt                 = benutzer.stadt;
     if (benutzer.email)             updateDoc.$set.email                 = benutzer.email;
     if (benutzer.telefon)           updateDoc.$set.telefon               = benutzer.telefon;

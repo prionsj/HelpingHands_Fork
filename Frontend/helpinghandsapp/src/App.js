@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, {Component, useState} from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -13,26 +13,35 @@ import AnzeigeErstellen from "./components/AnzeigeErstellen"
 import AngeboteneHilfe from "./components/AngeboteneHilfe"
 import Konto from "./components/Konto"
 import Error from "./components/Error"
+import UsernameContext from "./components/UsernameContext";
 
 
-class App extends Component {
-  render() {
+const App = () => {
+
+    const [username, setUsername] = useState('');
+
+    const setUsernameContext = (value) => {
+      setUsername(value);
+    };
+
     return (
-        <Router>
-          <div>
-            <Routes>
-              <Route path="/" element={<Login />} exact/>
-              <Route path="/registrierung" element={<Registrierung />}/>
-              <Route path="/hilfsanzeigen" element={<Hilfsanzeigen />}/>
-              <Route path="/anzeige-erstellen" element={<AnzeigeErstellen />} exact/>
-              <Route path="/angebotene-hilfe" element={<AngeboteneHilfe />}/>
-              <Route path="/konto" element={<Konto />}/>
-              <Route element={<Error />}/>
-            </Routes>
-          </div>
-        </Router>
+        <UsernameContext.Provider value={username}>
+          <Router>
+            <div>
+              <Routes>
+                  <Route path="/" element={<Login setUsername={setUsernameContext} />} exact/>
+                  <Route path="/registrierung" element={<Registrierung />}/>
+                  <Route path="/hilfsanzeigen" element={<Hilfsanzeigen />}/>
+                  <Route path="/anzeige-erstellen" element={<AnzeigeErstellen />} exact/>
+                  <Route path="/angebotene-hilfe" element={<AngeboteneHilfe />}/>
+                  <Route path="/konto" element={<Konto />}/>
+                  <Route element={<Error />}/>
+              </Routes>
+            </div>
+          </Router>
+        </UsernameContext.Provider>
     );
-  }
+
 
 }
 

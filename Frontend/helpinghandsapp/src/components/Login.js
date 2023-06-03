@@ -1,36 +1,55 @@
-import React, { useState } from "react";
-import logo from "./static/HelpingHands.png"
-import {NavLink} from "react-router-dom";
+import React, { useState, useContext } from "react";
+import logo from "./static/HelpingHands.png";
+import { NavLink } from "react-router-dom";
+import UsernameContext from "./UsernameContext";
+
+export const Login = ({ setUsername }) => {
+    const [nutzername, setNutzername] = useState('');
 
 
-export const Login = (props) => {
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-
-    const handleSubmit = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        console.log(email);
+        setUsername(nutzername);
     }
 
     return (
         <div className="login-page">
-             <div className="logo-picture">
-                    <img className="logo" src={logo}/>
-             </div>
-             <p className="logo-description">
-             <h2>Anmelden</h2>
+            <div className="logo-picture">
+                <img className="logo" src={logo} alt="Logo" />
+            </div>
+            <p className="logo-description">
+                <h2>Anmelden</h2>
             </p>
 
-            <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">E-Mail</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="deine.email@gmail.com" id="email" name="email" />
-                <label htmlFor="password">Passwort</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                
-                <button><NavLink to="/hilfsanzeigen">Anmelden</NavLink></button>
+            <form className="login-form">
+                <label htmlFor="nutzername">Nutzername</label>
+                <input
+                    value={nutzername}
+                    onChange={(e) => setNutzername(e.target.value)}
+                    type="text"
+                    placeholder="evaeth"
+                    id="nutzername"
+                    name="nutzername"
+                />
+                <label htmlFor="passwort">Passwort</label>
+                <input
+                    type="password"
+                    placeholder="********"
+                    id="passwort"
+                    name="passwort"
+                />
+
+                <button onClick={handleLogin}>
+                    <NavLink to="/hilfsanzeigen">Anmelden</NavLink>
+                </button>
             </form>
-            <button className="link-btn"><NavLink to="/Registrierung">Noch kein Konto?<br></br>Jetzt registrieren</NavLink></button>
+            <button className="link-btn">
+                <NavLink to="/Registrierung">
+                    Noch kein Konto?<br></br>Jetzt registrieren
+                </NavLink>
+            </button>
         </div>
-    )
-}
-    export default Login;
+    );
+};
+
+export default Login;

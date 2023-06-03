@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Navigation from "./Navigation";
+import UsernameContext from "./UsernameContext";
 
 const AngeboteneHilfe = () => {
+
+    const username = useContext(UsernameContext)
+
     return (
             <div>
                 <Navigation />

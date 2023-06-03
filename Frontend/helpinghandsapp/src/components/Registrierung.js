@@ -12,7 +12,7 @@ const Registrierung = () => {
     const [nachname, setNachname] = useState('');
     const [straße, setStraße] = useState('');
     const [hausnummer, setHausnummer] = useState('');
-    const [postleitszahl, setPostleitszahl] = useState('');
+    const [postleitzahl, setPostleitzahl] = useState('');
     const [stadt, setStadt] = useState('');
     const [email, setEmail] = useState('');
     const [telefon, setTelefon] = useState('');
@@ -29,7 +29,7 @@ const Registrierung = () => {
         "nachname": nachname, 
         "straße": straße,
         "hausnummer": hausnummer,
-        "postleitszahl": postleitszahl, 
+        "postleitzahl": postleitzahl,
         "stadt": stadt,
         "email": email,
         "telefon": telefon, 
@@ -95,8 +95,8 @@ const Registrierung = () => {
           <input
             placeholder="78048"
             className="otherField"
-            value={postleitszahl}
-            onChange={(e) => setPostleitszahl(e.target.value)}
+            value={postleitzahl}
+            onChange={(e) => setPostleitzahl(e.target.value)}
           />
           <br />
           <label htmlFor="name">Stadt</label>
@@ -149,7 +149,7 @@ const Registrierung = () => {
           />
         </div>
         <button onClick={handleSubmit} type="submit">
-          <NavLink to="/konto">Registrieren</NavLink>
+          <NavLink to="/">Registrieren</NavLink>
         </button>
       </form>
       {console.log(
@@ -157,7 +157,7 @@ const Registrierung = () => {
         nachname,
         straße,
         hausnummer,
-        postleitszahl,
+        postleitzahl,
         stadt,
         email,
         telefon,

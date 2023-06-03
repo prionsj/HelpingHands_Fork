@@ -1,7 +1,6 @@
 import React, {Component, useState, useEffect} from "react"
 import Navigation from "./Navigation";
 import logo from "./static/HelpingHands.png"
-import Backend from "./backend.js";
 
 const Hilfsanzeigen = () => {
         const keineAnzeigen = false
