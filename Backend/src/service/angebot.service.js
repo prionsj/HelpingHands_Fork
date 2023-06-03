@@ -50,7 +50,8 @@ export default class AngebotService {
     angebot = angebot || {};
 
     let newAngebot = {
-      titel:               angebot.titel         || ""
+      titel:               angebot.titel         || "",
+      nutzername:          angebot.nutzername    || ""
     };
 
     let result = await this._angebot.insertOne(newAngebot);

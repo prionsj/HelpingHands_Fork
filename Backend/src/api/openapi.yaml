@@ -59,9 +59,9 @@ paths:
           description: Gesuchter Standort
           schema:
             type: string
-        - name: benutzerid
+        - name: nutzername
           in: query
-          description: Gesuchte Benutzer-ID
+          description: Gesuchter Nutzername
           schema:
             type: string
       responses:
@@ -220,6 +220,11 @@ paths:
         - name: titel
           in: query
           description: Titel der Hilfsanzeige
+          schema:
+            type: string
+        - name: nutzername
+          in: query
+          description: Gesuchter Nutzername
           schema:
             type: string
       responses:
@@ -530,7 +535,7 @@ components:
           type: string
         standort:
           type: string
-        benutzerid:
+        nutzername:
           type: string
     HATEAOS_Resource:
       type: object
@@ -553,6 +558,8 @@ components:
         _id:
           type: string
         titel:
+          type: string
+        nutzername:
           type: string
     Benutzer:
       type: object
