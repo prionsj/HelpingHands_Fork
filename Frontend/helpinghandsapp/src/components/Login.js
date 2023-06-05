@@ -27,14 +27,14 @@ export const Login = ({ setUsername }) => {
                     value={nutzername}
                     onChange={(e) => setNutzername(e.target.value)}
                     type="text"
-                    placeholder="evaeth"
+                    placeholder="Benutzername"
                     id="nutzername"
                     name="nutzername"
                 />
                 <label htmlFor="passwort">Passwort</label>
                 <input
                     type="password"
-                    placeholder="********"
+                    placeholder="Passwort"
                     id="passwort"
                     name="passwort"
                 />

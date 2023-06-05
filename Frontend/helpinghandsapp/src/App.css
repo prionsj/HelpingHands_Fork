@@ -87,6 +87,15 @@ nav li:hover, .nav-link.active {
   margin-top: -20px;
 }
 
+.logo-description.double {
+  flex-direction: column;
+}
+
+.logo-description-title {
+  display: flex;
+  justify-content: center;
+}
+
 .search {
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius)!important;
@@ -108,13 +117,13 @@ nav li:hover, .nav-link.active {
 
 .category-container {
   margin-top: 10px;
-  width: 350px;
+  width: 100vw;
   display: flex;
   justify-content: center;
 }
 
 .form-select {
-  width: 275px;
+  width: 308px;
 }
 
 .no-entry {
@@ -135,10 +144,9 @@ nav li:hover, .nav-link.active {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 475px;
+  height: 450px;
   margin-top: 10px;
   overflow: scroll;
 }
@@ -324,3 +332,43 @@ hr {
 h2 {
   margin-top: 10px; /* Füge etwas Abstand oberhalb der kleinen Überschrift hinzu */
 }
+
+/* Anzeige erstellen */
+
+.helping-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.helping-form > div {
+  width: 325px;
+}
+
+.title-input, .description-input {
+  width: 308px;
+}
+
+.place-input, .time-input {
+  width: 150px;
+}
+
+.time-input {
+  margin-left: 0;
+}
+
+.description-input {
+  height: 150px;
+}
+
+.form-select.category {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
