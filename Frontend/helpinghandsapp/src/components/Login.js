@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import logo from "./static/HelpingHands.png";
 import { useNavigate, NavLink } from "react-router-dom";
-import UsernameContext from "./UsernameContext";
 import Modal from 'react-modal';
 
 const CloseButton = ({ onClick }) => (
