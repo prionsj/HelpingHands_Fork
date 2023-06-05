@@ -88,7 +88,7 @@ const Hilfsanzeigen = () => {
                         return (
                             <div className="hilfen">
                                 <div className="card">
-                                    <li className="list-entry" data-id="$ID$">
+                                    <li className="list-entry" data-id={help._id}>
                                         <div className="stadt titel">
                                             {help.standort}: {help.titel}
                                         </div>
