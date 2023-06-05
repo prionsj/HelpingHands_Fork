@@ -7,30 +7,19 @@ const Konto = () => {
     const [benutzer, setBenutzer] = useState([])
     const [helps, setHelps] = useState([])
     const keineAnzeigen = false
-let hilfsanzeigen
+    let hilfsanzeigen
+    const username = useContext(UsernameContext)
+    const [nutzername, setNutzername] = useState([]);
+
+    // Benutzernamen aus dem Local Storage abrufen
+    useEffect(() => {
+      const storedUsername = localStorage.getItem('username');
+      if (storedUsername) {
+        setNutzername(storedUsername);
+      }
+    }, [setNutzername]);
 
 
-
-useEffect(() => {
-    fetch('http://localhost:3000/hilfsanzeige')
-    .then((response) => response.json())
-    .then((data) => {
-    console.log(data);
-    setHelps(data);
-
-    }).catch((err) => {
-        console.log(err.message);
-    });
-}, []);
-
-
-if (keineAnzeigen) {
-    hilfsanzeigen = (
-        <div className="no-entry">
-            Es sind keine Hilfseinträge vorhanden.
-        </div>
-    )
-}
 
     useEffect(() => {
         fetch('http://localhost:3000/benutzer')
@@ -44,14 +33,40 @@ if (keineAnzeigen) {
         });
     }, []);
 
-    const username = useContext(UsernameContext)
+       // Benutzernamen im Local Storage speichern
+       useEffect(() => {
+        localStorage.setItem('username', username);
+    }, [username]);
+
+    useEffect(() => {
+      fetch('http://localhost:3000/hilfsanzeige')
+      .then((response) => response.json())
+      .then((data) => {
+      console.log(data);
+      setHelps(data);
+  
+      }).catch((err) => {
+          console.log(err.message);
+      });
+  }, []);
+  
+  
+  if (keineAnzeigen) {
+      hilfsanzeigen = (
+          <div className="no-entry">
+              Es sind keine Hilfseinträge vorhanden.
+          </div>
+      )
+  }
+
+
 
     return (
         <div>
           <Navigation />
           {
             benutzer && benutzer.map((benutzer, index) => {
-              if (benutzer.nutzername === username) {
+              if (benutzer.nutzername === nutzername)  {
                 return (
                   <div className="container">
                     <div className="header">
@@ -95,7 +110,7 @@ if (keineAnzeigen) {
                     <h1>Meine Hilfsanzeigen</h1>
                 {
                     helps && helps.map((help, index)=> {
-                        if (help.nutzername === username)
+                        if (help.nutzername === nutzername)
                         return (
                             <div className="hilfen">
                                 <div className="card">

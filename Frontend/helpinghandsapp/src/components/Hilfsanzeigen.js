@@ -6,10 +6,10 @@ const Hilfsanzeigen = () => {
         const keineAnzeigen = false
         let hilfsanzeigen
 
-        const [helps, setHelps] = useState([])
+    const [helps, setHelps] = useState([])
         
-        useEffect(() => {
-            fetch('http://localhost:3000/hilfsanzeige')
+    useEffect(() => {
+        fetch('http://localhost:3000/hilfsanzeige')
             .then((response) => response.json())
             .then((data) => {
             console.log(data);
@@ -18,10 +18,10 @@ const Hilfsanzeigen = () => {
             }).catch((err) => {
                 console.log(err.message);
             });
-        }, []);
+    }, []);
 
 
-        if (keineAnzeigen) {
+    if (keineAnzeigen) {
             hilfsanzeigen = (
                 <div className="no-entry">
                     Es sind keine Hilfseinträge vorhanden.
@@ -29,7 +29,7 @@ const Hilfsanzeigen = () => {
             )
         }
 
-        return (
+    return (
             <div className="hilfsanzeigen-page">
                 <Navigation />
                 <div className="logo-container">
@@ -97,7 +97,7 @@ const Hilfsanzeigen = () => {
                                         </ul>
                                     </li>
                                 </div>
-                </div>
+                            </div>
                         )
                     })
                 }
