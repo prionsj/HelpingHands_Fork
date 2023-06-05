@@ -31,7 +31,7 @@ export default class AngebotService {
   */
 
   async search(query) {
-    let cursor = this._angebote.find(query, {
+    let cursor = this._angebot.find(query, {
       sort: {
         titel: 1,
       }
