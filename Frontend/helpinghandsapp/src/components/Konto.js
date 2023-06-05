@@ -1,25 +1,18 @@
 import React, {useContext, useEffect, useState} from 'react'
-import UsernameContext from "./UsernameContext";
 import Navigation from "./Navigation";
 
 
 const Konto = () => {
     const [benutzer, setBenutzer] = useState([])
     const [helps, setHelps] = useState([])
-    const keineAnzeigen = false
-    let hilfsanzeigen
-    const username = useContext(UsernameContext)
     const [nutzername, setNutzername] = useState([]);
 
-    // Benutzernamen aus dem Local Storage abrufen
     useEffect(() => {
       const storedUsername = localStorage.getItem('username');
       if (storedUsername) {
         setNutzername(storedUsername);
       }
     }, [setNutzername]);
-
-
 
     useEffect(() => {
         fetch('http://localhost:3000/benutzer')
@@ -32,11 +25,6 @@ const Konto = () => {
             console.log(err.message);
         });
     }, []);
-
-       // Benutzernamen im Local Storage speichern
-       useEffect(() => {
-        localStorage.setItem('username', username);
-    }, [username]);
 
     useEffect(() => {
       fetch('http://localhost:3000/hilfsanzeige')
@@ -51,16 +39,6 @@ const Konto = () => {
   }, []);
   
   
-  if (keineAnzeigen) {
-      hilfsanzeigen = (
-          <div className="no-entry">
-              Es sind keine Hilfseinträge vorhanden.
-          </div>
-      )
-  }
-
-
-
     return (
         <div>
           <Navigation />

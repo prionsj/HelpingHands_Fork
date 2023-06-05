@@ -58,6 +58,10 @@ nav li:hover, .nav-link.active {
   padding: 0;
 }
 
+.navbar > .container {
+  padding: 0;
+}
+
 /* HILFSANZEIGEN */
 .hilfsanzeigen-page {
   display: flex;

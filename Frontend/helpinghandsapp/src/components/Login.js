@@ -22,7 +22,7 @@ const CloseButton = ({ onClick }) => (
   </button>
 );
 
-export const Login = ({ setUsername }) => {
+export const Login = () => {
     const navigate = useNavigate();
     const [nutzername, setNutzername] = useState("");
     const [passwort, setPasswort] = useState("");
@@ -31,35 +31,37 @@ export const Login = ({ setUsername }) => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        setUsername(nutzername);
-      const matchingBenutzer = benutzer.find(
-        (benutzer) =>
-          benutzer.nutzername === nutzername && benutzer.passwort === passwort
-      );
-      if (matchingBenutzer) {
-        setShowPopup(false);
-        navigate("/hilfsanzeigen");
-      } else {
-        setShowPopup(true);
-    }
+        const matchingBenutzer = benutzer.find(
+            (benutzer) =>
+                benutzer.nutzername === nutzername && benutzer.passwort === passwort
+        );
+        if (matchingBenutzer) {
+            setShowPopup(false);
+            navigate("/hilfsanzeigen");
+        } else {
+            setShowPopup(true);
+        }
     };
 
     useEffect(() => {
-      fetch("http://localhost:3000/benutzer")
+        fetch("http://localhost:3000/benutzer")
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
                 setBenutzer(data);
-        })
-        .catch((err) => {
-            console.log(err.message);
+            })
+            .catch((err) => {
+                console.log(err.message);
         });
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('username', nutzername);
+    }, [nutzername]);
 
     return (
 
         <div className="login-page">
-            
             <div className="logo-picture">
                 <img className="logo" src={logo} alt="Logo" />
             </div>
@@ -79,6 +81,8 @@ export const Login = ({ setUsername }) => {
                 />
                 <label htmlFor="passwort">Passwort</label>
                 <input
+                    value={passwort}
+                    onChange={(e) => setPasswort(e.target.value)}
                     type="password"
                     placeholder="Passwort"
                     id="passwort"
@@ -86,16 +90,39 @@ export const Login = ({ setUsername }) => {
                 />
 
                 <button onClick={handleLogin}>
-                    <NavLink to="/hilfsanzeigen">Anmelden</NavLink>
+                    Anmelden
                 </button>
             </form>
-            <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
-                <h2>Du bist angemeldet</h2>
-                {/* ... Weitere Inhalte des Pop-ups hier ... */}
-            </Modal>
+            {showPopup && (
+                <Modal
+                    isOpen={true}
+                    onRequestClose={() => setShowPopup(false)}
+                    shouldCloseOnOverlayClick={false}
+                    style={{
+                        content: {
+                            width: "300px",
+                            height: "400px",
+                            margin: "auto",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "red",
+                            border: "2px solid red",
+                        },
+                        overlay: {
+                            background: "rgba(0, 0, 0, 0.5)",
+                        },
+                    }}
+                >
+                    <CloseButton onClick={() => setShowPopup(false)} />
+                    <h2>Benutzername oder Passwort ist inkorrekt</h2>
+                </Modal>
+            )}
             <button className="link-btn">
                 <NavLink to="/Registrierung">
-                    Noch kein Konto?<br></br>Jetzt registrieren
+                    Noch kein Konto?
+                    <br></br>Jetzt registrieren
                 </NavLink>
             </button>
         </div>

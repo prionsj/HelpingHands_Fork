@@ -5,6 +5,7 @@ import logo from "./static/HelpingHands.png";
 const AngeboteneHilfe = () => {
 
     const [nutzername, setNutzername] = useState([]);
+    const [angebote, setAngebote] = useState([]);
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -12,6 +13,18 @@ const AngeboteneHilfe = () => {
             setNutzername(storedUsername);
         }
     }, [setNutzername]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/angebot')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setAngebote(data);
+
+            }).catch((err) => {
+            console.log(err.message);
+        });
+    }, []);
 
     return (
             <div>
@@ -24,6 +37,9 @@ const AngeboteneHilfe = () => {
                         Biete Hilfe in deiner Stadt
                     </p>
                 </div>
+                <ol className="hilfsanzeigen">
+
+                </ol>
             </div>
     )
 }
