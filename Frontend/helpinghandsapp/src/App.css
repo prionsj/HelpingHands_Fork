@@ -137,9 +137,15 @@ nav li:hover, .nav-link.active {
   padding: 0;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   height: 475px;
-  overflow: scroll;
   margin-top: 10px;
+  overflow: scroll;
+}
+
+.hilfen {
+  display: flex;
+  justify-content: center;
 }
 
 .hilfsanzeigen li {
@@ -148,10 +154,6 @@ nav li:hover, .nav-link.active {
   background-color: rgba(250, 250, 250, .8);
 
   border-bottom-width: 1px;
-}
-
-.hilfsanzseigen .help {
-
 }
 
 .hilfsanzeigen .titel {
@@ -251,19 +253,14 @@ nav li:hover, .nav-link.active {
   margin-top: 0;
   background-position: top;
 }
-.logo-description {
-  display: block;
-  justify-content: center;
-  color: #0d0d40;
-  margin-top: 10px;
-}
+
 .login-page, .login-form, .register-form {
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
 }
 .login-page{
-  padding: 7rem;
+  padding: 0;
   border: 1px solid rgb(255, 255, 255);
   border-radius: 10px;
   margin: 0 auto;
@@ -301,13 +298,6 @@ label {
   flex-direction: column;
   background-color: rgb(255, 255, 255);
   margin: 20px;
-}
-
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 .header {

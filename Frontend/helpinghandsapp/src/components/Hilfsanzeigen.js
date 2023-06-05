@@ -27,43 +27,7 @@ const Hilfsanzeigen = () => {
                     Es sind keine Hilfseinträge vorhanden.
                 </div>
             )
-        } else {
-            hilfsanzeigen = (
-                <div>
-                    <div className="card">
-                        <li className="list-entry" data-id="$ID$">
-                            <div className="stadt titel">
-                                $STADT$: $TITEL$
-                            </div>
-                            <div className="beschreibung">
-                                $BESCHREIBUNG$
-                            </div>
-                            <ul>
-                                <div>
-                                    <li>
-                                        <div className="standort">Standort:</div>
-                                        $STADT$
-                                    </li>
-                                    <li>
-                                        <div className="zeitpunkt">Zeitpunkt:</div>
-                                        $ZEITPUNKT$
-                                    </li>
-                                    <li>
-                                        <div className="kategorie">Kategorie:</div>
-                                        $KATEGORIE$
-                                    </li>
-                                </div>
-                                <div className="actions">
-                                    <div className="action edit">
-                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
-                                        </a>
-                                    </div>
-                                </div>
-                            </ul>
-                        </li>
-                    </div>
-                </div>
-            )
+        }
 
         return (
             <div className="hilfsanzeigen-page">
@@ -100,39 +64,39 @@ const Hilfsanzeigen = () => {
                     helps && helps.map((help, index)=> {
                         console.log(help.titel)
                         return (
-                            <div>
-                    <div className="card">
-                        <li className="list-entry" data-id="$ID$">
-                            <div className="stadt titel">
-                                {help.standort}: {help.titel}
-                            </div>
-                            <div className="beschreibung">
-                                {help.beschreibung}
-                            </div>
-                            <ul>
-                                <div>
-                                    <li>
-                                        <div className="standort">Standort:</div>
-                                        {help.standort}
-                                    </li>
-                                    <li>
-                                        <div className="zeitpunkt">Zeitpunkt:</div>
-                                        {help.zeitraum}
-                                    </li>
-                                    <li>
-                                        <div className="kategorie">Kategorie:</div>
-                                        {help.kategorie}
+                            <div className="hilfen">
+                                <div className="card">
+                                    <li className="list-entry" data-id="$ID$">
+                                        <div className="stadt titel">
+                                            {help.standort}: {help.titel}
+                                        </div>
+                                        <div className="beschreibung">
+                                            {help.beschreibung}
+                                        </div>
+                                        <ul>
+                                            <div>
+                                                <li>
+                                                    <div className="standort">Standort:</div>
+                                                    {help.standort}
+                                                </li>
+                                                <li>
+                                                    <div className="zeitpunkt">Zeitpunkt:</div>
+                                                    {help.zeitraum}
+                                                </li>
+                                                <li>
+                                                    <div className="kategorie">Kategorie:</div>
+                                                    {help.kategorie}
+                                                </li>
+                                            </div>
+                                            <div className="actions">
+                                                <div className="action edit">
+                                                    <a className="anfrage" href={"#"}>✉️<br/>Anfragen
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </ul>
                                     </li>
                                 </div>
-                                <div className="actions">
-                                    <div className="action edit">
-                                        <a className="anfrage" href={"#"}>✉️<br/>Anfragen
-                                        </a>
-                                    </div>
-                                </div>
-                            </ul>
-                        </li>
-                    </div>
                 </div>
                         )
                     })
@@ -140,7 +104,7 @@ const Hilfsanzeigen = () => {
                 </ol>
             </div>
         )
-    }
+
 
 }
 
