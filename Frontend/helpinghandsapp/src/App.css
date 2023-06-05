@@ -308,7 +308,6 @@ label {
   margin: 20px;
 }
 
-<<<<<<< HEAD
 /* Konto */
 .container {
   max-width: 600px;
@@ -316,8 +315,7 @@ label {
   padding: 20px;
 }
 
-=======
->>>>>>> c5e90d7bf59094fef69fa53424059f39159682a5
+
 .header {
   margin-bottom: 20px;
 }
@@ -340,9 +338,7 @@ h1 {
   margin-bottom: 10px;
 }
 
-<<<<<<< HEAD
 
-=======
 h2 {
   margin-top: 10px; /* Füge etwas Abstand oberhalb der kleinen Überschrift hinzu */
 }
@@ -385,5 +381,3 @@ h2 {
   justify-content: center;
   margin-top: 20px;
 }
->>>>>>> c5e90d7bf59094fef69fa53424059f39159682a5
-
