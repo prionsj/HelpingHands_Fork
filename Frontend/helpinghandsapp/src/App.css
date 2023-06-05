@@ -326,11 +326,12 @@ label {
   margin-bottom: 10px;
 }
 
-.box {
+.box{
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 10px;
   flex-basis: calc(50% - 5px);
+
 }
 
 h1 {

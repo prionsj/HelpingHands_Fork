@@ -5,6 +5,32 @@ import Navigation from "./Navigation";
 
 const Konto = () => {
     const [benutzer, setBenutzer] = useState([])
+    const [helps, setHelps] = useState([])
+    const keineAnzeigen = false
+let hilfsanzeigen
+
+
+
+useEffect(() => {
+    fetch('http://localhost:3000/hilfsanzeige')
+    .then((response) => response.json())
+    .then((data) => {
+    console.log(data);
+    setHelps(data);
+
+    }).catch((err) => {
+        console.log(err.message);
+    });
+}, []);
+
+
+if (keineAnzeigen) {
+    hilfsanzeigen = (
+        <div className="no-entry">
+            Es sind keine Hilfseinträge vorhanden.
+        </div>
+    )
+}
 
     useEffect(() => {
         fetch('http://localhost:3000/benutzer')
@@ -64,7 +90,53 @@ const Konto = () => {
                     <div className="box Nutzername">
                       <strong>Nutzername:</strong> {benutzer.nutzername}
                     </div>
+                    <hr></hr>
+                    <ol className="hilfsanzeigen">
+                    <h1>Meine Hilfsanzeigen</h1>
+                {
+                    helps && helps.map((help, index)=> {
+                        if (help.nutzername === username)
+                        return (
+                            <div className="hilfen">
+                                <div className="card">
+                                    <li className="list-entry" data-id="$ID$">
+                                        <div className="stadt titel">
+                                            {help.standort}: {help.titel}
+                                        </div>
+                                        <div className="beschreibung">
+                                            {help.beschreibung}
+                                        </div>
+                                        <ul>
+                                            <div>
+                                                <li>
+                                                    <div className="standort">Standort:</div>
+                                                    {help.standort}
+                                                </li>
+                                                <li>
+                                                    <div className="zeitpunkt">Zeitpunkt:</div>
+                                                    {help.zeitraum}
+                                                </li>
+                                                <li>
+                                                    <div className="kategorie">Kategorie:</div>
+                                                    {help.kategorie}
+                                                </li>
+                                            </div>
+                                            <div className="actions">
+                                                <div className="action edit">
+                                                    <a className="anfrage" href={"#"}>✉️<br/>Anfragen
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </div>
+                </div>
+                        )
+                    })
+                }
+                </ol>
                   </div>
+             
                 )
               }
             })
