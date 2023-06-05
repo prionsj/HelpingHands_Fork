@@ -6,6 +6,8 @@ const Konto = () => {
     const [benutzer, setBenutzer] = useState([])
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);
+    const keineAnzeigen = false
+    let hilfsanzeigen
 
     useEffect(() => {
       const storedUsername = localStorage.getItem('username');
@@ -37,6 +39,14 @@ const Konto = () => {
           console.log(err.message);
       });
   }, []);
+
+  if (keineAnzeigen) {
+    hilfsanzeigen = (
+        <div className="no-entry">
+            Es sind keine Hilfseinträge vorhanden.
+        </div>
+    )
+}
   
   
     return (
