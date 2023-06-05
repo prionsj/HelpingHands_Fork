@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UsernameContext from './UsernameContext';
+import React, { useEffect, useState } from 'react';
 import Navigation from './Navigation';
 
-const Konto = ({ setUsername }) => {
+const Konto = () => {
     const [benutzer, setBenutzer] = useState([]);
-    const username = useContext(UsernameContext);
+    const [nutzername, setNutzername] = useState([]);
 
-    // Benutzernamen aus dem Local Storage abrufen
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
-            setUsername(storedUsername);
+            setNutzername(storedUsername);
         }
-    }, [setUsername]);
+    }, [setNutzername]);
 
     useEffect(() => {
         fetch('http://localhost:3000/benutzer')
@@ -26,17 +24,12 @@ const Konto = ({ setUsername }) => {
             });
     }, []);
 
-    // Benutzernamen im Local Storage speichern
-    useEffect(() => {
-        localStorage.setItem('username', username);
-    }, [username]);
-
     return (
         <div>
             <Navigation />
             {benutzer &&
                 benutzer.map((benutzer, index) => {
-                    if (benutzer.nutzername === username) {
+                    if (benutzer.nutzername === nutzername) {
                         return (
                             <div className="container" key={index}>
                                 <div className="header">

@@ -1,13 +1,22 @@
 import React, { useState, useEffect, useContext} from "react"
 import Navigation from "./Navigation";
 import logo from "./static/HelpingHands.png"
-import UsernameContext from "./UsernameContext";
 
 const Hilfsanzeigen = () => {
         const keineAnzeigen = false
         let hilfsanzeigen
 
     const [helps, setHelps] = useState([])
+    const [titel, setTitel] = useState('')
+    const [nutzername, setNutzername] = useState([]);
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setNutzername(storedUsername);
+        }
+    }, [setNutzername]);
+
         
     useEffect(() => {
         fetch('http://localhost:3000/hilfsanzeige')
@@ -21,16 +30,13 @@ const Hilfsanzeigen = () => {
             });
     }, []);
 
-    const username = useContext(UsernameContext)
-    const [titel, setTitel] = useState('')
-
     const handleHelps = async (currentTitle) => {
         const response = await fetch('http://localhost:3000/angebot', {
             method: 'POST',
             body:
                 JSON.stringify({
                     "titel": currentTitle,
-                    "nutzername": username
+                    "nutzername": nutzername
 
                 }),
 

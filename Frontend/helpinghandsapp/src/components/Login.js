@@ -22,16 +22,19 @@ const CloseButton = ({ onClick }) => (
   </button>
 );
 
-export const Login = ({ setUsername }) => {
+export const Login = () => {
     const navigate = useNavigate();
     const [nutzername, setNutzername] = useState("");
     const [passwort, setPasswort] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [benutzer, setBenutzer] = useState([]);
 
+    useEffect(() => {
+        localStorage.setItem('username', nutzername);
+    }, [nutzername]);
+
     const handleLogin = (e) => {
       e.preventDefault();
-      setUsername(nutzername);
       const matchingBenutzer = benutzer.find(
         (benutzer) =>
           benutzer.nutzername === nutzername && benutzer.passwort === passwort
