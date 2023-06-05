@@ -1,19 +1,37 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import logo from "./static/HelpingHands.png";
 import { NavLink } from "react-router-dom";
 import UsernameContext from "./UsernameContext";
+import Modal from 'react-modal';
+
 
 export const Login = ({ setUsername }) => {
     const [nutzername, setNutzername] = useState('');
-
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
         setUsername(nutzername);
+        setIsOpen(true);
     }
+    const [benutzer, setBenutzer] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:3000/benutzer')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setBenutzer(data);
+
+            }).catch((err) => {
+            console.log(err.message);
+        });
+    }, []);
 
     return (
+
         <div className="login-page">
+            
             <div className="logo-picture">
                 <img className="logo" src={logo} alt="Logo" />
             </div>
@@ -43,6 +61,10 @@ export const Login = ({ setUsername }) => {
                     <NavLink to="/hilfsanzeigen">Anmelden</NavLink>
                 </button>
             </form>
+            <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
+                <h2>Du bist angemeldet</h2>
+                {/* ... Weitere Inhalte des Pop-ups hier ... */}
+            </Modal>
             <button className="link-btn">
                 <NavLink to="/Registrierung">
                     Noch kein Konto?<br></br>Jetzt registrieren
