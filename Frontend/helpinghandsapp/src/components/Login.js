@@ -22,16 +22,17 @@ const CloseButton = ({ onClick }) => (
   </button>
 );
 
-export const Login = ({ setUsername }) => {
+export const Login = () => {
     const navigate = useNavigate();
     const [nutzername, setNutzername] = useState("");
     const [passwort, setPasswort] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [benutzer, setBenutzer] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
-        setUsername(nutzername);
+        setNutzername(nutzername);
       const matchingBenutzer = benutzer.find(
         (benutzer) =>
           benutzer.nutzername === nutzername && benutzer.passwort === passwort
@@ -55,6 +56,10 @@ export const Login = ({ setUsername }) => {
             console.log(err.message);
         });
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('username', nutzername);
+    }, [nutzername]);
 
     return (
 

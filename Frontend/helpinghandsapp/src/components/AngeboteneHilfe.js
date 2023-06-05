@@ -38,21 +38,7 @@ const AngeboteneHilfe = () => {
                     </p>
                 </div>
                 <ol className="hilfsanzeigen">
-                    {
-                        angebote && angebote.map((angebot, index)=> {
-                            return (
-                                <div className="hilfen">
-                                    <div className="card">
-                                        <li className="list-entry" data-id="$ID$">
-                                            <div className="stadt titel">
-                                                {help.standort}: {help.titel}
-                                            </div>
-                                        </li>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+
                 </ol>
             </div>
     )

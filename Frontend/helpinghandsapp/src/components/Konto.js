@@ -26,11 +26,6 @@ const Konto = () => {
         });
     }, []);
 
-       // Benutzernamen im Local Storage speichern
-    useEffect(() => {
-        localStorage.setItem('username', nutzername);
-    }, [nutzername]);
-
     useEffect(() => {
       fetch('http://localhost:3000/hilfsanzeige')
       .then((response) => response.json())
