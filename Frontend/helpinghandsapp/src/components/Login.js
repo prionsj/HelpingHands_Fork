@@ -22,19 +22,16 @@ const CloseButton = ({ onClick }) => (
   </button>
 );
 
-export const Login = () => {
+export const Login = ({ setUsername }) => {
     const navigate = useNavigate();
     const [nutzername, setNutzername] = useState("");
     const [passwort, setPasswort] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [benutzer, setBenutzer] = useState([]);
 
-    useEffect(() => {
-        localStorage.setItem('username', nutzername);
-    }, [nutzername]);
-
     const handleLogin = (e) => {
-      e.preventDefault();
+        e.preventDefault();
+        setUsername(nutzername);
       const matchingBenutzer = benutzer.find(
         (benutzer) =>
           benutzer.nutzername === nutzername && benutzer.passwort === passwort
@@ -44,88 +41,65 @@ export const Login = () => {
         navigate("/hilfsanzeigen");
       } else {
         setShowPopup(true);
-      }
+    }
     };
-  
+
     useEffect(() => {
       fetch("http://localhost:3000/benutzer")
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setBenutzer(data);
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setBenutzer(data);
         })
         .catch((err) => {
-          console.log(err.message);
+            console.log(err.message);
         });
     }, []);
-  
+
     return (
-      <div className="login-page">
-        <div className="logo-picture">
-          <img className="logo" src={logo} alt="Logo" />
+
+        <div className="login-page">
+            
+            <div className="logo-picture">
+                <img className="logo" src={logo} alt="Logo" />
+            </div>
+            <p className="logo-description">
+                <h2>Anmelden</h2>
+            </p>
+
+            <form className="login-form">
+                <label htmlFor="nutzername">Nutzername</label>
+                <input
+                    value={nutzername}
+                    onChange={(e) => setNutzername(e.target.value)}
+                    type="text"
+                    placeholder="Benutzername"
+                    id="nutzername"
+                    name="nutzername"
+                />
+                <label htmlFor="passwort">Passwort</label>
+                <input
+                    type="password"
+                    placeholder="Passwort"
+                    id="passwort"
+                    name="passwort"
+                />
+
+                <button onClick={handleLogin}>
+                    <NavLink to="/hilfsanzeigen">Anmelden</NavLink>
+                </button>
+            </form>
+            <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
+                <h2>Du bist angemeldet</h2>
+                {/* ... Weitere Inhalte des Pop-ups hier ... */}
+            </Modal>
+            <button className="link-btn">
+                <NavLink to="/Registrierung">
+                    Noch kein Konto?<br></br>Jetzt registrieren
+                </NavLink>
+            </button>
         </div>
-        <p className="logo-description">
-          <h2>Anmelden</h2>
-        </p>
-  
-        <form className="login-form">
-          <label htmlFor="nutzername">Nutzername</label>
-          <input
-            value={nutzername}
-            onChange={(e) => setNutzername(e.target.value)}
-            type="text"
-            placeholder="Benutzername"
-            id="nutzername"
-            name="nutzername"
-          />
-          <label htmlFor="passwort">Passwort</label>
-          <input
-            value={passwort}
-            onChange={(e) => setPasswort(e.target.value)}
-            type="password"
-            placeholder="Passwort"
-            id="passwort"
-            name="passwort"
-          />
-  
-          <button onClick={handleLogin}>
-            Anmelden
-          </button>
-        </form>
-        {showPopup && (
-          <Modal
-            isOpen={true}
-            onRequestClose={() => setShowPopup(false)}
-            shouldCloseOnOverlayClick={false}
-            style={{
-              content: {
-                width: "300px",
-                height: "400px",
-                margin: "auto",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "red",
-                border: "2px solid red",
-              },
-              overlay: {
-                background: "rgba(0, 0, 0, 0.5)",
-              },
-            }}
-          >
-            <CloseButton onClick={() => setShowPopup(false)} />
-            <h2>Benutzername oder Passwort ist inkorrekt</h2>
-          </Modal>
-        )}
-        <button className="link-btn">
-          <NavLink to="/Registrierung">
-            Noch kein Konto?
-            <br></br>Jetzt registrieren
-          </NavLink>
-        </button>
-      </div>
     );
-  };
+};
 
 export default Login;
