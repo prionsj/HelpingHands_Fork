@@ -54,7 +54,7 @@ nav li:hover, .nav-link.active {
   padding-top: 25px;
 }
 
-.navbar, .container {
+.navbar, .navbar > .container {
   padding: 0;
 }
 

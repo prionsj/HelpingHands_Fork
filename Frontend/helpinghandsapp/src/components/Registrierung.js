@@ -227,7 +227,7 @@ const Registrierung = () => {
     </div>
 
     )
-}
+  }
     
    
 

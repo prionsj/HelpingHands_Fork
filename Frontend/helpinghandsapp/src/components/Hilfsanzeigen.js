@@ -1,15 +1,16 @@
-import React, {Component, useState, useEffect} from "react"
+import React, { useState, useEffect, useContext} from "react"
 import Navigation from "./Navigation";
 import logo from "./static/HelpingHands.png"
+import UsernameContext from "./UsernameContext";
 
 const Hilfsanzeigen = () => {
         const keineAnzeigen = false
         let hilfsanzeigen
 
-        const [helps, setHelps] = useState([])
+    const [helps, setHelps] = useState([])
         
-        useEffect(() => {
-            fetch('http://localhost:3000/hilfsanzeige')
+    useEffect(() => {
+        fetch('http://localhost:3000/hilfsanzeige')
             .then((response) => response.json())
             .then((data) => {
             console.log(data);
@@ -18,10 +19,32 @@ const Hilfsanzeigen = () => {
             }).catch((err) => {
                 console.log(err.message);
             });
-        }, []);
+    }, []);
 
+    const username = useContext(UsernameContext)
+    const [titel, setTitel] = useState('')
 
-        if (keineAnzeigen) {
+    const handleHelps = async (currentTitle) => {
+        const response = await fetch('http://localhost:3000/angebot', {
+            method: 'POST',
+            body:
+                JSON.stringify({
+                    "titel": currentTitle,
+                    "nutzername": username
+
+                }),
+
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => console.log(res));
+    }
+    const handleHelprequest = (titel) => {
+        setTitel(titel);
+        handleHelps(titel);
+    };
+
+    if (keineAnzeigen) {
             hilfsanzeigen = (
                 <div className="no-entry">
                     Es sind keine Hilfseinträge vorhanden.
@@ -29,7 +52,7 @@ const Hilfsanzeigen = () => {
             )
         }
 
-        return (
+    return (
             <div className="hilfsanzeigen-page">
                 <Navigation />
                 <div className="logo-container">
@@ -62,7 +85,6 @@ const Hilfsanzeigen = () => {
                 <ol className="hilfsanzeigen">
                 {
                     helps && helps.map((help, index)=> {
-                        console.log(help.titel)
                         return (
                             <div className="hilfen">
                                 <div className="card">
@@ -89,15 +111,16 @@ const Hilfsanzeigen = () => {
                                                 </li>
                                             </div>
                                             <div className="actions">
-                                                <div className="action edit">
-                                                    <a className="anfrage" href={"#"}>✉️<br/>Anfragen
+                                                <div className="action edit"
+                                                     onClick={() => handleHelprequest(help.titel)}>
+                                                    <a className="anfrage" href={"#"} >✉️<br/>Anfragen
                                                     </a>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                 </div>
-                </div>
+                            </div>
                         )
                     })
                 }
