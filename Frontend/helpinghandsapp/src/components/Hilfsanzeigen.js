@@ -7,6 +7,16 @@ const Hilfsanzeigen = () => {
         let hilfsanzeigen
 
     const [helps, setHelps] = useState([])
+    const [titel, setTitel] = useState('')
+    const [nutzername, setNutzername] = useState([]);
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setNutzername(storedUsername);
+        }
+    }, [setNutzername]);
+
         
     useEffect(() => {
         fetch('http://localhost:3000/hilfsanzeige')
@@ -20,6 +30,25 @@ const Hilfsanzeigen = () => {
             });
     }, []);
 
+    const handleHelps = async (currentTitle) => {
+        const response = await fetch('http://localhost:3000/angebot', {
+            method: 'POST',
+            body:
+                JSON.stringify({
+                    "titel": currentTitle,
+                    "nutzername": nutzername
+
+                }),
+
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => console.log(res));
+    }
+    const handleHelprequest = (titel) => {
+        setTitel(titel);
+        handleHelps(titel);
+    };
 
     if (keineAnzeigen) {
             hilfsanzeigen = (

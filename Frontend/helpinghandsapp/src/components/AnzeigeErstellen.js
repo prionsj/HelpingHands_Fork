@@ -1,18 +1,23 @@
-import React, {useContext, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import Navigation from "./Navigation";
-import UsernameContext from "./UsernameContext";
 import logo from "./static/HelpingHands.png";
 import {NavLink} from "react-router-dom";
 
 const AnzeigeErstellen = () => {
-
-    const username = useContext(UsernameContext)
 
     const [titel, setTitel] = useState('')
     const [beschreibung, setBeschreibung] = useState('')
     const [kategorie, setKategorie] = useState('')
     const [standort, setStandort] = useState('')
     const [zeitraum, setZeitraum] = useState('')
+    const [nutzername, setNutzername] = useState([]);
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setNutzername(storedUsername);
+        }
+    }, [setNutzername]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,7 +30,7 @@ const AnzeigeErstellen = () => {
                     "kategorie": kategorie,
                     "standort": standort,
                     "zeitraum": zeitraum,
-                    "nutzername": username,
+                    "nutzername": nutzername,
 
                 }),
 

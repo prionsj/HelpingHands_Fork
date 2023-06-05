@@ -1,16 +1,29 @@
-import React, {useContext} from 'react'
+import React, { useEffect, useState} from 'react'
 import Navigation from "./Navigation";
-import UsernameContext from "./UsernameContext";
+import logo from "./static/HelpingHands.png";
 
 const AngeboteneHilfe = () => {
 
-    const username = useContext(UsernameContext)
+    const [nutzername, setNutzername] = useState([]);
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setNutzername(storedUsername);
+        }
+    }, [setNutzername]);
 
     return (
             <div>
                 <Navigation />
-                <h1>Angebotene Hilfe</h1>
-                <p>Hier stehen später Hilfseinträge, bei denen ich geholfen habe.</p>
+                <div className="logo-container">
+                    <div className="logo-picture">
+                        <img className="logo" src={logo}/>
+                    </div>
+                    <p className="logo-description">
+                        Biete Hilfe in deiner Stadt
+                    </p>
+                </div>
             </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react"
+import React from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -13,33 +13,28 @@ import AnzeigeErstellen from "./components/AnzeigeErstellen"
 import AngeboteneHilfe from "./components/AngeboteneHilfe"
 import Konto from "./components/Konto"
 import Error from "./components/Error"
-import UsernameContext from "./components/UsernameContext";
 
 
 const App = () => {
 
-    const [username, setUsername] = useState('');
-
-    const setUsernameContext = (value) => {
-      setUsername(value);
-    };
-
     return (
-        <UsernameContext.Provider value={username}>
           <Router>
             <div>
               <Routes>
-                  <Route path="/" element={<Login setUsername={setUsernameContext} />} exact/>
+                  <Route path="/" element={<Login />} exact/>
                   <Route path="/registrierung" element={<Registrierung />}/>
                   <Route path="/hilfsanzeigen" element={<Hilfsanzeigen />}/>
                   <Route path="/anzeige-erstellen" element={<AnzeigeErstellen />} exact/>
                   <Route path="/angebotene-hilfe" element={<AngeboteneHilfe />}/>
+<<<<<<< HEAD
                   <Route path="/konto" element={<Konto />}/>
+=======
+                  <Route path="/konto" element={<Konto  />}/>
+>>>>>>> fc91c4febb9e1aa6934c47f0425f165f2e90507d
                   <Route element={<Error />}/>
               </Routes>
             </div>
           </Router>
-        </UsernameContext.Provider>
     );
 
 
