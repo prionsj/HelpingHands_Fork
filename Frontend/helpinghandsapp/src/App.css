@@ -303,7 +303,7 @@ label {
   margin: 20px;
 }
 
-
+/* Konto */
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -311,26 +311,26 @@ label {
 }
 
 .header {
-  margin-bottom: 20px; /* Füge etwas Abstand unterhalb der Überschrift hinzu */
+  margin-bottom: 20px;
+}
+
+.box-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .box {
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 10px;
+  flex-basis: calc(50% - 5px);
+}
+
+h1 {
+  margin-top: 10px;
   margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
 }
 
-.box p {
-  margin: 0;
-}
 
-hr {
-  margin: 20px 0; /* Platziere die Linie mit Abstand oberhalb und unterhalb */
-}
 
-h2 {
-  margin-top: 10px; /* Füge etwas Abstand oberhalb der kleinen Überschrift hinzu */
-}
