@@ -1,12 +1,30 @@
 
-import {NavLink} from "react-router-dom";
+import {useNavigate, NavLink} from "react-router-dom";
 import React, { useEffect,useState } from "react";
 import logo from "./static/HelpingHands.png"
+import Modal from 'react-modal';
 
 
 const Registrierung = () => {
-  
-   
+
+  const CloseButton = ({ onClick }) => (
+      <button
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "red",
+          }}
+          onClick={onClick}
+      >
+        &times;
+      </button>
+  );
 
     const [vorname, setVorname] = useState('');
     const [nachname, setNachname] = useState('');
@@ -18,32 +36,50 @@ const Registrierung = () => {
     const [telefon, setTelefon] = useState('');
     const [nutzername, setNutzername] = useState('');
     const [passwort, setPasswort] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
 
    const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:3000/benutzer', {
-      method: 'POST',
-      body: 
-      JSON.stringify({
-        "vorname": vorname,
-        "nachname": nachname, 
-        "straße": straße,
-        "hausnummer": hausnummer,
-        "postleitzahl": postleitzahl,
-        "stadt": stadt,
-        "email": email,
-        "telefon": telefon, 
-        "nutzername": nutzername,
-        "passwort": passwort, 
-     
-      }),
-    
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => console.log(res));
-    
+     if (
+         vorname === '' ||
+         nachname === '' ||
+         straße === '' ||
+         hausnummer === '' ||
+         postleitzahl === '' ||
+         stadt === '' ||
+         email === '' ||
+         telefon === '' ||
+         nutzername === '' ||
+         passwort === ''
+     ) {
+       setShowPopup(true);
+     } else {
+       setShowPopup(false);
+       const response = await fetch('http://localhost:3000/benutzer', {
+         method: 'POST',
+         body:
+             JSON.stringify({
+               "vorname": vorname,
+               "nachname": nachname,
+               "straße": straße,
+               "hausnummer": hausnummer,
+               "postleitzahl": postleitzahl,
+               "stadt": stadt,
+               "email": email,
+               "telefon": telefon,
+               "nutzername": nutzername,
+               "passwort": passwort,
+             }),
+
+         headers: {
+           'Content-Type': 'application/json'
+         }
+       }).then(res => console.log(res));
+       navigate("/");
+     }
    }
+
 
     return (
       <div className="registrieren-page">
@@ -149,9 +185,35 @@ const Registrierung = () => {
           />
         </div>
         <button onClick={handleSubmit} type="submit">
-          <NavLink to="/">Registrieren</NavLink>
+          Registrieren
         </button>
       </form>
+        {showPopup && (
+            <Modal
+                isOpen={true}
+                onRequestClose={() => setShowPopup(false)}
+                shouldCloseOnOverlayClick={false}
+                style={{
+                  content: {
+                    width: "300px",
+                    height: "400px",
+                    margin: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    color: "red",
+                    border: "2px solid red",
+                  },
+                  overlay: {
+                    background: "rgba(0, 0, 0, 0.5)",
+                  },
+                }}
+            >
+              <CloseButton onClick={() => setShowPopup(false)} />
+              <h2>Für die Registrierung müssen alle Datenfelder ausgefüllt werden.</h2>
+            </Modal>
+        )}
       {console.log(
         vorname,
         nachname,
