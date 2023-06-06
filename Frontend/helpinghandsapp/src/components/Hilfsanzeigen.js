@@ -77,7 +77,7 @@ const Hilfsanzeigen = () => {
         setTitel(titel);
         const matchingBenutzer = helps.find(
             (help) =>
-                help.nutzername === nutzername
+                help.nutzername === nutzername && help.titel === titel
         );
         if (matchingBenutzer) {
             setShowPopup(true);

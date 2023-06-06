@@ -47,7 +47,7 @@ class DatabaseFactory {
                     kategorie: "Garten",
                     zeitraum: "31.05.2023",
                     standort:"Karlsruhe",
-                    nutzername: "xx"
+                    nutzername: "peter.k"
                 },
                 {
                     titel: "Regal aufbauen",
@@ -55,7 +55,7 @@ class DatabaseFactory {
                     kategorie: "Möbel",
                     zeitraum: "29.05.2023",
                     standort:"Landau",
-                    nutzername: "yy"
+                    nutzername: "hans.m"
                 },
             ]);
         }
