@@ -222,14 +222,19 @@ paths:
           description: Titel der Hilfsanzeige
           schema:
             type: string
-        - name: nutzername
+        - name: standort
           in: query
-          description: Gesuchter Nutzername
+          description: Gesuchter Standort
           schema:
             type: string
         - name: ersteller
           in: query
           description: Gesuchter Ersteller
+          schema:
+            type: string
+        - name: nutzername
+          in: query
+          description: Gesuchter Nutzername
           schema:
             type: string
       responses:
@@ -564,9 +569,11 @@ components:
           type: string
         titel:
           type: string
-        nutzername:
+        standort:
           type: string
         ersteller:
+          type: string
+        nutzername:
           type: string
     Benutzer:
       type: object
