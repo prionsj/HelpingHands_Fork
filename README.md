@@ -14,28 +14,18 @@ Kurzbeschreibung
 ----------------
 
 Bei dieser Anwendung handelt es sich um eine HelpingHands-WebApp.
-Hier wird eine Single Page App zur Verwaltung von Hilfsanzeigen-Datensätzen
+Hier wird eine WebApp zur Verwaltung von Hilfsanzeigen-Datensätzen
 implementiert, die folgende Entitäten beinhaltet:
 
-  1. Rezepte:
-        Eine Auflistung aller Rezepte in diesem Kochbuch. Es können neue Rezepte
-         erstellt, vorhandene bearbeitet und gelöscht werden.
-  2. Bewertungen zu den Rezepten:
-        Möglichkeit, jedes Rezept anhand von Sternen zu beurteilen und einen
-        Kommentar abzugeben. Es ist auch eine mehrfach Bewertung eines Rezeptes
-        möglich.
-        Diese Bewertung lässt sich bei Bedarf auch ändern und löschen.
-  3. Favoritenliste:
-        Möglichkeit, bestimmte Lieblingsrezepte zu den Favoriten hinzuzufügen.
-        Favoriten können im Nachhinein wieder von der Favoritenliste entfernt
-        werden.
-  4. Einkaufsliste:
-        Besteht der Wunsch einen bestimmtes Rezept nachzukochen, können dessen
-        Zutaten und der Rezeptname auf die Einkaufsliste gesetzt werden und
-        bei Bedarf von der Einkaufsliste wieder zu entfernen.
+  1. Hilfsanzeigen:
+        Eine Auflistung aller erstellten Hilfsanzeigen in der HelpingHands-App. Es können neue Hilfsanzeigen erstellt, vorhandene bearbeitet und gelöscht werden.
+  2. Angebote:
+        Möglichkeit, auf bestimmte Hilfsanzeigen zu reagieren und eigene Hilfe anzubieten. Diese können dann in der Angebotliste eingesehen werden.
+  3. Benutzer:
+        Möglichkeit, einen Benutzer zu registrieren (erstellen) und sich mit diesem einzuloggen. Eigene Benutzer können bearbeitet oder gelöscht werden.
 
 Diese Version beinhaltet jedoch neben der Benutzeroberfläche auch ein vollständiges
-REST-Backend zur Ablage der Rezepte in einer zentralen Datenbank und auch die
+REST-Backend zur Ablage der Hilsanzeigen in einer zentralen Datenbank und auch die
 Struktur des Quellcodes folgt eher modernen Best Practices wie der Nutzung von
 npm zur Verwaltung von Abhängigkeiten und der Nutzung eines Bundlers, um diese
 dem Browser zugänglich zu machen.

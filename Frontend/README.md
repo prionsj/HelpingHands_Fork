@@ -14,7 +14,7 @@ Inhaltsverzeichnis
 Kurzbeschreibung
 ----------------
 
-Dies ist die clientseitige Single Page App mit dem Frontend der HelpingHands-WebApp.
+Dies ist die WebApp mit dem Frontend der HelpingHands-App.
 Es handelt sich dabei um eine einfache Webanwendung, die mit VanillaJS
 (also einfachem JavaScript) ohne zusätzlichem Framework realisiert wurde.
 

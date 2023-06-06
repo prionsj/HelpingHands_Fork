@@ -19,7 +19,7 @@ Rechners direkt ansprechen zu können. Setzt sich eine Anwendung allerdings aus
 mehreren Backend-Services zusammen, ist es meist vorteilhaft, diese Struktur
 nach Außen hin zu verbergen und die Services über eine einheitliche Adresse
 aufrufbar zu machen. Somit müssen die Verwender der Services (inkl. dem
-Web-Frontend oder etwaigen Mobile Apps) die Backend-Struktur nicht kennen und
+Web-Frontend) die Backend-Struktur nicht kennen und
 die Struktur kann in gewissem Rahmen frei verändert werden.
 
 Technisch wird dies durch einen HTTP Reverse Proxy realisiert, der unter einer
