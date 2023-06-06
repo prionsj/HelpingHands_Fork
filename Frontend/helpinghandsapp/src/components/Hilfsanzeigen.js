@@ -2,6 +2,26 @@ import React, { useState, useEffect} from "react"
 import Navigation from "./Navigation";
 import { useNavigate} from "react-router-dom";
 import logo from "./static/HelpingHands.png"
+import Modal from "react-modal";
+
+const CloseButton = ({ onClick }) => (
+    <button
+        style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "red",
+        }}
+        onClick={onClick}
+    >
+        &times;
+    </button>
+);
 
 const Hilfsanzeigen = () => {
         const keineAnzeigen = false
@@ -10,6 +30,7 @@ const Hilfsanzeigen = () => {
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);
     const [titel, setTitel] = useState('')
+    const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
         
     useEffect(() => {
@@ -51,11 +72,21 @@ const Hilfsanzeigen = () => {
         await fetch(`http://localhost:3000/hilfsanzeige/${id}`, { method: 'DELETE' });
     }
 
+
     const handleHelprequest = (titel, id) => {
         setTitel(titel);
-        handleHelps(titel);
-        deleteHelps(id);
-        navigate("/angebotene-hilfe");
+        const matchingBenutzer = helps.find(
+            (help) =>
+                help.nutzername === nutzername
+        );
+        if (matchingBenutzer) {
+            setShowPopup(true);
+        } else {
+            setShowPopup(false);
+            handleHelps(titel);
+            deleteHelps(id);
+            navigate("/angebotene-hilfe");
+        }
     };
 
     if (keineAnzeigen) {
@@ -139,6 +170,32 @@ const Hilfsanzeigen = () => {
                     })
                 }
                 </ol>
+                {showPopup && (
+                    <Modal
+                        isOpen={true}
+                        onRequestClose={() => setShowPopup(false)}
+                        shouldCloseOnOverlayClick={false}
+                        style={{
+                            content: {
+                                width: "300px",
+                                height: "400px",
+                                margin: "auto",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                color: "red",
+                                border: "2px solid red",
+                            },
+                            overlay: {
+                                background: "rgba(0, 0, 0, 0.5)",
+                            },
+                        }}
+                    >
+                        <CloseButton onClick={() => setShowPopup(false)} />
+                        <h2>Diese Hilfsanzeige wurde von dir selbst erstellt.</h2>
+                    </Modal>
+                )}
             </div>
         )
 
