@@ -41,12 +41,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
          res.sendResult([
              {
                  _name: "hilfsanzeige",
-                 query: {url: "/hilfsanzeige", method: "GET", queryParams: ["search", "titel", "beschreibung", "kategorie", "zeitraum", "standort"]},
+                 query: {url: "/hilfsanzeige", method: "GET", queryParams: ["search", "titel", "beschreibung", "kategorie", "zeitraum", "standort", "nutzername"]},
                  create: {url: "/hilfsanzeige", method: "POST"},
              },
              {
                  _name: "angebot",
-                 query: {url: "/angebot", method: "GET", queryParams: ["search", "titel"]},
+                 query: {url: "/angebot", method: "GET", queryParams: ["search", "titel", "nutzername", "ersteller"]},
                  create: {url: "/angebot", method: "POST"},
              },
              {

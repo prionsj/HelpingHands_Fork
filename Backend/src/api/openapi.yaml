@@ -227,6 +227,11 @@ paths:
           description: Gesuchter Nutzername
           schema:
             type: string
+        - name: ersteller
+          in: query
+          description: Gesuchter Ersteller
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -560,6 +565,8 @@ components:
         titel:
           type: string
         nutzername:
+          type: string
+        ersteller:
           type: string
     Benutzer:
       type: object
