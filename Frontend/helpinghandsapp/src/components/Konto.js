@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import Navigation from "./Navigation";
+import { useNavigate, NavLink } from "react-router-dom";
 
 
 const Konto = () => {
@@ -7,6 +8,7 @@ const Konto = () => {
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);
     const keineAnzeigen = false
+    const navigate = useNavigate();
     let hilfsanzeigen
 
     useEffect(() => {
@@ -47,7 +49,13 @@ const Konto = () => {
         </div>
     )
 }
-  
+const deleteHelps = async (id) => {
+  await fetch(`http://localhost:3000/hilfsanzeige/${id}`, { method: 'DELETE' });
+
+  navigate("/hilfsanzeigen")
+}
+
+    
   
     return (
         <div>
@@ -125,10 +133,19 @@ const Konto = () => {
                                                 </li>
                                             </div>
                                             <div className="actions">
-                                                <div className="action edit">
-                                                    <a className="anfrage" href={"#"}>✉️<br/>Anfragen
-                                                    </a>
-                                                </div>
+                                                <button className="action edit">
+                                          <NavLink
+                                            to={`/anzeige-erstellen`}>
+                                            Bearbeiten
+                                          </NavLink>             
+                                        </button>
+                                        <button
+                                          className="action edit"
+                                          onClick={() => deleteHelps(help._id)}>
+                                         
+                                          Löschen
+                                        </button>
+                                    
                                             </div>
                                         </ul>
                                     </li>
