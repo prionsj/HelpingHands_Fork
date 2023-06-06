@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react"
 import Navigation from "./Navigation";
+import { useNavigate} from "react-router-dom";
 import logo from "./static/HelpingHands.png"
 
 const Hilfsanzeigen = () => {
@@ -9,6 +10,7 @@ const Hilfsanzeigen = () => {
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);
     const [titel, setTitel] = useState('')
+    const navigate = useNavigate();
         
     useEffect(() => {
         fetch('http://localhost:3000/hilfsanzeige')
@@ -44,9 +46,16 @@ const Hilfsanzeigen = () => {
             }
         }).then(res => console.log(res));
     }
-    const handleHelprequest = (titel) => {
+
+    const deleteHelps = async (id) => {
+        await fetch(`http://localhost:3000/hilfsanzeige/${id}`, { method: 'DELETE' });
+    }
+
+    const handleHelprequest = (titel, id) => {
         setTitel(titel);
         handleHelps(titel);
+        deleteHelps(id);
+        navigate("/angebotene-hilfe");
     };
 
     if (keineAnzeigen) {
@@ -117,8 +126,8 @@ const Hilfsanzeigen = () => {
                                             </div>
                                             <div className="actions">
                                                 <div className="action edit"
-                                                     onClick={() => handleHelprequest(help.titel)}>
-                                                    <a className="anfrage" href={"#"} >✉️<br/>Anfragen
+                                                     onClick={() => handleHelprequest(help.titel, help._id)}>
+                                                    <a className="anfrage" href={"#"} >✉️<br/>Ich kann helfen
                                                     </a>
                                                 </div>
                                             </div>

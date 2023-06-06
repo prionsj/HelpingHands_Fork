@@ -15,7 +15,7 @@ const Navigation = () => {
                             <NavLink to="/anzeige-erstellen" className="nav-link">Ich brauche Hilfe</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/angebotene-hilfe" className="nav-link">Ich habe geholfen</NavLink>
+                            <NavLink to="/angebotene-hilfe" className="nav-link">Ich kann helfen</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink to="/konto" className="nav-link">Mein Konto</NavLink>

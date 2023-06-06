@@ -34,7 +34,7 @@ const AngeboteneHilfe = () => {
                         <img className="logo" src={logo}/>
                     </div>
                     <p className="logo-description">
-                        Überblick über deine bereits geleistete Hilfe
+                        Überblick über deine angebotene Hilfe
                     </p>
                 </div>
                 <ol className="hilfsanzeigen">
