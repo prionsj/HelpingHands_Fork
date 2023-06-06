@@ -180,8 +180,10 @@ const Registrierung = () => {
           <input
             placeholder="Password"
             className="otherField"
+            type="password"
             value={passwort}
             onChange={(e) => setPasswort(e.target.value)}
+        
           />
         </div>
         <button onClick={handleSubmit} type="submit">

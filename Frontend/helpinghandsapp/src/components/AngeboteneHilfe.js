@@ -34,11 +34,27 @@ const AngeboteneHilfe = () => {
                         <img className="logo" src={logo}/>
                     </div>
                     <p className="logo-description">
-                        Biete Hilfe in deiner Stadt
+                        Überblick über deine bereits geleistete Hilfe
                     </p>
                 </div>
                 <ol className="hilfsanzeigen">
-
+                    {
+                        angebote && angebote.map ((angebot, index)=> {
+                            if (angebot.nutzername === nutzername) {
+                                return (
+                                    <div className="hilfen">
+                                        <div className="card">
+                                            <li className="list-entry" data-id="$ID$">
+                                                <div className="stadt titel">
+                                                    {angebot.titel}
+                                                </div>
+                                            </li>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        })
+                    }
                 </ol>
             </div>
     )
