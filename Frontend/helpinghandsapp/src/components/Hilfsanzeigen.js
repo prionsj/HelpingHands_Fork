@@ -52,13 +52,15 @@ const Hilfsanzeigen = () => {
         }
     }, [setNutzername]);
 
-    const handleHelps = async (currentTitle) => {
+    const handleHelps = async (currentTitle, ersteller, standort) => {
         const response = await fetch('http://localhost:3000/angebot', {
             method: 'POST',
             body:
                 JSON.stringify({
                     "titel": currentTitle,
-                    "nutzername": nutzername
+                    "nutzername": nutzername,
+                    "ersteller": ersteller,
+                    "standort": standort
 
                 }),
 
@@ -73,7 +75,7 @@ const Hilfsanzeigen = () => {
     }
 
 
-    const handleHelprequest = (titel, id) => {
+    const handleHelprequest = (titel, ersteller, standort, id) => {
         setTitel(titel);
         const matchingBenutzer = helps.find(
             (help) =>
@@ -83,7 +85,7 @@ const Hilfsanzeigen = () => {
             setShowPopup(true);
         } else {
             setShowPopup(false);
-            handleHelps(titel);
+            handleHelps(titel, ersteller, standort);
             deleteHelps(id);
             navigate("/angebotene-hilfe");
         }
@@ -157,7 +159,7 @@ const Hilfsanzeigen = () => {
                                             </div>
                                             <div className="actions">
                                                 <div className="action edit"
-                                                     onClick={() => handleHelprequest(help.titel, help._id)}>
+                                                     onClick={() => handleHelprequest(help.titel, help.nutzername, help.standort, help._id)}>
                                                     <a className="anfrage" href={"#"} >✉️<br/>Ich kann helfen
                                                     </a>
                                                 </div>
