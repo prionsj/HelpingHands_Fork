@@ -66,9 +66,14 @@ const AnzeigeErstellen = () => {
                     <div>
                         <select className="form-select category" aria-label="Default select example" value={kategorie} onChange={(e) => setKategorie(e.target.value)}>
                             <option selected>Kategorie</option>
-                            <option value="1">Kategorie 1</option>
-                            <option value="2">Kategorie 2</option>
-                            <option value="3">Kategorie 3</option>
+                            <option value="Garten">Garten</option>
+                            <option value="Betreuung">Betreuung</option>
+                            <option value="Tierpflege">Tierpflege</option>
+                            <option value="Technik">Technik</option>
+                            <option value="Handwerk">Handwerk</option>
+                            <option value="Nachhilfe">Nachhilfe</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Sonstiges">Sonstiges</option>
                         </select>
                     </div>
                     <div>

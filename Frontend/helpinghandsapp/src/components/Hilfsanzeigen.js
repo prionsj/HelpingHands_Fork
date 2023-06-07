@@ -24,13 +24,13 @@ const CloseButton = ({ onClick }) => (
 );
 
 const Hilfsanzeigen = () => {
-        const keineAnzeigen = false
-        let hilfsanzeigen
 
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);
     const [titel, setTitel] = useState('')
     const [showPopup, setShowPopup] = useState(false);
+    const [selectedStandort, setSelectedStandort] = useState('');
+    const [selectedKategorie, setSelectedKategorie] = useState('');
     const navigate = useNavigate();
         
     useEffect(() => {
@@ -91,13 +91,9 @@ const Hilfsanzeigen = () => {
         }
     };
 
-    if (keineAnzeigen) {
-            hilfsanzeigen = (
-                <div className="no-entry">
-                    Es sind keine Hilfseinträge vorhanden.
-                </div>
-            )
-        }
+    const handleSearch = (e) => {
+        e.preventDefault();
+    };
 
     return (
             <div className="hilfsanzeigen-page">
@@ -110,28 +106,34 @@ const Hilfsanzeigen = () => {
                         Biete Hilfe in deiner Stadt
                     </p>
                 </div>
-                <div className="search-container">
+                <div className="search-container" onSubmit={handleSearch}>
                     <form className="d-flex search" role="search">
                         <input type="search" className="form-control rounded" placeholder="Standort" aria-label="Suche"
-                               aria-describedby="search-addon"/>
-                        <button className="btn" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                            </svg>
-                        </button>
+                               aria-describedby="search-addon" value={selectedStandort}
+                               onChange={(e) => setSelectedStandort(e.target.value)}/>
                     </form>
                 </div>
                 <div className="category-container">
-                    <select className="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example"  value={selectedKategorie}
+                            onChange={(e) => setSelectedKategorie(e.target.value)}>
                         <option selected>Kategorie</option>
-                        <option value="1">Kategorie 1</option>
-                        <option value="2">Kategorie 2</option>
-                        <option value="3">Kategorie 3</option>
+                        <option value="Garten">Garten</option>
+                        <option value="Betreuung">Betreuung</option>
+                        <option value="Tierpflege">Tierpflege</option>
+                        <option value="Technik">Technik</option>
+                        <option value="Handwerk">Handwerk</option>
+                        <option value="Nachhilfe">Nachhilfe</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Sonstiges">Sonstiges</option>
                     </select>
                 </div>
                 <ol className="hilfsanzeigen">
                 {
                     helps && helps.map((help, index)=> {
+                        if (
+                            (help.standort === selectedStandort || !selectedStandort) &&
+                            (help.kategorie === selectedKategorie || !selectedKategorie || selectedKategorie === 'Kategorie')
+                        ) {
                         return (
                             <div className="hilfen">
                                 <div className="card">
@@ -168,7 +170,7 @@ const Hilfsanzeigen = () => {
                                     </li>
                                 </div>
                             </div>
-                        )
+                        )}
                     })
                 }
                 </ol>
