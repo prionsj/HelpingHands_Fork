@@ -37,28 +37,6 @@ class DatabaseFactory {
 
     async _createDemoData() {
 
-        //Demodaten von Hilfsanzeigen
-        let hilfsanzeige = this.database.collection("hilfsanzeige");
-        if (await hilfsanzeige.estimatedDocumentCount() === 0) {
-            hilfsanzeige.insertMany([
-                {
-                    titel: "Rasenmähen",
-                    beschreibung: "Mein Rasen muss gemäht werden. Bitte um Hilfe!",
-                    kategorie: "Garten",
-                    zeitraum: "31.05.2023",
-                    standort:"Karlsruhe",
-                    nutzername: "peter.k"
-                },
-                {
-                    titel: "Regal aufbauen",
-                    beschreibung: "Ich brauche einen Handwerker. Bitte um Hilfe!",
-                    kategorie: "Möbel",
-                    zeitraum: "29.05.2023",
-                    standort:"Landau",
-                    nutzername: "hans.m"
-                },
-            ]);
-        }
 
         //Demodaten von Benutzer
         let benutzer = this.database.collection("benutzer");

@@ -8,8 +8,6 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
-import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
-import AngebotController from "./controller/angebot.controller.js";
 import BenutzerController from "./controller/benutzer.controller.js";
 
 
@@ -24,9 +22,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
 const config = {
-  port:    parseInt(process.env.PORT) || 3000,
+  port:    parseInt(process.env.PORT) || 3001,
   host:    process.env.HOST           || "localhost",
-  mongodb: process.env.MONGODB        || "mongodb://localhost:27017",
+  mongodb: process.env.MONGODB        || "mongodb://localhost:27018",
 };
 
 await DatabaseFactory.init(config.mongodb);
@@ -97,8 +95,6 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/");
-new HilfsanzeigeController(server, "/hilfsanzeige");
-new AngebotController(server, "/angebot");
 new BenutzerController(server, "/benutzer");
 
 

@@ -1,6 +1,6 @@
 "use strict"
 
-import { MongoClient } from "../../BackendBenutzer/node_modules/mongodb/mongodb";
+import { MongoClient } from "../../BackendHilfsanzeigen/node_modules/mongodb/mongodb";
 
 /**
  * Singleton-Klasse zum Zugriff auf das MongoDB-Datenbankobjekt, ohne dieses
@@ -60,36 +60,8 @@ class DatabaseFactory {
             ]);
         }
 
-        //Demodaten von Benutzer
-        let benutzer = this.database.collection("benutzer");
-        if (await benutzer.estimatedDocumentCount() === 0) {
-            benutzer.insertMany([
-                {
-                    vorname: "Hans",
-                    nachname: "Müller",
-                    straße: "Landwehrstraße",
-                    hausnummer: "7",
-                    postleitzahl: "76829",
-                    stadt: "Landau",
-                    email: "hans.mueller@gmail.com",
-                    telefon: "00001717",
-                    nutzername:"hans.m",
-                    passwort: "hansm"
-                },
-                {
-                    vorname: "Peter",
-                    nachname: "Klaus",
-                    straße: "Karlsruherstraße",
-                    hausnummer: "99",
-                    postleitzahl: "76133",
-                    stadt: "Karlsruhe",
-                    email: "klaus.peter@gmail.com",
-                    telefon: "00009999",
-                    nutzername:"peter.k",
-                    passwort: "peterk"
-                },
-            ]);
-        }
+
+        
 
     }
 
