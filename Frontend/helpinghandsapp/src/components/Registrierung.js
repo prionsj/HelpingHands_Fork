@@ -56,7 +56,7 @@ const Registrierung = () => {
        setShowPopup(true);
      } else {
        setShowPopup(false);
-       const response = await fetch('http://localhost:3000/benutzer', {
+       const response = await fetch('http://localhost:3001/benutzer', {
          method: 'POST',
          body:
              JSON.stringify({

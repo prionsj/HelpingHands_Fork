@@ -40,7 +40,7 @@ const Konto = () => {
     }, [setNutzername]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/benutzer')
+        fetch('http://localhost:3001/benutzer')
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -74,7 +74,7 @@ const Konto = () => {
   const confirmDelete = async (id) => {
    
       // Konto löschen (Beispiel: Annahme, dass die Löschung erfolgreich ist)
-      await fetch(`http://localhost:3000/benutzer/${id}`, { method: 'DELETE' });
+      await fetch(`http://localhost:3001/benutzer/${id}`, { method: 'DELETE' });
 
       navigate("/")
   }
@@ -141,12 +141,15 @@ const deleteHelps = async (id) => {
                     </div>
                     <div className="actions">
                       <button className="action edit">
-                        <NavLink to={`/`}>
+                        <NavLink to={`/editHilfsanzeige/:id`}>
                           Abmelden
                         </NavLink>            
                       </button>
                       <button className="action edit">
-                        Bearbeiten
+                      <NavLink to={``}>
+                      Bearbeiten
+                        </NavLink> 
+                        
                       </button>
                       <button onClick={deleteProfile}>
                         Löschen
@@ -208,7 +211,7 @@ const deleteHelps = async (id) => {
                                             <div className="actions">
                                                 <button className="action edit">
                                           <NavLink
-                                            to={`/anzeige-erstellen`}>
+                                            to={`/EditHilfsanzeige/:id`}>
                                             Bearbeiten
                                           </NavLink>             
                                         </button>
