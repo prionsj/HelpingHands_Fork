@@ -1,12 +1,33 @@
 import React, {useContext, useEffect, useState} from 'react'
 import Navigation from "./Navigation";
 import { useNavigate, NavLink } from "react-router-dom";
+import Modal from 'react-modal';
 
 
+
+const CloseButton = ({ onClick }) => (
+  <button
+    style={{
+      position: "absolute",
+      top: "10px",
+      right: "10px",
+      border: "none",
+      background: "transparent",
+      cursor: "pointer",
+      fontSize: "20px",
+      fontWeight: "bold",
+      color: "red",
+    }}
+    onClick={onClick}
+  >
+    &times;
+  </button>
+);
 const Konto = () => {
     const [benutzer, setBenutzer] = useState([])
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
     const keineAnzeigen = false
     const navigate = useNavigate();
     let hilfsanzeigen
@@ -41,6 +62,23 @@ const Konto = () => {
           console.log(err.message);
       });
   }, []);
+
+  const deleteProfile = (e) => {
+    e.preventDefault();
+
+    setShowPopup(true);
+  };
+  const cancelDelete = () => {
+    setShowPopup(false);
+  };
+  const confirmDelete = async (id) => {
+   
+      // Konto löschen (Beispiel: Annahme, dass die Löschung erfolgreich ist)
+      await fetch(`http://localhost:3000/benutzer/${id}`, { method: 'DELETE' });
+
+      navigate("/")
+  }
+    
 
   if (keineAnzeigen) {
     hilfsanzeigen = (
@@ -100,6 +138,41 @@ const deleteHelps = async (id) => {
                     </div>
                     <div className="box Nutzername">
                       <strong>Nutzername:</strong> {benutzer.nutzername}
+                    </div>
+                    <div className="actions">
+                      <button className="action edit">
+                        <NavLink to={`/`}>
+                          Abmelden
+                        </NavLink>            
+                      </button>
+                      <button className="action edit">
+                        Bearbeiten
+                      </button>
+                      <button onClick={deleteProfile}>
+                        Löschen
+                      </button>
+                      <div classname="PopUp">
+                      {showPopup && (
+                <Modal
+                    isOpen={true}
+                    onRequestClose={() => setShowPopup(false)}
+                    shouldCloseOnOverlayClick={false}
+                     className="PopUp">
+                    <CloseButton onClick={() => setShowPopup(false)} />
+                    <h2>Möchtest du dein Konto löschen?</h2>
+                    <div className="popup-buttons">
+                    <button onClick={cancelDelete}>Abbrechen</button>
+                    <button
+                    className="action edit"
+                    onClick={() => confirmDelete(benutzer._id)}>
+                                         
+                      Konto löschen
+                    </button>
+            </div>
+                </Modal>
+            )}
+             </div>
+                                    
                     </div>
                     <hr></hr>
                     <ol className="hilfsanzeigen">
