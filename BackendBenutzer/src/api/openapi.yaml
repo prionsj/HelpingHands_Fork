@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: '1.0'
-  title: Hilfsanzeige
+  title: Benutzer
   description: 'Die HelpingHands-WebApp nutzt Microservices. In diesem werden die üblichen CRUD-Operationen zur Suche, Anzeige und Bearbeitung von Benutzer ermöglicht.'
   contact:
     name: 'Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions'
