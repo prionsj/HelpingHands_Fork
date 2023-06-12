@@ -23,13 +23,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 * =============================================================================*/
 
 // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
-const config = {
+const configHilfsanzeigen = {
   port:    parseInt(process.env.PORT) || 3000,
   host:    process.env.HOST           || "localhost",
   mongodb: process.env.MONGODB        || "mongodb://localhost:27017",
 };
 
-await DatabaseFactory.init(config.mongodb);
+await DatabaseFactory.init(configHilfsanzeigen.mongodb);
 
 /* =============================================================================
 * SERVER STARTEN
@@ -103,7 +103,7 @@ new BenutzerController(server, "/benutzer");
 
 
 // Server tatsächlich starten
-server.listen(config.port, config.host, function() {
+server.listen(configHilfsanzeigen.port, configHilfsanzeigen.host, function() {
   console.log();
   console.log("=============");
   console.log("HelpingHands-Server");
@@ -111,7 +111,7 @@ server.listen(config.port, config.host, function() {
   console.log();
   console.log("Ausführung mit folgender Konfiguration:");
   console.log();
-  console.log(config);
+  console.log(configHilfsanzeigen);
   console.log();
   console.log("Nutzen Sie die folgenden Umgebungsvariablen zum Anpassen der Konfiguration:");
   console.log();

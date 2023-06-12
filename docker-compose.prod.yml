@@ -23,61 +23,104 @@
 version: "3.9"
 
 services:
-    # MongoDB-Datenbank
-    mongodb:
+
+    # MongoDB-Datenbank Hilfsanzeigen
+    mongodb-hilfsanzeigen:
+        container_name: MongoDB-Hilfsanzeigen
         image: mongo
         restart: always
         environment:
             MONGO_INITDB_ROOT_USERNAME: dbuser
             MONGO_INITDB_ROOT_PASSWORD: dbpass
         volumes:
-            - dbdata:/data/db
-            - dbconfig:/data/configdb
+            - dbdatahilfsanzeigen:/data/db
+            - dbconfighilfsanzeigen:/data/configdbbenutzer
 
-    # HelpingHands-Backend (Produktivmodus)
-    backend:
+
+    # HelpingHands-Backend (Entwicklungsmodus) Hilfsanzeigen
+    backend-hilfsanzeigen:
         build:
-            context: ./Backend
+            context: ./BackendHilfsanzeigen
+        container_name: Backend-Hilfsanzeigen
         depends_on:
-            - mongodb
+            - mongodb-hilfsanzeigen
         restart: always
         environment:
             HOST: "::"
             PORT: 3000
-            MONGODB: mongodb://dbuser:dbpass@mongodb:27017/
+            MONGODB: mongodb://dbuser:dbpass@mongodb-hilfsanzeigen:27017/
         deploy:
             # Beispiel für die Skalierung mit drei parallelen Instanzen.
             # Die Anzahl kann beim Aufruf von `docker-compose` durch den
             # Parameter `--scale backend=…` übersteuert werden.
             replicas: 3
 
-    # HelpingHands-Frontend (Produktivmodus)
-    frontend:
-        build:
-            context: ./Frontend
+    # MongoDB-Datenbank Benutzer
+    mongodb-benutzer:
+        container_name: MongoDB-Benutzer
+        image: mongo
         restart: always
         environment:
+            MONGO_INITDB_ROOT_USERNAME: dbuser
+            MONGO_INITDB_ROOT_PASSWORD: dbpass
+        volumes:
+            - dbdatabenutzer:/data/db
+            - dbconfigbenutzer:/data/configdbbenutzer
+
+
+    # HelpingHands-Backend (Entwicklungsmodus) Benutezr
+    backend-benutzer:
+        build:
+            context: ./BackendBenutzer
+        container_name: Backend-Benutzer
+        depends_on:
+            - mongodb-benutzer
+        restart: always
+        environment:
+            HOST: "::"
+            PORT: 3001
+            MONGODB: mongodb://dbuser:dbpass@mongodb-benutzer:27016/
+        deploy:
+            # Beispiel für die Skalierung mit drei parallelen Instanzen.
+            # Die Anzahl kann beim Aufruf von `docker-compose` durch den
+            # Parameter `--scale backend=…` übersteuert werden.
+            replicas: 3
+
+
+
+
+
+    # HelpingHands-Frontend (Produktivmodus)
+ #   frontend:
+ #       build:
+ #           context: ./Frontend
+ #       restart: always
+ #       environment:
             # Die URL des Backends kann durch die Umgebungsvariable API_URL
             # beim Aufruf von Docker Compose übersteuert werden. Sie wird an
             # die gleichnamige Umgebungsvariable im Container durchgereicht
             # und von dort für die Single Page App via HTTP abrufbar gemacht.
             # In einem echten Produktivsetup müsste hier statt localhost
             # natürlich ein richtiger Hostname eingetragen werden.
-            API_URL: ${API_URL:-http://localhost:8080/api}
-        deploy:
-            replicas: 2
+ #           API_URL: ${API_URL:-http://localhost:8080/api}
+ #       deploy:
+ #           replicas: 2
 
     # Gateway-Server
     gateway:
         depends_on:
-            - backend
+            - backend-benutzer
+            - backend-hilfsanzeigen
             - frontend
         build:
             context: ./Gateway
         restart: always
         ports:
             - 8080:81
+            - 8080:82
 
 volumes:
-    dbdata:
-    dbconfig:
+    dbdatahilfsanzeigen:
+    dbconfighilfsanzeigen:
+    dbdatabenutzer:
+    dbconfigbenutzer:

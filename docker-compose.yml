@@ -29,20 +29,26 @@
 #===============================================================================
 version: "3.9"
 
+networks:
+    helpinghands_default:
+        external: true
+
 services:
-    # MongoDB-Datenbank
-    mongodb:
+    # MongoDB-Datenbank Hilfsanzeigen
+    mongodb-hilfsanzeigen:
+        container_name: MongoDB-Hilfsanzeigen
         image: mongo
         restart: always
         environment:
             MONGO_INITDB_ROOT_USERNAME: dbuser
             MONGO_INITDB_ROOT_PASSWORD: dbpass
         volumes:
-            - dbdata:/data/db
-            - dbconfig:/data/configdbbenutzer
+            - dbdatahilfsanzeigen:/data/db
+            - dbconfighilfsanzeigen:/data/configdbbenutzer
 
-    # Admin-GUI für MongoDB
-    mongo-gui:
+    # Admin-GUI für MongoDB Hilfsanzeigen
+    mongo-gui-hilfsanzeigen:
+        container_name: MongoGUI-Hilfsanzeigen
         image: mongo-express
         restart: always
         ports:
@@ -50,23 +56,73 @@ services:
         environment:
             ME_CONFIG_MONGODB_ADMINUSERNAME: admin
             ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-            ME_CONFIG_MONGODB_URL: mongodb://dbuser:dbpass@mongodb:27017/
+            ME_CONFIG_MONGODB_URL: mongodb://dbuser:dbpass@mongodb-hilfsanzeigen:27017/
 
-    # HelpingHands-Backend (Entwicklungsmodus)
-    backend:
+    # HelpingHands-Backend (Entwicklungsmodus) Hilfsanzeigen
+    backend-hilfsanzeigen:
+        container_name: Backend-Hilfsanzeigen
         depends_on:
-            - mongodb
+            - mongodb-hilfsanzeigen
         image: node:17-alpine
         restart: always
         environment:
             HOST: "::"
             PORT: 3000
-            MONGODB: mongodb://dbuser:dbpass@mongodb:27017/
+            MONGODB: mongodb://dbuser:dbpass@mongodb-hilfsanzeigen:27017/
         ports:
             - 3000:3000
             - 9229:9229
         volumes:
-            - ./Backend:/app
+            - ./BackendHilfsanzeigen:/app
+        working_dir: /app
+        command: sh -c "npm i; npm start"
+
+    # MongoDB-Datenbank Benutzer
+    mongodb-benutzer:
+        container_name: MongoDB-Benutzer
+        image: mongo
+        ports:
+            - '27016:27017'
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: dbuser
+            MONGO_INITDB_ROOT_PASSWORD: dbpass
+        volumes:
+            - dbdatabenutzer:/data/db
+            - dbconfigbenutzer:/data/configdbbenutzer
+            - ./mongodb.conf:/mongodb.conf
+        command: mongod --config /mongodb.conf
+
+    # Admin-GUI für MongoDB Benutzer
+    mongo-gui-benutzer:
+        container_name: MongoGUI-Benutzer
+        image: mongo-express
+        restart: always
+        ports:
+            - 8082:8081
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+            ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+            ME_CONFIG_MONGODB_URL: mongodb://dbuser:dbpass@mongodb-benutzer:27016/
+        networks:
+            - helpinghands_default
+
+    # HelpingHands-Backend (Entwicklungsmodus) Benutzer
+    backend-benutzer:
+        container_name: Backend-Benutzer
+        depends_on:
+            - mongodb-benutzer
+        image: node:17-alpine
+        restart: always
+        environment:
+            HOST: "::"
+            PORT: 3001
+            MONGODB: mongodb://dbuser:dbpass@mongodb-benutzer:27016/
+        ports:
+            - 3001:3001
+            - 9230:9230
+        volumes:
+            - ./BackendBenutzer:/app
         working_dir: /app
         command: sh -c "npm i; npm start"
 
@@ -88,5 +144,7 @@ services:
 
 
 volumes:
-    dbdata:
-    dbconfig:
+    dbdatahilfsanzeigen:
+    dbconfighilfsanzeigen:
+    dbdatabenutzer:
+    dbconfigbenutzer:
