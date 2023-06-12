@@ -1,8 +1,0 @@
-**/node_modules/**
-**/build/**
-**/lib/**
-**/yarn-error.log
-**/.~*
-**/package-lock.json
-.vscode
-**/package.json
