@@ -8,12 +8,7 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
-import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
-import AngebotController from "./controller/angebot.controller.js";
-<<<<<<< HEAD
-=======
-
->>>>>>> 3df0ab86b7dc4d7b31d1b4adfac7406da2db37c3
+import BenutzerController from "./controller/benutzer.controller.js";
 
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
@@ -27,9 +22,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
 const config = {
-  port:    parseInt(process.env.PORT) || 3000,
+  port:    parseInt(process.env.PORT) || 3001,
   host:    process.env.HOST           || "localhost",
-  mongodb: process.env.MONGODB        || "mongodb://localhost:27017",
+  mongodb: process.env.MONGODB        || "mongodb://localhost:27018",
 };
 
 await DatabaseFactory.init(config.mongodb);
@@ -100,12 +95,7 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/");
-new HilfsanzeigeController(server, "/hilfsanzeige");
-new AngebotController(server, "/angebot");
-<<<<<<< HEAD
-=======
-
->>>>>>> 3df0ab86b7dc4d7b31d1b4adfac7406da2db37c3
+new BenutzerController(server, "/benutzer");
 
 
 // Server tatsächlich starten
