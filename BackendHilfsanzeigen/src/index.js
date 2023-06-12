@@ -10,7 +10,6 @@ import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
 import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
 import AngebotController from "./controller/angebot.controller.js";
-import BenutzerController from "./controller/benutzer.controller.js";
 
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
@@ -99,7 +98,6 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 new RootController(server, "/");
 new HilfsanzeigeController(server, "/hilfsanzeige");
 new AngebotController(server, "/angebot");
-new BenutzerController(server, "/benutzer");
 
 
 // Server tatsächlich starten

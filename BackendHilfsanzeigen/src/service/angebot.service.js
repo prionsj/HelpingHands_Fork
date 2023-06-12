@@ -1,7 +1,7 @@
 "use strict"
 
 import DatabaseFactory from "../database.js";
-import {ObjectId} from "mongodb";
+import {ObjectId} from "../../node_modules/mongodb/mongodb.js";
 
 /**
 * Geschäftslogik zur Verwaltung der angebotenen Hilfe. Diese Klasse implementiert die

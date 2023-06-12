@@ -37,7 +37,7 @@ services:
     # HelpingHands-Backend (Produktivmodus)
     backend:
         build:
-            context: ./Backend
+            context: ./BackendHilfsanzeigen
         depends_on:
             - mongodb
         restart: always
