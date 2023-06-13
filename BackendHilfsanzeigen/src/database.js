@@ -14,7 +14,7 @@ class DatabaseFactory {
     /**
      * Ersatz für den Konstruktor, damit aus dem Hauptprogramm heraus die
      * Verbindungs-URL der MongoDB übergeben werden kann. Hier wird dann
-     * auch gleich die Verbindung hergestellt.
+     * die Verbindung hergestellt.
      *
      * @param {String} connectionUrl URL-String mit den Verbindungsdaten
      */
@@ -30,9 +30,7 @@ class DatabaseFactory {
     }
 
     /**
-     * Hilfsmethode zum Anlegen von Demodaten. Würde man so in einer
-     * Produktivanwendung natürlich nicht machen, aber so sehen wir
-     * wenigstens gleich ein paar Daten.
+     * Hilfsmethode zum Anlegen von Demodaten.
      */
 
     async _createDemoData() {
@@ -56,37 +54,6 @@ class DatabaseFactory {
                     zeitraum: "29.05.2023",
                     standort:"Landau",
                     nutzername: "hans.m"
-                },
-            ]);
-        }
-
-        //Demodaten von Benutzer
-        let benutzer = this.database.collection("benutzer");
-        if (await benutzer.estimatedDocumentCount() === 0) {
-            benutzer.insertMany([
-                {
-                    vorname: "Hans",
-                    nachname: "Müller",
-                    straße: "Landwehrstraße",
-                    hausnummer: "7",
-                    postleitzahl: "76829",
-                    stadt: "Landau",
-                    email: "hans.mueller@gmail.com",
-                    telefon: "00001717",
-                    nutzername:"hans.m",
-                    passwort: "hansm"
-                },
-                {
-                    vorname: "Peter",
-                    nachname: "Klaus",
-                    straße: "Karlsruherstraße",
-                    hausnummer: "99",
-                    postleitzahl: "76133",
-                    stadt: "Karlsruhe",
-                    email: "klaus.peter@gmail.com",
-                    telefon: "00009999",
-                    nutzername:"peter.k",
-                    passwort: "peterk"
                 },
             ]);
         }

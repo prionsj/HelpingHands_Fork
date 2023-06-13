@@ -8,8 +8,6 @@ import DatabaseFactory from "./database.js";
 
 //Import Controller
 import RootController from "./controller/root.controller.js";
-import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
-import AngebotController from "./controller/angebot.controller.js";
 import BenutzerController from "./controller/benutzer.controller.js";
 
 
@@ -35,9 +33,6 @@ await DatabaseFactory.init(configBenutzer.mongodb);
 * SERVER STARTEN
 * =============================================================================*/
 const server = restify.createServer({
-
-  // Bei Bedarf notwendige Serverkonfiguration hier erweitern.
-  // Vgl. http://restify.com/docs/server-api/#createserver
 
 });
 
@@ -97,12 +92,10 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/");
-new HilfsanzeigeController(server, "/hilfsanzeige");
-new AngebotController(server, "/angebot");
 new BenutzerController(server, "/benutzer");
 
 
-// Server tatsächlich starten
+// Server starten
 server.listen(configBenutzer.port, configBenutzer.host, function() {
   console.log();
   console.log("=============");

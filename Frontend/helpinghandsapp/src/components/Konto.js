@@ -19,7 +19,7 @@ const Konto = () => {
     }, [setNutzername]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/benutzer')
+        fetch('http://localhost:3001/benutzer')
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);

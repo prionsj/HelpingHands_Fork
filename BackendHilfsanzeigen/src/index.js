@@ -10,7 +10,6 @@ import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
 import HilfsanzeigeController from "./controller/hilfsanzeige.controller.js";
 import AngebotController from "./controller/angebot.controller.js";
-import BenutzerController from "./controller/benutzer.controller.js";
 
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
@@ -35,9 +34,6 @@ await DatabaseFactory.init(configHilfsanzeigen.mongodb);
 * SERVER STARTEN
 * =============================================================================*/
 const server = restify.createServer({
-
-  // Bei Bedarf notwendige Serverkonfiguration hier erweitern.
-  // Vgl. http://restify.com/docs/server-api/#createserver
 
 });
 
@@ -99,10 +95,9 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 new RootController(server, "/");
 new HilfsanzeigeController(server, "/hilfsanzeige");
 new AngebotController(server, "/angebot");
-new BenutzerController(server, "/benutzer");
 
 
-// Server tatsächlich starten
+// Server starten
 server.listen(configHilfsanzeigen.port, configHilfsanzeigen.host, function() {
   console.log();
   console.log("=============");

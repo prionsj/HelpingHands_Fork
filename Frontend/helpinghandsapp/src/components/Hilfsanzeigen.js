@@ -116,7 +116,7 @@ const Hilfsanzeigen = () => {
                 <div className="category-container">
                     <select className="form-select" aria-label="Default select example"  value={selectedKategorie}
                             onChange={(e) => setSelectedKategorie(e.target.value)}>
-                        <option selected>Kategorie</option>
+                        <option selected>Alle Kategorien</option>
                         <option value="Garten">Garten</option>
                         <option value="Betreuung">Betreuung</option>
                         <option value="Tierpflege">Tierpflege</option>
@@ -132,7 +132,7 @@ const Hilfsanzeigen = () => {
                     helps && helps.map((help, index)=> {
                         if (
                             (help.standort === selectedStandort || !selectedStandort) &&
-                            (help.kategorie === selectedKategorie || !selectedKategorie || selectedKategorie === 'Kategorie')
+                            (help.kategorie === selectedKategorie || !selectedKategorie || selectedKategorie === 'Alle Kategorien')
                         ) {
                         return (
                             <div className="hilfen">

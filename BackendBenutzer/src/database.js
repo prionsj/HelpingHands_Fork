@@ -14,7 +14,7 @@ class DatabaseFactory {
     /**
      * Ersatz für den Konstruktor, damit aus dem Hauptprogramm heraus die
      * Verbindungs-URL der MongoDB übergeben werden kann. Hier wird dann
-     * auch gleich die Verbindung hergestellt.
+     * die Verbindung hergestellt.
      *
      * @param {String} connectionUrl URL-String mit den Verbindungsdaten
      */
@@ -30,36 +30,10 @@ class DatabaseFactory {
     }
 
     /**
-     * Hilfsmethode zum Anlegen von Demodaten. Würde man so in einer
-     * Produktivanwendung natürlich nicht machen, aber so sehen wir
-     * wenigstens gleich ein paar Daten.
+     * Hilfsmethode zum Anlegen von Demodaten.
      */
 
     async _createDemoData() {
-
-        //Demodaten von Hilfsanzeigen
-        let hilfsanzeige = this.database.collection("hilfsanzeige");
-        if (await hilfsanzeige.estimatedDocumentCount() === 0) {
-            hilfsanzeige.insertMany([
-                {
-                    titel: "Rasenmähen",
-                    beschreibung: "Mein Rasen muss gemäht werden. Bitte um Hilfe!",
-                    kategorie: "Garten",
-                    zeitraum: "31.05.2023",
-                    standort:"Karlsruhe",
-                    nutzername: "peter.k"
-                },
-                {
-                    titel: "Regal aufbauen",
-                    beschreibung: "Ich brauche einen Handwerker. Bitte um Hilfe!",
-                    kategorie: "Möbel",
-                    zeitraum: "29.05.2023",
-                    standort:"Landau",
-                    nutzername: "hans.m"
-                },
-            ]);
-        }
-
         //Demodaten von Benutzer
         let benutzer = this.database.collection("benutzer");
         if (await benutzer.estimatedDocumentCount() === 0) {

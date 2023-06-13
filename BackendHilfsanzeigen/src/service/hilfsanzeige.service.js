@@ -4,9 +4,8 @@ import DatabaseFactory from "../database.js";
 import {ObjectId} from "mongodb";
 
 /**
-* Geschäftslogik zur Verwaltung von Hilfsanzeigen. Diese Klasse implementiert die
-* eigentliche Anwendungslogik losgelöst vom technischen Übertragungsweg.
-* Die Hilfsanzeigen werden der Einfachheit halber in einer MongoDB abgelegt.
+* Geschäftslogik zur Verwaltung von Hilfsanzeigen. 
+* Die Hilfsanzeigen werden in einer MongoDB abgelegt.
 */
 
 export default class HilfsanzeigeService {
@@ -22,9 +21,7 @@ export default class HilfsanzeigeService {
   /**
   * Hilfsanzeige suchen.
   * Unterstützt wird lediglich eine ganz einfache Suche, bei der einzelne
-  * Felder auf exakte Übereinstimmung geprüft werden. Zwar unterstützt
-  * MongoDB prinzipiell beliebig komplexe Suchanfragen.
-  * Um das Beispiel klein zu halten, wird dies hier aber nicht unterstützt.
+  * Felder auf exakte Übereinstimmung geprüft werden. 
   *
   * @param {Object} query Optionale Suchparameter
   * @return {Promise} Liste der gefundenen Hilfsanzeigen

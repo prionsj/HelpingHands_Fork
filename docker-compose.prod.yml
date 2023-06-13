@@ -1,24 +1,23 @@
 #===============================================================================
 # Docker Compose File für die Produktivnutzung. Startet die folgenden Dienste:
 #
-#  * Ein MongoDB, die im internen Container-Netz für die anderen Container unter
-#    dem Hostnamen "mongodb" auf dem Standardport 27017 erreichbar ist.
+#  * Ein MongoDB für Hilfsanzeigen und Angebote, die im internen Container-Netz für die anderen Container unter
+#    dem Hostnamen "mongodb-hilfsanzeigen" auf dem Standardport 27017 erreichbar ist.
 #
-#  * Das REST-Backend der Anwendung, für welches ein auf nodeJS aufbauendes
+#  * Ein MongoDB für Benutzer, die im internen Container-Netz für die anderen Container unter
+#    dem Hostnamen "mongodb-benutzer" auf dem Port 27016 erreichbar ist.
+#
+#  * Das REST-Backend der Hilfsanzeigen und Angebote, für welches ein auf nodeJS aufbauendes
 #    Container-Image gebaut wird. Der REST-Webservice kann unter
 #    http://localhost:3000 aufgerufen werden.
 #
+#  * Das REST-Backend der Benutzer, für welches ein auf nodeJS aufbauendes
+#    Container-Image gebaut wird. Der REST-Webservice kann unter
+#    http://localhost:3001 aufgerufen werden.
+#
 #  * Das Frontend der Anwendung, für welches ein auf nginx aufbauendes
 #    Container-Image gebaut wird. Das Frontend kann unter der Adresse
-#    http://localhost:8080 aufgerufen werden.
-#
-# Stand 02/2022 wäre es auch möglich gewesen, die Dienste für Entwicklung und
-# Produktivbetrieb in einem einzigen Docker Compose File zu bündeln, und anhand
-# von Profilen zu unterscheiden, ob die Entwicklungs- oder Produktivservices
-# gestartet werden sollen. Vgl. https://docs.docker.com/compose/profiles/
-# Dies wird aktuell aber noch nicht von dem unter Linux verbreiteten Tool
-# "podman-compose" unterstützt, so dass wir hier weiterhin getrennte Dateien
-# verwenden.
+#    http://localhost:8080 aufgerufen werden.--> mal schauen
 #===============================================================================
 version: "3.9"
 

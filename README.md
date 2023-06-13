@@ -5,17 +5,13 @@ Inhaltsverzeichnis
 ------------------
 
  1. [Kurzbeschreibung](#kurzbeschreibung)
- 1. [Nutzung der Gitpod Online-IDE](#nutzung-der-gitpod-online-ide)
  1. [Start mit Docker Compose](#start-mit-docker-compose)
- 1. [Start einzelner Services mit und ohne Docker](#start-einzelner-services-mit-und-ohne-docker)
- 1. [Hinwes zu Podman unter Linux](#hinweis-zu-podman-unter-linux)
 
 Kurzbeschreibung
 ----------------
 
 Bei dieser Anwendung handelt es sich um eine HelpingHands-WebApp.
-Hier wird eine WebApp zur Verwaltung von Hilfsanzeigen-Datensätzen
-implementiert, die folgende Entitäten beinhaltet:
+Hier wird eine WebApp zur Verwaltung von Hilfsanzeigen, Abgebots- und Benutzer-Datensätzen implementiert, die folgende Entitäten beinhaltet:
 
   1. Hilfsanzeigen:
         Eine Auflistung aller erstellten Hilfsanzeigen in der HelpingHands-App. Es können neue Hilfsanzeigen erstellt, vorhandene bearbeitet und gelöscht werden.
@@ -24,55 +20,13 @@ implementiert, die folgende Entitäten beinhaltet:
   3. Benutzer:
         Möglichkeit, einen Benutzer zu registrieren (erstellen) und sich mit diesem einzuloggen. Eigene Benutzer können bearbeitet oder gelöscht werden.
 
-Diese Version beinhaltet jedoch neben der Benutzeroberfläche auch ein vollständiges
-REST-Backend zur Ablage der Hilsanzeigen in einer zentralen Datenbank und auch die
-Struktur des Quellcodes folgt eher modernen Best Practices wie der Nutzung von
+Diese Version beinhaltet jedoch neben der React-App-Benutzeroberfläche auch zwei Microservices. Eines zur Ablage der Hilsanzeigen und Angebote in einer mongodb-Datenbank sowie ein weiteres zur Ablage von Benutzerdaten in ebenfalls einer mongodb-Datenbank. Die Struktur des Quellcodes folgt modernen Best Practices wie der Nutzung von
 npm zur Verwaltung von Abhängigkeiten und der Nutzung eines Bundlers, um diese
 dem Browser zugänglich zu machen.
 
 Mit Docker und Docker Compose können die Bestandteile der App einzeln oder
-als Gesamtprojekt ausgeführt werden.
+als Gesamtprojekt ausgeführt werden. Mit npm start wird die React-App gestartet.
 
-Nutzung der Gitpod Online-IDE
-----------------------------
-
-Falls Sie auf Ihrem Rechner gar keine Software installieren können oder die
-Installation von Docker nicht geklappt hapt (bspw. weil Sie die Home-Edition
-von Microsoft Windows nutzen), können Sie das Beispiel auch in der GitPod
-Online-IDE bearbeiten. Diese stellt Ihnen neben der IDE auch eine Linux-Umgebung
-mit vorinstallierten Werkzeugen für Docker und Node.js zur Verfügung, so dass
-Sie alle hier gezeigten Befehle direkt ausführen können. Gehen Sie hierfür
-wie folgt vor:
-
-   1. Importieren Sie den Quellcode in ein neues Git-Repository.
-   2. Laden Sie das Git-Repository auf GitHub hoch und machen es public.
-   3. Rufen Sie die Startseite des Git-Repositories in GitHub auf.
-   4. Schreiben Sie `https://gitpod.io/#` vor die GitHub-URL, um die IDE zu starten.
-
-Innerhalb der Online-IDE können Sie über das Menü ein neues Terminal öffnen,
-in dem alle Befehle ausgeführt werden können. Dabei müssen Sie lediglich
-darauf achten, die TCP-Ports aller ausgeführten Serverdienste (z.B. für die
-MongoDB oder den Backend-Webservice) auf der linken Seite über den sog.
-„Remote Explorer” freizuschalten und somit über eine öffentliche URL
-zugänglich zu machen:
-
-![Remote Explorer in der Gitpod Online-IDE](gitpod1.png)
-
-Indem Sie dann das Preview-Icon direkt neben der Freigabe anklicken, öffnet sich
-im selben Browser-Tab ein neuer Bereich mit einem eingebetteten Browser-Fenster.
-
-![Vorschau des Backend-Service in GitPod](gitpod2.png)
-
-Dort können Sie sich vom Backend-Service mit der Portnummer 3000 die öffentliche
-URL kopieren. Diese sollten Sie vor Start aller Services als Umgebungsvariable
-API_URL exportieren. Achten Sie dabei darauf, dass die URL keinen abschließenden
-Slash beinhalten darf!
-
-```sh
-export API_URL=https://3000-….gitpod.io
-```
-
-Anschließend sollte alles wie es soll funktionieren.
 
 Start mit Docker Compose
 ------------------------
@@ -82,16 +36,20 @@ Anwendung im Entwicklungs- oder Produktivmodus gestartet werden kann:
 
  * `docker-compose.yml`: Entwicklungsmodus mit folgenden Diensten:
 
-     1. MongoDB (von Außen nicht erreichbar)
-     2. MongoDB Admin GUI (erreichbar auf http://localhost:8081)
-     3. Backend (erreichbar auf http://localhost:3000)
-     4. Frontend (erreichbar auf http://localhost:8080)
+     1. MongoDB-Hilfsanzeigen (mongodb://localhost:27017)
+     2. MongoGUI-Hilfsanzeigen (erreichbar auf http://localhost:8081)
+     3. Backend-Hilfsanzeigen (erreichbar auf http://localhost:3000)
+     4. MongoDB-Benutzer (172.18.0.5db://localhost:27016)
+     5. MongoGUI-Benutzer (erreichbar auf http://localhost:8082)
+     6. Backend-Bnutzer (erreichbar auf http://localhost:3001)
+     7. Frontend (erreichbar auf http://localhost:8080)
 
- Frontend und Backend führend den lokalen Quellcode in einer einfachen
+ Das Backend führt den lokalen Quellcode in einer einfachen
  Node.js-Laufzeitumgebung aus. Änderungen werden dadurch sofort aktiv, wobei
- sich das Backend bei einer Änderung automatisch neustartet und bei einer
- Änderung am Frontend einfach nur die Seite im Browser neugeladen werden
- muss.
+ sich das Backend bei einer Änderung automatisch neustartet. --> frontend, react??
+
+
+ ab hier nochmal genau überprüfen
 
  * `docker-compose.prod.yml`: Produktivmodus mit folgenden Diensten:
 
@@ -156,21 +114,3 @@ Funktion aber nur in Zusammenhang mit Docker Swarm an. Zwar lässt sich die
 App unverändert auch mit Docker Swarm ausführen, dies wird hier allerdings
 absichtlicht nicht beschrieben, da es auf Docker Compose aufbaut und Docker
 Compose davon abgesehen für uns zunächst ausreicht.
-
-Start einzelner Services mit und ohne Docker
---------------------------------------------
-
-Die README-Dateien in den jeweiligen Unterverzeichnissen beschrieben, wie die
-einzelnen Services mit und ohne Docker jeweils einzeln ausgeführt werden können,
-um diese in Isolation zu testen. In der Regel ist jedoch einfacher, mit Docker
-Compose eine komplette Entwicklungsumgebung zu starten und darauf los zu
-programmieren.
-
-Hinweis zu Podman unter Linux
------------------------------
-
-Unter Linux hat sich inzwischen Podman als verbreitete Alternative zu Docker
-durchgesetzt, u.a. weil es ohne Root-Rechte und einen im Hintergrund laufenden
-Daemon-Prozess auskommt. Alle in diesem Projekt gezeigte Befehle funktionieren
-nahezu unverändert auch mit Podman. Es muss lediglich `docker` durch `podman`
-bzw. `docker-compose` durch `podman-compose` ersetzt werden.

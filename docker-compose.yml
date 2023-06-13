@@ -1,31 +1,37 @@
 #===============================================================================
 # Docker Compose File für die lokale Entwicklung. Startet die folgenden Dienste:
 #
-#  * Ein MongoDB, die im internen Container-Netz für die anderen Container unter
-#    dem Hostnamen "mongodb" auf dem Standardport 27017 erreichbar ist.
+#  * Ein MongoDB für Hilfsanzeigen und Angebote, die im internen Container-Netz für 
+#    die anderen Container unter dem Hostnamen "mongodb-hilfsanzeigen" auf dem Standardport 27017 
+#    erreichbar ist.
 #
-#  * Ein grafisches Admin-Werkzeug für Mongo, das unter http://localhost:8081
-#    im Browser aufgerufen werden kann
+#  * Ein MongoDB für Benutzer, die im internen Container-Netz für 
+#    die anderen Container unter dem Hostnamen "mongodb-benutzer" auf dem Port 27016
+#    erreichbar ist.
 #
-#  * Eine NodeJS-Laufzeitumgebung, in welcher der Backend-Quellcode ausgeführt
+#  * Ein grafisches Admin-Werkzeug für Mongo der Hilfsanzeigen und Angebote, das unter http://localhost:8081
+#    im Browser aufgerufen werden kann.
+#
+#  * Ein grafisches Admin-Werkzeug für Mongo der Benutzer, das unter http://localhost:8082
+#    im Browser aufgerufen werden kann.
+#
+#  * Eine NodeJS-Laufzeitumgebung für Hilfsanzeigen und Angebote, in welcher der Backend-Quellcode ausgeführt
 #    wird. Änderungen am Quellcode führen zu einem automatischen Neustart des
 #    Services. Der REST-Webservice kann unter http://localhost:3000 aufgerufen
 #    werden. Unter dem Standardport 9229 kann sich ein JavaScript-Debugger
+#    (z.B. aus dem Chrome Dev Tools) verbinden.
+#
+#  * Eine NodeJS-Laufzeitumgebung für Beutzer, in welcher der Backend-Quellcode ausgeführt
+#    wird. Änderungen am Quellcode führen zu einem automatischen Neustart des
+#    Services. Der REST-Webservice kann unter http://localhost:3001 aufgerufen
+#    werden. Unter dem Port 9230 kann sich ein JavaScript-Debugger
 #    (z.B. aus dem Chrome Dev Tools) verbinden.
 #
 #  * Eine NodeJS-Laufzeitumgebung, in welcher der Frontend-Quellcode gebaut
 #    und unter der Adresse http://localhost:8080 zum Aufruf im Browser
 #    bereitgestellt wird. Auch hier führen Änderungen am Quellcode zu einem
 #    automatischen Neustart, so dass lediglich im Browser die Seite neugeladen
-#    werden muss.
-#
-# Stand 02/2022 wäre es auch möglich gewesen, die Dienste für Entwicklung und
-# Produktivbetrieb in einem einzigen Docker Compose File zu bündeln, und anhand
-# von Profilen zu unterscheiden, ob die Entwicklungs- oder Produktivservices
-# gestartet werden sollen. Vgl. https://docs.docker.com/compose/profiles/
-# Dies wird aktuell aber noch nicht von dem unter Linux verbreiteten Tool
-# "podman-compose" unterstützt, so dass wir hier weiterhin getrennte Dateien
-# verwenden.
+#    werden muss.--> mal schauen!!!
 #===============================================================================
 version: "3.9"
 
