@@ -13,6 +13,8 @@ import AnzeigeErstellen from "./components/AnzeigeErstellen"
 import AngeboteneHilfe from "./components/AngeboteneHilfe"
 import Konto from "./components/Konto"
 import Error from "./components/Error"
+import BenutzerBearbeiten from "./components/BenutzerBearbeiten"
+import HilfsanzeigeBearbeiten from "./components/HilfsanzeigeBearbeiten"
 
 
 const App = () => {
@@ -27,6 +29,8 @@ const App = () => {
                   <Route path="/anzeige-erstellen" element={<AnzeigeErstellen />} exact/>
                   <Route path="/angebotene-hilfe" element={<AngeboteneHilfe />}/>
                   <Route path="/konto" element={<Konto />}/>
+                  <Route path="/benutzerbearbeiten/:benutzerId" element={<BenutzerBearbeiten />}/>
+                  <Route path="/hilfsanzeigebearbeiten/:helpId" element={<HilfsanzeigeBearbeiten/>}/>
                   <Route element={<Error />}/>
               </Routes>
             </div>

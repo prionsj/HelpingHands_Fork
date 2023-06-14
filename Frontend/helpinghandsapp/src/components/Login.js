@@ -37,6 +37,7 @@ export const Login = () => {
         );
         if (matchingBenutzer) {
             setShowPopup(false);
+            localStorage.setItem('username', nutzername);
             navigate("/hilfsanzeigen");
         } else {
             setShowPopup(true);
