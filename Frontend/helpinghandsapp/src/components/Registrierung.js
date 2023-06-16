@@ -1,7 +1,7 @@
 
 import {useNavigate, NavLink} from "react-router-dom";
 import React, { useEffect,useState } from "react";
-import logo from "./static/HelpingHands.png"
+import logo from "./static/HelpingHandsWhite.png"
 import Modal from 'react-modal';
 
 
@@ -83,112 +83,131 @@ const Registrierung = () => {
 
     return (
       <div className="registrieren-page">
-      <div className="logo-picture">
-        <img className="logo" src={logo} />
-      </div>
-      <h2>Registrieren</h2>
+          <div className="logo-container">
+              <div className="logo-picture">
+                  <img className="logo" src={logo}/>
+              </div>
+              <p className="logo-description">
+                  Registrierung
+              </p>
+          </div>
       <form className="register-form">
         <div className="name_container">
-          <label htmlFor="name">Vorname</label>
-          <br />
-          <input
-            placeholder="Vorname"
-            className="name"
-            value={vorname}
-            onChange={(e) => setVorname(e.target.value)}
-          />
-          <br />
-          <label htmlFor="name">Nachname</label>
-          <br />
-          <input
-            placeholder="Nachname"
-            className="name"
-            value={nachname}
-            onChange={(e) => setNachname(e.target.value)}
-          />
+            <div className="name_labels">
+                <label htmlFor="name" className="name">Vorname</label>
+                <label htmlFor="name" className="name">Nachname</label>
+            </div>
+            <div className="name_inputs">
+                <input
+                    placeholder="Max"
+                    className="name"
+                    value={vorname}
+                    onChange={(e) => setVorname(e.target.value)}
+                />
+                <input
+                    placeholder="Mustermann"
+                    className="name"
+                    value={nachname}
+                    onChange={(e) => setNachname(e.target.value)}
+                />
+            </div>
         </div>
         <div className="adress_container">
-          <label htmlFor="name">Straße</label>
-          <br />
-          <input
-            placeholder="Mustermannstraße"
-            className="otherField"
-            value={straße}
-            onChange={(e) => setStraße(e.target.value)}
-          />
-          <br />
-          <label htmlFor="name">Hausnummer</label>
-          <br />
-          <input
-            placeholder="1"
-            className="otherField"
-            value={hausnummer}
-            onChange={(e) => setHausnummer(e.target.value)}
-          />
-          <br />
-          <label htmlFor="name">Plz</label>
-          <br />
-          <input
-            placeholder="78048"
-            className="otherField"
-            value={postleitzahl}
-            onChange={(e) => setPostleitzahl(e.target.value)}
-          />
-          <br />
-          <label htmlFor="name">Stadt</label>
-          <br />
-          <input
-            placeholder="Musterstadt"
-            className="otherField"
-            value={stadt}
-            onChange={(e) => setStadt(e.target.value)}
-          />
+            <div className="adress_labels">
+                <label htmlFor="street" className="street">Straße</label>
+                <label htmlFor="number" className="number">Nr.</label>
+            </div>
+            <div className="adress_inputs">
+                <input
+                    placeholder="Mustermannstraße"
+                    className="street"
+                    value={straße}
+                    onChange={(e) => setStraße(e.target.value)}
+                />
+                <input
+                    placeholder="15"
+                    className="number"
+                    value={hausnummer}
+                    onChange={(e) => setHausnummer(e.target.value)}
+                />
+            </div>
+            <div className="adress_labels">
+                <label htmlFor="plz" className="plz">Plz</label>
+                <label htmlFor="city" className="city">Stadt</label>
+            </div>
+            <div className="adress_inputs">
+                <input
+                    placeholder="78048"
+                    className="plz"
+                    value={postleitzahl}
+                    onChange={(e) => setPostleitzahl(e.target.value)}
+                />
+                <input
+                    placeholder="Musterstadt"
+                    className="city"
+                    value={stadt}
+                    onChange={(e) => setStadt(e.target.value)}
+                />
+            </div>
         </div>
         <div className="mail_container">
-          <label htmlFor="email">E-Mail</label>
-          <br />
-          <input
-            placeholder="E-mail"
-            className="otherField"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <div className="email_label">
+                <label htmlFor="email" className="email">E-Mail</label>
+            </div>
+            <div className="email_input">
+                <input
+                    placeholder="max.mustermann@gmail.com"
+                    className="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </div>
         </div>
-        <div>
-          <label htmlFor="email">Telefonnummer</label>
-          <br />
-          <input
-            placeholder="015637383"
-            className="otherField"
-            value={telefon}
-            onChange={(e) => setTelefon(e.target.value)}
-          />
+        <div className="phone_container">
+            <div className="phone_label">
+                <label htmlFor="phone" className="phone">Telefonnummer</label>
+            </div>
+            <div className="phone_input">
+                <input
+                    placeholder="015637383"
+                    className="phone"
+                    value={telefon}
+                    onChange={(e) => setTelefon(e.target.value)}
+                />
+            </div>
         </div>
         <div className="username_container">
-          <label htmlFor="username">Username</label>
-          <br />
-          <input
-            placeholder="max.mustermann"
-            className="otherField"
-            value={nutzername}
-            onChange={(e) => setNutzername(e.target.value)}
-          />
+            <div className="username_label">
+                <label htmlFor="username" className="username">Username</label>
+            </div>
+            <div className="username_input">
+                <input
+                    placeholder="max.mustermann"
+                    className="username"
+                    value={nutzername}
+                    onChange={(e) => setNutzername(e.target.value)}
+                />
+            </div>
         </div>
         <div className="pw_container">
-          <label htmlFor="password">Passwort</label>
-          <br />
-          <input
-            placeholder="Password"
-            className="otherField"
-            type="password"
-            value={passwort}
-            onChange={(e) => setPasswort(e.target.value)}
-        
-          />
+            <div className="pw_label">
+                <label htmlFor="password" className="pw">Passwort</label>
+            </div>
+            <div className="pw_input">
+                <input
+                    placeholder="*******"
+                    className="pw"
+                    type="password"
+                    value={passwort}
+                    onChange={(e) => setPasswort(e.target.value)}
+                />
+            </div>
         </div>
-        <button onClick={handleSubmit} type="submit">
-          Registrieren
-        </button>
+        <div className="register-button">
+            <button onClick={handleSubmit} type="submit">
+                Registrieren
+            </button>
+        </div>
       </form>
         {showPopup && (
             <Modal
@@ -216,18 +235,6 @@ const Registrierung = () => {
               <h2>Für die Registrierung müssen alle Datenfelder ausgefüllt werden.</h2>
             </Modal>
         )}
-      {console.log(
-        vorname,
-        nachname,
-        straße,
-        hausnummer,
-        postleitzahl,
-        stadt,
-        email,
-        telefon,
-        nutzername,
-        passwort
-      )}
     </div>
 
     )

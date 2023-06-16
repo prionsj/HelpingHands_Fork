@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import Navigation from "./Navigation";
-import logo from "./static/HelpingHands.png";
+import logo from "./static/HelpingHandsWhite.png";
 import {NavLink} from "react-router-dom";
 
 const AnzeigeErstellen = () => {
@@ -50,7 +50,7 @@ const AnzeigeErstellen = () => {
                 </div>
                 <p className="logo-description double">
                     <div className="logo-description-title">Du brauchst Hilfe?</div>
-                    <div className="logo-description-title"> Erstelle deinen Antrag und finde Hilfe in deiner Stadt! </div>
+                    <div className="logo-description-title"> Erstelle deinen Antrag und finde Hilfe! </div>
                 </p>
             </div>
             <form className="helping-form">
@@ -65,7 +65,7 @@ const AnzeigeErstellen = () => {
                     </div>
                     <div>
                         <select className="form-select category" aria-label="Default select example" value={kategorie} onChange={(e) => setKategorie(e.target.value)}>
-                            <option selected>Kategorie</option>
+                            <option selected>Alle Kategorien</option>
                             <option value="Garten">Garten</option>
                             <option value="Betreuung">Betreuung</option>
                             <option value="Tierpflege">Tierpflege</option>
@@ -90,16 +90,16 @@ const AnzeigeErstellen = () => {
                             onChange={(e) => setZeitraum(e.target.value)}
                         />
                     </div>
-                    <div>
-                        <input
+                    <div className="textarea">
+                        <textarea rows="4" cols="48"
                             placeholder="Beschreibung"
                             value={beschreibung}
                             className="description-input"
                             onChange={(e) => setBeschreibung(e.target.value)}
-                        />
+                        ></textarea>
                     </div>
                     <div className="submit-button">
-                        <button onClick={handleSubmit} type="submit">
+                        <button onClick={handleSubmit} type="submit" className="submit-button">
                             <NavLink to="/hilfsanzeigen">Hilfsantrag veröffentlichen</NavLink>
                         </button>
                     </div>

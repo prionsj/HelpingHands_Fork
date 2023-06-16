@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import Navigation from "./Navigation";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import Modal from 'react-modal';
+import logo from "./static/HelpingHandsWhite.png";
 
 const CloseButton = ({ onClick }) => (
   <button
@@ -103,8 +104,16 @@ const handleBearbeiten2 = (helpId) => {
               if (benutzer.nutzername === nutzername)  {
                 return (
                   <div className="container">
+                      <div className="logo-container">
+                          <div className="logo-picture">
+                              <img className="logo" src={logo}/>
+                          </div>
+                          <p className="logo-description">
+                              Dein Konto
+                          </p>
+                      </div>
                     <div className="header">
-                      <h1>Mein Konto</h1>
+                      <h1>Benutzerdaten</h1>
                     </div>
                     <div className="box-container">
                       <div className="box Vorname">
@@ -119,40 +128,42 @@ const handleBearbeiten2 = (helpId) => {
                         <strong>Straße:</strong> {benutzer.straße}
                       </div>
                       <div className="box Hausnummer">
-                        <strong>Hausnummer:</strong> {benutzer.hausnummer}
+                        <strong>Nr.:</strong> {benutzer.hausnummer}
                       </div>
                     </div>
                     <div className="box-container">
                       <div className="box Postleitzahl">
-                        <strong>Postleitzahl:</strong> {benutzer.postleitzahl}
+                        <strong>PLZ:</strong> {benutzer.postleitzahl}
                       </div>
                       <div className="box Stadt">
                         <strong>Stadt:</strong> {benutzer.stadt}
                       </div>
                     </div>
-                    <div className="box Email">
-                      <strong>Email:</strong> {benutzer.email}
+                    <div className="box-container">
+                        <div className="box Email">
+                          <strong>Email:</strong> {benutzer.email}
+                        </div>
                     </div>
-                    <div className="box Telefon">
-                      <strong>Telefon:</strong> {benutzer.telefon}
+                    <div className="box-container">
+                        <div className="box Telefon">
+                          <strong>Telefon:</strong> {benutzer.telefon}
+                        </div>
                     </div>
-                    <div className="box Nutzername">
-                      <strong>Nutzername:</strong> {benutzer.nutzername}
+                    <div className="box-container">
+                        <div className="box Nutzername">
+                          <strong>Nutzername:</strong> {benutzer.nutzername}
+                        </div>
                     </div>
-                    <div className="actions">
-                                                
-                                          <button onClick={() => handleBearbeiten(benutzer._id)}>Bearbeiten
-                                               
-                                        </button>
-                                        <button onClick={deleteUserConfirmation}>
-                                          Löschen
-                                        </button>
-                <button className="action edit">
-                                          <NavLink
-                                            to={`/`}>
-                                            Abmelden
-                                          </NavLink>             
-                                        </button>
+                    <div className="konto-buttons">
+                      <button className="konto-button"
+                              onClick={() => handleBearbeiten(benutzer._id)}>Bearbeiten
+                      </button>
+                      <button className="konto-button"
+                          onClick={deleteUserConfirmation}>Löschen
+                      </button>
+                      <button className="konto-button logout">
+                        <NavLink to={`/`}>Abmelden</NavLink>
+                      </button>
 
                             {showPopup && (
                                 <Modal
@@ -191,7 +202,9 @@ const handleBearbeiten2 = (helpId) => {
                                             </div>
                     <hr></hr>
                     <ol className="hilfsanzeigen">
-                    <h1>Meine Hilfsanzeigen</h1>
+                        <div className="header">
+                            <h1>Meine Hilfsanzeigen</h1>
+                        </div>
                 {
                     helps && helps.map((help, index)=> {
                         if (help.nutzername === nutzername)
@@ -221,10 +234,10 @@ const handleBearbeiten2 = (helpId) => {
                                                 </li>
                                             </div>
                                             <div className="actions">
-                                            <button onClick={() => handleBearbeiten2(help._id)}>Bearbeiten
+                                            <button className="konto-button hilfsanzeige-bearbeiten" onClick={() => handleBearbeiten2(help._id)}>Bearbeiten
                                                
                                                </button>
-                                               <button onClick={() => deleteHelps(help._id)}>
+                                               <button className="konto-button" onClick={() => deleteHelps(help._id)}>
                                                 Löschen
                                               </button>
                                              

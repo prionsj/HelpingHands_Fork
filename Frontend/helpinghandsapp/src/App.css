@@ -3,13 +3,22 @@ html {
   height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
+  background: snow;
+}
+
+body {
+  color: #0d0d40;
+  background: snow;
+}
+
+#root {
+  background: snow;
 }
 
 
 /* NAVIGATION */
 nav {
-  color: grey;
-  background-color: grey;
+  background-color: #0d0d40;
   text-align: center;
 }
 
@@ -28,17 +37,17 @@ nav ul {
 }
 
 nav li:hover, .nav-link.active {
-  background-color: rgb(220, 220, 220);
+  background-color: rgba(13, 13, 64, 0.1);
 
   border: 0px solid white;
-  border-bottom-width: 3px;
+  border-bottom-width: 5px;
 
-  color: black;
+  color: snow;
 }
 
 .nav {
   flex-wrap: unset;
-  --bs-nav-link-hover-color: black;
+  --bs-nav-link-hover-color: snow;
   height: 100px;
 }
 
@@ -73,7 +82,7 @@ nav li:hover, .nav-link.active {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  background: lightgray;
+  background: #0d0d40;
 }
 
 .logo-picture {
@@ -87,7 +96,7 @@ nav li:hover, .nav-link.active {
 .logo-description {
   display: flex;
   justify-content: center;
-  color: #0d0d40;
+  color: snow;
   margin-top: -20px;
 }
 
@@ -119,6 +128,15 @@ nav li:hover, .nav-link.active {
   border: none;
   margin: 0;
   padding: 10px;
+  background-color: rgba(13, 13, 64, 0.1);
+  color: #0d0d40;
+}
+
+.form-control:focus {
+  outline: none !important;
+  background-color: rgba(13, 13, 64, 0.1);
+  box-shadow: 0 0 10px #0d0d40;
+  color: #0d0d40;
 }
 
 .category-container {
@@ -130,6 +148,14 @@ nav li:hover, .nav-link.active {
 
 .form-select {
   width: 308px;
+  background-color: rgba(13, 13, 64, 0.1);
+  color: #0d0d40;
+}
+
+.form-select:focus {
+  outline: none !important;
+  background-color: rgba(13, 13, 64, 0.1);
+  box-shadow: 0 0 10px #0d0d40;
 }
 
 .no-entry {
@@ -140,10 +166,14 @@ nav li:hover, .nav-link.active {
 }
 
 .card {
-  width: 350px;
+  width: 320px;
   margin-top: 10px;
-  background: lightgray;
+  background-color: rgba(13, 13, 64, 0.1);
   padding: 2px;
+}
+
+.list-entry {
+  background-color: rgba(13, 13, 64, 0.1);
 }
 
 .hilfsanzeigen {
@@ -165,26 +195,28 @@ nav li:hover, .nav-link.active {
 .hilfsanzeigen li {
   margin: 0;
 
-  background-color: rgba(250, 250, 250, .8);
+  background-color: rgba(13, 13, 64, 0.01);
 
   border-bottom-width: 1px;
 }
 
 .hilfsanzeigen .titel {
   padding-left: 5px;
-  color: black;
+  color: #0d0d40;
   font-weight: bold;
   font-size: 20px;
+  background-color: rgba(13, 13, 64, 0.01);
 }
 
 .hilfsanzeigen .beschreibung {
   padding-left: 5px;
+  background-color: rgba(13, 13, 64, 0.01);
+  color: #0d0d40;
 }
 
 .hilfsanzeigen ul{
   padding-left: 0;
   align-content: center;
-  background: lightgray;
 }
 
 .hilfsanzeigen ul li {
@@ -192,6 +224,7 @@ nav li:hover, .nav-link.active {
   display: flex;
   flex-direction: row;
   padding-left: 5px;
+  color: #0d0d40;
 }
 
 .zeitpunkt, .standort, .kategorie {
@@ -203,13 +236,13 @@ nav li:hover, .nav-link.active {
   display: flex;
   justify-content: center;
   align-content: center;
-  background: lightgray;
+  background-color: rgba(13, 13, 64, 0.1);
   width: auto
 }
 
 .hilfsanzeigen .actions > div {
 
-  background-color: rgb(220, 220, 220);
+  background-color: rgba(13, 13, 64, 0.1);
   transition: background-color 0.5s;
 
   flex: 1;
@@ -222,10 +255,18 @@ nav li:hover, .nav-link.active {
   align-items: center;
 }
 
+.actions:hover {
+  color: snow;
+}
+
 .action.edit {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.edit:hover {
+  color: snow;
 }
 
 .hilfsanzeigen .actions > div:first-child {
@@ -237,8 +278,9 @@ nav li:hover, .nav-link.active {
 }
 
 .hilfsanzeigen .actions > div:hover {
-  background-color: darkgray;
   cursor: pointer;
+  background-color: #0d0d40;
+  color: snow;
 }
 
 .hilfsanzeigen ol ul {
@@ -249,11 +291,15 @@ nav li:hover, .nav-link.active {
   position: relative;
   display: inline-block;
   text-decoration: none;
-  color: black;
+  color: #0d0d40;
+}
 
+.anfrage:hover {
+  color: snow;
 }
 
 /* LOGIN */
+
 
 .logo-picture{
 
@@ -261,16 +307,16 @@ nav li:hover, .nav-link.active {
   text-align: center;
 
 }
-.logo {
-  width: 125px;
-  margin-top: 0;
+.login.logo {
+  width: 200px;
+  margin-top: 20px;
   background-position: top;
 }
 
 .login-page, .login-form, .register-form {
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 255, 255);
+  background: #FFFAFA;
 }
 .login-page{
   padding: 0;
@@ -278,75 +324,213 @@ nav li:hover, .nav-link.active {
   border-radius: 10px;
   margin: 0 auto;
 }
+
 input {
   margin: 0.5rem ;
   padding: 1rem;
   border:rgb(9, 9, 9);
   border-radius: 10px;
-  background-color: rgb(236, 237, 238);
+  background-color: rgba(13, 13, 64, 0.1);
+  color: #0d0d40;
 }
+
+input::placeholder{
+  color: #0d0d40;
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px #0d0d40;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 button {
   margin: 10px;
-  background-color: rgb(167, 192, 246);
   border: rgb(9, 9, 9);
+  background-color: #0d0d40;
   padding: 20px;
+  width: 200px;
   border-radius: 10px;
   cursor: pointer;
   color: #ffffff;
 }
+
+button:hover {
+  background-color: rgba(13, 13, 64, 0.1);
+  color: #0d0d40;
+}
+
 .link-btn {
   background: none;
   color: rgb(10, 10, 10);
   text-decoration: underline;
   margin:0;
 }
+
+.link-btn a {
+  color: #0d0d40;
+  text-decoration: unset;
+}
+
+.link-btn:hover {
+  background-color: unset;
+}
+
+.register-now {
+  display: flex;
+  justify-content: center;
+}
+
 label {
   text-align: left;
-  padding: 0.25rem 0;
 }
 
 /* Registrieren */
 .registrieren-page{
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 255, 255);
-  margin: 20px;
+  background-color: snow;
+}
+
+.register-form {
+  margin-top: 20px;
+}
+
+.name_labels, .adress_labels, .email_label, .phone_label, .username_label, .pw_label {
+  display: flex;
+  justify-content: center;
+}
+
+label.name, label.number, label.street, label.plz, label.city, label.email, label.phone, label.username, label.pw {
+  margin-left: 15px;
+}
+
+.name_inputs, .adress_inputs, .email_input, .phone_input, .username_input, .pw_input {
+  display: flex;
+  justify-content: center;
+}
+
+.name {
+  width: 160px;
+}
+
+.street {
+  width: 260px;
+}
+
+.number {
+  width: 60px;
+}
+
+.plz {
+  width: 80px;
+}
+
+.city {
+  width: 240px;
+}
+
+.email, .phone, .username, .pw {
+  width: 336px;
+}
+
+.register-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 /* Konto */
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 
 .header {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .box-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   margin-bottom: 10px;
 }
 
 .box{
   border: 1px solid #ccc;
+  box-shadow: 0 0 5px #0d0d40;
   border-radius: 6px;
   padding: 10px;
-  flex-basis: calc(50% - 5px);
+}
 
+.Vorname, .Nachname {
+  width: 160px;
+}
+
+.Straße {
+  width: 240px;
+}
+
+.Hausnummer {
+  width: 80px;
+}
+
+.Postleitzahl {
+  width: 110px;
+}
+
+.Stadt {
+  width: 210px;
+}
+
+.Email, .Telefon, .Nutzername {
+  width: 330px;
+}
+
+.konto-button {
+  width: 100px;
+  padding: 10px;
+}
+
+.logout > a{
+  text-decoration: none;
+  color: snow;
+}
+
+.logout > a:hover{
+  color: #0d0d40;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 330px;
 }
 
 
 h2 {
   margin-top: 10px; /* Füge etwas Abstand oberhalb der kleinen Überschrift hinzu */
+}
+
+.konto-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.hilfsanzeige-bearbeiten {
+  width: 110px;
 }
 
 /* Anzeige erstellen */
@@ -386,6 +570,46 @@ h2 {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.submit-button > button > a {
+  color: snow;
+  text-decoration: none;
+
+}
+
+.submit-button > button > a:hover {
+  color: #0d0d40;
+
+}
+
+textarea {
+  background-color: rgba(13, 13, 64, 0.1);
+  border: transparent;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  color: #0d0d40;
+}
+
+.description-input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 10px #0d0d40;
+}
+
+.textarea {
+  display: flex;
+  justify-content: center;
+}
+
+/* Angebotene Hilfe */
+
+.kontakt {
+  text-decoration: underline;
+  background-color: rgba(13, 13, 64, 0.1);
+  padding-left: 5px;
+  color: #0d0d40;
 }
 
 

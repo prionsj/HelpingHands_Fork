@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import Navigation from "./Navigation";
-import logo from "./static/HelpingHands.png";
+import logo from "./static/HelpingHandsWhite.png";
 
 const AngeboteneHilfe = () => {
 
@@ -61,7 +61,7 @@ const AngeboteneHilfe = () => {
                                                 <div className="stadt titel">
                                                     {angebot.standort}: {angebot.titel}
                                                 </div>
-                                                <div className="beschreibung">
+                                                <div className="kontakt">
                                                     Kontaktdaten des Hilfesuchenden:
                                                 </div>
                                                 <ul>

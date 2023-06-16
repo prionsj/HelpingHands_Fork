@@ -64,14 +64,11 @@ export const Login = () => {
 
         <div className="login-page">
             <div className="logo-picture">
-                <img className="logo" src={logo} alt="Logo" />
+                <img className="login logo" src={logo} alt="Logo" />
             </div>
-            <p className="logo-description">
-                <h2>Anmelden</h2>
-            </p>
 
             <form className="login-form">
-                <label htmlFor="nutzername">Nutzername</label>
+                <label htmlFor="nutzername">Benutzername</label>
                 <input
                     value={nutzername}
                     onChange={(e) => setNutzername(e.target.value)}
@@ -89,10 +86,11 @@ export const Login = () => {
                     id="passwort"
                     name="passwort"
                 />
-
-                <button onClick={handleLogin}>
-                    Anmelden
-                </button>
+                <div className="login-button">
+                    <button onClick={handleLogin}>
+                        Anmelden
+                    </button>
+                </div>
             </form>
             {showPopup && (
                 <Modal
@@ -120,12 +118,14 @@ export const Login = () => {
                     <h2>Benutzername oder Passwort ist inkorrekt</h2>
                 </Modal>
             )}
-            <button className="link-btn">
-                <NavLink to="/Registrierung">
-                    Noch kein Konto?
-                    <br></br>Jetzt registrieren
-                </NavLink>
-            </button>
+            <div className="register-now">
+                <button className="link-btn">
+                    <NavLink to="/Registrierung">
+                        Noch kein Konto?
+                        <br></br>Jetzt registrieren
+                    </NavLink>
+                </button>
+            </div>
         </div>
     );
 };

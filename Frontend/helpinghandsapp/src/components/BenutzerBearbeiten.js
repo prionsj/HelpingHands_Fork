@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import logo from "./static/HelpingHandsWhite.png";
 
 
 
@@ -64,114 +65,148 @@ const BenutzerBearbeiten = () => {
   return (
     <div>
       {benutzer && (
-        <form>
-          {/* Benutzerdaten bearbeiten */}
-          <h2>Bearbeite deine Daten</h2>
-
-          <div className="form-field">
-            <label htmlFor="vorname">Vorname</label>
-            <input
-              type="text"
-              name="vorname"
-              defaultValue={benutzer.vorname}
-              onChange={handleInputChange}
-            />
+          <div>
+          <div className="logo-container">
+            <div className="logo-picture">
+              <img className="logo" src={logo}/>
+            </div>
+            <p className="logo-description">
+              Bearbeite deine Benutzerdaten
+            </p>
+          </div>
+        <form  className="register-form">
+          <div className="name_container">
+            <div className="name_labels">
+              <label htmlFor="name" className="name">Vorname</label>
+              <label htmlFor="name" className="name">Nachname</label>
+            </div>
+            <div className="name_inputs">
+              <input
+                  type="text"
+                  name="name"
+                  className="name"
+                  defaultValue={benutzer.vorname}
+                  onChange={handleInputChange}
+              />
+              <input
+                  type="text"
+                  name="name"
+                  className="name"
+                  defaultValue={benutzer.nachname}
+                  onChange={handleInputChange}
+              />
+            </div>
           </div>
 
-          <div className="form-field">
-            <label htmlFor="nachname">Nachname</label>
-            <input
-              type="text"
-              name="nachname"
-              defaultValue={benutzer.nachname}
-              onChange={handleInputChange}
-            />
+          <div className="adress_container">
+            <div className="adress_labels">
+              <label htmlFor="street" className="street">Straße</label>
+              <label htmlFor="number" className="number">Nr.</label>
+            </div>
+            <div className="adress_inputs">
+              <input
+                  type="text"
+                  name="street"
+                  className="street"
+                  defaultValue={benutzer.straße}
+                  onChange={handleInputChange}
+              />
+              <input
+                  type="text"
+                  name="number"
+                  className="number"
+                  defaultValue={benutzer.hausnummer}
+                  onChange={handleInputChange}
+              />
+            </div>
+            <div className="adress_labels">
+              <label htmlFor="plz" className="plz">Plz</label>
+              <label htmlFor="city" className="city">Stadt</label>
+            </div>
+            <div className="adress_inputs">
+              <input
+                  type="text"
+                  name="plz"
+                  className="plz"
+                  defaultValue={benutzer.postleitzahl}
+                  onChange={handleInputChange}
+              />
+              <input
+                  type="text"
+                  name="city"
+                  className="city"
+                  defaultValue={benutzer.stadt}
+                  onChange={handleInputChange}
+              />
+            </div>
           </div>
 
-          <div className="form-field">
-            <label htmlFor="straße">Straße</label>
-            <input
-              type="text"
-              name="straße"
-              defaultValue={benutzer.straße}
-              onChange={handleInputChange}
-            />
+          <div className="mail_container">
+            <div className="email_label">
+              <label htmlFor="email" className="email">E-Mail</label>
+            </div>
+            <div className="email_input">
+              <input
+                  type="text"
+                  name="email"
+                  className="email"
+                  defaultValue={benutzer.email}
+                  onChange={handleInputChange}
+              />
+            </div>
           </div>
 
-          <div className="form-field">
-            <label htmlFor="hausnummer">Hausnummer</label>
-            <input
-              type="text"
-              name="hausnummer"
-              defaultValue={benutzer.hausnummer}
-              onChange={handleInputChange}
-            />
+          <div className="phone_container">
+            <div className="phone_label">
+              <label htmlFor="phone" className="phone">Telefonnummer</label>
+            </div>
+            <div className="phone_input">
+              <input
+                  type="text"
+                  name="phone"
+                  className="phone"
+                  defaultValue={benutzer.telefon}
+                  onChange={handleInputChange}
+              />
+            </div>
           </div>
 
-          <div className="form-field">
-            <label htmlFor="postleitzahl">Plz</label>
-            <input
-              type="text"
-              name="postleitzahl"
-              defaultValue={benutzer.postleitzahl}
-              onChange={handleInputChange}
-            />
+          <div className="username_container">
+            <div className="username_label">
+              <label htmlFor="username" className="username">Username</label>
+            </div>
+            <div className="username_input">
+              <input
+                  type="text"
+                  name="username"
+                  className="username"
+                  defaultValue={benutzer.nutzername}
+                  onChange={handleInputChange}
+              />
+            </div>
           </div>
 
-          <div className="form-field">
-            <label htmlFor="stadt">Stadt</label>
-            <input
-              type="text"
-              name="stadt"
-              defaultValue={benutzer.stadt}
-              onChange={handleInputChange}
-            />
+          <div className="pw_container">
+            <div className="pw_label">
+              <label htmlFor="password" className="pw">Passwort</label>
+            </div>
+            <div className="pw_input">
+              <input
+                  type="password"
+                  name="password"
+                  className="pw"
+                  defaultValue={benutzer.passwort}
+                  onChange={handleInputChange}
+              />
+            </div>
           </div>
-
-          <div className="form-field">
-            <label htmlFor="email">E-Mail</label>
-            <input
-              type="text"
-              name="email"
-              defaultValue={benutzer.email}
-              onChange={handleInputChange}
-            />
+          <div className="register-button">
+            <button onClick={handleSubmit} type="submit">
+              Speichern
+            </button>
           </div>
-
-          <div className="form-field">
-            <label htmlFor="telefon">Telefon</label>
-            <input
-              type="text"
-              name="telefon"
-              defaultValue={benutzer.telefon}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="form-field">
-            <label htmlFor="nutzername">Nutzername</label>
-            <input
-              type="text"
-              name="nutzername"
-              defaultValue={benutzer.nutzername}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="form-field">
-            <label htmlFor="password">Passwort</label>
-            <input
-              type="password"
-              name="passwort"
-              defaultValue={benutzer.passwort}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <button onClick={handleSubmit} type="submit">
-            Speichern
-          </button>
         </form>
+          </div>
       )}
     </div>
   );
