@@ -73,9 +73,8 @@ const Registrierung = () => {
          email === '' ||
          telefon === '' ||
          nutzername === '' ||
-         passwort === '' ||
-         matchingNutzername ||
-         matchingEmail
+         passwort === '' 
+
      ) {
        setShowPopup(true);
      } else if (matchingNutzername || matchingEmail) {
