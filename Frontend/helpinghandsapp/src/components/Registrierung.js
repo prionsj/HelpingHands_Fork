@@ -37,10 +37,32 @@ const Registrierung = () => {
     const [nutzername, setNutzername] = useState('');
     const [passwort, setPasswort] = useState('');
     const [showPopup, setShowPopup] = useState(false);
+    const [benutzer, setBenutzer] = useState('')
+    const [showPopup2, setShowPopup2] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch('http://localhost:3001/benutzer')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setBenutzer(data);
+
+            }).catch((err) => {
+            console.log(err.message);
+        });
+    }, []);
 
    const handleSubmit = async (e) => {
     e.preventDefault();
+       const matchingNutzername = benutzer.find(
+           (benutzer) =>
+               benutzer.nutzername === nutzername
+       );
+       const matchingEmail = benutzer.find(
+           (benutzer) =>
+               benutzer.email === email
+       )
      if (
          vorname === '' ||
          nachname === '' ||
@@ -51,11 +73,16 @@ const Registrierung = () => {
          email === '' ||
          telefon === '' ||
          nutzername === '' ||
-         passwort === ''
+         passwort === '' ||
+         matchingNutzername ||
+         matchingEmail
      ) {
        setShowPopup(true);
+     } else if (matchingNutzername || matchingEmail) {
+         setShowPopup2(true)
      } else {
        setShowPopup(false);
+       setShowPopup2(false)
        const response = await fetch('http://localhost:3001/benutzer', {
          method: 'POST',
          body:
@@ -235,6 +262,32 @@ const Registrierung = () => {
               <h2>Für die Registrierung müssen alle Datenfelder ausgefüllt werden.</h2>
             </Modal>
         )}
+          {showPopup2 && (
+              <Modal
+                  isOpen={true}
+                  onRequestClose={() => setShowPopup2(false)}
+                  shouldCloseOnOverlayClick={false}
+                  style={{
+                      content: {
+                          width: "300px",
+                          height: "400px",
+                          margin: "auto",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "red",
+                          border: "2px solid red",
+                      },
+                      overlay: {
+                          background: "rgba(0, 0, 0, 0.5)",
+                      },
+                  }}
+              >
+                  <CloseButton onClick={() => setShowPopup2(false)} />
+                  <h2>Der Benutzername oder die Email wurde bereits zur Registrierung verwendet.</h2>
+              </Modal>
+          )}
     </div>
 
     )
