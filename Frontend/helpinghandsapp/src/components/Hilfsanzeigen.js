@@ -23,7 +23,7 @@ const CloseButton = ({ onClick }) => (
     </button>
 );
 
-const Hilfsanzeigen = () => {
+export const Hilfsanzeigen = () => {
 
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);

@@ -5,7 +5,7 @@ import logo from "./static/HelpingHandsWhite.png"
 import Modal from 'react-modal';
 
 
-const Registrierung = () => {
+export const Registrierung = () => {
 
   const CloseButton = ({ onClick }) => (
       <button
@@ -37,7 +37,7 @@ const Registrierung = () => {
     const [nutzername, setNutzername] = useState('');
     const [passwort, setPasswort] = useState('');
     const [showPopup, setShowPopup] = useState(false);
-    const [benutzer, setBenutzer] = useState('')
+    const [benutzer, setBenutzer] = useState([]);
     const [showPopup2, setShowPopup2] = useState(false);
     const navigate = useNavigate();
 
@@ -45,11 +45,11 @@ const Registrierung = () => {
         fetch('http://localhost:3001/benutzer')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 setBenutzer(data);
 
             }).catch((err) => {
-            console.log(err.message);
+            //console.log(err.message);
         });
     }, []);
 
@@ -101,7 +101,7 @@ const Registrierung = () => {
          headers: {
            'Content-Type': 'application/json'
          }
-       }).then(res => console.log(res));
+       })//.then(res => console.log(res));
        navigate("/");
      }
    }

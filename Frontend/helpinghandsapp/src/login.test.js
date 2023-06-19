@@ -2,6 +2,11 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Login } from "./components/Login.js";
 import { MemoryRouter } from 'react-router-dom';
+import Modal from 'react-modal';
+
+// Definiere hier das App-Element für react-modal
+Modal.setAppElement(document.createElement('div'));
+
 
 describe("Login Component", () => {
   test("renders login form", () => {
@@ -37,7 +42,6 @@ describe("Login Component", () => {
     expect(screen.getByText("Benutzername oder Passwort ist inkorrekt")).toBeInTheDocument();
   });
 
-  // Weitere Tests hinzufügen, falls nötig
 });
 
 
