@@ -1,23 +1,51 @@
 {
+  "type": "module",
   "name": "helpinghands-backend",
   "version": "1.0.0",
   "description": "HelpingHands: Backend",
   "author": "Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions",
   "license": "CC-BY-4.0",
   "main": "src/index.js",
-  "type": "module",
+
   "scripts": {
     "start": "nodemon --legacy-watch --inspect=0.0.0.0:9230 src/index.js",
     "mongo-start": "docker run -d --name mongodb-benutzer -p 27016:27016 mongo",
-    "mongo-stop": "docker stop mongodb; docker container rm mongodb"
+    "mongo-stop": "docker stop mongodb; docker container rm mongodb",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[jt]sx?$": "babel-jest",
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!.*\\.(js|jsx)$)",
+      "\\.png$"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+
+    },
+    "testEnvironment": "jsdom",
+    "type": "module"
   },
   "dependencies": {
     "@dschulmeis/restify-openapi-enforcer-middleware": "^1.0.2",
     "mongodb": "^4.4.0",
+    "node-mocks-http": "^1.12.2",
     "openapi-enforcer": "^1.17.0",
-    "restify": "^8.6.1"
+    "restify": "^8.6.1",
+    "test": "^3.3.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
+    "@testing-library/react": "^14.0.0",
+    "babel-jest": "^29.5.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "nodemon": "^2.0.15"
   }
 }
