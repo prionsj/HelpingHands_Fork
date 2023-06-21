@@ -41,7 +41,7 @@ Anwendung im Entwicklungs- oder Produktivmodus gestartet werden kann:
      3. Backend-Hilfsanzeigen (erreichbar auf http://localhost:3000)
      4. MongoDB-Benutzer (172.18.0.5db://localhost:27016)
      5. MongoGUI-Benutzer (erreichbar auf http://localhost:8082)
-     6. Backend-Bnutzer (erreichbar auf http://localhost:3001)
+     6. Backend-Benutzer (erreichbar auf http://localhost:3001)
      7. Frontend (erreichbar auf http://localhost:8080)
 
  Das Backend führt den lokalen Quellcode in einer einfachen
