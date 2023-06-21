@@ -5,19 +5,41 @@
   "author": "Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions",
   "license": "CC-BY-4.0",
   "main": "src/index.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon --legacy-watch --inspect=0.0.0.0:9229 src/index.js",
     "mongo-start": "docker run -d --name mongodb-hilfsanzeigen -p 27017:27017 mongo",
-    "mongo-stop": "docker stop mongodb; docker container rm mongodb"
+    "mongo-stop": "docker stop mongodb; docker container rm mongodb",
+    "test": "jest"
   },
   "dependencies": {
     "@dschulmeis/restify-openapi-enforcer-middleware": "^1.0.2",
-    "mongodb": "^4.4.0",
     "openapi-enforcer": "^1.17.0",
     "restify": "^8.6.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
+    "babel-jest": "^29.5.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^27.5.1",
+    "jest-mock": "^29.5.0",
+    "mongodb": "^5.6.0",
     "nodemon": "^2.0.15"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "testMatch": [
+      "**/*.test.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
   }
 }
