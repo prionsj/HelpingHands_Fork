@@ -66,9 +66,8 @@ werden, wenn die Images neu erstellt werden. Dies kann entweder in den
 jeweiligen Verzeichnissen manuell oder durch Neustarten von Docker Compose
 erreicht werden.
 
-Ebenso sind die meisten Services in dieser Version von Außen nicht mehr
-erreichbar, sondern hinter einem Gateway-Server versteckt. Die Architektur
-sieht somit in etwa so aus:
+Architektur:
+
 
 ```mermaid
 graph LR
