@@ -48,9 +48,6 @@ Anwendung im Entwicklungs- oder Produktivmodus gestartet werden kann:
  Node.js-Laufzeitumgebung aus. Änderungen werden dadurch sofort aktiv, wobei
  sich das Backend bei einer Änderung automatisch neustartet. --> frontend, react??
 
-
- ab hier nochmal genau überprüfen
-
  * `docker-compose.prod.yml`: Produktivmodus mit folgenden Diensten:
 
      1. MongoDB (von Außen nicht erreichbar)
