@@ -4,23 +4,37 @@ import { useNavigate, NavLink } from "react-router-dom";
 import Modal from 'react-modal';
 
 const CloseButton = ({ onClick }) => (
-  <button
-    style={{
-      position: "absolute",
-      top: "10px",
-      right: "10px",
-      border: "none",
-      background: "transparent",
-      cursor: "pointer",
-      fontSize: "20px",
-      fontWeight: "bold",
-      color: "red",
-    }}
-    onClick={onClick}
-  >
-    &times;
-  </button>
+    <button
+        style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "red",
+        }}
+        onClick={onClick}
+    >
+        &times;
+    </button>
 );
+
+// Ausgelagerte handleLogin-Funktion
+export const handleLogin = (nutzername, passwort, benutzer, navigate, setShowPopup) => {
+    const matchingBenutzer = benutzer.find(
+        (benutzer) => benutzer.nutzername === nutzername && benutzer.passwort === passwort
+    );
+    if (matchingBenutzer) {
+        setShowPopup(false);
+        localStorage.setItem('username', nutzername);
+        navigate("/hilfsanzeigen");
+    } else {
+        setShowPopup(true);
+    }
+};
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -28,21 +42,6 @@ export const Login = () => {
     const [passwort, setPasswort] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [benutzer, setBenutzer] = useState([]);
-
-    const handleLogin = (e) => {
-        e.preventDefault();
-        const matchingBenutzer = benutzer.find(
-            (benutzer) =>
-                benutzer.nutzername === nutzername && benutzer.passwort === passwort
-        );
-        if (matchingBenutzer) {
-            setShowPopup(false);
-            localStorage.setItem('username', nutzername);
-            navigate("/hilfsanzeigen");
-        } else {
-            setShowPopup(true);
-        }
-    };
 
     useEffect(() => {
         fetch("http://localhost:3001/benutzer")
@@ -53,7 +52,7 @@ export const Login = () => {
             })
             .catch((err) => {
                 console.log(err.message);
-        });
+            });
     }, []);
 
     useEffect(() => {
@@ -61,7 +60,6 @@ export const Login = () => {
     }, [nutzername]);
 
     return (
-
         <div className="login-page">
             <div className="logo-picture">
                 <img className="login logo" src={logo} alt="Logo" />
@@ -87,7 +85,7 @@ export const Login = () => {
                     name="passwort"
                 />
                 <div className="login-button">
-                    <button onClick={handleLogin}>
+                    <button onClick={(e) => handleLogin(e, nutzername, passwort, benutzer, navigate, setShowPopup)}>
                         Anmelden
                     </button>
                 </div>
