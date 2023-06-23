@@ -18,9 +18,9 @@
         "replace_variables_extensions": ".htm; .html"
     },
     "devDependencies": {
+        "cypress": "^12.15.0",
         "esbuild": "^0.14.23",
         "esbuild-plugin-less": "^1.1.6",
         "shelljs": "^0.8.5"
-    },
-    "dependencies": {}
+    }
 }

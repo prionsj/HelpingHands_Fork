@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "helpinghands-backend",
   "version": "1.0.0",
   "description": "HelpingHands: Backend",

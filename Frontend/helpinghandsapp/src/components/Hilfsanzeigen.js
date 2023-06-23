@@ -156,7 +156,7 @@ export const Hilfsanzeigen = () => {
                                                 </li>
                                                 <li>
                                                     <div className="kategorie">Kategorie:</div>
-                                                    {help.kategorie}
+                                                    <div className="category">{help.kategorie} </div>
                                                 </li>
                                             </div>
                                             <div className="actions">
