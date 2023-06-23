@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { handleLogin } from '../src/components/Login';
+import 'jest-localstorage-mock';
 
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),

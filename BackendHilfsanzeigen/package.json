@@ -37,7 +37,7 @@
       "node_modules"
     ],
     "testMatch": [
-      "**/*.test.js"
+      "**/tests/**/*.test.js"
     ],
     "transform": {
       "^.+\\.js$": "babel-jest"

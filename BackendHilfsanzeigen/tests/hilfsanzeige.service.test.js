@@ -1,8 +1,8 @@
 const { ObjectId } = require("mongodb");
-import HilfsanzeigeService from "./hilfsanzeige.service";
-import { database } from "../database";
+import HilfsanzeigeService from "../src/service/hilfsanzeige.service";
+import { database } from "../src/database";
 
-jest.mock("../database", () => ({
+jest.mock("../src/database", () => ({
   database: {
     collection: jest.fn(),
   },
@@ -60,10 +60,10 @@ describe("HilfsanzeigeService", () => {
           toArray: jest.fn().mockReturnValue([]),
         };
         mockCollection.find.mockReturnValue(mockCursor);
-  
+
         const query = { kategorie: "Nonexistent" };
         const result = await service.search(query);
-  
+
         expect(mockCollection.find).toHaveBeenCalledWith(query, {
           sort: {
             titel: 1,
@@ -72,7 +72,7 @@ describe("HilfsanzeigeService", () => {
         expect(mockCursor.toArray).toHaveBeenCalled();
         expect(result).toEqual([]);
       });
-  
+
       test("should return Hilfsanzeigen in the expected order", async () => {
         // Mocking der MongoDB find-Methode
         const mockCursor = {
@@ -82,10 +82,10 @@ describe("HilfsanzeigeService", () => {
           ]),
         };
         mockCollection.find.mockReturnValue(mockCursor);
-  
+
         const query = { kategorie: "Test" };
         const result = await service.search(query);
-  
+
         expect(mockCollection.find).toHaveBeenCalledWith(query, {
           sort: {
             titel: 1,
@@ -103,10 +103,10 @@ describe("HilfsanzeigeService", () => {
           toArray: jest.fn().mockReturnValue([]),
         };
         mockCollection.find.mockReturnValue(mockCursor);
-  
+
         const query = {};
         const result = await service.search(query);
-  
+
         expect(mockCollection.find).toHaveBeenCalledWith(query, {
           sort: {
             titel: 1,
@@ -188,7 +188,7 @@ describe("HilfsanzeigeService", () => {
       });
       expect(result).toBeNull();
     });
-    
+
   });
 
   describe("read", () => {
@@ -225,14 +225,14 @@ describe("HilfsanzeigeService", () => {
       });
       expect(result).toBeNull();
     });
-  
+
       test("should handle non-existent Hilfsanzeige with the given ID", async () => {
         const nonExistentId = new ObjectId().toHexString();
-  
+
         mockCollection.findOne.mockReturnValue(null);
-  
+
         const result = await service.read(nonExistentId);
-  
+
         expect(mockCollection.findOne).toHaveBeenCalledWith({
           _id: new ObjectId(nonExistentId),
         });
@@ -298,7 +298,7 @@ describe("HilfsanzeigeService", () => {
       expect(mockCollection.updateOne).not.toHaveBeenCalled();
       expect(result).toBeUndefined();
     });
-  
+
       test("should handle non-existent Hilfsanzeige with the given ID", async () => {
         const nonExistentId = new ObjectId().toHexString();
         const hilfsanzeige = {
@@ -310,11 +310,11 @@ describe("HilfsanzeigeService", () => {
           standort: "Neuer Standort",
           nutzername: "Neuer Nutzername",
         };
-  
+
         mockCollection.findOne.mockReturnValue(null);
-  
+
         const result = await service.update(nonExistentId, hilfsanzeige);
-  
+
         expect(mockCollection.findOne).toHaveBeenCalledWith({
           _id: new ObjectId(nonExistentId),
         });
@@ -333,12 +333,12 @@ describe("HilfsanzeigeService", () => {
           standort: "Neuer Standort",
           nutzername: "Neuer Nutzername",
         };
-    
+
         // Mocking der MongoDB findOne-Methode
         mockCollection.findOne.mockReturnValueOnce(hilfsanzeige).mockReturnValueOnce(null);
-    
+
         const result = await service.update(id, hilfsanzeige);
-    
+
         expect(mockCollection.findOne).toHaveBeenCalledWith({
           _id: new ObjectId(id),
         });
@@ -392,19 +392,19 @@ describe("HilfsanzeigeService", () => {
       expect(result).toEqual(mockDeleteResult.deletedCount);
     });
 
-  
+
       test("should handle non-existent Hilfsanzeige with the given ID", async () => {
         const nonExistentId = new ObjectId().toHexString();
-  
+
         mockCollection.deleteOne.mockReturnValue({ deletedCount: 0 });
-  
+
         const result = await service.delete(nonExistentId);
-  
+
         expect(mockCollection.deleteOne).toHaveBeenCalledWith({
           _id: new ObjectId(nonExistentId),
         });
         expect(result).toEqual(0);
       });
-  
+
   });
 });

@@ -105,19 +105,6 @@ services:
  #       deploy:
  #           replicas: 2
 
-    # Gateway-Server
-    gateway:
-        depends_on:
-            - backend-benutzer
-            - backend-hilfsanzeigen
-            - frontend
-        build:
-            context: ./Gateway
-        restart: always
-        ports:
-            - 8080:81
-            - 8080:82
-
 volumes:
     dbdatahilfsanzeigen:
     dbconfighilfsanzeigen:
