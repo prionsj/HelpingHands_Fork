@@ -39,21 +39,18 @@ Anwendung im Entwicklungs- oder Produktivmodus gestartet werden kann:
      1. MongoDB-Hilfsanzeigen (mongodb://localhost:27017)
      2. MongoGUI-Hilfsanzeigen (erreichbar auf http://localhost:8081)
      3. Backend-Hilfsanzeigen (erreichbar auf http://localhost:3000)
-     4. MongoDB-Benutzer (172.18.0.5db://localhost:27016)
+     4. MongoDB-Benutzer (mongodb://localhost:27016)
      5. MongoGUI-Benutzer (erreichbar auf http://localhost:8082)
      6. Backend-Benutzer (erreichbar auf http://localhost:3001)
      7. Frontend (erreichbar auf http://localhost:8080)
 
  Das Backend führt den lokalen Quellcode in einer einfachen
  Node.js-Laufzeitumgebung aus. Änderungen werden dadurch sofort aktiv, wobei
- sich das Backend bei einer Änderung automatisch neustartet. --> frontend, react??
+ sich das Backend bei einer Änderung automatisch neustartet. 
 
- * `docker-compose.prod.yml`: Produktivmodus mit folgenden Diensten:
+ Beim Frontend handelt es sich um eine Webanwendung, die mit JavaScript und zusätzlich dem modernen Framework react realisiert wurde.
 
-     1. MongoDB (von Außen nicht erreichbar)
-     2. Backend (von Außen nicht erreichbar)
-     3. Frontend (von Außen nicht erreichbar)
-     4. Gateway (erreichbar auf http://localhost:8080)
+ * `docker-compose.prod.yml`: Produktivmodus mit denselben Diensten wie im Entwicklungsmodus.
 
 Im Unterschied zum Entwicklungsmodus werden hier anhand der in den jeweiligen
 Verzeichnissen abgelegten Datei `Dockerfile` eigenständige Container Images
