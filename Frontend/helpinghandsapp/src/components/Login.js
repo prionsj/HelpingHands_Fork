@@ -85,9 +85,10 @@ export const Login = () => {
                     name="passwort"
                 />
                 <div className="login-button">
-                    <button onClick={(e) => handleLogin(e, nutzername, passwort, benutzer, navigate, setShowPopup)}>
-                        Anmelden
-                    </button>
+                <button onClick={() => handleLogin(nutzername, passwort, benutzer, navigate, setShowPopup)}>
+                    Anmelden
+                </button>
+
                 </div>
             </form>
             {showPopup && (
