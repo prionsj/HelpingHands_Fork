@@ -29,26 +29,19 @@ jobs:
       - name: Run tests
         run: npm run test
 
-
-
       - name: Build Docker containers
         run: docker-compose build
 
       - name: Start Docker containers
         run: docker-compose -f docker-compose.yml up -d
 
+      - name: Build Frontend
+        working-directory: Frontend
+        run: npm run build
 
       - name: Build frontend_helpinghandsapp
         working-directory: Frontend/helpinghandsapp
         run: |
           npm install
           npm run build
-
-
-   #   - name: Build project
-   #     run: |
-   #       if [[ -f "yarn.lock" ]]; then
-   #         yarn build
-   #       else
-   #         npm run build
-   #       fi 
+          
