@@ -38,11 +38,11 @@ jobs:
         run: docker-compose -f docker-compose.yml up -d
 
 
-#      - name: Build frontend_helpinghandsapp
- #       working-directory: Frontend/helpinghandsapp
-  #      run: |
-   #       npm install
-    #      npm run build
+      - name: Build frontend_helpinghandsapp
+        working-directory: Frontend/helpinghandsapp
+        run: |
+          npm install
+          npm run build
 
 
    #   - name: Build project
