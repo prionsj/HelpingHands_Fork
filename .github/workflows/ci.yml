@@ -35,9 +35,9 @@ jobs:
       - name: Start Docker containers
         run: docker-compose -f docker-compose.yml up -d
 
-      - name: Build Frontend
-        working-directory: Frontend
-        run: npm run build
+ #     - name: Build Frontend
+  #      working-directory: Frontend
+   #     run: npm run build
 
       - name: Build frontend_helpinghandsapp
         working-directory: Frontend/helpinghandsapp
