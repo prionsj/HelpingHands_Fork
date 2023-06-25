@@ -23,7 +23,8 @@ const CloseButton = ({ onClick }) => (
 );
 
 // Ausgelagerte handleLogin-Funktion
-export const handleLogin = (nutzername, passwort, benutzer, navigate, setShowPopup) => {
+export const handleLogin = (event, nutzername, passwort, benutzer, navigate, setShowPopup) => {
+    event.preventDefault()
     const matchingBenutzer = benutzer.find(
         (benutzer) => benutzer.nutzername === nutzername && benutzer.passwort === passwort
     );
@@ -85,7 +86,7 @@ export const Login = () => {
                     name="passwort"
                 />
                 <div className="login-button">
-                <button onClick={() => handleLogin(nutzername, passwort, benutzer, navigate, setShowPopup)}>
+                <button onClick={(event) => handleLogin(event, nutzername, passwort, benutzer, navigate, setShowPopup)}>
                     Anmelden
                 </button>
 

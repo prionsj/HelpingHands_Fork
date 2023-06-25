@@ -20,18 +20,24 @@ describe('Handle Login', () => {
     const navigateMock = jest.fn();
     useNavigate.mockReturnValue(navigateMock);
 
-    handleLogin('user1', 'pass1', benutzer, navigateMock, jest.fn());
+    const eventMock = { preventDefault: jest.fn() };
 
+    handleLogin(eventMock, 'user1', 'pass1', benutzer, navigateMock, jest.fn());
+
+    expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(navigateMock).toHaveBeenCalledWith('/hilfsanzeigen');
-    // Weitere Assertions für localStorage.setItem
+    // Additional assertions for localStorage.setItem
   });
 
   test('should handle login with incorrect credentials', () => {
     const navigateMock = jest.fn();
     const setShowPopupMock = jest.fn();
 
-    handleLogin('wronguser', 'wrongpass', benutzer, navigateMock, setShowPopupMock);
+    const eventMock = { preventDefault: jest.fn() };
 
+    handleLogin(eventMock, 'wronguser', 'wrongpass', benutzer, navigateMock, setShowPopupMock);
+
+    expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
     expect(setShowPopupMock).toHaveBeenCalledWith(true);
   });
@@ -40,8 +46,11 @@ describe('Handle Login', () => {
     const navigateMock = jest.fn();
     const setShowPopupMock = jest.fn();
 
-    handleLogin('', '', benutzer, navigateMock, setShowPopupMock);
+    const eventMock = { preventDefault: jest.fn() };
 
+    handleLogin(eventMock, '', '', benutzer, navigateMock, setShowPopupMock);
+
+    expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
     expect(setShowPopupMock).toHaveBeenCalledWith(true);
   });
@@ -50,8 +59,11 @@ describe('Handle Login', () => {
     const navigateMock = jest.fn();
     const setShowPopupMock = jest.fn();
 
-    handleLogin('user1', 'wrongpass', benutzer, navigateMock, setShowPopupMock);
+    const eventMock = { preventDefault: jest.fn() };
 
+    handleLogin(eventMock, 'user1', 'wrongpass', benutzer, navigateMock, setShowPopupMock);
+
+    expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
     expect(setShowPopupMock).toHaveBeenCalledWith(true);
   });
@@ -60,8 +72,11 @@ describe('Handle Login', () => {
     const navigateMock = jest.fn();
     const setShowPopupMock = jest.fn();
 
-    handleLogin('wronguser', 'pass1', benutzer, navigateMock, setShowPopupMock);
+    const eventMock = { preventDefault: jest.fn() };
 
+    handleLogin(eventMock, 'wronguser', 'pass1', benutzer, navigateMock, setShowPopupMock);
+
+    expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
     expect(setShowPopupMock).toHaveBeenCalledWith(true);
   });
@@ -70,8 +85,11 @@ describe('Handle Login', () => {
     const navigateMock = jest.fn();
     const setShowPopupMock = jest.fn();
 
-    handleLogin('user1', '', benutzer, navigateMock, setShowPopupMock);
+    const eventMock = { preventDefault: jest.fn() };
 
+    handleLogin(eventMock, 'user1', '', benutzer, navigateMock, setShowPopupMock);
+
+    expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
     expect(setShowPopupMock).toHaveBeenCalledWith(true);
   });
@@ -80,9 +98,13 @@ describe('Handle Login', () => {
     const navigateMock = jest.fn();
     const setShowPopupMock = jest.fn();
 
-    handleLogin('', 'pass1', benutzer, navigateMock, setShowPopupMock);
+    const eventMock = { preventDefault: jest.fn() };
 
+    handleLogin(eventMock, '', 'pass1', benutzer, navigateMock, setShowPopupMock);
+
+    expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
     expect(setShowPopupMock).toHaveBeenCalledWith(true);
   });
+
 });

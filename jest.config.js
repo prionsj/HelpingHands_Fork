@@ -4,6 +4,7 @@ module.exports = {
       "^.+\\.jsx?$": "babel-jest",
     },
     "testEnvironment": "node",
+    maxWorkers: 1,
     "moduleFileExtensions": [
         "js",
         "jsx"

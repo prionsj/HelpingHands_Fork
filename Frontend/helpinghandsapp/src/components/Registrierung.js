@@ -1,47 +1,99 @@
 
-import {useNavigate, NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import React, { useEffect,useState } from "react";
 import logo from "./static/HelpingHandsWhite.png"
 import Modal from 'react-modal';
 
-const CloseButton = ({ onClick }) => (
-    <button
-        style={{
-          position: "absolute",
-          top: "10px",
-          right: "10px",
-          border: "none",
-          background: "transparent",
-          cursor: "pointer",
-          fontSize: "20px",
-          fontWeight: "bold",
-          color: "red",
-        }}
-        onClick={onClick}
-    >
-      &times;
-    </button>
 
-    
-);
+export const handleRegistration = async (event, benutzer, vorname, nachname, straße, hausnummer, postleitzahl, stadt, email,
+                                          telefon, nutzername, passwort, navigate, setShowPopup, setShowPopup2) => {
+    event.preventDefault()
+    const matchingNutzername = benutzer.find(
+        (benutzer) =>
+            benutzer.nutzername === nutzername
+    );
+    const matchingEmail = benutzer.find(
+        (benutzer) =>
+            benutzer.email === email
+    )
+    if (
+        vorname === '' ||
+        nachname === '' ||
+        straße === '' ||
+        hausnummer === '' ||
+        postleitzahl === '' ||
+        stadt === '' ||
+        email === '' ||
+        telefon === '' ||
+        nutzername === '' ||
+        passwort === ''
+
+    ) {
+        setShowPopup(true);
+    } else if (matchingNutzername || matchingEmail) {
+        setShowPopup2(true)
+    } else {
+        setShowPopup(false);
+        setShowPopup2(false)
+        const response = await fetch('http://localhost:3001/benutzer', {
+            method: 'POST',
+            body:
+                JSON.stringify({
+                    "vorname": vorname,
+                    "nachname": nachname,
+                    "straße": straße,
+                    "hausnummer": hausnummer,
+                    "postleitzahl": postleitzahl,
+                    "stadt": stadt,
+                    "email": email,
+                    "telefon": telefon,
+                    "nutzername": nutzername,
+                    "passwort": passwort,
+                }),
+
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })//.then(res => console.log(res));
+        navigate("/");
+    }
+};
+
 export const Registrierung = () => {
-const [vorname, setVorname] = useState('');
-const [nachname, setNachname] = useState('');
-const [straße, setStraße] = useState('');
-const [hausnummer, setHausnummer] = useState('');
-const [postleitzahl, setPostleitzahl] = useState('');
-const [stadt, setStadt] = useState('');
-const [email, setEmail] = useState('');
-const [telefon, setTelefon] = useState('');
-const [nutzername, setNutzername] = useState('');
-const [passwort, setPasswort] = useState('');
-const [showPopup, setShowPopup] = useState(false);
-const [benutzer, setBenutzer] = useState([]);
-const [showPopup2, setShowPopup2] = useState(false);
-const navigate = useNavigate();
 
+  const CloseButton = ({ onClick }) => (
+      <button
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "red",
+          }}
+          onClick={onClick}
+      >
+        &times;
+      </button>
+  );
 
-
+    const [vorname, setVorname] = useState('');
+    const [nachname, setNachname] = useState('');
+    const [straße, setStraße] = useState('');
+    const [hausnummer, setHausnummer] = useState('');
+    const [postleitzahl, setPostleitzahl] = useState('');
+    const [stadt, setStadt] = useState('');
+    const [email, setEmail] = useState('');
+    const [telefon, setTelefon] = useState('');
+    const [nutzername, setNutzername] = useState('');
+    const [passwort, setPasswort] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [benutzer, setBenutzer] = useState([]);
+    const [showPopup2, setShowPopup2] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:3001/benutzer')
@@ -54,63 +106,6 @@ const navigate = useNavigate();
             //console.log(err.message);
         });
     }, []);
-
-
-  
-
- const handleRegistration = async (e) => {
-    e.preventDefault();
-       const matchingNutzername = benutzer.find(
-           (benutzer) =>
-               benutzer.nutzername === nutzername
-       );
-       const matchingEmail = benutzer.find(
-           (benutzer) =>
-               benutzer.email === email
-       )
-     if (
-         vorname === '' ||
-         nachname === '' ||
-         straße === '' ||
-         hausnummer === '' ||
-         postleitzahl === '' ||
-         stadt === '' ||
-         email === '' ||
-         telefon === '' ||
-         nutzername === '' ||
-         passwort === '' 
-
-     ) {
-       setShowPopup(true);
-     } else if (matchingNutzername || matchingEmail) {
-         setShowPopup2(true)
-     } else {
-       setShowPopup(false);
-       setShowPopup2(false)
-       const response = await fetch('http://localhost:3001/benutzer', {
-         method: 'POST',
-         body:
-             JSON.stringify({
-               "vorname": vorname,
-               "nachname": nachname,
-               "straße": straße,
-               "hausnummer": hausnummer,
-               "postleitzahl": postleitzahl,
-               "stadt": stadt,
-               "email": email,
-               "telefon": telefon,
-               "nutzername": nutzername,
-               "passwort": passwort,
-             }),
-
-         headers: {
-           'Content-Type': 'application/json'
-         }
-       })//.then(res => console.log(res));
-       navigate("/");
-     }
-   }
-
 
     return (
       <div className="registrieren-page">
@@ -235,7 +230,8 @@ const navigate = useNavigate();
             </div>
         </div>
         <div className="register-button">
-            <button onClick={handleRegistration} type="submit">
+            <button onClick={(event) => handleRegistration(event, benutzer, vorname, nachname, straße, hausnummer, postleitzahl, stadt,
+                email, telefon, nutzername, passwort, navigate, setShowPopup, setShowPopup2)} type="submit">
                 Registrieren
             </button>
         </div>
@@ -296,9 +292,7 @@ const navigate = useNavigate();
 
     )
   }
-
-
     
-  Registrierung.handleRegistration = handleRegistration;
+   
 
 export default Registrierung;
