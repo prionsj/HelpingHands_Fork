@@ -30,4 +30,9 @@ jobs:
         run: npm run test
 
       - name: Build project
-        run: npm run build
+        run: |
+          if [[ -f "yarn.lock" ]]; then
+            yarn build
+          else
+            npm run build
+          fi 
