@@ -11,7 +11,7 @@
     "start": "nodemon --legacy-watch --inspect=0.0.0.0:9230 src/index.js",
     "mongo-start": "docker run -d --name mongodb-benutzer -p 27016:27016 mongo",
     "mongo-stop": "docker stop mongodb; docker container rm mongodb",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "jest": {
     "transform": {

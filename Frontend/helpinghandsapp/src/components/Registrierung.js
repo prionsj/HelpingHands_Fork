@@ -4,42 +4,44 @@ import React, { useEffect,useState } from "react";
 import logo from "./static/HelpingHandsWhite.png"
 import Modal from 'react-modal';
 
+const CloseButton = ({ onClick }) => (
+    <button
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          border: "none",
+          background: "transparent",
+          cursor: "pointer",
+          fontSize: "20px",
+          fontWeight: "bold",
+          color: "red",
+        }}
+        onClick={onClick}
+    >
+      &times;
+    </button>
 
+    
+);
 export const Registrierung = () => {
+const [vorname, setVorname] = useState('');
+const [nachname, setNachname] = useState('');
+const [straße, setStraße] = useState('');
+const [hausnummer, setHausnummer] = useState('');
+const [postleitzahl, setPostleitzahl] = useState('');
+const [stadt, setStadt] = useState('');
+const [email, setEmail] = useState('');
+const [telefon, setTelefon] = useState('');
+const [nutzername, setNutzername] = useState('');
+const [passwort, setPasswort] = useState('');
+const [showPopup, setShowPopup] = useState(false);
+const [benutzer, setBenutzer] = useState([]);
+const [showPopup2, setShowPopup2] = useState(false);
+const navigate = useNavigate();
 
-  const CloseButton = ({ onClick }) => (
-      <button
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontSize: "20px",
-            fontWeight: "bold",
-            color: "red",
-          }}
-          onClick={onClick}
-      >
-        &times;
-      </button>
-  );
 
-    const [vorname, setVorname] = useState('');
-    const [nachname, setNachname] = useState('');
-    const [straße, setStraße] = useState('');
-    const [hausnummer, setHausnummer] = useState('');
-    const [postleitzahl, setPostleitzahl] = useState('');
-    const [stadt, setStadt] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefon, setTelefon] = useState('');
-    const [nutzername, setNutzername] = useState('');
-    const [passwort, setPasswort] = useState('');
-    const [showPopup, setShowPopup] = useState(false);
-    const [benutzer, setBenutzer] = useState([]);
-    const [showPopup2, setShowPopup2] = useState(false);
-    const navigate = useNavigate();
+
 
     useEffect(() => {
         fetch('http://localhost:3001/benutzer')
@@ -53,7 +55,10 @@ export const Registrierung = () => {
         });
     }, []);
 
-   const handleSubmit = async (e) => {
+
+  
+
+ const handleRegistration = async (e) => {
     e.preventDefault();
        const matchingNutzername = benutzer.find(
            (benutzer) =>
@@ -230,7 +235,7 @@ export const Registrierung = () => {
             </div>
         </div>
         <div className="register-button">
-            <button onClick={handleSubmit} type="submit">
+            <button onClick={handleRegistration} type="submit">
                 Registrieren
             </button>
         </div>
@@ -291,7 +296,9 @@ export const Registrierung = () => {
 
     )
   }
+
+
     
-   
+  Registrierung.handleRegistration = handleRegistration;
 
 export default Registrierung;

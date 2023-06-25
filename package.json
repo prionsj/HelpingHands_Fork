@@ -2,28 +2,27 @@
   "dependencies": {
     "@babel/preset-react": "^7.16.7",
     "@dschulmeis/restify-openapi-enforcer-middleware": "^1.0.2",
-    "jose": "^4.14.4",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "jest-localstorage-mock": "^2.4.26",
+    "jose": "^4.14.4",
     "mongodb": "^5.6.0",
     "node-mocks-http": "^1.12.2",
     "openapi-enforcer": "^1.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.13.0",
     "react-scripts": "^5.0.1",
-    "restify": "^8.6.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
-    "react-modal": "^3.16.1",
     "react-test-renderer": "^18.2.0",
+    "restify": "^8.6.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "test": "jest --config=jest.config.js"
   },
-
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
