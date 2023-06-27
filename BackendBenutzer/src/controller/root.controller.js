@@ -33,7 +33,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
      /**
       * GET /:
-      * Übersicht über die vorhandenen Collections liefern (HATEOAS-Prinzip,
+      * Liefert eine Übersicht über die vorhandenen Collections (HATEOAS-Prinzip,
       * so dass Clients die URL-Struktur des Webservices entdecken können).
       * 
       * @param {Object} req Anfrageobjekt
