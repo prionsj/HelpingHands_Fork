@@ -2,9 +2,11 @@ import React from 'react';
 import { mount } from '@cypress/react18';
 import { MemoryRouter } from 'react-router-dom';
 import Hilfsanzeigen from './Hilfsanzeigen';
-import "../App.css"
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+
+import "../App.css"
 
 describe('testing filter function of <Hilfsanzeigen />', () => {
 

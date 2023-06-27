@@ -128,7 +128,12 @@ export const Hilfsanzeigen = () => {
                     </select>
                 </div>
                 <ol className="hilfsanzeigen">
-                {
+                {helps.length === 0 ? (
+                    <div className="no-hilfsanzeigen">
+                        <p>Keine Hilfsanzeigen gefunden.</p>
+                    </div>
+                ) : (
+
                     helps && helps.map((help, index)=> {
                         if (
                             (help.standort === selectedStandort || !selectedStandort) &&
@@ -170,9 +175,15 @@ export const Hilfsanzeigen = () => {
                                     </li>
                                 </div>
                             </div>
-                        )}
+                        )} else {
+                            return (
+                                <div className="no-hilfsanzeigen">
+                                    <p>Keine Hilfsanzeigen gefunden.</p>
+                                </div>
+                            )
+                        }
                     })
-                }
+                )}
                 </ol>
                 {showPopup && (
                     <Modal
