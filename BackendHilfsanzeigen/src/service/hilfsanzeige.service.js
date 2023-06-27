@@ -73,7 +73,7 @@ export default class HilfsanzeigeService {
 
   /**
   * Aktualisierung einer Hilfsanzeige, durch Überschreiben einzelner Felder
-  * oder des gesamten Hilfsanzeige-Objektes (ohne die ID).
+  * oder des gesamten Hilfsanzeige-Objektes. Die ID wird hierbei nicht geändert.
   *
   * @param {String} id ID der gesuchten Hilfsanzeige
   * @param {[type]} rezept Zu speichernde Hilfsanzeigedaten
