@@ -8,23 +8,26 @@ const AnzeigeErstellen = () => {
 
     const CloseButton = ({ onClick }) => (
         <button
-            style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                border: "none",
-                background: "transparent",
-                cursor: "pointer",
-                fontSize: "20px",
-                fontWeight: "bold",
-                color: "red",
-            }}
-            onClick={onClick}
+          style={{
+            position: 'relative',
+            top: '-20px',
+            right: '-20px',
+            border: 'none',
+            background: 'transparent',
+            cursor: 'pointer',
+            fontSize: '20px',
+            fontWeight: 'bold',
+            color: 'red',
+          }}
+          onClick={onClick}
+          className="close-button"
         >
-            &times;
+          &times;
         </button>
-    );
-
+      );
+      
+      
+      
     const [titel, setTitel] = useState('')
     const [beschreibung, setBeschreibung] = useState('')
     const [kategorie, setKategorie] = useState('')
@@ -138,30 +141,35 @@ const AnzeigeErstellen = () => {
                 </div>
             </form>
             {showPopup && (
-                <Modal
-                    isOpen={true}
-                    onRequestClose={() => setShowPopup(false)}
-                    shouldCloseOnOverlayClick={false}
-                    style={{
-                        content: {
-                            width: "300px",
-                            height: "400px",
-                            margin: "auto",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            color: "red",
-                            border: "2px solid red",
-                        },
-                        overlay: {
-                            background: "rgba(0, 0, 0, 0.5)",
-                        },
-                    }}
-                >
-                    <CloseButton onClick={() => setShowPopup(false)} />
-                    <h2>Um eine Hilfsanzeige zu veröffentlichen müssen mindestens der Titel, der Standort und die Beschreibung ausgefüllt werden.</h2>
-                </Modal>
+        <Modal
+        isOpen={true}
+        onRequestClose={() => setShowPopup(false)}
+        shouldCloseOnOverlayClick={false}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+          content: {
+            width: '300px',
+            height: '400px',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'red',
+            background: 'white',
+            border: '2px solid red',
+          },
+        }}
+        className="popup"
+      >
+        <CloseButton onClick={() => setShowPopup(false)} />
+        <h2>Um eine Hilfsanzeige zu veröffentlichen müssen mindestens der Titel, der Standort und die Beschreibung ausgefüllt werden.</h2>
+      </Modal>
             )}
         </div>
     )
