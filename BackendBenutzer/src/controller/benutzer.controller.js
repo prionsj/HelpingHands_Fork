@@ -58,9 +58,9 @@ export default class BenutzerController {
   * GET /benutzer
   * Benutzer suchen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async search(req, res, next) {
@@ -74,9 +74,9 @@ export default class BenutzerController {
   * POST /benutzer
   * Neue Benutzer anlegen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async create(req, res, next) {
@@ -92,9 +92,9 @@ export default class BenutzerController {
   * GET /benutzer/:id
   * Benutzer mit der angegebenen ID auslesen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async read(req, res, next) {
@@ -113,9 +113,9 @@ export default class BenutzerController {
   * PATCH /benutzer/:id
   * Benutzer mit der angegebenen ID ändern
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async update(req, res, next) {
@@ -133,9 +133,9 @@ export default class BenutzerController {
   * DELETE /benutzer/:id
   * Benutzer mit der angegebenen ID löschen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async delete(req, res, next) {
