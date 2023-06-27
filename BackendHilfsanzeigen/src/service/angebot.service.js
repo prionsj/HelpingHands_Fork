@@ -39,8 +39,8 @@ export default class AngebotService {
   /**
   * Speichern eines neuen Angebots.
   *
-  * @param {Object} angebot Zu speichernder Angebotdaten
-  * @return {Promise} Gespeicherter Angebotdaten
+  * @param {Object} angebot Zu speichernde Angebotsdaten
+  * @return {Promise} Gespeicherte Angebotsdaten
   */
 
   async create(angebot) {
@@ -58,10 +58,10 @@ export default class AngebotService {
   }
 
   /**
-  * Auslesen eines vorhandenen Angeboten anhand seiner ID.
+  * Auslesen eines vorhandenen Angebots anhand seiner ID.
   *
   * @param {String} id ID des gesuchten Angebots
-  * @return {Promise} Gefundener Angebotdaten
+  * @return {Promise} Gefundene Angebotsdaten
   */
 
   async read(id) {
