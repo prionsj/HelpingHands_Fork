@@ -58,9 +58,9 @@ export default class HilfsanzeigeController {
   * GET /hilfsanzeige
   * Hilfsanzeige suchen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async search(req, res, next) {
@@ -74,9 +74,9 @@ export default class HilfsanzeigeController {
   * POST /hilfsanzeige
   * Neue Hilfsanzeige anlegen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async create(req, res, next) {
@@ -92,9 +92,9 @@ export default class HilfsanzeigeController {
   * GET /hilfsanzeige/:id
   * Hilfsanzeige mit der angegebenen ID auslesen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async read(req, res, next) {
@@ -113,9 +113,9 @@ export default class HilfsanzeigeController {
   * PATCH /hilfsanzeige/:id
   * Hilfsanzeige mit der angegebenen ID ändern
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async update(req, res, next) {
@@ -133,9 +133,9 @@ export default class HilfsanzeigeController {
   * DELETE /hilfsanzeige/:id
   * Hilfsanzeige mit der angegebenen ID löschen
   *
-  * @param {Object} req
-  * @param {Object} res
-  * @param {Object} next
+  * @param {Object} req Anfrageobjekt
+  * @param {Object} res Antwortobjekt
+  * @param {Object} next Nächster Handler
   */
 
   async delete(req, res, next) {
