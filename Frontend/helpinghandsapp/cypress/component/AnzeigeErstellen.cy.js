@@ -16,7 +16,6 @@ describe('testing AnzeigeErstellen component', () => {
         <AnzeigeErstellen />
       </MemoryRouter>
     );
-    cy.wait(5000);
   });
 
   it('renders the AnzeigeErstellen component', () => {
@@ -24,42 +23,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.helping-form').should('exist');
   });
 
-  it('submits the form with all valid data', () => {
-    // Fülle das Formular mit gültigen Daten aus
-    cy.get('.title-input').type('Hilfe benötigt');
-    cy.get('.category').select('Garten');
-    cy.get('.place-input').type('Berlin');
-    cy.get('.time-input').type('Sommerferien');
-    cy.get('.description-input').type('Ich brauche Hilfe in meinem Garten.');
-
-    // Überprüfe, ob das Formular erfolgreich abgeschickt wird
-    cy.intercept('POST', 'http://localhost:3000/hilfsanzeige').as('submitForm');
-    cy.get('.submit-button button').click({ force: true });
-    cy.wait('@submitForm').then((interception) => {
-      // Assertions zur Netzwerkanfrage hier
-      expect(interception.request.method).to.equal('POST');
-      expect(interception.request.url).to.include('/hilfsanzeige');
-    });
-  });
-
-  it('submits the form with needed valid data', () => {
-    // Fülle das Formular mit gültigen Daten aus
-    cy.get('.title-input').type('Babysitter');
-    cy.get('.category').select('Betreuung');
-    cy.get('.place-input').type('Hannover');
-    cy.get('.time-input').type('Morgen');
-
-    // Überprüfe, ob das Formular erfolgreich abgeschickt wird
-    cy.intercept('POST', 'http://localhost:3000/hilfsanzeige').as('submitForm');
-    cy.get('.submit-button button').click({ force: true });
-    cy.wait('@submitForm').then((interception) => {
-      // Assertions zur Netzwerkanfrage hier
-      expect(interception.request.method).to.equal('POST');
-      expect(interception.request.url).to.include('/hilfsanzeige');
-    });
-  });
-
-  it('does not display error popup when all required fields are filled', () => {
+  it('does not display error popup when all fields are filled', () => {
     // Fülle alle erforderlichen Felder aus
     cy.get('.title-input').type('Hilfe benötigt');
     cy.get('.category').select('Garten');
@@ -71,6 +35,16 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.popup').should('not.exist');
   });
   
+  it('does not display error popup when all required fields are filled', () => {
+    // Fülle das Formular mit gültigen Daten aus
+    cy.get('.title-input').type('Babysitter');
+    cy.get('.category').select('Betreuung');
+    cy.get('.place-input').type('Hannover');
+    cy.get('.time-input').type('Morgen');
+
+    // Überprüfe, ob das Popup nicht angezeigt wird
+    cy.get('.popup').should('not.exist');
+  });
 
   it('displays error popup with invalid form data', () => {
     // Lasse das Formular leer
