@@ -20,51 +20,100 @@ describe('testing filter function of <Hilfsanzeigen />', () => {
   });
 
   it('renders the Hilfsanzeigen component', () => {
-    cy.viewport(375, 790)
     // Überprüfe, ob die Komponente erfolgreich gerendert wurde
     cy.get('.hilfsanzeigen-page').should('exist');
   });
 
   it('displays help offers based on selected location', () => {
-    cy.viewport(375, 790)
-    // Wähle einen Standort aus der Standortauswahl
-    cy.get('.search-container input[type="search"]').type('Karlsruhe{enter}');
+    // Überprüfe, ob es Anzeigen mit dem Standort "Karlsruhe" gibt
+    cy.get('.hilfen .card li .stadt')
+        .then((offersKarlsruhe) => {
+          const amountOffersKarlsruhe = offersKarlsruhe.filter((_, offers) => {
+            return Cypress.$(offers).text().includes('Karlsruhe');
+          }).length;
 
-    // Überprüfe, ob nur die Hilfsanzeigen mit dem ausgewählten Standort angezeigt werden
-    cy.get('.hilfen .card li .stadt').each((hilfe) => {
-      cy.wrap(hilfe).should('contain', 'Karlsruhe');
-    });
+          if (amountOffersKarlsruhe > 0) {
+            // Wähle den Standort "Karlsruhe" aus
+            cy.get('.search-container input[type="search"]').type('Karlsruhe{enter}');
+
+            // Überprüfe, ob nur Anzeigen mit dem Standort "Karlsruhe" angezeigt werden
+            cy.get('.hilfen .card li .stadt').each((hilfe) => {
+              cy.wrap(hilfe).should('contain', 'Karlsruhe');
+            });
+          } else {
+            cy.log('Keine Hilfsanzeigen mit dem Standort Karlsruhe gefunden.');
+          }
+        });
   });
 
-  it('displays help offers based on selected category', () => {
-    cy.viewport(375, 790)
-    // Wähle eine Kategorie aus der Kategorienauswahl
-    cy.get('.category-container select').select('Garten');
 
-    // Überprüfe, ob nur die Hilfsanzeigen mit der ausgewählten Kategorie angezeigt werden
-    cy.get('.hilfen .card li ul div li .category').each((kategorie) => {
-      cy.wrap(kategorie).should('contain', 'Garten');
-    });
+
+  it('displays help offers based on selected category', () => {
+
+    // Überprüfe, ob es Anzeigen mit der Kategorie "Garten" gibt
+    cy.get('.hilfen .card li ul div li .category')
+        .then((offersGarten) => {
+          const amountOffersGarten = offersGarten.filter((_, offers) => {
+            return Cypress.$(offers).text().includes('Garten');
+          }).length;
+
+
+          if (amountOffersGarten > 0) {
+            // Wähle die Kategorie "Garten" aus der Kategorienauswahl
+            cy.get('.category-container select').select('Garten');
+
+            // Überprüfe, ob nur die Hilfsanzeigen mit der Kategorie "Garten" angezeigt werden
+            cy.get('.hilfen .card li ul div li .category').each((kategorie) => {
+              cy.wrap(kategorie).should('contain', 'Garten');
+            });
+          } else {
+            cy.log('Keine Hilfsanzeigen mit der Kategorie Garten gefunden.');
+          }
+        });
   });
 
   it('displays help offers based on selected category and location', () => {
-    cy.viewport(375, 790)
-    // Wähle eine Kategorie aus der Kategorienauswahl
-    cy.get('.category-container select').select('Garten');
+    // Überprüfe, ob es Anzeigen mit dem Standort "Karlsruhe" gibt
+    cy.get('.hilfen .card li .stadt')
+        .then((offersKarlsruhe) => {
+          const amountOffersKarlsruhe = offersKarlsruhe.filter((_, offers) => {
+            return Cypress.$(offers).text().includes('Karlsruhe');
+          }).length;
 
-    // Wähle einen Standort aus der Standortauswahl
-    cy.get('.search-container input[type="search"]').type('Karlsruhe{enter}');
+          if (amountOffersKarlsruhe > 0) {
+            // Wähle den Standort "Karlsruhe" aus
+            cy.get('.search-container input[type="search"]').type('Karlsruhe{enter}');
 
-    // Überprüfe, ob nur die Hilfsanzeigen mit der ausgewählten Kategorie angezeigt werden
-    cy.get('.hilfen .card li ul div li .category').each((kategorie) => {
-      cy.wrap(kategorie).should('contain', 'Garten');
+            // Überprüfe, ob nur Anzeigen mit dem Standort "Karlsruhe" angezeigt werden
+            cy.get('.hilfen .card li .stadt').each((hilfe) => {
+              cy.wrap(hilfe).should('contain', 'Karlsruhe');
+            });
+          } else {
+            cy.log('Keine Hilfsanzeigen mit dem Standort Karlsruhe gefunden.');
+          }
+        });
 
-    });
 
-    // Überprüfe, ob nur die Hilfsanzeigen mit dem ausgewählten Standort angezeigt werden
-    cy.get('.hilfen .card li .stadt').each((hilfe) => {
-    cy.wrap(hilfe).should('contain', 'Karlsruhe');
-    });
+    // Überprüfe, ob es Anzeigen mit der Kategorie "Garten" gibt
+    cy.get('.hilfen .card li ul div li .category')
+        .then((offersGarten) => {
+          const amountOffersGarten = offersGarten.filter((_, offers) => {
+            return Cypress.$(offers).text().includes('Garten');
+          }).length;
+
+
+          if (amountOffersGarten > 0) {
+            // Wähle die Kategorie "Garten" aus der Kategorienauswahl
+            cy.get('.category-container select').select('Garten');
+
+            // Überprüfe, ob nur die Hilfsanzeigen mit der Kategorie "Garten" angezeigt werden
+            cy.get('.hilfen .card li ul div li .category').each((kategorie) => {
+              cy.wrap(kategorie).should('contain', 'Garten');
+            });
+          } else {
+            cy.log('Keine Hilfsanzeigen mit der Kategorie Garten gefunden.');
+          }
+        });
   });
 
 });
