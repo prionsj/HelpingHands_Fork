@@ -50,5 +50,9 @@ jobs:
         run: |
           npm install --force
           npm run build
+
+      - name: start frontend_helpinghandsapp
+        working-directory: Frontend/helpinghandsapp
+        run: npm start
           
 # ui tests: npx cypress run --component s
