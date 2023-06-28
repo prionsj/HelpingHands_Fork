@@ -42,10 +42,10 @@ jobs:
   #      working-directory: Frontend
    #     run: npm run build
 
-#      - name: Build frontend_helpinghandsapp
- #       working-directory: Frontend/helpinghandsapp
-  #      run: |
-   #       npm install --force
-    #      npm start
+      - name: Build frontend_helpinghandsapp
+        working-directory: Frontend/helpinghandsapp
+        run: |
+          # npm install --force
+          npm run build
           
 # ui tests: npx cypress run --component
