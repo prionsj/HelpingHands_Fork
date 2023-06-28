@@ -5,7 +5,7 @@ import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
 /**
- * HTTP-Controller-Klasse für Angeboteinträge.
+ *  HTTP-Controller-Klasse für Angeboteinträge.
  *  Diese Klasse registriert alle notwendigen URL-Handler beim Webserver
  *  für einen einfachen REST-Webservice zum Lesen und Schreiben von
  *  Angebote.
@@ -53,9 +53,9 @@ export default class AngebotController {
      * GET /angebot
      * Angebot suchen
      *
-     * @param {Object} req
-     * @param {Object} res
-     * @param {Object} next
+     * @param {Object} req Anfrageobjekt
+     * @param {Object} res Antwortobjekt
+     * @param {Object} next Nächster Handler
      */
 
     async search(req, res, next) {
@@ -69,9 +69,9 @@ export default class AngebotController {
      * POST /angebot
      * Neues Angebot anlegen
      *
-     * @param {Object} req
-     * @param {Object} res
-     * @param {Object} next
+     * @param {Object} req Anfrageobjekt
+     * @param {Object} res Antwortobjekt
+     * @param {Object} next Nächster Handler
      */
 
     async create(req, res, next) {
@@ -89,9 +89,9 @@ export default class AngebotController {
      * GET /angebot/:id
      * Angebot mit der angegebenen ID auslesen
      *
-     * @param {Object} req
-     * @param {Object} res
-     * @param {Object} next
+     * @param {Object} req Anfrageobjekt
+     * @param {Object} res Antwortobjekt
+     * @param {Object} next Nächster Handler
      */
 
     async read(req, res, next) {

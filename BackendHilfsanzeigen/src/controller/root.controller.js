@@ -33,8 +33,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
      /**
       * GET /:
-      * Übersicht über die vorhandenen Collections liefern (HATEOAS-Prinzip,
+      * Liefert eine Übersicht über die vorhandenen Collections (HATEOAS-Prinzip,
       * so dass Clients die URL-Struktur des Webservices entdecken können).
+      * 
+      * @param {Object} req Anfrageobjekt
+      * @param {Object} res Antwortobjekt
+      * @param {Object} next Nächster Handler
       */
 
      async index(req, res, next) {
@@ -57,6 +61,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
      /**
       * GET /openapi.yaml:
       * Abruf der OpenAPI-Spezifikation
+      * 
+      * @param {Object} req Anfrageobjekt
+      * @param {Object} res Antwortobjekt
+      * @param {Object} next Nächster Handler
       */
 
      async openApi(req, res, next) {

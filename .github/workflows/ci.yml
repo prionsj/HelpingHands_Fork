@@ -48,3 +48,4 @@ jobs:
      #     npm install
       #    npm run build
           
+# ui tests: npx cypress run --component

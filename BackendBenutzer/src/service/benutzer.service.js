@@ -77,7 +77,7 @@ export default class BenutzerService {
 
   /**
   * Aktualisierung eines Benutzers, durch Überschreiben einzelner Felder
-  * oder des gesamten Benutzer-Objektes (ohne die ID).
+  * oder des gesamten Benutzer-Objektes. Die ID wird hierbei nicht geändert.
   *
   * @param {String} id ID des gesuchten Benutzers
   * @param {[type]} benutzer Zu speichernde Benutzerdaten

@@ -298,7 +298,18 @@ nav li:hover, .nav-link.active {
   color: snow;
 }
 
+.no-hilfsanzeigen {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.no-hilfsanzeigen p {
+  font-size: 18px;
+}
+
 /* LOGIN */
+
 
 
 .logo-picture{
