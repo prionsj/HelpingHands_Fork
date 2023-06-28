@@ -1,4 +1,4 @@
-name: CI
+name: CI-Backend
 
 on:
   push:
@@ -34,5 +34,9 @@ jobs:
 
       - name: Start Docker containers
         run: docker-compose -f docker-compose.yml up -d
+        
+      - name: Run Unit tests
+        working-directory: BackendHilfanzeigen
+        run: npm run test
 
 
