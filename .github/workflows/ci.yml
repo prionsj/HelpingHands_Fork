@@ -26,8 +26,8 @@ jobs:
             npm install
           fi
 
-  #    - name: Install Babel plugin
-   #     run: npm install --save-dev @babel/plugin-proposal-private-property-in-object
+      - name: Install Babel plugin
+        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
       - name: Run tests
         run: npm run test
