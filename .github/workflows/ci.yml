@@ -23,11 +23,11 @@ jobs:
           if [[ -f "yarn.lock" ]]; then
             yarn install
           else
-            npm install
+            npm install --force
           fi
 
       - name: Install Babel plugin
-        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object
+        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object --force
 
       - name: Run tests
         run: npm run test
