@@ -60,6 +60,7 @@ describe('testing AnzeigeErstellen component', () => {
 
   it('does not display error popup when all required fields are filled', () => {
     // Fülle alle erforderlichen Felder aus
+    cy.wait(1000);
     cy.get('.title-input').type('Hilfe benötigt');
     cy.get('.category').select('Garten');
     cy.get('.place-input').type('Berlin');
