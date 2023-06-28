@@ -22,5 +22,10 @@
         "esbuild": "^0.14.23",
         "esbuild-plugin-less": "^1.1.6",
         "shelljs": "^0.8.5"
+    },
+    "dependencies": {
+        "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+        "install": "^0.13.0",
+        "npm": "^9.7.2"
     }
 }
