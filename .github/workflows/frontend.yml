@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    env:
+      CI: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x' 
+
+      - name: Install dependencies
+        run: |
+          if [[ -f "yarn.lock" ]]; then
+            yarn install
+          else
+            npm install --force
+          fi
+
+      - name: Install Babel plugin
+        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object --force
+
+      - name: Build Frontend
+        working-directory: Frontend
+        run: npm install --force
+
+      - name: Build frontend_helpinghandsapp
+        working-directory: Frontend/helpinghandsapp
+        run: |
+          npm install --force
+          npm run build
+
