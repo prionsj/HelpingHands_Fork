@@ -1,4 +1,4 @@
-name: CI
+name: CI-Frontend
 
 on:
   push:
@@ -41,4 +41,12 @@ jobs:
         run: |
           npm install --force
           npm run build
+          
+      - name: Run Unit tests
+        working-directory: Frontend/helpinghandsapp
+        run: npm run test
+        
+      - name: Run Cypress UI Tests
+        working-directory: Frontend/helpinghandsapp
+        run: npx cypress run --component
 
