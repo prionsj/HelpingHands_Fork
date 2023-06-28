@@ -16,7 +16,7 @@ describe('testing AnzeigeErstellen component', () => {
         <AnzeigeErstellen />
       </MemoryRouter>
     );
-    cy.wait(1000);
+    cy.wait(5000);
   });
 
   it('renders the AnzeigeErstellen component', () => {
