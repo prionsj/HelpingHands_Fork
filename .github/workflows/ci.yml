@@ -32,7 +32,7 @@ jobs:
       - name: Install Babel plugin
         run: npm install --save-dev @babel/plugin-proposal-private-property-in-object --force
 
-      - name: Run tests
+      - name: Run Unit tests
         run: npm run test
 
       - name: Build Docker containers
@@ -51,8 +51,6 @@ jobs:
           npm install --force
           npm run build
 
-      - name: start frontend_helpinghandsapp
+      - name: Run Cypress UI Tests
         working-directory: Frontend/helpinghandsapp
-        run: npm start
-          
-# ui tests: npx cypress run --component s
+        run: npx cypress run --component s
