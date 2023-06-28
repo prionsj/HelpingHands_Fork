@@ -8,6 +8,7 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "jest-localstorage-mock": "^2.4.26",
     "mongodb": "^5.6.0",
+    "node-fetch": "^2.6.11",
     "node-mocks-http": "^1.12.2",
     "openapi-enforcer": "^1.17.0",
     "react": "^18.2.0",
