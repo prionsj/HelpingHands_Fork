@@ -5,11 +5,6 @@
     "author": "Angelika Kleimann, Ayse Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions",
     "license": "CC-BY-4.0",
     "type": "module",
-    "scripts": {
-        "clean": "node scripts/clean.js",
-        "build": "npm run clean; node scripts/build-static.js; node scripts/esbuild-bundle.js",
-        "start": "node scripts/esbuild-serve.js"
-    },
     "config": {
         "src_dir": "src",
         "static_dir": "static",
