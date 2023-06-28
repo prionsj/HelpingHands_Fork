@@ -45,7 +45,7 @@ jobs:
       - name: Build frontend_helpinghandsapp
         working-directory: Frontend/helpinghandsapp
         run: |
-          # npm install --force
+          npm install --force
           npm start
           
 # ui tests: npx cypress run --component
