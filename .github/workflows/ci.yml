@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x' # oder eine andere gültige Node.js-Version
+          node-version: '18.x' 
 
       - name: Install dependencies
         run: |
@@ -38,9 +38,9 @@ jobs:
       - name: Start Docker containers
         run: docker-compose -f docker-compose.yml up -d
 
- #     - name: Build Frontend
-  #      working-directory: Frontend
-   #     run: npm run build
+      - name: Build Frontend
+        working-directory: Frontend
+        run: npm install --force
 
       - name: Build frontend_helpinghandsapp
         working-directory: Frontend/helpinghandsapp
