@@ -36,7 +36,7 @@ jobs:
         run: docker-compose -f docker-compose.yml up -d
         
       - name: Run Unit tests
-        working-directory: BackendHilfanzeigen
+        working-directory: BackendHilfsanzeigen
         run: npm run test
 
 
