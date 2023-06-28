@@ -26,8 +26,8 @@ jobs:
             npm install
           fi
 
-      - name: Install Babel plugin
-        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object
+  #    - name: Install Babel plugin
+   #     run: npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
       - name: Run tests
         run: npm run test
@@ -38,14 +38,14 @@ jobs:
       - name: Start Docker containers
         run: docker-compose -f docker-compose.yml up -d
 
-#      - name: Build Frontend
-#        working-directory: Frontend
-#         run: npm run build
+ #     - name: Build Frontend
+  #      working-directory: Frontend
+   #     run: npm run build
 
-     - name: Build frontend_helpinghandsapp
-        working-directory: Frontend/helpinghandsapp
-        run: |
-          npm install
-          npm run build
+  #    - name: Build frontend_helpinghandsapp
+   #     working-directory: Frontend/helpinghandsapp
+    #    run: |
+     #     npm install
+      #    npm run build
           
 # ui tests: npx cypress run --component
