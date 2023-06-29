@@ -90,7 +90,7 @@ const HilfsanzeigeBearbeiten = () => {
           <div>
             <div className="logo-container">
               <div className="logo-picture">
-                <img className="logo" src={logo}/>
+                <img className="logo" src={logo} alt="Logo" />
               </div>
               <p className="logo-description">
                 Bearbeite deine Hilfsanzeige

@@ -1,4 +1,3 @@
-
 import {useNavigate} from "react-router-dom";
 import React, { useEffect,useState } from "react";
 import logo from "./static/HelpingHandsWhite.png"
@@ -111,7 +110,7 @@ export const Registrierung = () => {
       <div className="registrieren-page">
           <div className="logo-container">
               <div className="logo-picture">
-                  <img className="logo" src={logo}/>
+                  <img className="logo" src={logo} alt="Logo" />
               </div>
               <p className="logo-description">
                   Registrierung

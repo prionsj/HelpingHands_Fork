@@ -44,7 +44,7 @@ const AngeboteneHilfe = () => {
                 <Navigation />
                 <div className="logo-container">
                     <div className="logo-picture">
-                        <img className="logo" src={logo}/>
+                        <img className="logo" src={logo} alt="Logo" />
                     </div>
                     <p className="logo-description">
                         Überblick über deine angebotene Hilfe
