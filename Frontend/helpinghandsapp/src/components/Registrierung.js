@@ -35,26 +35,26 @@ export const handleRegistration = async (event, benutzer, vorname, nachname, str
     } else {
         setShowPopup(false);
         setShowPopup2(false)
-        // const response = await fetch('http://localhost:3001/benutzer', {
-        //     method: 'POST',
-        //     body:
-        //         JSON.stringify({
-        //             "vorname": vorname,
-        //             "nachname": nachname,
-        //             "straße": straße,
-        //             "hausnummer": hausnummer,
-        //             "postleitzahl": postleitzahl,
-        //             "stadt": stadt,
-        //             "email": email,
-        //             "telefon": telefon,
-        //             "nutzername": nutzername,
-        //             "passwort": passwort,
-        //         }),
+        const response = await fetch('http://localhost:3001/benutzer', {
+            method: 'POST',
+            body:
+                JSON.stringify({
+                    "vorname": vorname,
+                    "nachname": nachname,
+                    "straße": straße,
+                    "hausnummer": hausnummer,
+                    "postleitzahl": postleitzahl,
+                    "stadt": stadt,
+                    "email": email,
+                    "telefon": telefon,
+                    "nutzername": nutzername,
+                    "passwort": passwort,
+                }),
 
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })//.then(res => console.log(res));
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })//.then(res => console.log(res));
         navigate("/");
     }
 };

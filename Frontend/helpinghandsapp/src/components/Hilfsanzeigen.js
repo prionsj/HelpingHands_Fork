@@ -54,18 +54,18 @@ const Hilfsanzeigen = () => {
     }, [setNutzername]);
 
     const handleHelps = async (currentTitle, ersteller, standort) => {
-        // const response = await fetch("http://localhost:3000/angebot", {
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //         titel: currentTitle,
-        //         nutzername: nutzername,
-        //         ersteller: ersteller,
-        //         standort: standort,
-        //     }),
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        // }).then((res) => console.log(res));
+        const response = await fetch("http://localhost:3000/angebot", {
+            method: "POST",
+            body: JSON.stringify({
+                titel: currentTitle,
+                nutzername: nutzername,
+                ersteller: ersteller,
+                standort: standort,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })//.then((res) => console.log(res));
     };
 
     const deleteHelps = async (id) => {
