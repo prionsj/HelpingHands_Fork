@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Navigation from "./Navigation";
-import { useNavigate, NavLink} from "react-router-dom"; //useLocation
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import Modal from 'react-modal';
 import logo from "./static/HelpingHandsWhite.png";
 
@@ -28,13 +28,13 @@ const Konto = () => {
     const [helps, setHelps] = useState([])
     const [nutzername, setNutzername] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
-    // const [isDataSaved, setIsDataSaved] = useState(true);
-    // const location = useLocation();
-    // const updatedUsername = location?.state?.updatedUsername; // Erhalten Sie den aktualisierten Nutzernamen aus dem state-Objekt
+    const [isDataSaved, setIsDataSaved] = useState(true);
+    const location = useLocation();
+    const updatedUsername = location?.state?.updatedUsername; // Erhalten Sie den aktualisierten Nutzernamen aus dem state-Objekt
 
   const navigate = useNavigate();
-  // let hilfsanzeigen;
-  // const keineAnzeigen = false
+  let hilfsanzeigen;
+    const keineAnzeigen = false
 
 
 
@@ -96,184 +96,169 @@ const handleBearbeiten2 = (helpId) => {
 };
 
 
-  return (
-    <div>
-      <Navigation />
-      {benutzer &&
-        benutzer.map((benutzer, index) => {
-          if (benutzer.nutzername === nutzername) {
-            return (
-              <div className="container" key={index}>
-                <div className="logo-container">
-                  <div className="logo-picture">
-                    <img className="logo" src={logo} alt="Helping Hands" />
-                  </div>
-                  <p className="logo-description">Dein Konto</p>
-                </div>
-                <div className="header">
-                  <h1>Benutzerdaten</h1>
-                </div>
-                <div className="box-container">
-                  <div className="box Vorname">
-                    <strong>Vorname:</strong> {benutzer.vorname}
-                  </div>
-                  <div className="box Nachname">
-                    <strong>Nachname:</strong> {benutzer.nachname}
-                  </div>
-                </div>
-                <div className="box-container">
-                  <div className="box Straße">
-                    <strong>Straße:</strong> {benutzer.straße}
-                  </div>
-                  <div className="box Hausnummer">
-                    <strong>Nr.:</strong> {benutzer.hausnummer}
-                  </div>
-                </div>
-                <div className="box-container">
-                  <div className="box Postleitzahl">
-                    <strong>PLZ:</strong> {benutzer.postleitzahl}
-                  </div>
-                  <div className="box Stadt">
-                    <strong>Stadt:</strong> {benutzer.stadt}
-                  </div>
-                </div>
-                <div className="box-container">
-                  <div className="box Email">
-                    <strong>Email:</strong> {benutzer.email}
-                  </div>
-                </div>
-                <div className="box-container">
-                  <div className="box Telefon">
-                    <strong>Telefon:</strong> {benutzer.telefon}
-                  </div>
-                </div>
-                <div className="box-container">
-                  <div className="box Nutzername">
-                    <strong>Nutzername:</strong> {benutzer.nutzername}
-                  </div>
-                </div>
-                <div className="konto-buttons">
-                  <button
-                    className="konto-button"
-                    onClick={() => handleBearbeiten(benutzer._id)}
-                  >
-                    Bearbeiten
-                  </button>
-                  <button
-                    className="konto-button"
-                    onClick={deleteUserConfirmation}
-                  >
-                    Löschen
-                  </button>
-                  <button className="konto-button logout">
-                    <NavLink to={`/`}>Abmelden</NavLink>
-                  </button>
+    return (
+        <div>
+          <Navigation />
+          {
+            benutzer && benutzer.map((benutzer, index) => {
+              if (benutzer.nutzername === nutzername)  {
+                return (
+                  <div className="container">
+                      <div className="logo-container">
+                          <div className="logo-picture">
+                              <img className="logo" src={logo}/>
+                          </div>
+                          <p className="logo-description">
+                              Dein Konto
+                          </p>
+                      </div>
+                    <div className="header">
+                      <h1>Benutzerdaten</h1>
+                    </div>
+                    <div className="box-container">
+                      <div className="box Vorname">
+                        <strong>Vorname:</strong> {benutzer.vorname}
+                      </div>
+                      <div className="box Nachname">
+                        <strong>Nachname:</strong> {benutzer.nachname}
+                      </div>
+                    </div>
+                    <div className="box-container">
+                      <div className="box Straße">
+                        <strong>Straße:</strong> {benutzer.straße}
+                      </div>
+                      <div className="box Hausnummer">
+                        <strong>Nr.:</strong> {benutzer.hausnummer}
+                      </div>
+                    </div>
+                    <div className="box-container">
+                      <div className="box Postleitzahl">
+                        <strong>PLZ:</strong> {benutzer.postleitzahl}
+                      </div>
+                      <div className="box Stadt">
+                        <strong>Stadt:</strong> {benutzer.stadt}
+                      </div>
+                    </div>
+                    <div className="box-container">
+                        <div className="box Email">
+                          <strong>Email:</strong> {benutzer.email}
+                        </div>
+                    </div>
+                    <div className="box-container">
+                        <div className="box Telefon">
+                          <strong>Telefon:</strong> {benutzer.telefon}
+                        </div>
+                    </div>
+                    <div className="box-container">
+                        <div className="box Nutzername">
+                          <strong>Nutzername:</strong> {benutzer.nutzername}
+                        </div>
+                    </div>
+                    <div className="konto-buttons">
+                      <button className="konto-button"
+                              onClick={() => handleBearbeiten(benutzer._id)}>Bearbeiten
+                      </button>
+                      <button className="konto-button"
+                          onClick={deleteUserConfirmation}>Löschen
+                      </button>
+                      <button className="konto-button logout">
+                        <NavLink to={`/`}>Abmelden</NavLink>
+                      </button>
 
-                  {showPopup && (
-                    <Modal
-                      isOpen={true}
-                      onRequestClose={() => setShowPopup(false)}
-                      shouldCloseOnOverlayClick={false}
-                      style={{
-                        content: {
-                          width: '300px',
-                          height: '400px',
-                          margin: 'auto',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          color: 'red',
-                          border: '2px solid red',
-                        },
-                        overlay: {
-                          background: 'rgba(0, 0, 0, 0.5)',
-                        },
-                      }}
-                    >
-                      <CloseButton onClick={() => setShowPopup(false)} />
-                      <h2>Möchtest du dein Konto Löschen?</h2>
-                      <button onClick={() => deleteUser(benutzer._id)}>
-                        Löschen
-                      </button>
-                      <button onClick={() => setShowPopup(false)}>
-                        Abbrechen
-                      </button>
-                    </Modal>
-                  )}
-                </div>
-                <hr />
-                <ol className="hilfsanzeigen">
-                  <div className="header">
-                    <h1>Meine Hilfsanzeigen</h1>
-                  </div>
-                  {helps &&
-                    helps.map((help, index) => {
-                      if (help.nutzername === nutzername) {
-                        return (
-                          <div className="hilfen" key={index}>
-                            <div className="card">
-                              <li className="list-entry" data-id="$ID$">
-                                <div className="stadt titel">
-                                  {help.standort}: {help.titel}
-                                </div>
-                                <div className="beschreibung">
-                                  {help.beschreibung}
-                                </div>
-                                <ul>
-                                  <div>
-                                    <li>
-                                      <div className="standort">Standort:</div>
-                                      {help.standort}
-                                    </li>
-                                    <li>
-                                      <div className="zeitpunkt">
-                                        Zeitpunkt:
-                                      </div>
-                                      {help.zeitraum}
-                                    </li>
-                                    <li>
-                                      <div className="kategorie">
-                                        Kategorie:
-                                      </div>
-                                      {help.kategorie}
-                                    </li>
-                                  </div>
-                                  <div className="actions">
-                                    <button
-                                      className="konto-button hilfsanzeige-bearbeiten"
-                                      onClick={() =>
-                                        handleBearbeiten2(help._id)
-                                      }
-                                    >
-                                      Bearbeiten
-                                    </button>
-                                    <button
-                                      className="konto-button"
-                                      onClick={() => deleteHelps(help._id)}
-                                    >
+                            {showPopup && (
+                                <Modal
+                                    isOpen={true}
+                                    onRequestClose={() => setShowPopup(false)}
+                                    shouldCloseOnOverlayClick={false}
+                                    style={{
+                                        content: {
+                                            width: "300px",
+                                            height: "400px",
+                                            margin: "auto",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            color: "red",
+                                            border: "2px solid red",
+                                        },
+                                        overlay: {
+                                            background: "rgba(0, 0, 0, 0.5)",
+                                        },
+                                    }}
+                                >
+                              
+                                    <CloseButton onClick={() => setShowPopup(false)} />
+                                    <h2>Möchtest du dein Konto Löschen?</h2>
+                                    <button onClick={() => deleteUser(benutzer._id)}>
                                       Löschen
                                     </button>
-                                  </div>
-                                </ul>
-                              </li>
-                            </div>
-                          </div>
-                        );
-                      } else {
-                        return null;
-                      }               
-                    })}
+                                      <button onClick={() => setShowPopup(false)}>
+                                          Abbrechen
+                                      </button>
+                                </Modal>
+                            )}
+                                    
+                                            </div>
+                    <hr></hr>
+                    <ol className="hilfsanzeigen">
+                        <div className="header">
+                            <h1>Meine Hilfsanzeigen</h1>
+                        </div>
+                {
+                    helps && helps.map((help, index)=> {
+                        if (help.nutzername === nutzername)
+                        return (
+                            <div className="hilfen">
+                                <div className="card">
+                                    <li className="list-entry" data-id="$ID$">
+                                        <div className="stadt titel">
+                                            {help.standort}: {help.titel}
+                                        </div>
+                                        <div className="beschreibung">
+                                            {help.beschreibung}
+                                        </div>
+                                        <ul>
+                                            <div>
+                                                <li>
+                                                    <div className="standort">Standort:</div>
+                                                    {help.standort}
+                                                </li>
+                                                <li>
+                                                    <div className="zeitpunkt">Zeitpunkt:</div>
+                                                    {help.zeitraum}
+                                                </li>
+                                                <li>
+                                                    <div className="kategorie">Kategorie:</div>
+                                                    {help.kategorie}
+                                                </li>
+                                            </div>
+                                            <div className="actions">
+                                            <button className="konto-button hilfsanzeige-bearbeiten" onClick={() => handleBearbeiten2(help._id)}>Bearbeiten
+                                               
+                                               </button>
+                                               <button className="konto-button" onClick={() => deleteHelps(help._id)}>
+                                                Löschen
+                                              </button>
+                                             
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </div>
+                </div>
+                        )
+                    })
+                }
                 </ol>
-              </div>
-            );
-          } else {
-            return null;
+                  </div>
+             
+                )
+              }
+            })
           }
-        })}
-    </div>
-  );
-};
+        </div>
 
+    )
+}
 
 export default Konto;

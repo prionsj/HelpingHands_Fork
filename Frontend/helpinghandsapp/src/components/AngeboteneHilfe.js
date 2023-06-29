@@ -44,61 +44,62 @@ const AngeboteneHilfe = () => {
                 <Navigation />
                 <div className="logo-container">
                     <div className="logo-picture">
-                        <img className="logo" src={logo} alt="Logo-Beschreibung" />
+                        <img className="logo" src={logo}/>
                     </div>
                     <p className="logo-description">
                         Überblick über deine angebotene Hilfe
                     </p>
                 </div>
                 <ol className="hilfsanzeigen">
-                {angebote &&
-                    angebote.map((angebot, index) => {
-                    if (angebot.nutzername === nutzername) {
-                        return (
-                        <div className="hilfen" key={index}>
-                            <div className="card">
-                            <li className="list-entry" data-id={angebot._id}>
-                                <div className="stadt titel">
-                                {angebot.standort}: {angebot.titel}
-                                </div>
-                                <div className="kontakt">Kontaktdaten des Hilfesuchenden:</div>
-                                <ul>
-                                {benutzer &&
-                                    benutzer.map((benutzer, index) => {
-                                    if (benutzer.nutzername === angebot.ersteller) {
-                                        return (
-                                        <div key={index}>
-                                            <li>
-                                            <div className="standort">Name:</div>
-                                            {benutzer.vorname} {benutzer.nachname}
-                                            </li>
-                                            <li>
-                                            <div className="zeitpunkt">Adresse:</div>
-                                            {benutzer.straße} {benutzer.hausnummer}, {benutzer.postleitzahl} {benutzer.stadt}
-                                            </li>
-                                            <li>
-                                            <div className="kategorie">Email:</div>
-                                            {benutzer.email}
-                                            </li>
-                                            <li>
-                                            <div className="kategorie">Telefon:</div>
-                                            {benutzer.telefon}
+                    {
+                        angebote && angebote.map ((angebot, index)=> {
+                            if (angebot.nutzername === nutzername) {
+                                return (
+                                    <div className="hilfen">
+                                        <div className="card">
+                                            <li className="list-entry" data-id={angebot._id}>
+                                                <div className="stadt titel">
+                                                    {angebot.standort}: {angebot.titel}
+                                                </div>
+                                                <div className="kontakt">
+                                                    Kontaktdaten des Hilfesuchenden:
+                                                </div>
+                                                <ul>
+                                                    {
+                                                        benutzer && benutzer.map ((benutzer, index)=> {
+                                                            if (benutzer.nutzername === angebot.ersteller) {
+                                                                return (
+                                                                    <div>
+                                                                        <li>
+                                                                            <div className="standort">Name:</div>
+                                                                            {benutzer.vorname} {benutzer.nachname}
+                                                                        </li>
+                                                                        <li>
+                                                                            <div className="zeitpunkt">Adresse:</div>
+                                                                            {benutzer.straße} {benutzer.hausnummer}, {benutzer.postleitzahl} {benutzer.stadt}
+                                                                        </li>
+                                                                        <li>
+                                                                            <div className="kategorie">Email:</div>
+                                                                            {benutzer.email}
+                                                                        </li>
+                                                                        <li>
+                                                                            <div className="kategorie">Telefon:</div>
+                                                                            {benutzer.telefon}
+                                                                        </li>
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        })
+                                                    }
+                                                </ul>
                                             </li>
                                         </div>
-                                        );
-                                    } else {
-                                        return null; // Rückgabewert für den Fall, dass das if-Statement nicht erfüllt ist
-                                    }
-                                    })}
-                                </ul>
-                            </li>
-                            </div>
-                        </div>
-                        );
-                    } else {
-                        return null; // Rückgabewert für den Fall, dass das if-Statement nicht erfüllt ist
+                                    </div>
+
+                                )
+                            }
+                        })
                     }
-                    })}
                 </ol>
             </div>
     )
