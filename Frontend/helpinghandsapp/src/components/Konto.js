@@ -106,7 +106,7 @@ const handleBearbeiten2 = (helpId) => {
                   <div className="container">
                       <div className="logo-container">
                           <div className="logo-picture">
-                              <img className="logo" src={logo} alt="Logo" />
+                              <img className="logo" src={logo}/>
                           </div>
                           <p className="logo-description">
                               Dein Konto
