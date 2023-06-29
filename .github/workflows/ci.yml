@@ -1,4 +1,4 @@
-name: CI-Backend
+name: CI-Backend und -Frontend
 
 on:
   push:
@@ -29,14 +29,28 @@ jobs:
             npm install --force
           fi
 
+      - name: Install Babel plugin
+        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object --force
+
       - name: Build Docker containers
         run: docker-compose build
 
       - name: Start Docker containers
         run: docker-compose -f docker-compose.yml up -d
-        
+
+      - name: Build Frontend
+        working-directory: Frontend
+        run: npm install --force
+
+      - name: Build frontend_helpinghandsapp
+        working-directory: Frontend/helpinghandsapp
+        run: |
+          npm install --force
+          npm run build
+  
       - name: Run Unit tests
-        working-directory: BackendHilfsanzeigen
         run: npm run test
 
-
+      - name: Run Cypress UI Tests
+        working-directory: Frontend/helpinghandsapp
+        run: npx cypress run --component
