@@ -26,7 +26,7 @@ const CloseButton = ({ onClick }) => (
 const Hilfsanzeigen = () => {
     const [helps, setHelps] = useState([]);
     const [nutzername, setNutzername] = useState([]);
-    const [titel, setTitel] = useState("");
+    // const [titel, setTitel] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [selectedStandort, setSelectedStandort] = useState("");
     const [selectedKategorie, setSelectedKategorie] = useState("");
@@ -54,18 +54,18 @@ const Hilfsanzeigen = () => {
     }, [setNutzername]);
 
     const handleHelps = async (currentTitle, ersteller, standort) => {
-        const response = await fetch("http://localhost:3000/angebot", {
-            method: "POST",
-            body: JSON.stringify({
-                titel: currentTitle,
-                nutzername: nutzername,
-                ersteller: ersteller,
-                standort: standort,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then((res) => console.log(res));
+        // const response = await fetch("http://localhost:3000/angebot", {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         titel: currentTitle,
+        //         nutzername: nutzername,
+        //         ersteller: ersteller,
+        //         standort: standort,
+        //     }),
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // }).then((res) => console.log(res));
     };
 
     const deleteHelps = async (id) => {
@@ -189,11 +189,16 @@ const Hilfsanzeigen = () => {
                                                             )
                                                         }
                                                     >
-                                                        <a className="anfrage" href="#">
+                                                        <button
+                                                            className="anfrage"
+                                                            onClick={() =>
+                                                                handleHelprequest(help.titel, help.nutzername, help.standort, help._id)
+                                                            }
+                                                        >
                                                             ✉️
                                                             <br />
                                                             Ich kann helfen
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </ul>

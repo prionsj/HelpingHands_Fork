@@ -55,23 +55,23 @@ const AnzeigeErstellen = () => {
             setShowPopup(true);
         } else {
             setShowPopup(false);
-            const response = await fetch('http://localhost:3000/hilfsanzeige', {
-                method: 'POST',
-                body:
-                    JSON.stringify({
-                        "titel": titel,
-                        "beschreibung": beschreibung,
-                        "kategorie": kategorie,
-                        "standort": standort,
-                        "zeitraum": zeitraum,
-                        "nutzername": nutzername,
+            // const response = await fetch('http://localhost:3000/hilfsanzeige', {
+            //     method: 'POST',
+            //     body:
+            //         JSON.stringify({
+            //             "titel": titel,
+            //             "beschreibung": beschreibung,
+            //             "kategorie": kategorie,
+            //             "standort": standort,
+            //             "zeitraum": zeitraum,
+            //             "nutzername": nutzername,
 
-                    }),
+            //         }),
 
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // })
             navigate("/hilfsanzeigen");
         }
     }
@@ -81,7 +81,7 @@ const AnzeigeErstellen = () => {
             <Navigation />
             <div className="logo-container">
                 <div className="logo-picture">
-                    <img className="logo" src={logo}/>
+                    <img className="logo" src={logo} alt="Logo" />
                 </div>
                 <p className="logo-description double">
                     <div className="logo-description-title">Du brauchst Hilfe?</div>

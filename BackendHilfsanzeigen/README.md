@@ -9,6 +9,7 @@ Inhaltsverzeichnis
  1. [Probleme unter Windows und iOS](#probleme-unter-windows-und-ios)
  1. [Node.js-Kommandozeilenbefehle](#nodejs-kommandozeilenbefehle)
  1. [Produktives Container Image bauen](#produktives-container-image-bauen)
+ 1. [Unit Tests im Backend](#unit-tests-im-backend)
 
 Kurzbeschreibung
 ----------------
@@ -66,3 +67,9 @@ Der Container kann somit direkt in eine produktive Systemlandschaft überführt 
 
 Das `Dockerfile` wird auch verwendet, wenn im Wurzelverzeichnis mit Docker Compose die Datei `docker-compose.prod.yml` ausgeführt wird. 
 Der Container wird im Grunde genommen damit auch auf die gleiche Art gestartet.
+
+
+Unit Tests im Backend
+---------------------
+
+Um die Unit Tests im Backend der Hilfanzeigen auszuführen, muss entweder im Verzeichnis BackendHilfsanzeigen (um nur den Backend Unit Test auszuführen) oder im Wurzelverzeichnis (um alle Unit Tests auszuführen) npm test ausgeführt werden. In der Konsole werden die Ergebnisse der Tests angezeigt. Die Unit Tests wurden mit dem Framework Jest erstellt (mehr Informationen: siehe Architekturdokumentation).

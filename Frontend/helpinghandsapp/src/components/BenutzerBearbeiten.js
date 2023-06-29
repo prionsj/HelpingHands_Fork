@@ -7,10 +7,10 @@ import logo from "./static/HelpingHandsWhite.png";
 const BenutzerBearbeiten = () => {
   const { benutzerId } = useParams();
   const [benutzer, setBenutzer] = useState(null);
-  const [isSaved, setIsSaved] = useState(false);
+  // const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const updatedUsername = location?.state?.updatedUsername; // Erhalten Sie den aktualisierten Nutzernamen aus dem state-Objekt
+  // const location = useLocation();
+  // const updatedUsername = location?.state?.updatedUsername; // Erhalten Sie den aktualisierten Nutzernamen aus dem state-Objekt
 
 
 
@@ -68,7 +68,7 @@ const BenutzerBearbeiten = () => {
           <div>
           <div className="logo-container">
             <div className="logo-picture">
-              <img className="logo" src={logo}/>
+              <img className="logo" src={logo} alt="Logo" />
             </div>
             <p className="logo-description">
               Bearbeite deine Benutzerdaten

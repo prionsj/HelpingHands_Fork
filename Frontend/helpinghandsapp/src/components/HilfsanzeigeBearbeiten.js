@@ -5,7 +5,7 @@ import logo from "./static/HelpingHandsWhite.png";
 const HilfsanzeigeBearbeiten = () => {
   const { helpId } = useParams();
   const [hilfsanzeige, setHilfsanzeige] = useState(null);
-  const [isSaved, setIsSaved] = useState(false);
+  // const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const HilfsanzeigeBearbeiten = () => {
           <div>
             <div className="logo-container">
               <div className="logo-picture">
-                <img className="logo" src={logo}/>
+                <img className="logo" src={logo} alt="Logo" />
               </div>
               <p className="logo-description">
                 Bearbeite deine Hilfsanzeige

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./static/HelpingHands.png";
 import { useNavigate, NavLink } from "react-router-dom";
 import Modal from 'react-modal';
