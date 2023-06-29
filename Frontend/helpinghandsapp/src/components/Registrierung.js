@@ -75,18 +75,18 @@ export const Registrierung = () => {
     </button>
   );
 
-//   const [vorname, setVorname] = useState('');
-//   const [nachname, setNachname] = useState('');
-//   const [straße, setStraße] = useState('');
-//   const [hausnummer, setHausnummer] = useState('');
-//   const [postleitzahl, setPostleitzahl] = useState('');
-//   const [stadt, setStadt] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [telefon, setTelefon] = useState('');
-//   const [nutzername, setNutzername] = useState('');
-//   const [passwort, setPasswort] = useState('');
+  const [vorname, setVorname] = useState('');
+  const [nachname, setNachname] = useState('');
+  const [straße, setStraße] = useState('');
+  const [hausnummer, setHausnummer] = useState('');
+  const [postleitzahl, setPostleitzahl] = useState('');
+  const [stadt, setStadt] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefon, setTelefon] = useState('');
+  const [nutzername, setNutzername] = useState('');
+  const [passwort, setPasswort] = useState('');
   const [showPopup, setShowPopup] = useState(false);
-  const [ setBenutzer] = useState([]); //benutzer,
+  const [benutzer, setBenutzer] = useState([]);
   const [showPopup2, setShowPopup2] = useState(false);
   const navigate = useNavigate();
 
@@ -110,7 +110,13 @@ export const Registrierung = () => {
         <p className="logo-description">Registrierung</p>
       </div>
       <form className="register-form">
-        {/* Form fields */}
+        {/* form inputs */}
+        <div className="register-button">
+          <button onClick={(event) => handleRegistration(event, benutzer, vorname, nachname, straße, hausnummer, postleitzahl, stadt,
+            email, telefon, nutzername, passwort, navigate, setShowPopup, setShowPopup2)} type="submit">
+            Registrieren
+          </button>
+        </div>
       </form>
       {showPopup && (
         <Modal
