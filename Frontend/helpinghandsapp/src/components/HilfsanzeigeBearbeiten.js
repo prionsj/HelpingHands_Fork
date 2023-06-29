@@ -5,7 +5,7 @@ import logo from "./static/HelpingHandsWhite.png";
 const HilfsanzeigeBearbeiten = () => {
   const { helpId } = useParams();
   const [hilfsanzeige, setHilfsanzeige] = useState(null);
-  const [isSaved, setIsSaved] = useState(false);
+  const [setIsSaved] = useState(false); //isSaved,
   const navigate = useNavigate();
 
   useEffect(() => {

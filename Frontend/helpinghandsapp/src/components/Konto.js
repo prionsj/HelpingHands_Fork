@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Navigation from "./Navigation";
-import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import { useNavigate, NavLink} from "react-router-dom"; //useLocation
 import Modal from 'react-modal';
 import logo from "./static/HelpingHandsWhite.png";
 
@@ -264,8 +264,9 @@ const handleBearbeiten2 = (helpId) => {
                 </ol>
               </div>
             );
+          } else {
+            return null;
           }
-          return null;
         })}
     </div>
   );
