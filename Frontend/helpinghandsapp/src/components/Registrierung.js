@@ -75,18 +75,18 @@ export const Registrierung = () => {
     </button>
   );
 
-  const [vorname, setVorname] = useState('');
-  const [nachname, setNachname] = useState('');
-  const [straße, setStraße] = useState('');
-  const [hausnummer, setHausnummer] = useState('');
-  const [postleitzahl, setPostleitzahl] = useState('');
-  const [stadt, setStadt] = useState('');
-  const [email, setEmail] = useState('');
-  const [telefon, setTelefon] = useState('');
-  const [nutzername, setNutzername] = useState('');
-  const [passwort, setPasswort] = useState('');
+//   const [vorname, setVorname] = useState('');
+//   const [nachname, setNachname] = useState('');
+//   const [straße, setStraße] = useState('');
+//   const [hausnummer, setHausnummer] = useState('');
+//   const [postleitzahl, setPostleitzahl] = useState('');
+//   const [stadt, setStadt] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [telefon, setTelefon] = useState('');
+//   const [nutzername, setNutzername] = useState('');
+//   const [passwort, setPasswort] = useState('');
   const [showPopup, setShowPopup] = useState(false);
-  const [benutzer, setBenutzer] = useState([]);
+  const [ setBenutzer] = useState([]); //benutzer,
   const [showPopup2, setShowPopup2] = useState(false);
   const navigate = useNavigate();
 

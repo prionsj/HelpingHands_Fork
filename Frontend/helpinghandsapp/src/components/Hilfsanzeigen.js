@@ -26,7 +26,7 @@ const CloseButton = ({ onClick }) => (
 const Hilfsanzeigen = () => {
   const [helps, setHelps] = useState([]);
   const [nutzername, setNutzername] = useState([]);
-  const [selectedTitel, setSelectedTitel] = useState("");
+  const [setSelectedTitel] = useState(""); //selectedTitel, 
   const [showPopup, setShowPopup] = useState(false);
   const [selectedStandort, setSelectedStandort] = useState("");
   const [selectedKategorie, setSelectedKategorie] = useState("");
