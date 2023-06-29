@@ -209,7 +209,7 @@ const handleBearbeiten2 = (helpId) => {
                   </div>
                   {helps &&
                     helps.map((help, index) => {
-                      if (help.nutzername === nutzername)
+                      if (help.nutzername === nutzername) {
                         return (
                           <div className="hilfen" key={index}>
                             <div className="card">
@@ -260,6 +260,9 @@ const handleBearbeiten2 = (helpId) => {
                             </div>
                           </div>
                         );
+                      } else {
+                        return null;
+                      }               
                     })}
                 </ol>
               </div>
