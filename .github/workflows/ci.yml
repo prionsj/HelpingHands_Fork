@@ -16,13 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -39,11 +32,11 @@ jobs:
       - name: Install Babel plugin
         run: npm install --save-dev @babel/plugin-proposal-private-property-in-object --force
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: docker-compose.yml
+      - name: Build Docker containers
+        run: docker-compose build
+
+      - name: Start Docker containers
+        run: docker-compose -f docker-compose.yml up -d
 
       - name: Build Frontend
         working-directory: Frontend
@@ -54,7 +47,7 @@ jobs:
         run: |
           npm install --force
           npm run build
-
+  
       - name: Run Unit tests
         run: npm run test
 
