@@ -43,7 +43,7 @@ const Konto = () => {
       if (storedUsername) {
         setNutzername(storedUsername);
       }
-    }, [setNutzername]);
+    }, []);
 
     useEffect(() => {
         fetch('http://localhost:3001/benutzer')
@@ -55,7 +55,7 @@ const Konto = () => {
             }).catch((err) => {
             console.log(err.message);
         });
-    }, []);
+    }, [updatedUsername]);
 
     useEffect(() => {
       fetch('http://localhost:3000/hilfsanzeige')
