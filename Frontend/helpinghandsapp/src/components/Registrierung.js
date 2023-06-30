@@ -34,7 +34,7 @@ export const handleRegistration = async (event, benutzer, vorname, nachname, str
     } else {
         setShowPopup(false);
         setShowPopup2(false)
-        const response = await fetch('http://localhost:3001/benutzer', {
+        await fetch('http://localhost:3001/benutzer', {
             method: 'POST',
             body:
                 JSON.stringify({

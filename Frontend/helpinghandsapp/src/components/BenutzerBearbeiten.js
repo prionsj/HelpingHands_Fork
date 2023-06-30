@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import logo from "./static/HelpingHandsWhite.png";
 
 const BenutzerBearbeiten = () => {
   const { benutzerId } = useParams();
   const [benutzer, setBenutzer] = useState(null);
-  const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const updatedUsername = location?.state?.updatedUsername;
 
   useEffect(() => {
     fetch(`http://localhost:3001/benutzer/${benutzerId}`)
@@ -44,7 +41,6 @@ const BenutzerBearbeiten = () => {
   
       if (response.ok) {
         console.log('Benutzerdaten wurden aktualisiert:', benutzer);
-        setIsSaved(true);
         localStorage.setItem('username', benutzer.nutzername);
         navigate('/konto', { state: { updatedUsername: benutzer.nutzername } });
       } else {

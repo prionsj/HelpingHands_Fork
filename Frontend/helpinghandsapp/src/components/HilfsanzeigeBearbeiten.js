@@ -5,7 +5,6 @@ import logo from "./static/HelpingHandsWhite.png";
 const HilfsanzeigeBearbeiten = () => {
   const { helpId } = useParams();
   const [hilfsanzeige, setHilfsanzeige] = useState(null);
-  const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,8 +72,7 @@ const HilfsanzeigeBearbeiten = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Benutzerdaten wurden aktualisiert:', data);
-        setIsSaved(true);
+        console.log('Hilfsanzeige wurde aktualisiert:', data);
         // Nachdem die Daten erfolgreich aktualisiert wurden, navigiere zur Konto-Seite
         navigate('/konto');
       })

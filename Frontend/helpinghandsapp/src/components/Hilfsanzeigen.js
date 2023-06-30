@@ -26,7 +26,6 @@ const CloseButton = ({ onClick }) => (
 const Hilfsanzeigen = () => {
     const [helps, setHelps] = useState([]);
     const [nutzername, setNutzername] = useState([]);
-    const [titel, setTitel] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [selectedStandort, setSelectedStandort] = useState("");
     const [selectedKategorie, setSelectedKategorie] = useState("");
@@ -54,7 +53,7 @@ const Hilfsanzeigen = () => {
     }, [setNutzername]);
 
     const handleHelps = async (currentTitle, ersteller, standort) => {
-        const response = await fetch("http://localhost:3000/angebot", {
+        await fetch("http://localhost:3000/angebot", {
             method: "POST",
             body: JSON.stringify({
                 titel: currentTitle,
@@ -73,7 +72,6 @@ const Hilfsanzeigen = () => {
     };
 
     const handleHelprequest = (titel, ersteller, standort, id) => {
-        setTitel(titel);
         const matchingBenutzer = helps.find(
             (help) => help.nutzername === nutzername && help.titel === titel
         );
@@ -189,7 +187,7 @@ const Hilfsanzeigen = () => {
                                                             )
                                                         }
                                                     >
-                                                        <a className="anfrage" href="#">
+                                                        <a className="anfrage" href="##">
                                                             ✉️
                                                             <br />
                                                             Ich kann helfen

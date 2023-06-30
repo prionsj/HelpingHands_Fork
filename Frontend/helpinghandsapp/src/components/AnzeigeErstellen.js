@@ -11,13 +11,14 @@ const AnzeigeErstellen = () => {
           style={{
             position: 'relative',
             top: '-20px',
-            right: '-20px',
+            right: '-100px',
             border: 'none',
             background: 'transparent',
             cursor: 'pointer',
             fontSize: '20px',
             fontWeight: 'bold',
             color: 'red',
+              width: '20px'
           }}
           onClick={onClick}
           className="close-button"
@@ -55,7 +56,7 @@ const AnzeigeErstellen = () => {
             setShowPopup(true);
         } else {
             setShowPopup(false);
-            const response = await fetch('http://localhost:3000/hilfsanzeige', {
+            await fetch('http://localhost:3000/hilfsanzeige', {
                 method: 'POST',
                 body:
                     JSON.stringify({
@@ -158,11 +159,11 @@ const AnzeigeErstellen = () => {
             margin: 'auto',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
             alignItems: 'center',
             color: 'red',
             background: 'white',
             border: '2px solid red',
+            padding: '20px'
           },
         }}
         className="popup"
