@@ -32,9 +32,7 @@ Das dort abgelegte README beschreibt die dafür notwendigen Befehle im Detail:
 Probleme unter Windows und iOS
 -------------------------------
 
-node_modules neu installieren
-npm -g rm
-npm install
+Sollten es Probleme mit node.js geben, müssen die node_modules in allen Verzeichnissen (Wurzelverzeichnis, BackendBenutzer, BackendHilfsanzeigen, Frontend, helpinghandsapp) neu installiert werden. ZUerst muss zur Deinstallation `npm -g rm` in allen Verzeichnissen ausgeführt werden, sowie die package.json und node-modules-ordner gelöscht werden. Mit `npm install` in allen Verzeichnissen können dann alle node-modules neu installiert werden.
 
 
 Node.js-Kommandozeilenbefehle
@@ -72,4 +70,4 @@ Der Container wird im Grunde genommen damit auch auf die gleiche Art gestartet.
 Unit Tests im Backend
 ---------------------
 
-Um die Unit Tests im Backend der Hilfanzeigen auszuführen, muss entweder im Verzeichnis BackendHilfsanzeigen (um nur den Backend Unit Test auszuführen) oder im Wurzelverzeichnis (um alle Unit Tests auszuführen) npm test ausgeführt werden. In der Konsole werden die Ergebnisse der Tests angezeigt. Die Unit Tests wurden mit dem Framework Jest erstellt (mehr Informationen: siehe Architekturdokumentation).
+Um die Unit Tests im Backend der Hilfanzeigen auszuführen, muss entweder im Verzeichnis BackendHilfsanzeigen (um nur den Backend Unit Test auszuführen) oder im Wurzelverzeichnis (um alle Unit Tests auszuführen) `npm test` ausgeführt werden. In der Konsole werden die Ergebnisse der Tests angezeigt. Die Unit Tests wurden mit dem Framework Jest erstellt (mehr Informationen: siehe Architekturdokumentation). Installiert wird Jest mit dem Befehl `npm install jest` im Verzeichnis helpinghandsapp, Frontend, BackendHilfsanzeigen und im Wurzelverzeichnis.

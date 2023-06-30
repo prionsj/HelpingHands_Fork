@@ -32,9 +32,7 @@ Das dort abgelegte README beschreibt die dafür notwendigen Befehle im Detail:
 Probleme unter Windows und iOS
 -------------------------------
 
-node_modules neu installieren
-npm -g rm
-npm install
+Sollten es Probleme mit node.js geben, müssen die node_modules in allen Verzeichnissen (Wurzelverzeichnis, BackendBenutzer, BackendHilfsanzeigen, Frontend, helpinghandsapp) neu installiert werden. ZUerst muss zur Deinstallation `npm -g rm` in allen Verzeichnissen ausgeführt werden, sowie die package.json und node-modules-ordner gelöscht werden. Mit `npm install` in allen Verzeichnissen können dann alle node-modules neu installiert werden.
 
 
 Node.js-Kommandozeilenbefehle

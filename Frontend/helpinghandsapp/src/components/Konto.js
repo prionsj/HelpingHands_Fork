@@ -37,7 +37,6 @@ const Konto = () => {
     const keineAnzeigen = false
 
 
-
     useEffect(() => {
       const storedUsername = localStorage.getItem('username');
       if (storedUsername) {
@@ -69,7 +68,6 @@ const Konto = () => {
       });
   }, []);
 
-
 const deleteHelps = async (id) => {
   await fetch(`http://localhost:3000/hilfsanzeige/${id}`, { method: 'DELETE' });
 
@@ -94,7 +92,6 @@ const handleBearbeiten = (benutzerId) => {
 const handleBearbeiten2 = (helpId) => {
   navigate(`/hilfsanzeigebearbeiten/${helpId}`);
 };
-
 
     return (
         <div>
@@ -262,3 +259,5 @@ const handleBearbeiten2 = (helpId) => {
 }
 
 export default Konto;
+
+

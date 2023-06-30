@@ -1,17 +1,77 @@
-HelpingHands: Frontend_helpinghandsapp
+HelpingHands: helpinghandsapp
 ====================
 
 Inhaltsverzeichnis
 ------------------
 
 1. [Kurzbeschreibung](#kurzbeschreibung)
+1. [Responsive HelpingHands](#responsive-helpinghands)
+1. [Node.js-Kommandozeilenbefehle](#nodejs-kommandozeilenbefehle)
+1. [Probleme unter Windows und iOS](#probleme-unter-windows-und-ios)
+1. [Unit Tests im Frontend](#unit-tests-im-frontend)
+1. [UI Tests im Frontend](#ui-tests-im-frontend)
 1. [Verfügbare Skripte](#verfügbare-skripte)
-1. [Erfahren Sie mehr](#erfahren-sie-mehr)
-
 Kurzbeschreibung
 ----------------
 
+Dies ist die webbasierte React-App mit dem Frontend der HelpingHands-App.
+Es handelt sich dabei um eine  Webanwendung, die mit JavaScript und zusätzlich dem modernen Framework react realisiert wurde.
+
 Dieses Projekt wurde mit [Create React App](https://github.com/facebook/create-react-app) gebootstrapped.
+
+
+Responsive HelpingHands
+----------------
+
+Die HelpingHands-React App soll zukünftig responsive sein. Aktuell ist dieses MVP allerdings nur auf die Bildschirmgröße 375x790 optimiert. Die Entwickler bitten um Verständnis sowie darum, dies zu beachten und die App möglichst in dieser optimierten Größe zu verwenden, um verschobene oder verdeckte Elemente in der App zu vermeiden.
+
+
+Node.js-Kommandozeilenbefehle
+-----------------------------
+
+Diese App nutzt Node.js und den esbuild-Bundler zur Verwaltung von Abhängigkeiten
+(im Quellcode verwendete, externe Bibliothekten und Frameworks) sowie zum Bauen
+einer deploybaren Version. Hierfür werden die folgenden Kommandozeilenbefehle
+bereitgestellt:
+
+ * `npm install` zur Installation aller benötigten Module
+ * `npm update` zur Aktualisierung aller Abhängigkeiten
+ * `npm start` zum Starten eines Entwicklungsservers auf Port 8080
+ * `npm run build` zum Bauen der Anwendung für den Produktivbetrieb
+ * `npm run clean` zum Löschen des Build-Verzeichnisses
+
+Änderungen am Quellcode werden sofort aktiv. Es muss lediglich die Seite im
+Browser neugeladen werden.
+
+Die mit `npm run build` gebaute Anwendung wird im Verzeichnis `build` abgelegt
+und kann von dort auf einen beliebigen Webserver hochgeladen werden. Insbesondere
+`npm install` und `npm run build` werden daher im `Dockerfile` während dem Bauen
+des Container Images ausgeführt. In der `../docker-compose.yml` werden
+hingegen die Befehle `npm install` und `npm start` ausgeführt.
+
+
+Probleme unter Windows und iOS
+-------------------------------
+
+Sollten es Probleme mit node.js geben, müssen die node_modules in allen Verzeichnissen (Wurzelverzeichnis, BackendBenutzer, BackendHilfsanzeigen, Frontend, helpinghandsapp) neu installiert werden. ZUerst muss zur Deinstallation `npm -g rm` in allen Verzeichnissen ausgeführt werden, sowie die package.json und node-modules-ordner gelöscht werden. Mit `npm install` in allen Verzeichnissen können dann alle node-modules neu installiert werden.
+
+
+Unit Tests im Frontend
+----------------------
+
+Um die Unit Tests im Frontend auszuführen, muss im Verzeichnis helpinghandsapp oder im Wurzelverzeichnis (für alle Unit Tests, auch im Backend) `npm test` ausgeführt werden. In der Konsole werden die Ergebnisse der Tests angezeigt. Die Unit Tests wurden mit dem Framework Jest erstellt (mehr Informationen: siehe Architekturdokumentation). Installiert wird Jest mit dem Befehl `npm install jest` im Verzeichnis helpinghandsapp, Frontend, BackendHilfsanzeigen und im Wurzelverzeichnis.
+
+
+UI Tests im Frontend
+--------------------
+
+Um die UI Tests im Frontend auszuführen, muss im Verzeichnis helpinghandsapp eines der folgenden Befehle ausgeführt werden:
+
+ * `npx cypress open` öffnet die Benutzeroberfläche von Cypress. Nach der Auswahl des component-Tests und dem favorisierten Browser können die einzelnen UI-Tests einzelnd getestet werden.
+ * `npx cypress open --component --browser ***` ohne die Verwendung der Cypress Benutzeroberfläche. Der favorisierte Browser ersetzt '***'. In diesem die einzelnen UI-Tests einzelnd getestet werden. Der Befehl würde für Chrome so aussehen: `npx cypress open --component --browser chrome`.
+ * `npx cypress run --component` zum starten aller UI Tests. In der Konsole werden die Ergebnisse der Tests angezeigt. 
+
+Die UI Tests wurden mit dem Framework Cypress erstellt (mehr Informationen: siehe Architekturdokumentation). Installiert wird Cypress mit dem Befehl `npm install cypress` im Verzeichnis helpinghandsapp.
 
 
 Verfügbare Skripte
@@ -38,31 +98,3 @@ Hinweis: Dies ist ein einseitiger Vorgang. Sobald Sie "eject", können Sie nicht
 Stattdessen werden alle Konfigurationsdateien und die transitiven Abhängigkeiten (webpack, Babel, ESLint, etc.) direkt in Ihr Projekt kopiert, so dass Sie die volle Kontrolle über sie haben. Alle Befehle mit Ausnahme von "eject" funktionieren weiterhin, aber sie verweisen auf die kopierten Skripte, so dass Sie sie anpassen können. An diesem Punkt sind Sie auf sich allein gestellt.
 
 Sie müssen `eject` nicht verwenden. Der kuratierte Funktionssatz ist für kleine und mittlere Einsätze geeignet, und Sie sollten sich nicht verpflichtet fühlen, diese Funktion zu nutzen. Wir verstehen jedoch, dass dieses Werkzeug nicht nützlich wäre, wenn Sie es nicht anpassen könnten, wenn Sie dazu bereit sind.
-
-
-Erfahren Sie mehr
-------------------
-
-Weitere Informationen finden Sie in der [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-Um React zu lernen, lesen Sie die [React documentation](https://reactjs.org/).
-
-Die im folgenden ausgelisteten Abschnitte wurden zu den angegebenen Links verschoben.
-
-1. Code Splitting
-    [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-2. Analyzing the Bundle Size
-    [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-3. Making a Progressive Web App
-    [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-4. Advanced Configuration
-    [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-5. Deployment
-    [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-6. `npm run build` fails to minify
-    [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
