@@ -6,6 +6,9 @@ Inhaltsverzeichnis
 
  1. [Kurzbeschreibung](#kurzbeschreibung)
  1. [Start mit Docker Compose](#start-mit-docker-compose)
+ 1. [Probleme unter Windows und iOS](#probleme-unter-windows-und-ios)
+ 1. [Unit Tests im Backend und Frontend](#unit-tests-im-backend-und-frontend)
+ 1. [UI Tests im Frontend](#ui-tests-im-frontend)
 
 Kurzbeschreibung
 ----------------
@@ -87,3 +90,21 @@ und bei dessen Start durch ein Startskript ausgewertet wird. Das Skript schreibt
 Der Mechanismus ist im Grunde genommen derselbe, wie Docker ihn für "Secrets" und "Configs" bereitstellt. Auch diese werden einfach über eine Datei im Container sichtar gemacht. 
 Leider bietet Docker diese Funktion aber nur in Zusammenhang mit Docker Swarm an. Zwar lässt sich die App unverändert auch mit Docker Swarm ausführen, dies wird hier allerdings
 absichtlicht nicht beschrieben, da es auf Docker Compose aufbaut und Docker Compose davon abgesehen für dieses Projekt zunächst ausreicht.
+
+
+Probleme unter Windows und iOS
+-------------------------------
+
+Sollten es Probleme mit node.js geben, müssen die node_modules in allen Verzeichnissen (Wurzelverzeichnis, BackendBenutzer, BackendHilfsanzeigen, Frontend, helpinghandsapp) neu installiert werden. ZUerst muss zur Deinstallation `npm -g rm` in allen Verzeichnissen ausgeführt werden, sowie die package.json und node-modules-ordner gelöscht werden. Mit `npm install` in allen Verzeichnissen können dann alle node-modules neu installiert werden.
+
+
+Unit Tests im Backend und Frontend
+----------------------------------
+
+Um die Unit Tests im Backend der Hilfanzeigen und im Frontend auszuführen, muss entweder seperat im Verzeichnis BackendHilfsanzeigen sowie im Verzeichnis helpinghandsapp oder gemeinsam im Wurzelverzeichnis `npm test` ausgeführt werden. In der Konsole werden die Ergebnisse der Tests angezeigt. Die Unit Tests wurden mit dem Framework Jest erstellt (mehr Informationen: siehe Architekturdokumentation). Installiert wird Jest mit dem Befehl `npm install jest` im Verzeichnis helpinghandsapp, Frontend, BackendHilfsanzeigen und im Wurzelverzeichnis.
+
+
+UI Tests im Frontend
+--------------------
+
+Um die UI Tests im Frontend auszuführen, siehe README.md im helpinghandsapp-Verzeichnis (unter Frontend/helpingshandsapp).

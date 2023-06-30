@@ -6,13 +6,13 @@ Inhaltsverzeichnis
 
  1. [Kurzbeschreibung](#kurzbeschreibung)
  1. [Node.js-Kommandozeilenbefehle](#nodejs-kommandozeilenbefehle)
+ 1. [Probleme unter Windows und iOS](#probleme-unter-windows-und-ios)
 
 
 Kurzbeschreibung
 ----------------
 
-Dies ist die webbasierte React-App mit dem Frontend der HelpingHands-App.
-Es handelt sich dabei um eine  Webanwendung, die mit JavaScript und zusätzlich dem modernen Framework react realisiert wurde.
+Das Frontend-Verzeichnis dient der Übersichtlichkeit und ist das hierarchisch übergeordnete Verzeichnis der helpinghandsapp, eine mit dem Framework react erstellte, webbasierte Applikation.
 
 
 Node.js-Kommandozeilenbefehle
@@ -25,19 +25,10 @@ bereitgestellt:
 
  * `npm install` zur Installation aller benötigten Module
  * `npm update` zur Aktualisierung aller Abhängigkeiten
- * `npm start` zum Starten eines Entwicklungsservers auf Port 8080
- * `npm run build` zum Bauen der Anwendung für den Produktivbetrieb
- * `npm run clean` zum Löschen des Build-Verzeichnisses
-
-Änderungen am Quellcode werden sofort aktiv. Es muss lediglich die Seite im
-Browser neugeladen werden.
-
-Die mit `npm run build` gebaute Anwendung wird im Verzeichnis `build` abgelegt
-und kann von dort auf einen beliebigen Webserver hochgeladen werden. Insbesondere
-`npm install` und `npm run build` werden daher im `Dockerfile` während dem Bauen
-des Container Images ausgeführt. In der `../docker-compose.yml` werden
-hingegen die Befehle `npm install` und `npm start` ausgeführt.
 
 
+Probleme unter Windows und iOS
+-------------------------------
 
+Sollten es Probleme mit node.js geben, müssen die node_modules in allen Verzeichnissen (Wurzelverzeichnis, BackendBenutzer, BackendHilfsanzeigen, Frontend, helpinghandsapp) neu installiert werden. ZUerst muss zur Deinstallation `npm -g rm` in allen Verzeichnissen ausgeführt werden, sowie die package.json und node-modules-ordner gelöscht werden. Mit `npm install` in allen Verzeichnissen können dann alle node-modules neu installiert werden.
 
