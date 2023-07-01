@@ -623,5 +623,34 @@ textarea {
   color: #0d0d40;
 }
 
+.Popup{
+
+    width: 320px;
+    height: 400px;
+    margin: auto;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    color: red;
+    border: 2px solid red;
+    background: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: -9;
+    padding-top: 30px;
+    margin-top: 10px;
+
+
+
+}
+.Popup .text {
+  align-self: flex-start;
+  margin-top: 500px;
+}
+
 
 

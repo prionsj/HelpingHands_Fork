@@ -3,25 +3,9 @@ import Navigation from "./Navigation";
 import { useNavigate } from "react-router-dom";
 import logo from "./static/HelpingHandsWhite.png";
 import Modal from "react-modal";
+import CloseButton from "./CloseButton";
 
-const CloseButton = ({ onClick }) => (
-    <button
-        style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontSize: "20px",
-            fontWeight: "bold",
-            color: "red",
-        }}
-        onClick={onClick}
-    >
-        &times;
-    </button>
-);
+
 
 const Hilfsanzeigen = () => {
     const [helps, setHelps] = useState([]);
@@ -210,22 +194,7 @@ const Hilfsanzeigen = () => {
                     isOpen={true}
                     onRequestClose={() => setShowPopup(false)}
                     shouldCloseOnOverlayClick={false}
-                    style={{
-                        content: {
-                            width: "300px",
-                            height: "400px",
-                            margin: "auto",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            color: "red",
-                            border: "2px solid red",
-                        },
-                        overlay: {
-                            background: "rgba(0, 0, 0, 0.5)",
-                        },
-                    }}
+                    className="Popup"
                 >
                     <CloseButton onClick={() => setShowPopup(false)} />
                     <h2>Diese Hilfsanzeige wurde von dir selbst erstellt.</h2>

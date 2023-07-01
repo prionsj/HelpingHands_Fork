@@ -3,25 +3,8 @@ import Navigation from './Navigation';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Modal from 'react-modal';
 import logo from './static/HelpingHandsWhite.png';
+import CloseButton from "./CloseButton";
 
-const CloseButton = ({ onClick }) => (
-    <button
-        style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            border: 'none',
-            background: 'transparent',
-            cursor: 'pointer',
-            fontSize: '20px',
-            fontWeight: 'bold',
-            color: 'red',
-        }}
-        onClick={onClick}
-    >
-        &times;
-    </button>
-);
 
 const Konto = () => {
     const [benutzer, setBenutzer] = useState([]);
@@ -156,22 +139,7 @@ const Konto = () => {
                                             isOpen={true}
                                             onRequestClose={() => setShowPopup(false)}
                                             shouldCloseOnOverlayClick={false}
-                                            style={{
-                                                content: {
-                                                    width: '300px',
-                                                    height: '400px',
-                                                    margin: 'auto',
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                    color: 'red',
-                                                    border: '2px solid red',
-                                                },
-                                                overlay: {
-                                                    background: 'rgba(0, 0, 0, 0.5)',
-                                                },
-                                            }}
+                                            className="Popup"
                                         >
                                             <CloseButton onClick={() => setShowPopup(false)} />
                                             <h2>Möchtest du dein Konto Löschen?</h2>

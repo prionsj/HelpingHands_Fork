@@ -3,31 +3,9 @@ import Navigation from "./Navigation";
 import logo from "./static/HelpingHandsWhite.png";
 import {useNavigate} from "react-router-dom";
 import Modal from "react-modal";
+import CloseButton from "./CloseButton";
 
 const AnzeigeErstellen = () => {
-
-    const CloseButton = ({ onClick }) => (
-        <button
-          style={{
-            position: 'relative',
-            top: '-20px',
-            right: '-100px',
-            border: 'none',
-            background: 'transparent',
-            cursor: 'pointer',
-            fontSize: '20px',
-            fontWeight: 'bold',
-            color: 'red',
-              width: '20px'
-          }}
-          onClick={onClick}
-          className="close-button"
-        >
-          &times;
-        </button>
-      );
-      
-      
       
     const [titel, setTitel] = useState('')
     const [beschreibung, setBeschreibung] = useState('')
@@ -146,27 +124,7 @@ const AnzeigeErstellen = () => {
         isOpen={true}
         onRequestClose={() => setShowPopup(false)}
         shouldCloseOnOverlayClick={false}
-        style={{
-          overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          },
-          content: {
-            width: '300px',
-            height: '400px',
-            margin: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            color: 'red',
-            background: 'white',
-            border: '2px solid red',
-            padding: '20px'
-          },
-        }}
-        className="popup"
+        className="Popup"
       >
         <CloseButton onClick={() => setShowPopup(false)} />
         <h2>Um eine Hilfsanzeige zu veröffentlichen müssen mindestens der Titel, der Standort und die Beschreibung ausgefüllt werden.</h2>
