@@ -32,7 +32,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.description-input').type('Ich brauche Hilfe in meinem Garten.');
   
     // Überprüfe, ob das Popup nicht angezeigt wird
-    cy.get('.popup').should('not.exist');
+    cy.get('.Popup2').should('not.exist');
   });
   
   it('does not display error popup when all required fields are filled', () => {
@@ -56,7 +56,7 @@ describe('testing AnzeigeErstellen component', () => {
 
     // Warte auf das Popup-Element und überprüfe, ob es existiert
     cy.wait(1000);
-    cy.get('.popup').should('exist');
+    cy.get('.Popup2').should('exist');
   });
 
   it('displays error popup when only the title field is filled', () => {
@@ -69,7 +69,7 @@ describe('testing AnzeigeErstellen component', () => {
   
     // Überprüfe, ob das Popup angezeigt wird
     cy.wait(1000);
-    cy.get('.popup').should('exist');
+    cy.get('.Popup2').should('exist');
   });
 
   it('displays error popup when only the location field is filled', () => {
@@ -82,7 +82,7 @@ describe('testing AnzeigeErstellen component', () => {
     
     // Überprüfe, ob das Popup angezeigt wird
     cy.wait(1000);
-    cy.get('.popup').should('exist');
+    cy.get('.Popup2').should('exist');
   });
 
   it('displays error popup when only the description field is filled', () => {
@@ -95,7 +95,7 @@ describe('testing AnzeigeErstellen component', () => {
     
     // Überprüfe, ob das Popup angezeigt wird
     cy.wait(1000);
-    cy.get('.popup').should('exist');
+    cy.get('.Popup2').should('exist');
   });
 
   it('closes the popup when the close button is clicked', () => {
@@ -108,13 +108,13 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.submit-button button').click({ force: true });
   
     // Überprüfe, ob das Popup angezeigt wird
-    cy.get('.popup').should('exist');
+    cy.get('.Popup2').should('exist');
   
     // Klicke auf das Schließen-Symbol (Kreuz)
-    cy.get('.popup .close-button').click();
+    cy.get('.Popup2 .close-button').click();
   
     // Überprüfe, ob das Popup geschlossen ist
-    cy.get('.popup').should('not.exist');
+    cy.get('.Popup2').should('not.exist');
   });
   
 });
