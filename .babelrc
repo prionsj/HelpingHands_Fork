@@ -1,5 +1,7 @@
 {
+  // Babel-Plugin zum Umwandeln von ES2015-Modulen in CommonJS-Module
   "plugins": ["transform-es2015-modules-commonjs"],
+  // Babel-Preset für React-Anwendungen
   "presets": ["@babel/preset-react"]
 }
 

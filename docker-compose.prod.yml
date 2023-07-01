@@ -15,9 +15,9 @@
 #    Container-Image gebaut wird. Der REST-Webservice kann unter
 #    http://localhost:3001 aufgerufen werden.
 #
-#  * Das Frontend der Anwendung, für welches ein auf nginx aufbauendes
-#    Container-Image gebaut wird. Das Frontend kann unter der Adresse
-#    http://localhost:8080 aufgerufen werden.--> mal schauen
+#  * Das Frontend (helpinghandsapp) der Anwendung, für welches ein auf nginx aufbauendes
+#    Container-Image gebaut wird. Das Frontend (helpinghandsapp) kann unter der Adresse
+#    http://localhost:8080 aufgerufen werden.
 #===============================================================================
 version: "3.9"
 
@@ -67,7 +67,7 @@ services:
             - dbconfigbenutzer:/data/configdbbenutzer
 
 
-    # HelpingHands-Backend (Entwicklungsmodus) Benutezr
+    # HelpingHands-Backend (Entwicklungsmodus) Benutzer
     backend-benutzer:
         build:
             context: ./BackendBenutzer

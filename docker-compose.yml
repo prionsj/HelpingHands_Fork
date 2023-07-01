@@ -27,11 +27,11 @@
 #    werden. Unter dem Port 9230 kann sich ein JavaScript-Debugger
 #    (z.B. aus dem Chrome Dev Tools) verbinden.
 #
-#  * Eine NodeJS-Laufzeitumgebung, in welcher der Frontend-Quellcode gebaut
+#  * Eine NodeJS-Laufzeitumgebung, in welcher der Frontend-Quellcode (helpinghandsapp) gebaut
 #    und unter der Adresse http://localhost:8080 zum Aufruf im Browser
 #    bereitgestellt wird. Auch hier führen Änderungen am Quellcode zu einem
 #    automatischen Neustart, so dass lediglich im Browser die Seite neugeladen
-#    werden muss.--> mal schauen!!!
+#    werden muss.
 #===============================================================================
 version: "3.9"
 

@@ -1,3 +1,6 @@
+// Diese Datei enthält die Jest-Konfiguration für das Testen von JavaScript- und JSX-Dateien.
+// Die Konfiguration definiert verschiedene Einstellungen und Transformationen für Jest-Tests.
+
 module.exports = {
     transform: {
       '^.+\\.js$': 'babel-jest',
