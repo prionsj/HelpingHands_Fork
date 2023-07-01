@@ -139,7 +139,7 @@ const Konto = () => {
                                             isOpen={true}
                                             onRequestClose={() => setShowPopup(false)}
                                             shouldCloseOnOverlayClick={false}
-                                            className="Popup"
+                                            className="Popup2"
                                         >
                                             <CloseButton onClick={() => setShowPopup(false)} />
                                             <h2>Möchtest du dein Konto Löschen?</h2>

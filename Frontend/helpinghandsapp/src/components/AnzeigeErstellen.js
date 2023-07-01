@@ -124,7 +124,7 @@ const AnzeigeErstellen = () => {
         isOpen={true}
         onRequestClose={() => setShowPopup(false)}
         shouldCloseOnOverlayClick={false}
-        className="Popup"
+        className="Popup2"
       >
         <CloseButton onClick={() => setShowPopup(false)} />
         <h2>Um eine Hilfsanzeige zu veröffentlichen müssen mindestens der Titel, der Standort und die Beschreibung ausgefüllt werden.</h2>
