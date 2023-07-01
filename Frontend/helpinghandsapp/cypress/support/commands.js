@@ -1,25 +1,25 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
+// Diese example commands.js zeigt Ihnen, wie Sie
+// verschiedene benutzerdefinierte Befehle erstellen und vorhandene 
+// Befehle überschreiben können.
 //
-// For more comprehensive examples of custom
-// commands please read more here:
+// Für umfassendere Beispiele von benutzerdefinierten Befehlen
+// lesen Sie bitte hier weiter:
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
 //
-// -- This is a parent command --
+// -- Dies ist ein übergeordneter Befehl --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
 //
-// -- This is a child command --
+// -- Dies ist ein untergeordneter Befehl --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
 //
-// -- This is a dual command --
+// -- Dies ist ein dualer Befehl --
 // Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
 //
 //
-// -- This will overwrite an existing command --
+// -- Dies wird einen vorhandenen Befehl überschreiben --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })

@@ -3,10 +3,12 @@ import 'jest-localstorage-mock';
 import { useNavigate } from 'react-router-dom';
 import fetchMock from 'jest-fetch-mock';
 
+// Mock für die Verwendung von useNavigate
 jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
 }));
 
+// Testfall für die Funktion handleRegistration
 describe('handleRegistration', () => {
   let mockEvent;
   let mockBenutzer;
@@ -14,31 +16,43 @@ describe('handleRegistration', () => {
   let mockSetShowPopup2;
   let navigateMock;
 
+  // Vorbereitung der Testumgebung vor jedem Testfall
   beforeEach(() => {
+    // Erstellen eines Mock-Event-Objekts mit einer Mock-Funktion für 'preventDefault'
     mockEvent = {
       preventDefault: jest.fn(),
     };
+
+    // Erstellen eines Mock-Arrays mit einem vorhandenen Benutzer
     mockBenutzer = [
       { nutzername: 'existingUsername', email: 'existingEmail@example.com' },
     ];
+
+    // Erstellen von Mock-Funktionen
     mockSetShowPopup = jest.fn();
     mockSetShowPopup2 = jest.fn();
     navigateMock = jest.fn();
+
+    // Die Mock-Funktion 'navigateMock' wird als Rückgabewert für 'useNavigate' festgelegt
     useNavigate.mockReturnValue(navigateMock);
   });
 
+  // Nach jedem Testfall werden alle Mock-Funktionen zurückgesetzt
   afterEach(() => {
     jest.clearAllMocks();
   });
 
+  // Vor dem ersten Testfall wird die Mock-Funktionalität für Fetch aktiviert
   beforeAll(() => {
     fetchMock.enableMocks();
   });
 
+  // Nach dem letzten Testfall wird die Mock-Funktionalität für Fetch deaktiviert
   afterAll(() => {
     fetchMock.disableMocks();
   });
 
+  // Überprüft, ob das Popup angezeigt wird, wenn alle Felder leer sind
   test('should show popup if all fields are empty', () => {
     handleRegistration(
       mockEvent,
@@ -58,11 +72,15 @@ describe('handleRegistration', () => {
       mockSetShowPopup2
     );
 
+    // Überprüft, ob navigateMock nicht aufgerufen wurde
     expect(navigateMock).not.toHaveBeenCalled();
+    // Überprüft, ob mockSetShowPopup mit dem Wert true aufgerufen wurde
     expect(mockSetShowPopup).toHaveBeenCalledWith(true);
+    // Überprüft, ob mockSetShowPopup2 nicht aufgerufen wurde
     expect(mockSetShowPopup2).not.toHaveBeenCalled();
   });
 
+  // Überprüft, ob zur Startseite navigiert wird, wenn die Registrierung erfolgreich ist
   test('should navigate to home page if registration is successful', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({}));
 
@@ -84,11 +102,13 @@ describe('handleRegistration', () => {
       mockSetShowPopup2
     );
 
+    // Überprüft, ob navigateMock mit dem Wert '/' aufgerufen wurde
     expect(navigateMock).toHaveBeenCalledWith('/');
   });
 
+  // Überprüft, ob ein Popup angezeigt wird, wenn der Benutzername bereits vergeben ist
   it('should show popup if username is already taken', () => {
-    // Testfall: Der eingegebene Benutzername existiert bereits
+
     handleRegistration(
         mockEvent,
         mockBenutzer,
@@ -106,14 +126,19 @@ describe('handleRegistration', () => {
         mockSetShowPopup,
         mockSetShowPopup2
     );
+    
+    // Überprüft, ob navigateMock nicht aufgerufen wurde
     expect(navigateMock).not.toHaveBeenCalled();
+    // Überprüft, ob mockSetShowPopup2 mit dem Wert true aufgerufen wurde
     expect(mockSetShowPopup2).toHaveBeenCalledWith(true);
+    // Überprüft, ob mockSetShowPopup nicht aufgerufen wurde  
     expect(mockSetShowPopup).not.toHaveBeenCalled();
 });
 
+// Überprüft, ob ein Popup angezeigt wird, wenn die E-Mail-Adresse bereits registriert ist
 it('should show popup if email is already registered', () => {
-    // Testfall: Die eingegebene E-Mail-Adresse ist bereits registriert
-    handleRegistration(
+
+  handleRegistration(
         mockEvent,
         mockBenutzer,
         'Vorname',
@@ -130,12 +155,18 @@ it('should show popup if email is already registered', () => {
         mockSetShowPopup,
         mockSetShowPopup2
     );
+
+    // Überprüft, ob navigateMock nicht aufgerufen wurde
     expect(navigateMock).not.toHaveBeenCalled();
+    // Überprüft, ob mockSetShowPopup2 mit dem Wert true aufgerufen wurde
     expect(mockSetShowPopup2).toHaveBeenCalledWith(true);
+    // Überprüft, ob mockSetShowPopup nicht aufgerufen wurde
     expect(mockSetShowPopup).not.toHaveBeenCalled();
 });
 
+// Überprüft, ob ein Popup angezeigt wird, wenn Benutzername und E-Mail-Adresse bereits vergeben sind
 it('should show popup if username and email are already taken', () => {
+  
   handleRegistration(
     mockEvent,
     mockBenutzer,
@@ -145,22 +176,27 @@ it('should show popup if username and email are already taken', () => {
     'hausnummer',
     'Postleitzahl',
     'Stadt',
-    'existingEmail@example.com', // Existing email
+    'existingEmail@example.com', // Vorhandene E-Mail-Adresse
     '1234567890',
-    'existingUsername', // Existing username
+    'existingUsername', // Vorhandener Benutzername
     'password123',
     navigateMock,
     mockSetShowPopup,
     mockSetShowPopup2
   );
 
+  // Überprüft, ob navigateMock nicht aufgerufen wurde
   expect(navigateMock).not.toHaveBeenCalled();
+  // Überprüft, ob mockSetShowPopup nicht aufgerufen wurde
   expect(mockSetShowPopup).not.toHaveBeenCalled();
+  // Überprüft, ob mockSetShowPopup2 mit dem Wert true aufgerufen wurde
   expect(mockSetShowPopup2).toHaveBeenCalledWith(true);
 
 });
+
+// Überprüft, ob ein Popup angezeigt wird, wenn das E-Mail-Feld leer gelassen wurde
 it('should show popup if email field is left empty', () => {
-  // Testfall: Das E-Mail-Feld wurde leer gelassen
+  
   handleRegistration(
     mockEvent,
     mockBenutzer,
@@ -178,13 +214,18 @@ it('should show popup if email field is left empty', () => {
     mockSetShowPopup,
     mockSetShowPopup2
   );
+
+  // Überprüft, ob navigateMock nicht aufgerufen wurde
   expect(navigateMock).not.toHaveBeenCalled();
+  // Überprüft, ob mockSetShowPopup mit dem Wert true aufgerufen wurde  
   expect(mockSetShowPopup).toHaveBeenCalledWith(true);
+  // Überprüft, ob mockSetShowPopup2 nicht aufgerufen wurde
   expect(mockSetShowPopup2).not.toHaveBeenCalled();
 });
 
+// Überprüft, ob ein Popup angezeigt wird, wenn das Nutzername-Feld leer gelassen wurde
 it('should show popup if username field is left empty', () => {
-  // Testfall: Das Nutzername-Feld wurde leer gelassen
+
   handleRegistration(
     mockEvent,
     mockBenutzer,
@@ -202,13 +243,18 @@ it('should show popup if username field is left empty', () => {
     mockSetShowPopup,
     mockSetShowPopup2
   );
+
+  // Überprüft, ob navigateMock nicht aufgerufen wurde
   expect(navigateMock).not.toHaveBeenCalled();
+  // Überprüft, ob mockSetShowPopup mit dem Wert true aufgerufen wurde
   expect(mockSetShowPopup).toHaveBeenCalledWith(true);
+  // Überprüft, ob mockSetShowPopup2 nicht aufgerufen wurde
   expect(mockSetShowPopup2).not.toHaveBeenCalled();
 });
 
+// Überprüft, ob ein Popup angezeigt wird, wenn das Passwort-Feld leer gelassen wurde
 it('should show popup if password field is left empty', () => {
-  // Testfall: Das Passwort-Feld wurde leer gelassen
+
   handleRegistration(
     mockEvent,
     mockBenutzer,
@@ -226,13 +272,18 @@ it('should show popup if password field is left empty', () => {
     mockSetShowPopup,
     mockSetShowPopup2
   );
+
+  // Überprüft, ob navigateMock nicht aufgerufen wurde
   expect(navigateMock).not.toHaveBeenCalled();
+  // Überprüft, ob mockSetShowPopup mit dem Wert true aufgerufen wurde
   expect(mockSetShowPopup).toHaveBeenCalledWith(true);
+  // Überprüft, ob mockSetShowPopup2 nicht aufgerufen wurde
   expect(mockSetShowPopup2).not.toHaveBeenCalled();
 });
 
+// Überprüft, ob ein Popup angezeigt wird, wenn das Name-Feld leer gelassen wurde
 it('should show popup if name field is left empty', () => {
-  // Testfall: Das Name-Feld wurde leer gelassen
+
   handleRegistration(
     mockEvent,
     mockBenutzer,
@@ -250,8 +301,12 @@ it('should show popup if name field is left empty', () => {
     mockSetShowPopup,
     mockSetShowPopup2
   );
+
+  // Überprüft, ob navigateMock nicht aufgerufen wurde
   expect(navigateMock).not.toHaveBeenCalled();
+  // Überprüft, ob mockSetShowPopup mit dem Wert true aufgerufen wurde
   expect(mockSetShowPopup).toHaveBeenCalledWith(true);
+  // Überprüft, ob mockSetShowPopup2 nicht aufgerufen wurde
   expect(mockSetShowPopup2).not.toHaveBeenCalled();
 });
 

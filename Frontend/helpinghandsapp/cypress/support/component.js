@@ -1,27 +1,28 @@
 // ***********************************************************
-// This example support/component.js is processed and
-// loaded automatically before your test files.
+// Diese Beispiel-Datei support/component.js wird automatisch
+//  vor Ihrer Testdateien verarbeitet und geladen.
 //
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
+// Dies ist ein großartiger Ort, um globale Konfigurationen und
+// Verhaltensweisen einzufügen, die Cypress modifizieren.
 //
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
+// Sie können den Speicherort dieser Datei ändern oder das 
+// automatische Laden von Support-Dateien mit der Konfigurationsoption
+// 'supportFile' deaktivieren.
 //
-// You can read more here:
+// Weitere Informationen finden Sie hier:
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+// Importieren von commands.js mit ES2015-Syntax:
 import './commands'
 
-// Alternatively you can use CommonJS syntax:
+// Alternativ können Sie auch die CommonJS-Syntax verwenden:
 // require('./commands')
 
 import { mount } from 'cypress/react18'
 
+// Fügen Sie den Befehl 'mount' zu Cypress.Commands hinzu:
 Cypress.Commands.add('mount', mount)
 
-// Example use:
+// Beispielhafte Verwendung:
 // cy.mount(<MyComponent />)

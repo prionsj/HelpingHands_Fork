@@ -2,3 +2,8 @@
   "plugins": ["transform-es2015-modules-commonjs"],
   "presets": ["@babel/preset-react"]
 }
+
+// Diese .babelrc-Datei enthält die Babel-Konfiguration für das Transpilieren von JavaScript-Code.
+// Das Plugin "transform-es2015-modules-commonjs" wird verwendet, um ES2015-Module in das CommonJS-Modulformat zu transpilieren.
+// Das Preset "@babel/preset-react" wird verwendet, um JSX in JavaScript zu transformieren.
+// Diese Konfiguration wird von Babel verwendet, um den JavaScript-Code in einem Projekt entsprechend zu transpilieren.

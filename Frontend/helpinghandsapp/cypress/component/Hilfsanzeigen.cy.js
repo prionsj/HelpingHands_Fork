@@ -9,7 +9,9 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import "../../src/App.css"
 
 describe('testing filter function of <Hilfsanzeigen />', () => {
-
+  // Vor jedem Test:
+  // - Setze die Viewport-Größe auf 375x790
+  // - Rendere die Hilfsanzeigen-Komponente in einem MemoryRouter
   beforeEach(() => {
     cy.viewport(375, 790)
     mount(
@@ -19,11 +21,13 @@ describe('testing filter function of <Hilfsanzeigen />', () => {
     );
   });
 
+  // Test: Rendert die Hilfsanzeigen-Komponente
   it('renders the Hilfsanzeigen component', () => {
     // Überprüfe, ob die Komponente erfolgreich gerendert wurde
     cy.get('.hilfsanzeigen-page').should('exist');
   });
 
+  // Test: Zeigt Hilfsangebote basierend auf dem ausgewählten Standort an
   it('displays help offers based on selected location', () => {
     // Überprüfe, ob es Anzeigen mit dem Standort "Karlsruhe" gibt
     cy.get('.hilfen .card li .stadt')
@@ -46,8 +50,7 @@ describe('testing filter function of <Hilfsanzeigen />', () => {
         });
   });
 
-
-
+  // Test: Zeigt Hilfsangebote basierend auf der ausgewählten Kategorie an
   it('displays help offers based on selected category', () => {
 
     // Überprüfe, ob es Anzeigen mit der Kategorie "Garten" gibt
@@ -56,7 +59,6 @@ describe('testing filter function of <Hilfsanzeigen />', () => {
           const amountOffersGarten = offersGarten.filter((_, offers) => {
             return Cypress.$(offers).text().includes('Garten');
           }).length;
-
 
           if (amountOffersGarten > 0) {
             // Wähle die Kategorie "Garten" aus der Kategorienauswahl
@@ -72,6 +74,7 @@ describe('testing filter function of <Hilfsanzeigen />', () => {
         });
   });
 
+  // Test: Zeigt Hilfsangebote basierend auf ausgewählter Kategorie und Standort an
   it('displays help offers based on selected category and location', () => {
     // Überprüfe, ob es Anzeigen mit dem Standort "Karlsruhe" gibt
     cy.get('.hilfen .card li .stadt')

@@ -9,6 +9,9 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import '../../src/App.css';
 
 describe('testing AnzeigeErstellen component', () => {
+  // Vor jedem Test:
+  // - Setze die Viewport-Größe auf 375x790
+  // - Rendere die AnzeigeErstellen-Komponente in einem MemoryRouter
   beforeEach(() => {
     cy.viewport(375, 790);
     mount(
@@ -18,11 +21,13 @@ describe('testing AnzeigeErstellen component', () => {
     );
   });
 
+  // Test: Rendert die AnzeigeErstellen-Komponente
   it('renders the AnzeigeErstellen component', () => {
     // Überprüfe, ob die Komponente erfolgreich gerendert wurde
     cy.get('.helping-form').should('exist');
   });
 
+  // Test: Zeigt kein Fehler-Popup an, wenn alle Felder ausgefüllt sind
   it('does not display error popup when all fields are filled', () => {
     // Fülle alle erforderlichen Felder aus
     cy.get('.title-input').type('Hilfe benötigt');
@@ -35,6 +40,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.Popup2').should('not.exist');
   });
   
+  // Test: Zeigt kein Fehler-Popup an, wenn alle erforderlichen Felder ausgefüllt sind
   it('does not display error popup when all required fields are filled', () => {
     // Fülle das Formular mit gültigen Daten aus
     cy.get('.title-input').type('Babysitter');
@@ -46,6 +52,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.popup').should('not.exist');
   });
 
+  // Test: Zeigt Fehler-Popup an, wenn das Formular ungültige Daten enthält
   it('displays error popup with invalid form data', () => {
     // Lasse das Formular leer
 
@@ -59,6 +66,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.Popup2').should('exist');
   });
 
+  // Test: Zeigt Fehler-Popup an, wenn nur das Titel-Feld ausgefüllt ist
   it('displays error popup when only the title field is filled', () => {
     // Fülle nur das Titel-Feld aus
     cy.get('.title-input').type('Hilfe benötigt');
@@ -72,6 +80,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.Popup2').should('exist');
   });
 
+  // Test: Zeigt Fehler-Popup an, wenn nur das Standort-Feld ausgefüllt ist
   it('displays error popup when only the location field is filled', () => {
     // Fülle nur das Standort-Feld aus
     cy.get('.place-input').type('Berlin');
@@ -85,6 +94,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.Popup2').should('exist');
   });
 
+  // Test: Zeigt Fehler-Popup an, wenn nur das Beschreibung-Feld ausgefüllt ist
   it('displays error popup when only the description field is filled', () => {
     // Fülle nur das Beschreibung-Feld aus
     cy.get('.description-input').type('Ich brauche Hilfe in meinem Garten.');
@@ -98,6 +108,7 @@ describe('testing AnzeigeErstellen component', () => {
     cy.get('.Popup2').should('exist');
   });
 
+  // Test: Schließt das Popup, wenn auf die Schaltfläche "Schließen" geklickt wird
   it('closes the popup when the close button is clicked', () => {
     // Fülle das Formular mit gültigen Daten aus
     cy.get('.title-input').type('Hilfe benötigt');
