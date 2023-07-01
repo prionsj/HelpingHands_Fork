@@ -5,8 +5,10 @@ import {useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import CloseButton from "./CloseButton";
 
+// Komponente für das Erstellen einer Hilfsanzeige
 const AnzeigeErstellen = () => {
       
+    // Zustände für die Formulareingaben
     const [titel, setTitel] = useState('')
     const [beschreibung, setBeschreibung] = useState('')
     const [kategorie, setKategorie] = useState('')
@@ -16,6 +18,7 @@ const AnzeigeErstellen = () => {
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
 
+    // Effekt zum Laden des Nutzernamens aus dem lokalen Speicher
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
@@ -23,6 +26,7 @@ const AnzeigeErstellen = () => {
         }
     }, [setNutzername]);
 
+    // Funktion zum Absenden des Formulars
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (
@@ -55,9 +59,13 @@ const AnzeigeErstellen = () => {
         }
     }
 
+    // Hauptkomponente für das Erstellen der Hilfsanzeige wird gerendert
     return (
         <div>
+            {/* Navigation-Komponente einbinden */}
             <Navigation />
+
+            {/* Logo und Beschreibung anzeigen */}
             <div className="logo-container">
                 <div className="logo-picture">
                     <img className="logo" src={logo} alt="Logo" />
@@ -67,6 +75,8 @@ const AnzeigeErstellen = () => {
                     <div className="logo-description-title"> Erstelle deinen Antrag und finde Hilfe! </div>
                 </p>
             </div>
+
+            {/* Formular zur Erstellung der Hilfsanzeige */}
             <form className="helping-form">
                 <div className="heling-form-inputs">
                     <div>
@@ -119,6 +129,8 @@ const AnzeigeErstellen = () => {
                     </div>
                 </div>
             </form>
+
+            {/* Popup für fehlende Angaben */}
             {showPopup && (
         <Modal
         isOpen={true}

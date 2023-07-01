@@ -5,30 +5,36 @@ import logo from "./static/HelpingHandsWhite.png";
 import Modal from "react-modal";
 import CloseButton from "./CloseButton";
 
-
-
+// Komponente für die Hilfsanzeigen-Seite
 const Hilfsanzeigen = () => {
+    // Zustand für die Hilfsanzeigen
     const [helps, setHelps] = useState([]);
+    // Zustand für den Nutzernamen
     const [nutzername, setNutzername] = useState([]);
+    // Zustand für die Anzeige des Popups
     const [showPopup, setShowPopup] = useState(false);
+    // Zustand für den ausgewählten Standort
     const [selectedStandort, setSelectedStandort] = useState("");
+    // Zustand für die ausgewählte Kategorie
     const [selectedKategorie, setSelectedKategorie] = useState("");
-    const [noResults, setNoResults] = useState(false); // Zustand für die Anzeige der Nachricht
+    // Zustand für die Anzeige der Nachricht
+    const [noResults, setNoResults] = useState(false);
 
+    // Hook zum Navigieren zu anderen Seiten
     const navigate = useNavigate();
 
+    // Effekt zum Laden der Hilfsanzeigen von der API
     useEffect(() => {
         fetch("http://localhost:3000/hilfsanzeige")
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setHelps(data);
             })
             .catch((err) => {
-                console.log(err.message);
             });
     }, []);
 
+    // Effekt zum Laden des Nutzernamens aus dem lokalen Speicher
     useEffect(() => {
         const storedUsername = localStorage.getItem("username");
         if (storedUsername) {
@@ -36,6 +42,7 @@ const Hilfsanzeigen = () => {
         }
     }, [setNutzername]);
 
+    // Funktion zum Bearbeiten der Hilfsanzeigen
     const handleHelps = async (currentTitle, ersteller, standort) => {
         await fetch("http://localhost:3000/angebot", {
             method: "POST",
@@ -51,10 +58,12 @@ const Hilfsanzeigen = () => {
         }).then((res) => console.log(res));
     };
 
+    // Funktion zum Löschen der Hilfsanzeigen
     const deleteHelps = async (id) => {
         await fetch(`http://localhost:3000/hilfsanzeige/${id}`, { method: "DELETE" });
     };
 
+    // Funktion zum Bearbeiten der Hilfsanfrage
     const handleHelprequest = (titel, ersteller, standort, id) => {
         const matchingBenutzer = helps.find(
             (help) => help.nutzername === nutzername && help.titel === titel
@@ -69,10 +78,12 @@ const Hilfsanzeigen = () => {
         }
     };
 
+    // Funktion zum Behandeln der Sucheingabe
     const handleSearch = (e) => {
         e.preventDefault();
     };
 
+    // Effekt zum Überprüfen, ob Ergebnisse vorhanden sind
     useEffect(() => {
         setNoResults(
             helps.length === 0 ||
@@ -82,15 +93,20 @@ const Hilfsanzeigen = () => {
         );
     }, [helps, selectedStandort, selectedKategorie]);
 
+
+    // Hauptkomponente für die Hilfsanzeigen wird gerendert
     return (
         <div className="hilfsanzeigen-page">
             <Navigation />
+            {/* Logo und Beschreibung anzeigen */}
             <div className="logo-container">
                 <div className="logo-picture">
                     <img className="logo" src={logo} alt="Helping Hands Logo" />
                 </div>
                 <p className="logo-description">Biete Hilfe in deiner Stadt</p>
             </div>
+
+            {/* Suchformular */}
             <div className="search-container" onSubmit={handleSearch}>
                 <form className="d-flex search" role="search">
                     <input
@@ -104,6 +120,8 @@ const Hilfsanzeigen = () => {
                     />
                 </form>
             </div>
+
+            {/* Kategorienauswahl */}
             <div className="category-container">
                 <select
                     className="form-select"
@@ -122,6 +140,8 @@ const Hilfsanzeigen = () => {
                     <option value="Sonstiges">Sonstiges</option>
                 </select>
             </div>
+
+            {/* Liste der Hilfsanzeigen */}
             <ol className="hilfsanzeigen">
                 {noResults ? ( // Überprüfung, ob keine Ergebnisse gefunden wurden
                     <div className="no-hilfsanzeigen">

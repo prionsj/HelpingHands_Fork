@@ -4,10 +4,12 @@ import logo from "./static/HelpingHandsWhite.png"
 import Modal from 'react-modal';
 import CloseButton from "./CloseButton";
 
-
+// Funktion zur Registrierung
 export const handleRegistration = async (event, benutzer, vorname, nachname, straße, hausnummer, postleitzahl, stadt, email,
                                           telefon, nutzername, passwort, navigate, setShowPopup, setShowPopup2) => {
     event.preventDefault()
+    
+    // Überprüfung der Eingabefelder
     const matchingNutzername = benutzer.find(
         (benutzer) =>
             benutzer.nutzername === nutzername
@@ -35,6 +37,8 @@ export const handleRegistration = async (event, benutzer, vorname, nachname, str
     } else {
         setShowPopup(false);
         setShowPopup2(false)
+        
+        // Daten an die API senden
         await fetch('http://localhost:3001/benutzer', {
             method: 'POST',
             body:
@@ -54,44 +58,58 @@ export const handleRegistration = async (event, benutzer, vorname, nachname, str
             headers: {
                 'Content-Type': 'application/json'
             }
-        })//.then(res => console.log(res));
+        })
+        // Zur Startseite navigieren
         navigate("/");
     }
 };
 
+// Komponente für die Registrierung
 export const Registrierung = () => {
-
-
-
+    // Zustand für den Vornamen des Benutzers
     const [vorname, setVorname] = useState('');
+    // Zustand für den Nachnamen des Benutzers
     const [nachname, setNachname] = useState('');
+    // Zustand für den Straßennamen des Benutzers
     const [straße, setStraße] = useState('');
+    // Zustand für die Hausnummer des Benutzers
     const [hausnummer, setHausnummer] = useState('');
+    // Zustand für die Postleitzahl des Benutzers
     const [postleitzahl, setPostleitzahl] = useState('');
+    // Zustand für den Stadtnamen des Benutzers
     const [stadt, setStadt] = useState('');
+    // Zustand für die E-Mail des Benutzers
     const [email, setEmail] = useState('');
+    // Zustand für die Telefonnummer des Benutzers
     const [telefon, setTelefon] = useState('');
+    // Zustand für den Benutzernamen des Benutzers
     const [nutzername, setNutzername] = useState('');
+    // Zustand für das Passwort des Benutzers
     const [passwort, setPasswort] = useState('');
+    // Zustand zur Steuerung der Anzeige des Popups
     const [showPopup, setShowPopup] = useState(false);
+    // Zustand für eine Liste der Benutzer
     const [benutzer, setBenutzer] = useState([]);
+    // Zustand zur Steuerung der Anzeige des zweiten Popups
     const [showPopup2, setShowPopup2] = useState(false);
+    
+    // Funktion zum Navigieren in der Anwendung
     const navigate = useNavigate();
 
+    // Effekt zum Abrufen der Benutzerdaten von der API
     useEffect(() => {
         fetch('http://localhost:3001/benutzer')
             .then((response) => response.json())
             .then((data) => {
-                //console.log(data);
                 setBenutzer(data);
-
             }).catch((err) => {
-            //console.log(err.message);
         });
     }, []);
 
+    // Hauptkomponente für die Registrierungsseite wird gerendert
     return (
       <div className="registrieren-page">
+            {/* Logo und Registrierungsbeschreibung */}
           <div className="logo-container">
               <div className="logo-picture">
                   <img className="logo" src={logo} alt="Logo" />
@@ -100,7 +118,7 @@ export const Registrierung = () => {
                   Registrierung
               </p>
           </div>
-      <form className="register-form">
+      <form className="register-form"> {/* Registrierungsformular */}
         <div className="name_container">
             <div className="name_labels">
                 <label htmlFor="name" className="name">Vorname</label>
@@ -219,6 +237,7 @@ export const Registrierung = () => {
             </button>
         </div>
       </form>
+        {/* Popup-Modal für fehlende Daten */}
         {showPopup && (
             <Modal
                 isOpen={true}
@@ -230,6 +249,7 @@ export const Registrierung = () => {
               <h2>Für die Registrierung müssen alle Datenfelder ausgefüllt werden.</h2>
             </Modal>
         )}
+            {/* Popup-Modal für bereits verwendeten Benutzernamen oder E-Mail */}
           {showPopup2 && (
               <Modal
                   isOpen={true}

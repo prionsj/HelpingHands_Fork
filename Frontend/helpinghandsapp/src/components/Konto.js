@@ -5,15 +5,21 @@ import Modal from 'react-modal';
 import logo from './static/HelpingHandsWhite.png';
 import CloseButton from "./CloseButton";
 
-
+// Komponente für das Konto
 const Konto = () => {
+   // Zustand für Benutzerdaten
     const [benutzer, setBenutzer] = useState([]);
+    // Zustand für Hilfsanzeigen
     const [helps, setHelps] = useState([]);
+    // Zustand für den aktuellen Nutzernamen
     const [nutzername, setNutzername] = useState([]);
+    // Zustand für die Anzeige des Lösch-Popups
     const [showPopup, setShowPopup] = useState(false);
 
+    // Verwendung des useNavigate-Hooks zur Navigation
     const navigate = useNavigate();
 
+    // Effekt zum Laden des Nutzernamens aus dem lokalen Speicher
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
@@ -21,52 +27,56 @@ const Konto = () => {
         }
     }, [setNutzername]);
 
+    // Effekt zum Abrufen der Benutzerdaten von der API
     useEffect(() => {
         fetch('http://localhost:3001/benutzer')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setBenutzer(data);
             })
             .catch((err) => {
-                console.log(err.message);
             });
     }, []);
 
+    // Effekt zum Abrufen der Hilfsanzeigen von der API
     useEffect(() => {
         fetch('http://localhost:3000/hilfsanzeige')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setHelps(data);
             })
             .catch((err) => {
-                console.log(err.message);
             });
     }, []);
 
+    // Funktion zum Löschen einer Hilfsanzeige
     const deleteHelps = async (id) => {
         await fetch(`http://localhost:3000/hilfsanzeige/${id}`, { method: 'DELETE' });
         navigate('/hilfsanzeigen');
     };
 
+    // Funktion zum Bestätigen des Löschen-Befehls für einen Benutzer
     const deleteUserConfirmation = async (id) => {
         setShowPopup(true);
     };
 
+    // Funktion zum Löschen eines Benutzers
     const deleteUser = async (id) => {
         await fetch(`http://localhost:3001/benutzer/${id}`, { method: 'DELETE' });
         navigate('/');
     };
 
+    // Funktion zum Bearbeiten eines Benutzers
     const handleBearbeiten = (benutzerId) => {
         navigate(`/benutzerbearbeiten/${benutzerId}`);
     };
 
+    // Funktion zum Bearbeiten einer Hilfsanzeige
     const handleBearbeiten2 = (helpId) => {
         navigate(`/hilfsanzeigebearbeiten/${helpId}`);
     };
 
+    // Hauptkomponente für das Konto wird gerendert
     return (
         <div>
             <Navigation />
@@ -75,12 +85,15 @@ const Konto = () => {
                     if (benutzer.nutzername === nutzername) {
                         return (
                             <div className="container" key={index}>
+                                {/* Logo und Beschreibung */}
                                 <div className="logo-container">
                                     <div className="logo-picture">
                                         <img className="logo" src={logo} alt="Logo" />
                                     </div>
                                     <p className="logo-description">Dein Konto</p>
                                 </div>
+                                
+                                {/* Benutzerdaten anzeigen */}
                                 <div className="header">
                                     <h1>Benutzerdaten</h1>
                                 </div>
@@ -134,6 +147,7 @@ const Konto = () => {
                                         <NavLink to={`/`}>Abmelden</NavLink>
                                     </button>
 
+                                    {/* Popup zur Bestätigung des Benutzerlöschens */}
                                     {showPopup && (
                                         <Modal
                                             isOpen={true}
@@ -149,6 +163,7 @@ const Konto = () => {
                                     )}
                                 </div>
                                 <hr></hr>
+                                {/* Meine Hilfsanzeigen anzeigen */}
                                 <ol className="hilfsanzeigen">
                                     <div className="header">
                                         <h1>Meine Hilfsanzeigen</h1>
@@ -199,13 +214,13 @@ const Konto = () => {
                                                     </div>
                                                 );
                                             }
-                                            return null; // Return null for non-matching helps
+                                            return null; // Null zurückgeben für nicht übereinstimmende Hilfsanzeigen
                                         })}
                                 </ol>
                             </div>
                         );
                     }
-                    return null; // Return null for non-matching benutzer
+                    return null; // Null zurückgeben für nicht übereinstimmende Benutzer
                 })}
         </div>
     );

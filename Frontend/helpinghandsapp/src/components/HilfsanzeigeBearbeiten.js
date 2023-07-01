@@ -2,23 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import logo from "./static/HelpingHandsWhite.png";
 
+// Komponente zum Bearbeiten einer Hilfsanzeige
 const HilfsanzeigeBearbeiten = () => {
   const { helpId } = useParams();
   const [hilfsanzeige, setHilfsanzeige] = useState(null);
   const navigate = useNavigate();
 
+  // Effekt zum Laden der Hilfsanzeige von der API
   useEffect(() => {
     fetch(`http://localhost:3000/hilfsanzeige/${helpId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setHilfsanzeige(data);
       })
       .catch((err) => {
-        console.log(err.message);
       });
   }, [helpId]);
 
+  // Handler zum Aktualisieren des Titels
   const handleTitelChange = (event) => {
     const { value } = event.target;
     setHilfsanzeige((prevHilfsanzeige) => ({
@@ -27,6 +28,7 @@ const HilfsanzeigeBearbeiten = () => {
     }));
   };
 
+  // Handler zum Aktualisieren der Kategorie
   const handleKategorieChange = (event) => {
     const { value } = event.target;
     setHilfsanzeige((prevHilfsanzeige) => ({
@@ -35,6 +37,7 @@ const HilfsanzeigeBearbeiten = () => {
     }));
   };
 
+  // Handler zum Aktualisieren des Standorts
   const handleStandortChange = (event) => {
     const { value } = event.target;
     setHilfsanzeige((prevHilfsanzeige) => ({
@@ -43,6 +46,7 @@ const HilfsanzeigeBearbeiten = () => {
     }));
   };
 
+  // Handler zum Aktualisieren des Zeitraums
   const handleZeitraumChange = (event) => {
     const { value } = event.target;
     setHilfsanzeige((prevHilfsanzeige) => ({
@@ -51,6 +55,7 @@ const HilfsanzeigeBearbeiten = () => {
     }));
   };
 
+  // Handler zum Aktualisieren der Beschreibung
   const handleBeschreibungChange = (event) => {
     const { value } = event.target;
     setHilfsanzeige((prevHilfsanzeige) => ({
@@ -59,7 +64,7 @@ const HilfsanzeigeBearbeiten = () => {
     }));
   };
   
-
+  // Handler zum Absenden der aktualisierten Hilfsanzeige
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -72,18 +77,17 @@ const HilfsanzeigeBearbeiten = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Hilfsanzeige wurde aktualisiert:', data);
         // Nachdem die Daten erfolgreich aktualisiert wurden, navigiere zur Konto-Seite
         navigate('/konto');
       })
       .catch((err) => {
-        console.log(err.message);
       });
   };
 
-
+  // Hauptkomponente für die Hilfsanzeige-Bearbeiten-Ansicht wird gerendert
   return (
     <div>
+      {/* Prüfen, ob Hilfsanzeige existiert */}
       {hilfsanzeige && (
           <div>
             <div className="logo-container">
@@ -94,8 +98,8 @@ const HilfsanzeigeBearbeiten = () => {
                 Bearbeite deine Hilfsanzeige
               </p>
             </div>
+            {/* Formular für die Bearbeitung der Hilfsanzeige */}
             <form className="helping-form">
-              {/* Benutzerdaten bearbeiten */}
               <div className="heling-form-inputs">
                 <div>
                   <input

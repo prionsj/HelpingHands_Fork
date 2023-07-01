@@ -3,8 +3,8 @@ const CloseButton = ({ onClick }) => (
     <button
       style={{
         position: 'relative',
-        top: '-50px', // Verschiebung nach oben
-        right: '-100px', // Verschiebung nach rechts
+        top: '-50px',
+        right: '-100px',
         border: 'none',
         background: 'transparent',
         cursor: 'pointer',
@@ -13,8 +13,10 @@ const CloseButton = ({ onClick }) => (
         color: 'red',
         width: '5px'
       }}
+      // Funktion, die bei Klick aufgerufen wird
       onClick={onClick}
-      className="close-button" // Klasse für Styling-Verwendung
+      // Klasse für Styling-Verwendung
+      className="close-button"
     >
       &times;
     </button>

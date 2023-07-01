@@ -2,23 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import logo from "./static/HelpingHandsWhite.png";
 
+// Komponente zum Bearbeiten der Benutzerdaten
 const BenutzerBearbeiten = () => {
+  // BenutzerId aus den URL-Parametern abrufen
   const { benutzerId } = useParams();
+  // Zustand für den Benutzer
   const [benutzer, setBenutzer] = useState(null);
+  // Navigationsfunktion zum Weiterleiten nach dem Speichern
   const navigate = useNavigate();
 
+  // Effekt zum Abrufen der Benutzerdaten von der API
   useEffect(() => {
     fetch(`http://localhost:3001/benutzer/${benutzerId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setBenutzer(data);
       })
       .catch((err) => {
-        console.log(err.message);
       });
   }, [benutzerId]);
 
+  // Funktion zum Aktualisieren des Eingabewerts
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setBenutzer((prevBenutzer) => ({
@@ -27,6 +31,7 @@ const BenutzerBearbeiten = () => {
     }));
   };
 
+  // Funktion zum Bearbeiten des Benutzers
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -40,21 +45,21 @@ const BenutzerBearbeiten = () => {
       });
   
       if (response.ok) {
-        console.log('Benutzerdaten wurden aktualisiert:', benutzer);
         localStorage.setItem('username', benutzer.nutzername);
         navigate('/konto', { state: { updatedUsername: benutzer.nutzername } });
       } else {
-        console.log('Fehler beim Aktualisieren der Benutzerdaten:', response.statusText);
       }
     } catch (error) {
-      console.log('Fehler beim Aktualisieren der Benutzerdaten:', error.message);
     }
   };
 
+  // Hauptkomponente für die Bearbeiten-Ansicht wird gerendert
   return (
     <div>
+      {/* Überprüfen, ob Benutzerdaten vorhanden sind */}
       {benutzer && (
         <div>
+          {/* Logo und Beschreibung anzeigen */}
           <div className="logo-container">
             <div className="logo-picture">
               <img className="logo" src={logo} alt="Logo" />
@@ -63,6 +68,7 @@ const BenutzerBearbeiten = () => {
               Bearbeite deine Benutzerdaten
             </p>
           </div>
+          {/* Formular zum Bearbeiten der Benutzerdaten */}
           <form className="register-form" onSubmit={handleSubmit}>
             <div className="name_container">
               <div className="name_labels">

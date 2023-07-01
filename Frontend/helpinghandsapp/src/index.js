@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Erstelle eine Wurzel für das Rendern der React-Anwendung
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// Rendere die App-Komponente innerhalb des React.StrictMode
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Wenn du die Leistung in deiner App messen möchtest, gib eine Funktion weiter,
+// um die Ergebnisse zu protokollieren (z. B.: reportWebVitals(console.log))
+// oder sende sie an eine Analytics-Endpunkt. Erfahre mehr unter: https://bit.ly/CRA-vitals
 reportWebVitals();

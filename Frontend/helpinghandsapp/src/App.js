@@ -22,16 +22,17 @@ const App = () => {
     return (
           <Router>
             <div>
+              // Router-Konfiguration
               <Routes>
-                  <Route path="/" element={<Login />} exact/>
-                  <Route path="/registrierung" element={<Registrierung />}/>
-                  <Route path="/hilfsanzeigen" element={<Hilfsanzeigen />}/>
-                  <Route path="/anzeige-erstellen" element={<AnzeigeErstellen />} exact/>
-                  <Route path="/angebotene-hilfe" element={<AngeboteneHilfe />}/>
-                  <Route path="/konto" element={<Konto />}/>
-                  <Route path="/benutzerbearbeiten/:benutzerId" element={<BenutzerBearbeiten />}/>
-                  <Route path="/hilfsanzeigebearbeiten/:helpId" element={<HilfsanzeigeBearbeiten/>}/>
-                  <Route element={<Error />}/>
+                  <Route path="/" element={<Login />} exact/>                                         // Startseite
+                  <Route path="/registrierung" element={<Registrierung />}/>                          // Registrierungsseite
+                  <Route path="/hilfsanzeigen" element={<Hilfsanzeigen />}/>                          // Hilfsanzeigen-Seite
+                  <Route path="/anzeige-erstellen" element={<AnzeigeErstellen />} exact/>             // Seite zum Erstellen einer Anzeige
+                  <Route path="/angebotene-hilfe" element={<AngeboteneHilfe />}/>                     // Seite mit angebotener Hilfe
+                  <Route path="/konto" element={<Konto />}/>                                          // Konto-Seite
+                  <Route path="/benutzerbearbeiten/:benutzerId" element={<BenutzerBearbeiten />}/>    // Seite zur Bearbeitung des Benutzerprofils
+                  <Route path="/hilfsanzeigebearbeiten/:helpId" element={<HilfsanzeigeBearbeiten/>}/> // Seite zur Bearbeitung einer Hilfsanzeige
+                  <Route element={<Error />}/>                                                        // Fallback-Seite für unbekannte Routen
               </Routes>
             </div>
           </Router>

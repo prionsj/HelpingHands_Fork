@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Navigation from "./Navigation";
 import logo from "./static/HelpingHandsWhite.png";
 
+// Komponente für die angebotene Hilfe
 const AngeboteneHilfe = () => {
+    // Zustand für den Nutzernamen
     const [nutzername, setNutzername] = useState([]);
+    // Zustand für die angebotene Hilfe
     const [angebote, setAngebote] = useState([]);
+    // Zustand für die Benutzerdaten
     const [benutzer, setBenutzer] = useState([]);
 
+    // Effekt zum Laden des Nutzernamens aus dem lokalen Speicher
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
@@ -14,33 +19,35 @@ const AngeboteneHilfe = () => {
         }
     }, [setNutzername]);
 
+    // Effekt zum Abrufen der Angebote von der API
     useEffect(() => {
         fetch('http://localhost:3000/angebot')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setAngebote(data);
             })
             .catch((err) => {
-                console.log(err.message);
             });
     }, []);
 
+    // Effekt zum Abrufen der Benutzerdaten von der API
     useEffect(() => {
         fetch('http://localhost:3001/benutzer')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setBenutzer(data);
             })
             .catch((err) => {
-                console.log(err.message);
             });
     }, []);
 
+    // Hauptkomponente für die angebotene Hilfe-Ansicht wird gerendert
     return (
         <div>
+            {/* Navigation-Komponente einbinden */}
             <Navigation />
+
+            {/* Logo und Beschreibung anzeigen */}
             <div className="logo-container">
                 <div className="logo-picture">
                     <img className="logo" src={logo} alt="Logo" />
@@ -49,6 +56,8 @@ const AngeboteneHilfe = () => {
                     Überblick über deine angebotene Hilfe
                 </p>
             </div>
+
+            {/* Liste der Hilfsanzeigen */}
             <ol className="hilfsanzeigen">
                 {angebote &&
                     angebote.map((angebot) => {

@@ -5,7 +5,17 @@ import Modal from 'react-modal';
 import CloseButton from "./CloseButton";
 
 
-// Ausgelagerte handleLogin-Funktion
+/**
+ * Ausgelagerte handleLogin-Funktion
+ * Funktion zur Behandlung des Login-Vorgangs.
+ * Überprüft den Benutzernamen und das Passwort und navigiert bei erfolgreicher Anmeldung zur Hilfsanzeigen-Seite.
+ * @param {object} event - Das Event-Objekt.
+ * @param {string} nutzername - Der eingegebene Benutzername.
+ * @param {string} passwort - Das eingegebene Passwort.
+ * @param {array} benutzer - Die Liste der Benutzer.
+ * @param {function} navigate - Die navigate-Funktion aus dem useNavigate-Hook.
+ * @param {function} setShowPopup - Die Funktion zum Anzeigen/Verstecken des Popups.
+ */
 export const handleLogin = (event, nutzername, passwort, benutzer, navigate, setShowPopup) => {
     event.preventDefault()
     const matchingBenutzer = benutzer.find(
@@ -20,6 +30,11 @@ export const handleLogin = (event, nutzername, passwort, benutzer, navigate, set
     }
 };
 
+/**
+ * Komponente für den Login.
+ * Zeigt das Login-Formular an und ermöglicht die Anmeldung.
+ */
+
 export const Login = () => {
     const navigate = useNavigate();
     const [nutzername, setNutzername] = useState("");
@@ -27,28 +42,30 @@ export const Login = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [benutzer, setBenutzer] = useState([]);
 
+    // Daten vom Server abrufen
     useEffect(() => {
         fetch("http://localhost:3001/benutzer")
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setBenutzer(data);
             })
             .catch((err) => {
-                console.log(err.message);
             });
     }, []);
 
+    // Speichert den aktuellen Nutzernamen im Local Storage.
     useEffect(() => {
         localStorage.setItem('username', nutzername);
     }, [nutzername]);
 
+    // Hauptkomponente für die Login-Seite wird gerendert
     return (
         <div className="login-page">
             <div className="logo-picture">
                 <img className="login logo" src={logo} alt="Logo" />
             </div>
 
+            {/* Forular für das Login */}
             <form className="login-form">
                 <label htmlFor="nutzername">Benutzername</label>
                 <input
@@ -75,6 +92,8 @@ export const Login = () => {
 
                 </div>
             </form>
+
+            {/* Popup für Fehlermeldung */}
             {showPopup && (
                 <Modal
                     isOpen={true}

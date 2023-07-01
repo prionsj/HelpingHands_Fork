@@ -2,12 +2,14 @@ import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 
+// Die Komponente für die Navigationsleiste der Anwendung
 const Navigation = () => {
     return (
         <nav className="navbar fixed-bottom" id="app-menu">
             <div className="container">
                 <div>
-                    <ul className="nav">
+                    // Liste für die Navigationslinks
+                    <ul className="nav"> 
                         <li className="nav-item">
                             <NavLink to="/hilfsanzeigen" className="nav-link">Ich möchte Menschen helfen</NavLink>
                         </li>
