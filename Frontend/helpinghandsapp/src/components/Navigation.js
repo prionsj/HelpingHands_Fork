@@ -8,7 +8,7 @@ const Navigation = () => {
         <nav className="navbar fixed-bottom" id="app-menu">
             <div className="container">
                 <div>
-                    // Liste für die Navigationslinks
+                    {/* Liste für die Navigationslinks */}
                     <ul className="nav"> 
                         <li className="nav-item">
                             <NavLink to="/hilfsanzeigen" className="nav-link">Ich möchte Menschen helfen</NavLink>
