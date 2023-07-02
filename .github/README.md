@@ -1,4 +1,4 @@
-HelpingHands-CI Pipeline
+Helping Hands: CI Pipeline
 ==============================
 
 Inhaltsverzeichnis

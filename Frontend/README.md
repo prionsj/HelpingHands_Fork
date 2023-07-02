@@ -1,4 +1,4 @@
-HelpingHands: Frontend
+Helping Hands: Frontend
 ====================
 
 Inhaltsverzeichnis
@@ -12,7 +12,7 @@ Inhaltsverzeichnis
 Kurzbeschreibung
 ----------------
 
-Das Frontend-Verzeichnis dient der Übersichtlichkeit und ist das hierarchisch übergeordnete Verzeichnis der helpinghandsapp, eine mit dem Framework react erstellte, webbasierte Applikation.
+Das Frontend-Verzeichnis dient der Übersichtlichkeit und ist das hierarchisch übergeordnete Verzeichnis der helpinghandsapp, eine mit dem Framework React erstellte, webbasierte Applikation.
 
 
 Node.js-Kommandozeilenbefehle

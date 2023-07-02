@@ -1,4 +1,4 @@
-HelpingHands-WebApp
+Helping Hands: WebApp
 ==============================
 
 Inhaltsverzeichnis
@@ -13,11 +13,11 @@ Inhaltsverzeichnis
 Kurzbeschreibung
 ----------------
 
-Bei dieser Anwendung handelt es sich um eine HelpingHands-WebApp.
+Bei dieser Anwendung handelt es sich um eine Helping Hands WebApp.
 Hier wird eine WebApp zur Verwaltung von Hilfsanzeigen, Abgebots- und Benutzer-Datensätzen implementiert, die folgende Entitäten beinhaltet:
 
   1. Hilfsanzeigen:
-        Eine Auflistung aller erstellten Hilfsanzeigen in der HelpingHands-App. Es können neue Hilfsanzeigen erstellt, vorhandene bearbeitet und gelöscht werden.
+        Eine Auflistung aller erstellten Hilfsanzeigen in der Helping Hands App. Es können neue Hilfsanzeigen erstellt, vorhandene bearbeitet und gelöscht werden.
   2. Angebote:
         Möglichkeit, auf bestimmte Hilfsanzeigen zu reagieren und eigene Hilfe anzubieten. Diese können dann in der Angebotliste eingesehen werden.
   3. Benutzer:
@@ -53,22 +53,10 @@ Im Unterschied zum Entwicklungsmodus werden hier anhand der in den jeweiligen Ve
 Der Quellcode wird hierfür einmalig in die Images hinein kopiert, sodass Änderungen erst wirksam werden, wenn die Images neu erstellt werden. 
 Dies kann entweder in den jeweiligen Verzeichnissen manuell oder durch Neustarten von Docker-Compose erreicht werden.
 
-Architektur:
-
-```mermaid
-graph LR
-    E(Externe Aufrufer) --> F[Frontend];
-    F[Frontend] --> BH[BackenHilfsanzeigen];
-    F[Frontend] --> BB[BackendBenutzer];
-    BH[BackendHilfsanzeigen] --> M1[MongoDB];
-    BB[BackendBenutzer] --> M2[MongoDB];
-```
-
 Das Vorgehen zum Starten und Stoppen der Anwendung ist für beide Modi gleich. Lediglich der Dateiname muss in den folgenden Befehlen angepasst werden:
 
  * `docker-compose -f docker-compose.yml up -d` zum Starten aller Dienste
  * `docker-compose -f docker-compose.yml down` zum Stoppen aller Dienste
- * `docker system prune` zum Aufräumen nicht mehr benötigter Dateien
 
 Im Falle der Produktivversion werden die Container für Frontend und Backend von Docker Compose nur einmalig gebaut, dann aber nicht mehr erneut gebaut, wenn sich der zugrunde liegende Quellcode verändert. 
 Bei Änderungenen müssen sie daher vor der nächsten Ausführung mit folgendem Befehl neu gebaut werden: 
@@ -76,20 +64,6 @@ Bei Änderungenen müssen sie daher vor der nächsten Ausführung mit folgendem 
 ```sh
 docker-compose -f docker-compose.prod.yml build
 ```
-
-In der Produktivversion kann durch Setzen der Umgebungsvariable API_URL die Adresse des Backendservices definiert werden, mit der sich das Frontend zu
-verbinden versucht:
-
-```sh
-export API_URL=http://api.beispiel.de
-docker-compose -f docker-compose.prod.yml up -d
-```
-
-Dies funktioniert, indem die Umgebungsvariable in der `docker-compose.prod.yml` an die gleichnamige Umgebungsvariable des Frontend-Containers übergeben 
-und bei dessen Start durch ein Startskript ausgewertet wird. Das Skript schreibt den Inhalt in eine statische Datei, die das Frontend unter der Addresse `api.url` abrufen kann. 
-Der Mechanismus ist im Grunde genommen derselbe, wie Docker ihn für "Secrets" und "Configs" bereitstellt. Auch diese werden einfach über eine Datei im Container sichtar gemacht. 
-Leider bietet Docker diese Funktion aber nur in Zusammenhang mit Docker Swarm an. Zwar lässt sich die App unverändert auch mit Docker Swarm ausführen, dies wird hier allerdings
-absichtlicht nicht beschrieben, da es auf Docker Compose aufbaut und Docker Compose davon abgesehen für dieses Projekt zunächst ausreicht.
 
 
 Probleme unter Windows und iOS

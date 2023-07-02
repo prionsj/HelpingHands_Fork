@@ -1,4 +1,4 @@
-HelpingHands: BackendHilfsanzeigen
+Helping Hands: BackendHilfsanzeigen
 ===================
 
 Inhaltsverzeichnis
@@ -14,14 +14,14 @@ Inhaltsverzeichnis
 Kurzbeschreibung
 ----------------
 
-Dies ist der backendseitige Microservice für die Daten der Hilfsanzeigen und Angebote der HelpingHands-WebApp.
+Dies ist der backendseitige Microservice für die Daten der Hilfsanzeigen und Angebote der Helping Hands WebApp.
 Es handelt sich um ein nodeJS-Projekt mit dem Webframework [Restify](http://restify.com/).
 Die Schnittstelle des Webservices ist in der Datei `src/api/openapi.yaml` beschrieben.
 
 Start mit Docker Compose
 ------------------------
 
-Am einfachsten lässt sich die HelpingHands-WebApp mit Docker Compose aus dem Wurzelverzeichnis heraus starten. 
+Am einfachsten lässt sich die Helping Hands WebApp mit Docker Compose aus dem Wurzelverzeichnis heraus starten. 
 Das dort abgelegte README beschreibt die dafür notwendigen Befehle im Detail:
 
  * `docker-compose -f docker-compose.yml up -d` zum Starten aller Dienste

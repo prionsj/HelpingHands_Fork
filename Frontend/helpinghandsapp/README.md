@@ -1,29 +1,30 @@
-HelpingHands: helpinghandsapp
+Helping Hands: helpinghandsapp mit React
 ====================
 
 Inhaltsverzeichnis
 ------------------
 
 1. [Kurzbeschreibung](#kurzbeschreibung)
-1. [Responsive HelpingHands](#responsive-helpinghands)
+1. [Responsive Helping Hands](#responsive-helping-hands)
 1. [Node.js-Kommandozeilenbefehle](#nodejs-kommandozeilenbefehle)
 1. [Probleme unter Windows und iOS](#probleme-unter-windows-und-ios)
 1. [Unit Tests im Frontend](#unit-tests-im-frontend)
 1. [UI Tests im Frontend](#ui-tests-im-frontend)
-1. [Verfügbare Skripte](#verfügbare-skripte)
+
+
 Kurzbeschreibung
 ----------------
 
-Dies ist die webbasierte React-App mit dem Frontend der HelpingHands-App.
+Dies ist die webbasierte React-App mit dem Frontend der Helping Hands WebApp.
 Es handelt sich dabei um eine  Webanwendung, die mit JavaScript und zusätzlich dem modernen Framework react realisiert wurde.
 
 Dieses Projekt wurde mit [Create React App](https://github.com/facebook/create-react-app) gebootstrapped.
 
 
-Responsive HelpingHands
-----------------
+Responsive Helping Hands
+------------------------
 
-Die HelpingHands-React App soll zukünftig responsive sein. Aktuell ist dieses MVP allerdings nur auf die Bildschirmgröße 375x790 optimiert. Die Entwickler bitten um Verständnis sowie darum, dies zu beachten und die App möglichst in dieser optimierten Größe zu verwenden, um verschobene oder verdeckte Elemente in der App zu vermeiden.
+Die Helping Hands App soll zukünftig responsive sein. Aktuell ist dieses MVP allerdings nur auf die Bildschirmgröße 375x790 optimiert. Die Entwickler bitten um Verständnis sowie darum, dies zu beachten und die App möglichst in dieser optimierten Größe zu verwenden, um verschobene oder verdeckte Elemente in der App zu vermeiden. Empfohlen wird, der Browser Chrome zu verwenden.
 
 
 Node.js-Kommandozeilenbefehle
@@ -72,29 +73,3 @@ Um die UI Tests im Frontend auszuführen, muss im Verzeichnis helpinghandsapp ei
  * `npx cypress run --component` zum starten aller UI Tests. In der Konsole werden die Ergebnisse der Tests angezeigt. 
 
 Die UI Tests wurden mit dem Framework Cypress erstellt (mehr Informationen: siehe Architekturdokumentation). Installiert wird Cypress mit dem Befehl `npm install cypress` im Verzeichnis helpinghandsapp.
-
-
-Verfügbare Skripte
-------------------
-
-Im Projektverzeichnis können folgende Kommandozeilenbefehle ausgeführt werden:
-
-* `npm start` zum Starten der Anwendung im Entwicklungsmodus
-        Für die Anzeige im Browser [http://localhost:8080](http://localhost:8080) öffnen.
-        Bei Änderungen wird die Seite neugeladen und Lint-Fehler können in der Konsole eingesehen werden.
-
-* `npm test` zum Starten eines Test-Runners im interativen Überwachungsmodus
-        Weitere Informationen können im Abschnitt [running tests](https://facebook.github.io/create-react-app/docs/running-tests) gefunden werden.
-
-* `npm run build` zum Bauen der Anwendung für den Produktivbetrieb in den `build` Ordner
-        Es bündelt React korrekt im Produktionsmodus und optimiert den build für die beste Leistung.
-        Die Dateinamen enthalten die Hashes und der build ist minimiert. Die App ist bereit für das Deployment!
-        Weitere Informationen können im Abschnitt [deployment](https://facebook.github.io/create-react-app/docs/deployment) gefunden werden.
-
-Hinweis: Dies ist ein einseitiger Vorgang. Sobald Sie "eject", können Sie nicht mehr zurückgehen!
-* `npm run eject` zum entfernen einzelner Build-Abhängigkeiten
-        Im Fall einer Unzufriedenheit der Wahl des Build-Tools und der Konfiguration, kann diese jederzeit entfernt werden.
-
-Stattdessen werden alle Konfigurationsdateien und die transitiven Abhängigkeiten (webpack, Babel, ESLint, etc.) direkt in Ihr Projekt kopiert, so dass Sie die volle Kontrolle über sie haben. Alle Befehle mit Ausnahme von "eject" funktionieren weiterhin, aber sie verweisen auf die kopierten Skripte, so dass Sie sie anpassen können. An diesem Punkt sind Sie auf sich allein gestellt.
-
-Sie müssen `eject` nicht verwenden. Der kuratierte Funktionssatz ist für kleine und mittlere Einsätze geeignet, und Sie sollten sich nicht verpflichtet fühlen, diese Funktion zu nutzen. Wir verstehen jedoch, dass dieses Werkzeug nicht nützlich wäre, wenn Sie es nicht anpassen könnten, wenn Sie dazu bereit sind.
