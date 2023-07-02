@@ -139,7 +139,7 @@ const AnzeigeErstellen = () => {
         className="Popup2"
       >
         <CloseButton onClick={() => setShowPopup(false)} />
-        <h2>Um eine Hilfsanzeige zu veröffentlichen müssen mindestens der Titel, der Standort und die Beschreibung ausgefüllt werden.</h2>
+        <h2>Um eine Hilfsanzeige zu veröffentlichen müssen mindestens der Titel, der Standort und die Kategorie ausgefüllt werden.</h2>
       </Modal>
             )}
         </div>

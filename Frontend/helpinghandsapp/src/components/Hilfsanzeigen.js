@@ -55,7 +55,7 @@ const Hilfsanzeigen = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-        }).then((res) => console.log(res));
+        });
     };
 
     // Funktion zum Löschen der Hilfsanzeigen
