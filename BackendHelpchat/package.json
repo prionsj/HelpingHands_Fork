@@ -1,0 +1,27 @@
+{
+  "type": "module",
+  "name": "backendnachrichten",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --legacy-watch --inspect=0.0.0.0:9231 src/index.js",
+    "mongo-start": "docker run -d --name mongodb-helpchat -p 27017:27017 mongo",
+    "mongo-stop": "docker stop mongodb; docker container rm mongodb",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+
+
+  "dependencies": {
+    "@dschulmeis/restify-openapi-enforcer-middleware": "^1.0.2",
+    "dotenv": "^16.3.1",
+    "mongodb": "^5.7.0",
+    "nodemon": "^3.0.1",
+    "openapi-enforcer": "^1.22.3",
+    "restify": "^11.1.0",
+    "restify-errors": "^8.0.2"
+  }
+}

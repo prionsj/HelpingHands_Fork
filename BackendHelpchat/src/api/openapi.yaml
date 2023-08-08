@@ -1,0 +1,317 @@
+openapi: 3.0.3
+
+info:
+  title: Help-ChatApi
+  description: REST-API for Help-Chat messaging. Help-Chats are based on Help-Entries to contact the person who needs Help
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:3002/'
+tags:
+  - name: CRUD-Operations
+  - name: HATEOAS-Links
+  - name: Help-Chat
+  - name: Help-Chat-Collection
+  - name: Message
+  - name: API-Root
+
+paths:
+#### Root-Path
+  /:
+    get:
+      tags:
+        - HATEOAS-Links
+        - API-Root
+      summary: Get HATEOAS-root-links
+      description: Root-path of the API. Gets HATEAOS-links to all available operations.
+      operationId: get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HATEOAS_Collection'
+      servers:
+        - url: 'http://localhost:3002'
+
+### Help-Chat-Collection-Routes
+  /helpchat:
+    get:
+      tags:
+        - CRUD-Operations
+        - Help-Chat-Collection
+      summary: Get available Help-Chats (Collection)
+      description: Get all available Help-Chats. Use query parameters to search by title of the chat.
+      operationId: getHelpChats
+      parameters:
+        - name: title
+          in: query
+          schema:
+            $ref: '#/components/schemas/title'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Help-Chat-Collection'
+      servers:
+        - url: 'http://localhost:3002'
+
+    post:
+      tags:
+        - CRUD-Operations
+        - Help-Chat
+      description: Create a new Help-Chat as a response to a help entry, including the first message.
+      operationId: createHelpChat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Help-Chat'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL to Help-Chat-Data
+
+### Single Help-Chat-Routes
+  /helpchat/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/_id'
+    get:
+      tags:
+        - CRUD-Operations
+        - Help-Chat
+      description: Get a specific Help-Chat by its Id
+      operationId: getHelpChatById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Help-Chat'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+        - url: 'http://localhost:3002'
+
+    put:
+      tags:
+        - CRUD-Operations
+        - Help-Chat
+      description: Update an existing Help-Chat object identified by id.
+      operationId: putHelpChatById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Help-Chat'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Help-Chat'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3002'
+
+    delete:
+      tags:
+        - CRUD-Operations
+        - Help-Chat
+      description: Delte the Help-Chat and its messages, identified by id.
+      operationId: deleteHelpChatById
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+    patch:
+      tags:
+        - Help-Chat
+        - Message
+      description: Patch Help-Chat-Entry. Post new message by patching messages object.
+      operationId: patchNewMessage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/_id'
+      requestBody:
+        $ref: '#/components/requestBodies/patchNewMessage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+        - url: 'http://localhost:3002'
+
+components:
+  schemas:
+### Components: Single-value properties
+    _id:
+      type: string
+      description: Id-number of Help-Chat
+    helpentry:
+      type: string
+      description: The Id of the corresponding help entry
+    userHelpentry:
+      type: string
+      description: Username who created corresponding help entry
+    userResponder:
+      type: string
+      description: Username who responded to the help entry
+    title:
+      type: string
+      description: Title of Help-Chat (Title of Help-Entry)
+    messageCount:
+      type: integer
+      description: Count of Message objects in messages array. Used to check for newer messages before overriding.
+    messageText:
+      type: string
+      description: Text of a message
+    timestamp:
+      type: string
+      description: Date and time when a message was send
+    belongsToUser:
+      type: string
+      description: Username of the person who sended the message
+
+### Components: Single Objects
+    Message:
+      type: object
+      description: Single textmessage to a Help-Chat
+      properties:
+        messageText:
+          $ref: '#/components/schemas/messageText'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        belongsToUser:
+          $ref: '#/components/schemas/belongsToUser'
+
+    Help-Chat:
+      required:
+        - helpentry
+        - userResponder
+        - messages
+        - messageCount
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/_id'
+        helpentry:
+          $ref: '#/components/schemas/helpentry'
+        userHelpentry:
+          $ref: '#/components/schemas/userHelpentry'
+        userResponder:
+          $ref: '#/components/schemas/userResponder'
+        title:
+          $ref: '#/components/schemas/title'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        messageCount:
+          $ref: '#/components/schemas/messageCount'
+        _links:
+          $ref: '#/components/schemas/HATEAOS_Resource'
+
+### Components: Object-Collections
+    Messages:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+    Help-Chat-Collection:
+      type: object
+      properties:
+        help-chats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Help-Chat'
+
+### Components: HATEOAS schemas
+    HATEAOS_Resource:
+      type: object
+      title: HATEAOS_Resource
+      description: HATEAOS-links of a Help-Chat resource
+      properties:
+        read:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        put:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        patch:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        delete:
+          $ref: '#/components/schemas/HATEOAS_Link'
+    HATEOAS_Collection:
+      type: object
+      title: HATEOAS_Collection
+      description: HATEOAS-links of a Help-Chat-Collection
+      properties:
+        _name:
+          type: string
+        query:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        create:
+          $ref: '#/components/schemas/HATEOAS_Link'
+    HATEOAS_Link:
+      type: object
+      title: HATEOAS_Link
+      description: HATEOAS-Link
+      properties:
+        url:
+          type: string
+        method:
+          type: string
+        query_params:
+          type: array
+          items:
+            type: string
+
+### Requestbodys
+  requestBodies:
+    patchNewMessage:
+      required: true
+      content:
+        application/json:
+          schema:
+              $ref: '#/components/schemas/Message'
+      description: Mandatory Requestbody to post a new message by patching the Help-Chat
+

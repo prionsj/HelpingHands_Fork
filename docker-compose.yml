@@ -37,9 +37,67 @@ version: "3.9"
 
 networks:
     helpinghands_default:
-        external: true
+    hilfsanzeigen_network:
+    benutzer_network:
+    helpchat_network:
 
 services:
+    # MongoDB-Datenbank Help-Chat
+    mongodb-helpchat:
+        container_name: MongoDB-Helpchat
+        image: mongo
+        restart: always
+        ports:
+            -   27017:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: dbuser
+            MONGO_INITDB_ROOT_PASSWORD: dbpass
+        volumes:
+            - dbdatahelpchat:/data/db
+            - dbconfighelpchat:/data/configdbhelpchat
+        networks:
+            helpchat_network:
+                aliases:
+                    - mongodb-helpchat
+
+    # Admin-GUI für MongoDB Helpchat
+    mongo-gui-helpchat:
+        container_name: MongoGUI-Helpchat
+        image: mongo-express
+        restart: always
+        ports:
+            - 8083:8081
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+            ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+            ME_CONFIG_MONGODB_URL: mongodb://dbuser:dbpass@mongodb-helpchat:27017/
+        networks:
+            helpchat_network:
+
+    # HelpingHands-Backend (Entwicklungsmodus) Helpchat
+    backend-helpchat:
+        container_name: Backend-Helpchat
+        depends_on:
+            - mongodb-helpchat
+        image: node:17-alpine
+        restart: always
+        environment:
+            HOST: "::"
+            PORT: 3002
+            MONGODB: mongodb://dbuser:dbpass@mongodb-helpchat:27017/
+        ports:
+            - 3002:3002
+            - 9231:9231
+        volumes:
+            - ./BackendHelpchat:/app
+        working_dir: /app
+        command: sh -c "npm i; npm start"
+        networks:
+            helpchat_network:
+            helpinghands_default:
+
+
+
     # MongoDB-Datenbank Hilfsanzeigen
     mongodb-hilfsanzeigen:
         container_name: MongoDB-Hilfsanzeigen
@@ -51,6 +109,10 @@ services:
         volumes:
             - dbdatahilfsanzeigen:/data/db
             - dbconfighilfsanzeigen:/data/configdbbenutzer
+        networks:
+            hilfsanzeigen_network:
+                aliases:
+                    - mongodb-hilfsanzeigen
 
     # Admin-GUI für MongoDB Hilfsanzeigen
     mongo-gui-hilfsanzeigen:
@@ -63,6 +125,8 @@ services:
             ME_CONFIG_MONGODB_ADMINUSERNAME: admin
             ME_CONFIG_MONGODB_ADMINPASSWORD: admin
             ME_CONFIG_MONGODB_URL: mongodb://dbuser:dbpass@mongodb-hilfsanzeigen:27017/
+        networks:
+            hilfsanzeigen_network:
 
     # HelpingHands-Backend (Entwicklungsmodus) Hilfsanzeigen
     backend-hilfsanzeigen:
@@ -82,6 +146,9 @@ services:
             - ./BackendHilfsanzeigen:/app
         working_dir: /app
         command: sh -c "npm i; npm start"
+        networks:
+            hilfsanzeigen_network:
+            helpinghands_default:
 
     # MongoDB-Datenbank Benutzer
     mongodb-benutzer:
@@ -96,8 +163,10 @@ services:
         volumes:
             - dbdatabenutzer:/data/db
             - dbconfigbenutzer:/data/configdbbenutzer
-            - ./mongodb.conf:/mongodb.conf
-        command: mongod --config /mongodb.conf
+            #- ./mongodb.conf:/mongodb.conf
+        #command: mongod --config /mongodb.conf
+        networks:
+            benutzer_network:
 
     # Admin-GUI für MongoDB Benutzer
     mongo-gui-benutzer:
@@ -107,11 +176,12 @@ services:
         ports:
             - 8082:8081
         environment:
+            ME_CONFIG_MOMGODB_SERVER: mongodb-benutzer
             ME_CONFIG_MONGODB_ADMINUSERNAME: admin
             ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-            ME_CONFIG_MONGODB_URL: mongodb://dbuser:dbpass@mongodb-benutzer:27016/
+            ME_CONFIG_MONGODB_URL: mongodb://dbuser:dbpass@mongodb-benutzer:27017/
         networks:
-            - helpinghands_default
+            benutzer_network:
 
     # HelpingHands-Backend (Entwicklungsmodus) Benutzer
     backend-benutzer:
@@ -123,7 +193,7 @@ services:
         environment:
             HOST: "::"
             PORT: 3001
-            MONGODB: mongodb://dbuser:dbpass@mongodb-benutzer:27016/
+            MONGODB: mongodb://dbuser:dbpass@mongodb-benutzer:27017/
         ports:
             - 3001:3001
             - 9230:9230
@@ -131,6 +201,10 @@ services:
             - ./BackendBenutzer:/app
         working_dir: /app
         command: sh -c "npm i; npm start"
+        networks:
+            benutzer_network:
+            helpinghands_default:
+
 
 
     # HelpingHands-Frontend (Entwicklungsmodus)
@@ -154,3 +228,7 @@ volumes:
     dbconfighilfsanzeigen:
     dbdatabenutzer:
     dbconfigbenutzer:
+    dbdatahelpchat:
+    dbconfighelpchat:
+
+
